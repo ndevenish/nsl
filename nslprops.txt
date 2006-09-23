@@ -1,0 +1,44 @@
+Recognised scripting commands: add, set, load, with, stop
+
+=================================================================================
+Particle class settings
+
+vx, vy, vz - Vector of starting velocity
+velocity - Magnitude of starting velocity.
+	- If the vector settings are missing, a default will be created with i=j=k=1.
+	- If there is a magnitude specified, this will be scaled to fit this. Otherwise the magnitude is set to zero, even if the vector is non-zero.
+gamma	- the gamma value
+x,y,z	- Starting position of particle. All default to zero, and overridden if startvolume is set
+startvolume - The container volume (name) to start in. If not set, position will be [x,y,z]
+startposition - The position in this volume to start in. Valid are:
+	- edge - Starts at an edge
+	- center - Starts in the center (default)
+start_spin_polar_angle - The vertical angle (in units of pi) to start the particles spin off at. Default is 0.5 (full horizontal spin).
+start_spin_phase - the horizontal phase to start the spin off at. Again in units of pi. default is zero.
+
+===========================================================================
+volume_cylinder class settings
+
+type - the volume type; positive, negative or none (default none)
+radius - the radius of the cylinder
+height - the height of the cylinder
+x, y, z - the position of the cylinder - defaults to all zero
+reflection - the surface reflection properties; specular or diffuse (default diffuse)
+
+=============================================================================
+bfield class settings
+
+b0x, b0y, b0z - The base magnetic field strengths along the three axis
+(Any further magnetic field effects are handles by generic subobjects, such as linear_zgradient)
+
+=============================================================================
+efield class settings
+
+e0x, e0y, e0z - The base Electric field strengths along the three axis
+(Any further electric field effects are handles by generic subobjects, such as linear_zgradient)
+
+=============================================================================
+linear_zgradient class settings
+
+d_dz - the vertical field gradient
+NOTE: The linear_zgradient currently assumes that the zero-point is at 0,0,0
