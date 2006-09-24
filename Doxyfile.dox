@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 PROJECT_NAME           = "Neutron Scripting Language"
 PROJECT_NUMBER         = 
-OUTPUT_DIRECTORY       = D:/Vcpp/nsl/doc
+OUTPUT_DIRECTORY       = ./doc
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 USE_WINDOWS_ENCODING   = YES
