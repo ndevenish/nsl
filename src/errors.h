@@ -32,12 +32,12 @@ public:
 	Warning(std::stringstream);
 };
 
-class Error : public std::exception {
+class Error : public std::runtime_error {
 public:
 //	const char* const message;
 
 	//Error(const char* const msg = "") : message(msg) {}
-	Error(std::string msg = "") : std::exception(msg.c_str()) {}
+	Error(std::string msg = "") : std::runtime_error(msg.c_str()) {}
 };
 
 class parse_error : public std::runtime_error {

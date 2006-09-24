@@ -83,7 +83,7 @@ void nslobject::set ( std::string propertyname, std::string value )
 
 	// Convert to lower case
 	string newstring;
-	transform (propertyname.begin(),propertyname.end(), propertyname.begin(), tolower);
+	transform (propertyname.begin(),propertyname.end(), propertyname.begin(), (int (*)(int))tolower);
 
 	properties[propertyname] = value;
 }

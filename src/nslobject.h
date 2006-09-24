@@ -212,6 +212,11 @@ public:
 	* @param cd True if the object can safely be delete automatically, false otherwise */
 	void candelete( bool cd ) { candeletethis = cd; }
 
+
+	// The local instance of the object factory
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new nslobject; }
+	};
 protected:
 	// String to hold a name for the type of object - protected so that
 	// inherited classes can alter it directly
@@ -285,10 +290,6 @@ private:
 	// A bool to say whether or not this is a deleteable object
 	bool candeletethis; ///< The internal flag used by candelete() and candelete(bool)
 
-	// The local instance of the object factory
-	class Factory : public nslobjectfactory {
-		nslobject *create() { return new nslobject; }
-	};
 };
 
 #endif

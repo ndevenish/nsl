@@ -26,7 +26,7 @@
 #include <float.h> // for _finite
 
 //#include <stdlib.h>
-
+#include "errors.h"
 
 #include "physics.h"
 
@@ -55,7 +55,7 @@ void vector3::scaleto(long double newlength)
 	}
 
 	scale_ratio = newlength/mod();
-	assert(_finite(scale_ratio));
+	assert(finite(scale_ratio));
 
 
 	x *= scale_ratio;
@@ -75,12 +75,12 @@ bool AlmostEqual2sComplement(long double A, long double B, int maxUlps)
 	long long aLL = *(long long*)&A;
     // Make aInt lexicographically ordered as a twos-complement int
     if (aLL < 0)
-        aLL = 0x8000000000000000 - aLL;
+        aLL = 0x8000000000000000LL - aLL;
 
     // Make bInt lexicographically ordered as a twos-complement int
     long long bLL = *(long long*)&B;
     if (bLL < 0)
-        bLL = 0x8000000000000000 - bLL;
+        bLL = 0x8000000000000000LL - bLL;
     
 	//long long llDiff = llabs(aLL - bLL);
 	long long llDiff = (aLL - bLL);
@@ -100,12 +100,12 @@ long long lddistance(long double A, long double B)
 	long long aLL = *(long long*)&A;
     // Make aInt lexicographically ordered as a twos-complement int
     if (aLL < 0)
-        aLL = 0x8000000000000000 - aLL;
+        aLL = 0x8000000000000000LL - aLL;
 
     // Make bInt lexicographically ordered as a twos-complement int
     long long bLL = *(long long*)&B;
     if (bLL < 0)
-        bLL = 0x8000000000000000 - bLL;
+        bLL = 0x8000000000000000LL - bLL;
     
 	//long long llDiff = llabs(aLL - bLL);
 	long long llDiff = (aLL - bLL);
