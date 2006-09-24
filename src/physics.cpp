@@ -22,7 +22,7 @@
 
 #include <iostream>
 #include <assert.h>
-#include <math.h>
+#include <cmath>
 #include <float.h> // for _finite
 
 //#include <stdlib.h>
@@ -31,7 +31,6 @@
 #include "physics.h"
 
 using namespace std;
-
 
 std::ostream& operator<<(std::ostream& os, const vector3& vec)
 {
@@ -55,8 +54,10 @@ void vector3::scaleto(long double newlength)
 	}
 
 	scale_ratio = newlength/mod();
-	assert(finite(scale_ratio));
 
+#ifdef WIN32
+	assert(_finite(scale_ratio));
+#endif
 
 	x *= scale_ratio;
 	y *= scale_ratio;
