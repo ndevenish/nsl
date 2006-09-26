@@ -74,8 +74,12 @@ int main ( int argc, string argv )
 		bfield *fieldob;
 		fieldob = (bfield*)rootobject.findbyname("bfield");
 
-		fieldob->getfield(fieldstrength, vector3(1,1,0));
-		fieldob->getfield(fieldstrength, vector3(1,1,1));
+		if (fieldob) {
+			fieldob->getfield(fieldstrength, vector3(1,1,0));
+			fieldob->getfield(fieldstrength, vector3(1,1,1));
+		} else {
+			throw runtime_error("Field object invalid - cannot retrieve field strength");
+		}
 
 
 
