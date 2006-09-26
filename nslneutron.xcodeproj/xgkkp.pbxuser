@@ -1,0 +1,163 @@
+// !$*UTF8*$!
+{
+	08FB7793FE84155DC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 0A3B6E830AC99355002CC2AF /* nslneutron */;
+		activeTarget = 8DD76F620486A84900D96B5E /* nslneutron */;
+		addToTargets = (
+			8DD76F620486A84900D96B5E /* nslneutron */,
+		);
+		breakpoints = (
+			0A3B6EC70AC9946B002CC2AF /* electromagnetics.cpp:40 */,
+		);
+		breakpointsGroup = 0A3B6EC80AC99489002CC2AF /* XCBreakpointsBucket */;
+		codeSenseManager = 0A3B6E8C0AC99360002CC2AF /* Code sense */;
+		executables = (
+			0A3B6E830AC99355002CC2AF /* nslneutron */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					243,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 180983621;
+			PBXWorkspaceStateSaveDate = 180983621;
+		};
+		perUserProjectItems = {
+			0A3A6B220AC996FE00E91CB3 = 0A3A6B220AC996FE00E91CB3 /* PBXTextBookmark */;
+			0ADE44420AC997360020133F = 0ADE44420AC997360020133F /* PBXTextBookmark */;
+		};
+		sourceControlManager = 0A3B6E8B0AC99360002CC2AF /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	0A3A6B220AC996FE00E91CB3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9B0AC993DB002CC2AF /* main.cpp */;
+		name = "main.cpp: 42";
+		rLen = 0;
+		rLoc = 1018;
+		rType = 0;
+		vrLen = 744;
+		vrLoc = 839;
+	};
+	0A3B6E830AC99355002CC2AF /* nslneutron */ = {
+		isa = PBXExecutable;
+		activeArgIndex = 2147483647;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = nslneutron;
+		savedGlobals = {
+		};
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	0A3B6E8B0AC99360002CC2AF /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 1;
+		scmConfiguration = {
+			SubversionToolPath = /usr/local/bin/svn;
+		};
+		scmType = scm.subversion;
+	};
+	0A3B6E8C0AC99360002CC2AF /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {653, 1470}}";
+			sepNavSelRange = "{1006, 0}";
+			sepNavVisRect = "{{0, 502}, {653, 166}}";
+		};
+	};
+	0A3B6E9B0AC993DB002CC2AF /* main.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {711, 1092}}";
+			sepNavSelRange = "{1018, 0}";
+			sepNavVisRect = "{{0, 490}, {711, 429}}";
+			sepNavWindowFrame = "{{38, 162}, {750, 558}}";
+		};
+	};
+	0A3B6EA10AC993DB002CC2AF /* volume_cylinder.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {698, 3584}}";
+			sepNavSelRange = "{1990, 36}";
+			sepNavVisRect = "{{0, 1086}, {459, 186}}";
+		};
+	};
+	0A3B6EC70AC9946B002CC2AF /* electromagnetics.cpp:40 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		delayBeforeContinue = 0;
+		fileReference = 0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */;
+		functionName = "forcefield::getfield()";
+		hitCount = 0;
+		lineNumber = 40;
+		location = electromagnetics.ob;
+		modificationTime = 180982891.069224;
+		state = 1;
+	};
+	0A3B6EC80AC99489002CC2AF /* XCBreakpointsBucket */ = {
+		isa = XCBreakpointsBucket;
+		name = "Project Breakpoints";
+		objects = (
+			0A3B6EC70AC9946B002CC2AF /* electromagnetics.cpp:40 */,
+		);
+	};
+	0ADE44420AC997360020133F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9B0AC993DB002CC2AF /* main.cpp */;
+		name = "main.cpp: 42";
+		rLen = 0;
+		rLoc = 1018;
+		rType = 0;
+		vrLen = 744;
+		vrLoc = 839;
+	};
+	8DD76F620486A84900D96B5E /* nslneutron */ = {
+		activeExec = 0;
+		executables = (
+			0A3B6E830AC99355002CC2AF /* nslneutron */,
+		);
+	};
+}

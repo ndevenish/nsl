@@ -1,0 +1,274 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A3B6EA20AC993DB002CC2AF /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6E970AC993DB002CC2AF /* container.cpp */; };
+		0A3B6EA30AC993DB002CC2AF /* cparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6E980AC993DB002CC2AF /* cparser.cpp */; };
+		0A3B6EA40AC993DB002CC2AF /* electromagnetics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */; };
+		0A3B6EA50AC993DB002CC2AF /* errors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6E9A0AC993DB002CC2AF /* errors.cpp */; };
+		0A3B6EA60AC993DB002CC2AF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6E9B0AC993DB002CC2AF /* main.cpp */; };
+		0A3B6EA70AC993DB002CC2AF /* nslobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6E9C0AC993DB002CC2AF /* nslobject.cpp */; };
+		0A3B6EA80AC993DB002CC2AF /* nslobjectfactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6E9D0AC993DB002CC2AF /* nslobjectfactory.cpp */; };
+		0A3B6EA90AC993DB002CC2AF /* nsltest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6E9E0AC993DB002CC2AF /* nsltest.cpp */; };
+		0A3B6EAA0AC993DB002CC2AF /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */; };
+		0A3B6EAB0AC993DB002CC2AF /* physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6EA00AC993DB002CC2AF /* physics.cpp */; };
+		0A3B6EAC0AC993DB002CC2AF /* volume_cylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B6EA10AC993DB002CC2AF /* volume_cylinder.cpp */; };
+		0A3B6EB60AC9940B002CC2AF /* container.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EAE0AC9940B002CC2AF /* container.h */; };
+		0A3B6EB70AC9940B002CC2AF /* cparser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EAF0AC9940B002CC2AF /* cparser.h */; };
+		0A3B6EB80AC9940B002CC2AF /* electromagnetics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB00AC9940B002CC2AF /* electromagnetics.h */; };
+		0A3B6EB90AC9940B002CC2AF /* errors.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB10AC9940B002CC2AF /* errors.h */; };
+		0A3B6EBA0AC9940B002CC2AF /* nslobject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB20AC9940B002CC2AF /* nslobject.h */; };
+		0A3B6EBB0AC9940B002CC2AF /* nslobjectfactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB30AC9940B002CC2AF /* nslobjectfactory.h */; };
+		0A3B6EBC0AC9940B002CC2AF /* particle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */; };
+		0A3B6EBD0AC9940B002CC2AF /* physics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB50AC9940B002CC2AF /* physics.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				0A3B6EB60AC9940B002CC2AF /* container.h in CopyFiles */,
+				0A3B6EB70AC9940B002CC2AF /* cparser.h in CopyFiles */,
+				0A3B6EB80AC9940B002CC2AF /* electromagnetics.h in CopyFiles */,
+				0A3B6EB90AC9940B002CC2AF /* errors.h in CopyFiles */,
+				0A3B6EBA0AC9940B002CC2AF /* nslobject.h in CopyFiles */,
+				0A3B6EBB0AC9940B002CC2AF /* nslobjectfactory.h in CopyFiles */,
+				0A3B6EBC0AC9940B002CC2AF /* particle.h in CopyFiles */,
+				0A3B6EBD0AC9940B002CC2AF /* physics.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0A3B6E970AC993DB002CC2AF /* container.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = container.cpp; path = src/container.cpp; sourceTree = "<group>"; };
+		0A3B6E980AC993DB002CC2AF /* cparser.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = cparser.cpp; path = src/cparser.cpp; sourceTree = "<group>"; };
+		0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = electromagnetics.cpp; path = src/electromagnetics.cpp; sourceTree = "<group>"; };
+		0A3B6E9A0AC993DB002CC2AF /* errors.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = errors.cpp; path = src/errors.cpp; sourceTree = "<group>"; };
+		0A3B6E9B0AC993DB002CC2AF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		0A3B6E9C0AC993DB002CC2AF /* nslobject.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = nslobject.cpp; path = src/nslobject.cpp; sourceTree = "<group>"; };
+		0A3B6E9D0AC993DB002CC2AF /* nslobjectfactory.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = nslobjectfactory.cpp; path = src/nslobjectfactory.cpp; sourceTree = "<group>"; };
+		0A3B6E9E0AC993DB002CC2AF /* nsltest.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = nsltest.cpp; path = src/nsltest.cpp; sourceTree = "<group>"; };
+		0A3B6E9F0AC993DB002CC2AF /* particle.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = particle.cpp; path = src/particle.cpp; sourceTree = "<group>"; };
+		0A3B6EA00AC993DB002CC2AF /* physics.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = physics.cpp; path = src/physics.cpp; sourceTree = "<group>"; };
+		0A3B6EA10AC993DB002CC2AF /* volume_cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = volume_cylinder.cpp; path = src/volume_cylinder.cpp; sourceTree = "<group>"; };
+		0A3B6EAE0AC9940B002CC2AF /* container.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = container.h; path = src/container.h; sourceTree = "<group>"; };
+		0A3B6EAF0AC9940B002CC2AF /* cparser.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = cparser.h; path = src/cparser.h; sourceTree = "<group>"; };
+		0A3B6EB00AC9940B002CC2AF /* electromagnetics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = electromagnetics.h; path = src/electromagnetics.h; sourceTree = "<group>"; };
+		0A3B6EB10AC9940B002CC2AF /* errors.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = errors.h; path = src/errors.h; sourceTree = "<group>"; };
+		0A3B6EB20AC9940B002CC2AF /* nslobject.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = nslobject.h; path = src/nslobject.h; sourceTree = "<group>"; };
+		0A3B6EB30AC9940B002CC2AF /* nslobjectfactory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = nslobjectfactory.h; path = src/nslobjectfactory.h; sourceTree = "<group>"; };
+		0A3B6EB40AC9940B002CC2AF /* particle.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = particle.h; path = src/particle.h; sourceTree = "<group>"; };
+		0A3B6EB50AC9940B002CC2AF /* physics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = physics.h; path = src/physics.h; sourceTree = "<group>"; };
+		8DD76F6C0486A84900D96B5E /* nslneutron */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nslneutron; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* nslneutron */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = nslneutron;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				0A3B6EAD0AC993EA002CC2AF /* Headers */,
+				0A3B6E970AC993DB002CC2AF /* container.cpp */,
+				0A3B6E980AC993DB002CC2AF /* cparser.cpp */,
+				0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */,
+				0A3B6E9A0AC993DB002CC2AF /* errors.cpp */,
+				0A3B6E9B0AC993DB002CC2AF /* main.cpp */,
+				0A3B6E9C0AC993DB002CC2AF /* nslobject.cpp */,
+				0A3B6E9D0AC993DB002CC2AF /* nslobjectfactory.cpp */,
+				0A3B6E9E0AC993DB002CC2AF /* nsltest.cpp */,
+				0A3B6E9F0AC993DB002CC2AF /* particle.cpp */,
+				0A3B6EA00AC993DB002CC2AF /* physics.cpp */,
+				0A3B6EA10AC993DB002CC2AF /* volume_cylinder.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		0A3B6EAD0AC993EA002CC2AF /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				0A3B6EAE0AC9940B002CC2AF /* container.h */,
+				0A3B6EAF0AC9940B002CC2AF /* cparser.h */,
+				0A3B6EB00AC9940B002CC2AF /* electromagnetics.h */,
+				0A3B6EB10AC9940B002CC2AF /* errors.h */,
+				0A3B6EB20AC9940B002CC2AF /* nslobject.h */,
+				0A3B6EB30AC9940B002CC2AF /* nslobjectfactory.h */,
+				0A3B6EB40AC9940B002CC2AF /* particle.h */,
+				0A3B6EB50AC9940B002CC2AF /* physics.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* nslneutron */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* nslneutron */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "nslneutron" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = nslneutron;
+			productInstallPath = "$(HOME)/bin";
+			productName = nslneutron;
+			productReference = 8DD76F6C0486A84900D96B5E /* nslneutron */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "nslneutron" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* nslneutron */;
+			projectDirPath = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* nslneutron */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A3B6EA20AC993DB002CC2AF /* container.cpp in Sources */,
+				0A3B6EA30AC993DB002CC2AF /* cparser.cpp in Sources */,
+				0A3B6EA40AC993DB002CC2AF /* electromagnetics.cpp in Sources */,
+				0A3B6EA50AC993DB002CC2AF /* errors.cpp in Sources */,
+				0A3B6EA60AC993DB002CC2AF /* main.cpp in Sources */,
+				0A3B6EA70AC993DB002CC2AF /* nslobject.cpp in Sources */,
+				0A3B6EA80AC993DB002CC2AF /* nslobjectfactory.cpp in Sources */,
+				0A3B6EA90AC993DB002CC2AF /* nsltest.cpp in Sources */,
+				0A3B6EAA0AC993DB002CC2AF /* particle.cpp in Sources */,
+				0A3B6EAB0AC993DB002CC2AF /* physics.cpp in Sources */,
+				0A3B6EAC0AC993DB002CC2AF /* volume_cylinder.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = "$(HOME)/bin";
+				PRODUCT_NAME = nslneutron;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = "$(HOME)/bin";
+				PRODUCT_NAME = nslneutron;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "nslneutron" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "nslneutron" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
