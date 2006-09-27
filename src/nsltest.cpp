@@ -97,7 +97,7 @@ try {
 
 int testparser()
 {
-	ifstream in("d:\\parsenum.txt");
+	ifstream in("./scripts/parsenum.txt");
 	cparser parser(&in);
 
 	if (in)
@@ -209,7 +209,7 @@ void testnslparsing ( void )
 	nslobject anobject;
 	anobject.set("name", "Root Object");
 
-	anobject.parse("d:\\testparse.nsl");
+	anobject.parse("./scripts/testparse.nsl");
 
 	cout << "Testing finding an object by name: ";
 	// find an object and rename it
@@ -308,7 +308,7 @@ void testray(void)
 	// Print out the tree
 	box.tree();
 
-	ofstream out("d:/rayout.txt");
+	ofstream out("./rayout.txt");
 
 	// Make a couple of vectors for the ray and direction
 	vector3 raypos(-0.1,0.0,0);

@@ -59,7 +59,7 @@ int main ( int argc, string argv )
 		// the actual classes we want
 		nslobjectfactory::add("particle", new particle::Factory);
 
-		rootobject.parse("d:\\edmexperiment.nsl");
+		rootobject.parse("./scripts/edmexperiment.nsl");
 
 		cout << "Read in structure:" << endl;
 		rootobject.tree();

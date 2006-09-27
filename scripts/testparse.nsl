@@ -1,0 +1,46 @@
+add nslobject {
+	set name firstobject
+	add nslobject {
+		set name sub1
+#		load "nothing"
+	}
+	add nslobject "subobject 2" {
+		add nslobject {
+			set name subsub1
+		}
+	}
+	#test object for an object above to search for.
+	add newobject "searchobject" {
+	}
+}
+
+load "d:\newname.nsl" #load a file to change the current object name
+#set name subsub1
+
+#now an object to test number parsing
+add newobject testnewobject {
+	set name "uhhh"
+}
+
+with "subobject 2" {
+	set name "subobject 2 renamed"
+}
+
+stop
+
+add particle {
+	set name neutron
+	set mass 2
+	set description "something wonderful"
+	vary mass from 1 to 24 in 5 steps
+}
+
+with neutron {
+	vary mass from 1 to 24 in 5 steps
+}
+
+add edmexperiment theexperiment {
+	load neutron
+	add "linear_bfield" what
+	
+}
