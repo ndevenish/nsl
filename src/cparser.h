@@ -85,4 +85,10 @@ private:
 
 };
 
+inline const bool isreturn ( const char token )
+{
+	if ((token == '\r') || (token == '\n'))
+		return true;
+	return false;
+}
 #endif

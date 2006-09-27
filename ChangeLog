@@ -1,0 +1,3 @@
+Changed working target for xcode project to base directory
+
+Cparser now returns both \r and \n as \n - to account for differences between platforms (visual c++ automatically folded them together). This allows the new script-in-relative-subdirectory system to work.

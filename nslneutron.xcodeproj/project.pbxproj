@@ -49,6 +49,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A232F6B0AC99A0D00ABB21F /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; };
 		0A3B6E970AC993DB002CC2AF /* container.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = container.cpp; path = src/container.cpp; sourceTree = "<group>"; };
 		0A3B6E980AC993DB002CC2AF /* cparser.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = cparser.cpp; path = src/cparser.cpp; sourceTree = "<group>"; };
 		0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = electromagnetics.cpp; path = src/electromagnetics.cpp; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		08FB7794FE84155DC02AAC07 /* nslneutron */ = {
 			isa = PBXGroup;
 			children = (
+				0A232F6B0AC99A0D00ABB21F /* ChangeLog */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,

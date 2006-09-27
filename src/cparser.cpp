@@ -98,7 +98,7 @@ std::string cparser::gettoken( void )
 		//Let's grab a string - this cannot span multiple lines
 		while (nextchar =((*instream).peek()))
 		{
-			if (nextchar == '\n')
+			if (isreturn(nextchar))
 			{
 				cout << "Error reading line " << linecount << " - stringization hit end of line" << endl;
 				break;
@@ -118,10 +118,17 @@ std::string cparser::gettoken( void )
 	do {
 		inchar = (*instream).get();
 		//nextchar = 
+		
+		// If it is a return, increase the linecount and convert it to a 
+		// \n for compatability
+		if (isreturn(inchar))
+		{
+			linecount++;
+			inchar = '\n';
+		}
+			
 		currenttoken += inchar;
 		tokenlength++;
-		if (inchar == '\n')
-			linecount++;
 	// Loop while this and the next character is valid
 	} while (isvalnum(inchar) && isvalnum((*instream).peek()));
 
@@ -130,6 +137,9 @@ std::string cparser::gettoken( void )
 	if (inchar == EOF)
 		endoffile = true;
 
+	// Force all newline returns to be \n to avoid messiness
+/*	if (isreturn(inchar))
+		inchar = '\n'; */
 	return currenttoken;
 
 }
