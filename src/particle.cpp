@@ -45,9 +45,11 @@ particle::particle()
 	position.x = position.y = position.z = 0.0;
 	velocity_vec.x = velocity_vec.y = velocity_vec.z = 0.0;
 	velocity = 0.0;
-	spin.x = spin.y = spin.z = 0.0;
+	spinEplus.x = spinEplus.y = spinEplus.z = 0.0;
+	spinEminus = spinEplus;
 
 	objecttype = "particle";
+	types.push_back(objecttype);
 }
 
 
@@ -125,9 +127,10 @@ bool particle::prepareobject()
 	start_spin_polar_angle = pi*getlongdouble("start_spin_polar_angle", 0.5);
 	start_spin_phase = pi*getlongdouble("start_spin_phase", 0.0);
 
-	spin.x = sinl(start_spin_polar_angle)*cosl(start_spin_phase);
-	spin.y = sinl(start_spin_polar_angle)*sinl(start_spin_phase);
-	spin.z = cosl(start_spin_polar_angle);
+	spinEplus.x = sinl(start_spin_polar_angle)*cosl(start_spin_phase);
+	spinEplus.y = sinl(start_spin_polar_angle)*sinl(start_spin_phase);
+	spinEplus.z = cosl(start_spin_polar_angle);
+	spinEminus = spinEplus;
 
 	// ************************************************************
 	// Find a magnetic field to link to

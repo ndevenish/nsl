@@ -143,6 +143,11 @@ public:
 	* @see isoftype() */
 	nslobject *findbytype(std::string type, int maxsteps = -1);
 
+	/** Counts the number of child ofjects of specified type.
+	* This function searches only the children of the current object, and counts
+	* the number of them with a certain type (as reported by isoftype()). */
+	int countchildren(std::string type);
+
 	////////////////////////////////////////////////////////////////////////////////
 	// Three overloaded functions to initiate parsing from various sources.
 	// Those that are not the cparser form call the cparser form (after making

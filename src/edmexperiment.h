@@ -20,49 +20,41 @@
  * 
  */
 
-#ifndef PARTICLE_H
-#define PARTICLE_H
-
-#include <string>
-
-#include "physics.h"
+#ifndef EDMEXPERIMENT_H
+#define EDMEXPERIMENT_H
 
 #include "nslobject.h"
 #include "nslobjectfactory.h"
 
 class container;
+class particle;
 class bfield;
 class efield;
 
-/** Object representing a particle. */
-class particle : public nslobject {
+const int MAX_PARTICLES = 32;
 
-	// Physical Properties values
-	vector3	position;
-	vector3 velocity_vec;
-	vector3 spinEplus;
-	vector3 spinEminus;
+/** Object to handle running of EDM Experiment */
+class edmexperiment : public nslobject {
 
-	long double velocity;
-
-	long double gamma;
-	
-	// Utility class pointers
 	container *particlebox;
-	bfield *mag_field;
-	efield *elec_field;
+	particle *particles[MAX_PARTICLES];
+	bfield * magfield;
+	efield *elecfield;
+
+	int particlecount;
 
 	bool prepareobject();
-
-	//bool getvaluetoproperty(std::string valuename, long double &dest);
+	bool runobject();	
+	
+	void bigstep(particle* part, long double time);
+	void smallstep(particle* part, long double time);
 
 public:
-	particle();
+	edmexperiment();
 
 	// Allow this to be created from the object factory
 	class Factory : public nslobjectfactory {
-		nslobject *create() { return new particle; }
+		nslobject *create() { return new edmexperiment; }
 	};
 };
-
 #endif

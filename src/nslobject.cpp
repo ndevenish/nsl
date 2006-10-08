@@ -432,3 +432,15 @@ bool nslobject::isoftype(std::string type_name)
 	else
 		return true;
 }
+
+int nslobject::countchildren(std::string type)
+{
+	// Declare the iterator for the subobject list
+	std::vector<nslobject*>::iterator sublist;
+	int runningcount = 0;
+
+	for (sublist = subobjects.begin(); sublist != subobjects.end(); sublist++)
+		if ((*sublist)->isoftype(type))
+			runningcount++;
+	return runningcount;
+}

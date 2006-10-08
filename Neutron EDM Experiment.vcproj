@@ -190,6 +190,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\edmexperiment.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\electromagnetics.cpp"
 					>
 				</File>
@@ -237,6 +241,10 @@
 				>
 				<File
 					RelativePath=".\src\container.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\edmexperiment.h"
 					>
 				</File>
 				<File

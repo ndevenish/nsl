@@ -31,6 +31,7 @@
 
 #include "cparser.h"
 
+#include "edmexperiment.h"
 #include "particle.h"
 #include "container.h"
 #include "electromagnetics.h"
@@ -47,7 +48,7 @@ int main ( int argc, string argv )
 		nslobject rootobject;
 
 		// Add holders for the classes we want
-		nslobjectfactory::add("edmexperiment", new nslobject::Factory);
+		nslobjectfactory::add("edmexperiment", new edmexperiment::Factory);
 		nslobjectfactory::add("container", new container::Factory);
 		nslobjectfactory::add("volume_cylinder", new volume_cylinder::Factory);
 		nslobjectfactory::add("bfield", new bfield::Factory);
