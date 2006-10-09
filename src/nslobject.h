@@ -76,7 +76,7 @@ public:
 	* @see getlongdouble() to extract a number from a propery. */
 	std::string get ( std::string propertyname, std::string defaultval = "" );
 	
-	/** Reads a number from a property.
+	/** Reads a real number from a property.
 	* This function reads a specified property value, attempts to convert it to a number
 	* and returns the result. In the event the property is not set, it returns a specified
 	* default value.
@@ -86,6 +86,13 @@ public:
 	* @see get() to retrieve the string value of a property */
 	long double getlongdouble( std::string propertyname, long double defaultvalue );
 
+	/** Reads an integer from a property
+	* See getlongdouble() */
+	int getint( std::string propertyname, int defaultvalue );
+	/** Reads a long from a property
+	* See getlongdouble() */
+	long getlong (std::string propertyname, long defaultvalue);
+	
 	/** Ensures a property has been set.
 	* If the specified property has not been set, this function throws a runtime_error
 	* exception. Note that it does not return the value, only checks it exists.
@@ -259,6 +266,8 @@ protected:
 	/** A vector list of the object's children */
 	std::vector<nslobject *> subobjects; // A list of the object's 'children
 
+	/** An output object for logging */
+	std::ostream &logger;
 private:
 	// Variables
 	

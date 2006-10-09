@@ -36,7 +36,8 @@ class efield;
 
 /** Object representing a particle. */
 class particle : public nslobject {
-
+	friend class edmexperiment;
+	
 	// Physical Properties values
 	vector3	position;
 	vector3 velocity_vec;

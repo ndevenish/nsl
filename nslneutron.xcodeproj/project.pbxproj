@@ -26,6 +26,8 @@
 		0A3B6EBB0AC9940B002CC2AF /* nslobjectfactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB30AC9940B002CC2AF /* nslobjectfactory.h */; };
 		0A3B6EBC0AC9940B002CC2AF /* particle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */; };
 		0A3B6EBD0AC9940B002CC2AF /* physics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB50AC9940B002CC2AF /* physics.h */; };
+		0AB232B90ADA3BE400323FF0 /* edmexperiment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */; };
+		0AB232BA0ADA3BE500323FF0 /* edmexperiment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB232B80ADA3BE400323FF0 /* edmexperiment.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +45,7 @@
 				0A3B6EBB0AC9940B002CC2AF /* nslobjectfactory.h in CopyFiles */,
 				0A3B6EBC0AC9940B002CC2AF /* particle.h in CopyFiles */,
 				0A3B6EBD0AC9940B002CC2AF /* physics.h in CopyFiles */,
+				0AB232BA0ADA3BE500323FF0 /* edmexperiment.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -69,6 +72,8 @@
 		0A3B6EB30AC9940B002CC2AF /* nslobjectfactory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = nslobjectfactory.h; path = src/nslobjectfactory.h; sourceTree = "<group>"; };
 		0A3B6EB40AC9940B002CC2AF /* particle.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = particle.h; path = src/particle.h; sourceTree = "<group>"; };
 		0A3B6EB50AC9940B002CC2AF /* physics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = physics.h; path = src/physics.h; sourceTree = "<group>"; };
+		0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = edmexperiment.cpp; path = src/edmexperiment.cpp; sourceTree = "<group>"; };
+		0AB232B80ADA3BE400323FF0 /* edmexperiment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = edmexperiment.h; path = src/edmexperiment.h; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* nslneutron */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nslneutron; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -100,6 +105,7 @@
 				0A3B6EAD0AC993EA002CC2AF /* Headers */,
 				0A3B6E970AC993DB002CC2AF /* container.cpp */,
 				0A3B6E980AC993DB002CC2AF /* cparser.cpp */,
+				0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */,
 				0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */,
 				0A3B6E9A0AC993DB002CC2AF /* errors.cpp */,
 				0A3B6E9B0AC993DB002CC2AF /* main.cpp */,
@@ -116,6 +122,7 @@
 		0A3B6EAD0AC993EA002CC2AF /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				0AB232B80ADA3BE400323FF0 /* edmexperiment.h */,
 				0A3B6EAE0AC9940B002CC2AF /* container.h */,
 				0A3B6EAF0AC9940B002CC2AF /* cparser.h */,
 				0A3B6EB00AC9940B002CC2AF /* electromagnetics.h */,
@@ -195,6 +202,7 @@
 				0A3B6EAA0AC993DB002CC2AF /* particle.cpp in Sources */,
 				0A3B6EAB0AC993DB002CC2AF /* physics.cpp in Sources */,
 				0A3B6EAC0AC993DB002CC2AF /* volume_cylinder.cpp in Sources */,
+				0AB232B90ADA3BE400323FF0 /* edmexperiment.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +242,7 @@
 			buildSettings = {
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
@@ -244,6 +253,7 @@
 			buildSettings = {
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};

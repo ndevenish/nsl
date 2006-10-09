@@ -39,6 +39,11 @@ std::ostream& operator<<(std::ostream& os, const vector3& vec)
   os << vec.x << ", " << vec.y << ", " << vec.z;
   return os;
 }
+/*
+vector3 operator+(const vector3& lhs, const vector3&rhs)
+{
+	return 
+}*/
 
 // Scales the vector to fit a specified length
 void vector3::scaleto(long double newlength)

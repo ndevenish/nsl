@@ -30,24 +30,46 @@ class container;
 class particle;
 class bfield;
 class efield;
+class vector3;
 
 const int MAX_PARTICLES = 32;
 
 /** Object to handle running of EDM Experiment */
 class edmexperiment : public nslobject {
 
-	container *particlebox;
-	particle *particles[MAX_PARTICLES];
-	bfield * magfield;
-	efield *elecfield;
+	container *particlebox; ///< A shortcut link to the box the particle is stored in
+	particle *particles[MAX_PARTICLES]; ///< An array of particles we control
+	bfield * magfield; ///< The magnetic field object
+	efield *elecfield; ///< The electric field object
+	
+	/// the steptime to be used by the basic inbuilt midpoint solver
+	long double steptime;
+	/// How many phase averaging steps to take
+	int phase_steps;
+	/// How many bounces to take
+	long bounces;
 
+	/// A count of how many particles we are controlling
 	int particlecount;
 
 	bool prepareobject();
 	bool runobject();	
 	
-	void bigstep(particle* part, long double time);
-	void smallstep(particle* part, long double time);
+	/** Performs a bigstep.
+	* This function performs a large step i.e. a step between bounces.
+	* It essentially acts as the solver function because it is passed a
+	* particle and a time and alters the particle along that path. Based
+	* on naming scheme from phil harris' original edm program. */
+	void bigstep(particle& part, long double time);
+	
+	/** Performs a midpoint integrator step.
+	* This function steps a particle forwards a very small amount and then calculates
+	* the spin changes. */
+	void smallstep(particle& part, long double time);
+	
+	/** Performs the necessary spin calculations.
+	* This function spins the particle */
+	void spin_calculation( vector3& spinvector, const vector3& mag_field, const long double time);
 
 public:
 	edmexperiment();

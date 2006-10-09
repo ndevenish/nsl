@@ -32,8 +32,14 @@
 #include <iostream>
 #include <math.h>
 
+
+#include <boost/operators.hpp>
+
 /// A Class to represent a simple three-component vector autonomously
-struct vector3 {
+class vector3 :		boost::additive< vector3, 
+					boost::equality_comparable< vector3,
+					boost::multiplicative< vector3, long double > > >
+{
 public:
 	long double x;
 	long double y;
@@ -41,37 +47,113 @@ public:
 
 	/// Initialises all the vector components to 0.0
 	vector3() : x(0.0), y(0.0), z(0.0) {}
+//	vector3(vector3& old) : x(old.x), y(old.y), z(old.z) {}
+	
 	/// Initialises the vector with three provided values
 	vector3( long double xx, long double yy, long double zz) : x(xx), y(yy), z(zz) { }
+/*
+	friend const vector3 operator+(const vector3& lhs, const vector3& rhs);
+	friend int operator==(const vector3& lhs, const vector3& rhs);
 
-	vector3 operator+(const vector3& rhs) { return vector3(x+rhs.x, y+rhs.y, z+rhs.z); }
+	friend vector3& operator+=(vector3& lhs, const vector3& rhs);
+
 	vector3 operator-(const vector3& rhs) { return vector3(x-rhs.x, y-rhs.y, z-rhs.z); }
 
 	vector3 operator*(const long double s) { return vector3(x*s, y*s, z*s); }
 	long double operator*(const vector3 vec) { return x*vec.x + y*vec.y + z*vec.z; }
 
-	vector3& operator+=(const vector3& rhs) { x += rhs.x; y += rhs.y; z += rhs.z; return *this; }
+	//vector3& operator+=(const vector3& rhs) { x += rhs.x; y += rhs.y; z += rhs.z; return *this; }
 	vector3& operator*=(const long double &rhs) { x *= rhs; y *= rhs; z *= rhs; return *this; }
 	
-	int operator==(const vector3 &rt) {
+/*	int operator==(const vector3 &rt) {
 		return (x == rt.x) && (y == rt.y) && (z == rt.z);
-	}
-
-
+	}*/
+	vector3 operator+=(const vector3&);
+	vector3 operator-=(const vector3&);
+	
+	vector3 operator*=(const long double&);
+	vector3 operator/=(const long double&);
+	
+	bool operator==(const vector3&);
+	
+	// Inner product operators
+	long double operator*(const vector3&);
+	friend long double operator*(const vector3&, const vector3& );
+	
 	/// Returns the length of the vector
 	long double vector3::mod() {	return sqrtl(x*x + y*y + z*z); }
 
 	/// Scales the vector to a specified length
 	void scaleto(long double newlength);
 
-
-	//void print( void ) { std::cout << "[ " << x << ", " << y << ", " << z << " ]"; }
-	//vector3 operator+=(const
 };
+
+//template struct 
+
+
+vector3 vector3::operator+=(const vector3& rt)
+{
+	x+=rt.x; y+=rt.y; z+=rt.z;
+	return *this;
+}
+vector3 vector3::operator-=(const vector3& rt)
+{
+	x-=rt.x; y-=rt.y; z-=rt.z;
+	return *this;
+}
+bool vector3::operator==(const vector3& rt)
+{
+	return (x==rt.x) && (y==rt.y) && (z==rt.z);
+}
+vector3 vector3::operator*=(const long double& rt)
+{
+	x *= rt; y *= rt; z *= rt;
+	return *this;
+}
+vector3 vector3::operator/=(const long double& rt)
+{
+	x /= rt; y /= rt; z /= rt;
+	return *this;
+}
+long double vector3::operator*(const vector3& rt)
+{
+	return x*rt.x + y* rt.y + z * rt.z;
+}
+long double operator*(const vector3& lt, const vector3& rt)
+{
+	return lt.x*rt.x + lt.y*rt.y + lt.z*rt.z;
+}
+/*
+const vector3 operator+(const vector3& lhs, const vector3& rhs) {
+	return vector3(lhs.x+rhs.x, lhs.y+rhs.y, lhs.z+rhs.z);
+}
+
+int operator==(const vector3& lt, const vector3& rt) {
+		return (lt.x == rt.x) && (lt.y == rt.y) && (lt.z == rt.z);
+}
+
+vector3& operator+=(vector3& lhs, const vector3& rhs)
+{
+	lhs.x += rhs.x;
+	lhs.y += rhs.y;
+	lhs.z += rhs.z;
+	
+	return lhs;
+}*/
+
+
+
 
 inline long double dot(const vector3 &a, const vector3 &b)
 {
 	return a.x*b.x + a.y*b.y + a.z*b.z;
+}
+
+inline vector3 crossproduct(const vector3 &a, const vector3 &b)
+{
+	return vector3(	a.y*b.z - a.z*b.y,
+					a.z*b.x - a.x*b.z,
+					a.x*b.y - a.y*b.x );
 }
 
 typedef vector3 vec3;

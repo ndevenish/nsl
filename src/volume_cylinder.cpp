@@ -99,7 +99,7 @@ bool volume_cylinder::prepareobject()
 int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& direction, intercept *nextplace )
 {
 	// count of the intercepts so far
-	int intercepts = 0, invalids = 0;
+	int intercepts = 0;//, invalids = 0;
 
 	long double lowerheight, upperheight;
 	lowerheight = 0;//position.z;

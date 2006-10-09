@@ -52,9 +52,15 @@ protected:
 public:
 	forcefield();
 
+	/** Retrieves the strength of the field at a specified position.
+	* This is returned as a vector. */
 	virtual void field(vector3& field, const vector3& position) { return; }
+	/** Retrieves the strength of the field gradient.*/
 	virtual void fieldgradient(vector3& field, const vector3 &position) { return; }
 	
+	/** Retrieves the field from this object tree.
+	* This function will iterate through all of it's children, asking them for
+	* their field modifiers and will modify the passed vector by this. */
 	void getfield( vector3& field, const vector3 &position );
 
 	// Allow this to be created from the object factory
@@ -71,10 +77,11 @@ class bfield : public forcefield {
 
 	bool prepareobject();
 
+protected:
+	void field(vector3& field, const vector3& position) { field += b0; }
+
 public:
 	bfield();
-
-	void field(vector3& field, const vector3& position) { field += b0; }
 
 	//vector3 getfieldgradient(const vector3& position) { return dbd; };
 
@@ -92,10 +99,11 @@ class efield : public forcefield {
 
 	bool prepareobject();
 
+protected:
+	void field(vector3& field, const vector3& position) { field += e0; }
+
 public:
 	efield();
-
-	void field(vector3& field, const vector3& position) { field += e0; }
 
 	//vector3 getfieldgradient(const vector3& position) { return dbd; };
 
@@ -105,10 +113,12 @@ public:
 	};
 };
 
-/** A linear gradient modifier for forcefields */
+/** A linear gradient modifier for forcefields.
+* The linear gradient this produces is centered on the origin, and purely vertical. */
 class linear_zgradient : public forcefield {
 	long double d_dz;
 
+protected:
 	void field(vector3& field, const vector3 &position);
 	void fieldgradient(vector3& field, const vector3 &position) { field += vector3(0,0,d_dz); }
 

@@ -37,12 +37,14 @@
 using namespace std;
 
 
-nslobject::nslobject()
+nslobject::nslobject() : logger(cout)
 {
 	candeletethis = false;
 	parent = 0;
 	initialised = false;
 
+//	logger = cout;
+	
 	objecttype = "nslobject";
 	types.push_back(objecttype);
 }
@@ -399,6 +401,7 @@ void nslobject::run ( void )
 			(*sublist)->run();
 }
 
+//template <int T>
 
 long double nslobject::getlongdouble( std::string propertyname, long double defaultvalue )
 {
@@ -420,6 +423,57 @@ long double nslobject::getlongdouble( std::string propertyname, long double defa
 	} catch (...) {
 		cout << "Error attempting to convert property " << propertyname
 			<< " to long double on object " << gettype() << " [" << get("name") 
+			<< "]" << endl;
+		throw;
+	}
+}
+
+int nslobject::getint( std::string propertyname, int defaultvalue )
+{
+	try {
+		// if no value, dfault
+		if (!isset(propertyname))
+			return defaultvalue;
+			
+		// Grabb the value
+		string inval = get(propertyname);
+		
+		//Convert this to an int
+		std::istringstream oStream(inval);
+		int  dOutput = 0;
+		oStream >> dOutput;
+		
+		return dOutput;
+
+	} catch (...) {
+		cout << "Error attempting to convert property " << propertyname
+			<< " to integer on object " << gettype() << " [" << get("name") 
+			<< "]" << endl;
+		throw;
+	}
+}
+
+
+long nslobject::getlong (std::string propertyname, long defaultvalue)
+{
+	try {
+		// If there is no value to get, default
+		if (!isset(propertyname))
+			return defaultvalue;
+
+		// Get the value
+		string invalue = get(propertyname);
+
+		// Convert the value to a long double
+		std::istringstream oStream(invalue);
+		long dOutput = 0;
+		oStream >> dOutput;
+		
+		return dOutput;
+
+	} catch (...) {
+		cout << "Error attempting to convert property " << propertyname
+			<< " to long on object " << gettype() << " [" << get("name") 
 			<< "]" << endl;
 		throw;
 	}

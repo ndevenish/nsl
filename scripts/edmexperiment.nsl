@@ -1,6 +1,17 @@
 # Test 
 
-add edmexperiment {
+add edmexperiment theexperiment {
+	# set the steptime for the inbuilt solver to use
+	set steptime 3e-4
+	set phase_steps 5 #phase average loops
+	set bounces 1000 #number of bounces to run the simulation over
+	
+	#Set the distance to 'lift' the particle off of the bottles
+	#surface after a collision has happened. This is in to fix
+	#a few rather nasty floating-point rounding errors in the
+	#raytracer.
+	set collision_compensation_distance 1e-9
+	
 	add container bottle {
 		add volume_cylinder mainbottle {
 			set type negative
