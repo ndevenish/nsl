@@ -23,7 +23,11 @@
 
 
 #include <iostream>
+#include <fstream>
+
 #include <cmath>
+#include <cassert>
+#include <cstdlib>
 
 #include "errors.h"
 
@@ -40,6 +44,8 @@
 
 using std::runtime_error;
 using std::endl;
+using std::ofstream;
+
 //using std::floorl;
 
 
@@ -59,6 +65,7 @@ edmexperiment::edmexperiment()
 	phase_steps = 0;
 	steptime = 0.0;
 	bounces = 0;
+	collision_offset = 0.;
 	
 	objecttype = "edmexperiment";
 	types.push_back(objecttype);
@@ -102,10 +109,12 @@ bool edmexperiment::prepareobject()
 
 	// Grab the steptime from the property set
 	//if (isset("steptime"))
-	steptime = getint("steptime", 3e-4);
+	steptime = getlongdouble("steptime", 3e-4);
 		
 	phase_steps = getint("phase_steps", 1);
 	bounces = getlong("bounces", 1);
+	
+	collision_offset = getlongdouble("collision_compensation_distance", 0.0);
 	
 	// If we are at this point we have the particlebox, particles, bfield and efield objects
 	// configured
@@ -115,20 +124,80 @@ bool edmexperiment::prepareobject()
 
 bool edmexperiment::runobject()
 {
+	ofstream poslog("poslog.txt");
+	
+	// Ensure that all of our particles are within the starting volume
+	for (int i = 0; i < particlecount; i++)
+		if (!particlebox->isinside(particles[i]->position))
+			throw runtime_error("Particle is not starting inside of a container volume");
 
 
 	// for now assume that everything is set up correctly
 	
-	//We want to perform this calculation over multiple starting phases
-	for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
+	// FOR EACH PARTICLE
+	particle *part;
+	int partloop = 0;
+	for (partloop = 0; partloop < particlecount; partloop++)
 	{
-		logger << "Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+		// Assign the current particle
+		part = particles[partloop];
 		
-		for (int bounce = 0; bounce < bounces; bounce++)
+		//We want to perform this calculation over multiple starting phases
+		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
 		{
-			// This is run every bounce
+			logger << "Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+			
+			for (int bounce = 0; bounce < bounces; bounce++)
+			{
+				// Log each bounces position to a file (this will not output the last bounce here, but that
+				// doesn't really matter)
+				poslog << bounce << ", " << part->position << endl;
+			
+				// This is run every bounce
+				intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
+				
+				// Normalise the Normal! (see cast documentation)
+				collisionpoint.normal.scaleto(1.0);
+				// Fill out the collisionpoint location
+				collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
+				
+				logger << " " <<  bounce << ": Time to Collision: " << collisionpoint.time << endl;
+				
+				if (collisionpoint.time == 0.)
+					logger << "\t------- Zero time Intersection" << endl; //	throw runtime_error("Zero Collision-point time");
+					
+				// Now we know the time to collision, cast a bigstep
+				if (collisionpoint.time > 0.)
+					bigstep(*part, collisionpoint.time);
+				
+				// Reflect the particle now
+				if (collisionpoint.collideobject->reflection == container::reflection_specular) 
+				{
+					part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
+				} else { // diffuse reflection
+					part->velocity_vec.x = rand()-(RAND_MAX/2);
+					part->velocity_vec.y = rand()-(RAND_MAX/2);
+					part->velocity_vec.z = rand()-(RAND_MAX/2);
+					
+					// Make sure it faces away from the normal
+					if ((part->velocity_vec * collisionpoint.normal) < 0.)
+						part->velocity_vec *= -1.0;
+				}
+				// Ensure velocity is kept constant
+				part->velocity_vec.scaleto(part->velocity);
+				
+				// Output the difference between particle and calculated impact position
+				logger << "\tPositional Difference: " << mod(part->position - collisionpoint.location) << endl;
+				
+				// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
+				// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
+				// 1e-30 anyway)
+				part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
+				
+			}
+			// This is run every phase loop
 		}
-		// This is run every phase loop
+		// Run every particle
 	}
 	return false;
 }

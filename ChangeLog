@@ -1,6 +1,4 @@
-BOOST LIBRARIES ARE NOW REQUIRED TO COMPILE PHYSICS.H
--Added edmexperiment class files to xcode project
--Mostly rewrote vector3 class operators to use boost::operator
--continues basic implementation of edmexperiment class
--Added getint and getlong to nslobject to retrieve respective typed properties
--Added logger object to nslobject for redirectable output
+- Added textexperiment.nsl script file
+- More edmexperiment running code
+- Fixed cast() not returning object pointer
+- Finished writing initial version of bounce-around code -still need to test

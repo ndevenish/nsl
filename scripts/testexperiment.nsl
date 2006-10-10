@@ -1,0 +1,45 @@
+# Test 
+
+add edmexperiment theexperiment {
+	# set the steptime for the inbuilt solver to use
+	set steptime 3e-4
+	set phase_steps 1 #phase average loops
+	set bounces 100 #number of bounces to run the simulation over
+	
+	#Set the distance to 'lift' the particle off of the bottles
+	#surface after a collision has happened. This is in to fix
+	#a few rather nasty floating-point rounding errors in the
+	#raytracer.
+	set collision_compensation_distance 1e-9
+	
+	add container bottle {
+		add volume_cylinder mainbottle {
+			set type negative
+			set radius 0.235
+			set height 0.12
+			set reflection specular
+		}
+	}
+
+	add particle neutron {
+		set gamma -29.1646870E+6
+		set velocity 3
+		
+		# Set up the starting position
+		set startvolume mainbottle
+		set startposition edge
+
+		set start_spin_polar_angle 0.5 #in units of pi
+		set spin_phase 0 #again in pi units
+	}
+
+	add bfield bfield {
+		set b0z 	1.0E-6
+		add linear_zgradient "bfield gradient" {
+			set D_DZ	1e-9
+		}
+	}
+	add efield efield {
+		set e0z		8.e5
+	}
+}

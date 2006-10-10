@@ -40,6 +40,8 @@ using std::endl;
 
 container::container()
 {
+	reflection = reflection_specular;
+	
 	objecttype = "container";
 	types.push_back(objecttype);
 }
@@ -85,6 +87,7 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 	{
 		// FUDGE
 		interceptlist[0].time *= fudge;
+		//interceptlist[0].normal.scaleto(1.0);
 		return interceptlist[0];
 	}
 

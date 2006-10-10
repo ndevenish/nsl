@@ -147,6 +147,7 @@ int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& 
 				nextplace->normal.z = 0.0;
 				nextplace->normal.x = position.x - (rayposi.x+ i1*direction.x);
 				nextplace->normal.y = position.y - (rayposi.y+ i1*direction.y);
+				nextplace->collideobject = this;
 				
 				nextplace++;
 				intercepts++;
@@ -168,7 +169,8 @@ int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& 
 				nextplace->normal.z = 0.0;
 				nextplace->normal.x = position.x - (rayposi.x+ i2*direction.x);
 				nextplace->normal.y = position.y - (rayposi.y+ i2*direction.y);
-
+				nextplace->collideobject = this;
+				
 				//nextplace->location.
 				nextplace++;
 				intercepts++;
@@ -209,7 +211,8 @@ int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& 
 				nextplace->type = icept_exit;
 			nextplace->normal.x = nextplace->normal.y = 0.0;
 			nextplace->normal.z = -1;
-
+			nextplace->collideobject = this;
+			
 			nextplace++;
 			// return if this makes two intercepts
 			if ((++intercepts) == 2)
@@ -238,6 +241,7 @@ int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& 
 				nextplace->type = icept_entry;
 			nextplace->normal.x = nextplace->normal.y = 0.0;
 			nextplace->normal.z = 1;
+			nextplace->collideobject = this;
 
 			nextplace++;
 
@@ -266,9 +270,9 @@ int volume_cylinder::isinside(const vector3 &pos)
 
 	adjpos = (position*-1.0)+ pos;
 	xysq = adjpos.x*adjpos.x + adjpos.y*adjpos.y;
-	if (xysq < (radius*radius))
-		if (adjpos.z < height)
-			if (adjpos.z > 0.0)
+	if ((radius*radius)-xysq > - 1e-15)
+		if (height-adjpos.z > -1e-15)
+			if (adjpos.z > -1e-15)
 				count++;
 
 	if (volume_type == volume_positive)

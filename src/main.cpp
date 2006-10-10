@@ -48,6 +48,11 @@ int main ( int argc, string argv )
 		nslobject rootobject;
 
 		// Add holders for the classes we want
+		// None held at the moment!
+		
+		
+		// the actual classes we want
+		nslobjectfactory::add("particle", new particle::Factory);
 		nslobjectfactory::add("edmexperiment", new edmexperiment::Factory);
 		nslobjectfactory::add("container", new container::Factory);
 		nslobjectfactory::add("volume_cylinder", new volume_cylinder::Factory);
@@ -55,12 +60,9 @@ int main ( int argc, string argv )
 		nslobjectfactory::add("forcefield", new forcefield::Factory);
 		nslobjectfactory::add("linear_zgradient", new linear_zgradient::Factory);
 		nslobjectfactory::add("efield", new efield::Factory);
-
-
-		// the actual classes we want
-		nslobjectfactory::add("particle", new particle::Factory);
-
-		rootobject.parse("./scripts/edmexperiment.nsl");
+		
+		// Build the tree
+		rootobject.parse("./scripts/testexperiment.nsl");
 
 		cout << "Read in structure:" << endl;
 		rootobject.tree();
@@ -71,16 +73,8 @@ int main ( int argc, string argv )
 
 		rootobject.prepare();
 
-		vector3 fieldstrength;
-		bfield *fieldob;
-		fieldob = (bfield*)rootobject.findbyname("bfield");
-
-		if (fieldob) {
-			fieldob->getfield(fieldstrength, vector3(1,1,0));
-			fieldob->getfield(fieldstrength, vector3(1,1,1));
-		} else {
-			throw runtime_error("Field object invalid - cannot retrieve field strength");
-		}
+		rootobject.run();
+		
 
 
 

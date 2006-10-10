@@ -123,6 +123,13 @@ long double operator*(const vector3& lt, const vector3& rt)
 {
 	return lt.x*rt.x + lt.y*rt.y + lt.z*rt.z;
 }
+
+inline long double mod( const vector3& vc)
+{
+	/// Returns the length of the vector
+	return sqrtl(vc.x*vc.x + vc.y*vc.y + vc.z*vc.z);
+}
+
 /*
 const vector3 operator+(const vector3& lhs, const vector3& rhs) {
 	return vector3(lhs.x+rhs.x, lhs.y+rhs.y, lhs.z+rhs.z);

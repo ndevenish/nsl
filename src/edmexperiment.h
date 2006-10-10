@@ -48,6 +48,9 @@ class edmexperiment : public nslobject {
 	int phase_steps;
 	/// How many bounces to take
 	long bounces;
+	
+	/// The floating-point-error collision compensation distance
+	long double collision_offset;
 
 	/// A count of how many particles we are controlling
 	int particlecount;

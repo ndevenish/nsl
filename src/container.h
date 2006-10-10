@@ -45,12 +45,12 @@ enum itype {
 };
 
 struct intercept {
-	long double time;
-	itype type;
-	vector3 location;
-	vector3 normal;
+	long double time; ///< The time to the interception
+	itype type; ///< The interception type. This should always be returned as interception_exit
+	vector3 location; ///< The spatial position of the intercept
+	vector3 normal; ///< The surface normal at the point of interception
 
-	container *collideobject;
+	container *collideobject; ///< Pointer to the object with which the ray collides
 
 	intercept() : time(0.0), type(interception_none), location(0,0,0), normal(0,0,0), collideobject(0) {}
 };
@@ -62,6 +62,8 @@ const int MAX_INTERCEPTS = 32;
 
 /** Ties together multiple volumes as a single large volume. */
 class container : public nslobject {
+	friend class edmexperiment;
+
 	bool prepareobject();
 
 	// List of intercepts
@@ -79,6 +81,11 @@ protected:
 	// intersections that occur, and returns the number of intersections.
 	virtual int findintersections ( const vector3& position, const vector3& direction, intercept *nextintercept ) { return 0; };
 
+	enum {
+		reflection_diffuse,
+		reflection_specular
+	} reflection;
+	
 public:
 	container();
 
@@ -98,6 +105,10 @@ public:
 	* result and surface parameters) a reference to an intercept object with the:
 	* Distance to the collision, collision point, normal at that point, and a pointer
 	* to the object with which it is colliding.
+	*
+	* IMPORTANT NOTE: The normal in the intercept structure returned will most likely NOT
+	* be normalised. This is done in order to save calculation inside of the casting process. For
+	* similar reasons the position is also not filled out, and these must be calculated manually.
 	* @param position The position of the particle
 	* @param direction The direction the particle is facing i.e. the velocity
 	* @param unused Currently unused.
@@ -122,11 +133,6 @@ class volume_cylinder : public container {
 	long double radius;
 	long double height;
 	vector3 position;
-
-	enum {
-		reflection_diffuse,
-		reflection_specular
-	} reflection;
 
 	itype icept_entry;
 	itype icept_exit;
