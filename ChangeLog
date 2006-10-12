@@ -1,4 +1,3 @@
-- Added textexperiment.nsl script file
-- More edmexperiment running code
-- Fixed cast() not returning object pointer
-- Finished writing initial version of bounce-around code -still need to test
+- Added matlab directory
+- Only holds at end of execution on windows
+- Wrote dataset class, and tested

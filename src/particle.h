@@ -48,12 +48,17 @@ class particle : public nslobject {
 
 	long double gamma;
 	
+	long double flytime;
+	
 	// Utility class pointers
 	container *particlebox;
 	bfield *mag_field;
 	efield *elec_field;
 
 	bool prepareobject();
+	
+	// Initialise the values in the class
+	void initvals();
 
 	//bool getvaluetoproperty(std::string valuename, long double &dest);
 

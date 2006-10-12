@@ -4,7 +4,7 @@ add edmexperiment theexperiment {
 	# set the steptime for the inbuilt solver to use
 	set steptime 3e-4
 	set phase_steps 1 #phase average loops
-	set bounces 100 #number of bounces to run the simulation over
+	set bounces 50 #number of bounces to run the simulation over
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -19,16 +19,27 @@ add edmexperiment theexperiment {
 			set height 0.12
 			set reflection specular
 		}
+		add volume_cylinder sidebottle {
+			set type negative
+			set radius 0.235
+			set height 0.12
+			set reflection diffuse
+			set x 0.3
+		}
 	}
 
 	add particle neutron {
 		set gamma -29.1646870E+6
 		set velocity 3
+		# set up the velocity VECTOR (this will be scaled to velocity)
+		set vy 1
+		set vx 0.1
 		
 		# Set up the starting position
 		set startvolume mainbottle
 		set startposition edge
 
+		# Set up initial spin angle
 		set start_spin_polar_angle 0.5 #in units of pi
 		set spin_phase 0 #again in pi units
 	}

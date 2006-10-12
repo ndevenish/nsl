@@ -81,7 +81,7 @@ bool volume_cylinder::prepareobject()
 	height = getlongdouble("height", 0.0);
 
 	// Now set up the starting positions - edge and center
-	positionlist["edge"] = position + vector3(0.0, radius, height/2.0);
+	positionlist["edge"] = position + vector3(0.0, -radius, height/2.0);
 	positionlist["center"] = position + vector3(0.0, 0.0, (height/2.0));
 
 	string reflectiontype;

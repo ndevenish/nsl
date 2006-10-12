@@ -41,6 +41,7 @@
 #include "edmexperiment.h"
 
 #include "physics.h"
+#include "datasets.h"
 
 using std::runtime_error;
 using std::endl;
@@ -124,6 +125,11 @@ bool edmexperiment::prepareobject()
 
 bool edmexperiment::runobject()
 {
+	// Dataset to track the false EDM
+	dataset false_edm;
+	
+	//particle storeparticle;
+	
 	ofstream poslog("poslog.txt");
 	
 	// Ensure that all of our particles are within the starting volume
@@ -142,44 +148,57 @@ bool edmexperiment::runobject()
 		// Assign the current particle
 		part = particles[partloop];
 		
-		//We want to perform this calculation over multiple starting phases
+		//We want to perform this calculation over multiple starting phase
 		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
 		{
 			logger << "Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+			// Copy the stored particle to part
+			//*part = storeparticle;
+			
+			////////////////////////////////
+			// Reset the particle each phase
+			
+			
+			part->reset();
 			
 			for (int bounce = 0; bounce < bounces; bounce++)
 			{
+				// This section is run every bounce
+				
 				// Log each bounces position to a file (this will not output the last bounce here, but that
 				// doesn't really matter)
-				poslog << bounce << ", " << part->position << endl;
-			
-				// This is run every bounce
+				//poslog << bounce << ", " << part->position << endl;
+				
+				// Calculate the next point of intersection
 				intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
+					// Normalise the Normal! (see cast documentation)
+					collisionpoint.normal.scaleto(1.0);
+					// Fill out the collisionpoint location
+					collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
 				
-				// Normalise the Normal! (see cast documentation)
-				collisionpoint.normal.scaleto(1.0);
-				// Fill out the collisionpoint location
-				collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
+				//logger << " " <<  bounce << ": Time to Collision: " << collisionpoint.time << endl;
 				
-				logger << " " <<  bounce << ": Time to Collision: " << collisionpoint.time << endl;
-				
+				// If we get a zero-time collision, make a note of it
 				if (collisionpoint.time == 0.)
 					logger << "\t------- Zero time Intersection" << endl; //	throw runtime_error("Zero Collision-point time");
 					
-				// Now we know the time to collision, cast a bigstep
+				// Now we know the time to collision, step over it calculating the spin changes as we go
 				if (collisionpoint.time > 0.)
 					bigstep(*part, collisionpoint.time);
+					
+				// Update the particles flytime
+				part->flytime += collisionpoint.time;
 				
 				// Reflect the particle now
 				if (collisionpoint.collideobject->reflection == container::reflection_specular) 
 				{
 					part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
-				} else { // diffuse reflection
+				} else { // Assume diffuse reflection otherwise (for now)
 					part->velocity_vec.x = rand()-(RAND_MAX/2);
 					part->velocity_vec.y = rand()-(RAND_MAX/2);
 					part->velocity_vec.z = rand()-(RAND_MAX/2);
 					
-					// Make sure it faces away from the normal
+					// Ensure it faces away from the normal
 					if ((part->velocity_vec * collisionpoint.normal) < 0.)
 						part->velocity_vec *= -1.0;
 				}
@@ -187,18 +206,20 @@ bool edmexperiment::runobject()
 				part->velocity_vec.scaleto(part->velocity);
 				
 				// Output the difference between particle and calculated impact position
-				logger << "\tPositional Difference: " << mod(part->position - collisionpoint.location) << endl;
+				//logger << "\tPositional Difference: " << mod(part->position - collisionpoint.location) << endl;
 				
 				// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
 				// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
 				// 1e-30 anyway)
 				part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
 				
-			}
+			} // End of bounces
 			// This is run every phase loop
-		}
+			
+		} // End of phase loops
 		// Run every particle
-	}
+		
+	} // End of particle loop
 	return false;
 }
 
@@ -251,6 +272,7 @@ void edmexperiment::smallstep(particle& part, long double time)
 	
 	
 	// Now apply the new physical properties to the particle
+	
 	// Move it first
 	part.position += part.velocity_vec * time;
 	

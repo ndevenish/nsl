@@ -42,7 +42,7 @@
 using namespace std;
 
 int main ( int argc, string argv )
-{
+{	
 	try {
 
 		nslobject rootobject;
@@ -89,7 +89,9 @@ int main ( int argc, string argv )
 	}
 
 	// Hold at the end of execution until they hit enter
-	getchar();
+	#ifdef WIN32
+		getchar();
+	#endif
 
 	return 0;
 }

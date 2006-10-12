@@ -39,20 +39,25 @@ using namespace std;
 
 particle::particle()
 {
+	initvals();
+	
+	objecttype = "particle";
+	types.push_back(objecttype);
+}
+
+void particle::initvals( void )
+{
 	particlebox = 0;
 
+	flytime = 0.;
+	
 	gamma = 0.0;
 	position.x = position.y = position.z = 0.0;
 	velocity_vec.x = velocity_vec.y = velocity_vec.z = 0.0;
 	velocity = 0.0;
 	spinEplus.x = spinEplus.y = spinEplus.z = 0.0;
 	spinEminus = spinEplus;
-
-	objecttype = "particle";
-	types.push_back(objecttype);
 }
-
-
 bool particle::prepareobject()
 {
 	// Find a container!

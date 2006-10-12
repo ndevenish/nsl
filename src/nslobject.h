@@ -224,7 +224,12 @@ public:
 	* @param cd True if the object can safely be delete automatically, false otherwise */
 	void candelete( bool cd ) { candeletethis = cd; }
 
-
+	/** Resets the class back to it's initial state.
+	* This function resets the class back to it's initial state, by recalling prepareobject().
+	* This can work because prepareobject() should only base it's initial configuration off of
+	* the internal parameter variables. */
+	void reset ( void ) { prepareobject(); }
+	
 	// The local instance of the object factory
 	class Factory : public nslobjectfactory {
 		nslobject *create() { return new nslobject; }
@@ -254,9 +259,13 @@ protected:
 	* time one is needed, each derived class is given a chance to preload all values into
 	* appropriate variables. This is done inside of this function, as is any other preperation.
 	*
+	* Note that this should only base off of parameter values and not precalculated variables as
+	* the class may be called to reset() at some point.
+	*
 	* It is a virtual function, so any deriving class should implement one of it's own.
 	* @returns A bool that currently represents nothing.*/
 	virtual bool prepareobject ( void ) { return true; }
+	
 	/** Runs an object.
 	* This virtual function is called when the object tree is run.
 	* @return Returns true to continue running subobjects, otherwise false to fall back
