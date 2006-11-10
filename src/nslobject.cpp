@@ -196,7 +196,10 @@ tokens nslobject::parseparser( cparser & parser)
 			else
 				throw parse_error("Unidentified name");
 
-
+		} else if (token == "ignore") {
+			// We should ignore this object... loop until we hit the next }
+			while (parser.gettoken() != "}")
+				;
 		} else if (token == "{") {
 			//ignore this
 			;

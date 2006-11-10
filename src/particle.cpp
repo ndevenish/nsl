@@ -57,6 +57,11 @@ void particle::initvals( void )
 	velocity = 0.0;
 	spinEplus.x = spinEplus.y = spinEplus.z = 0.0;
 	spinEminus = spinEplus;
+	
+	E_sum_phase = E_minus_sum_phase = 0.0;
+	
+	vxEeffect *= 0;
+	
 }
 bool particle::prepareobject()
 {
@@ -85,6 +90,8 @@ bool particle::prepareobject()
 		velocity = velocity_vec.mod();
 	}
 
+	vgamma = sqrtl(1. / (1. - (velocity*velocity)/csquared));
+				   
 	// Warn for zero velocity
 	if (velocity == 0.0)
 		Warning("Velocity in particle is unset (or set to 0.0)");
@@ -125,7 +132,9 @@ bool particle::prepareobject()
 	gamma = getlongdouble("gamma", 0.0);
 	if (gamma == 0.0)
 		Warning("Gamma in particle is unset (or set to 0.0)");
-
+	// Multiply by 2pi
+	gamma *= 2. * pi;
+	
 	// ~~~~~ Spin stuff
 	long double start_spin_polar_angle, start_spin_phase;
 	// Start by getting the spin polar angles

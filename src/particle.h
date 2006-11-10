@@ -37,6 +37,9 @@ class efield;
 /** Object representing a particle. */
 class particle : public nslobject {
 	friend class edmexperiment;
+	friend class reporter;
+	friend class impactreporter;
+	friend class phasereporter;
 	
 	// Physical Properties values
 	vector3	position;
@@ -44,9 +47,18 @@ class particle : public nslobject {
 	vector3 spinEplus;
 	vector3 spinEminus;
 
+	// A 'cache' for the exB effect that only changes every bounce (in a linear electric field)
+	vector3 vxEeffect;
+	
 	long double velocity;
 
+	// Gyromagnetic ratio of the particle
 	long double gamma;
+	
+	// Particles velocity gamma
+	long double vgamma;
+	
+	long double E_sum_phase, E_minus_sum_phase;
 	
 	long double flytime;
 	

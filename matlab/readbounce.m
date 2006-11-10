@@ -20,7 +20,7 @@
 function [ output_args ] = readbounce( input_args )
 %READBOUNCE     Reads a file consisting of location triplets
 %               and renders it against a bottle volume
-    filename = '../poslog.txt';
+filename = '../poslog.txt';
     [bounce, x, y, z] = textread(filename, '','delimiter', ',');
 
     subplot(1,2,1);

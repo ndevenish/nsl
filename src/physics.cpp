@@ -49,7 +49,7 @@ vector3 operator+(const vector3& lhs, const vector3&rhs)
 void vector3::scaleto(long double newlength)
 {
 	long double scale_ratio;
-
+	
 	if (newlength == 0.0)
 	{
 		x = y = z = 0.0;
@@ -57,13 +57,13 @@ void vector3::scaleto(long double newlength)
 	} else if (mod() == 0.0) {
 		throw runtime_error("Attempting to scale zero-length vector");
 	}
-
+	
 	scale_ratio = newlength/mod();
-
+	
 #ifdef WIN32
 	assert(_finite(scale_ratio));
 #endif
-
+	
 	x *= scale_ratio;
 	y *= scale_ratio;
 	z *= scale_ratio;

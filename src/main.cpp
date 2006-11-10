@@ -35,6 +35,7 @@
 #include "particle.h"
 #include "container.h"
 #include "electromagnetics.h"
+#include "reporters.h"
 
 #include <stdio.h>
 
@@ -60,6 +61,12 @@ int main ( int argc, string argv )
 		nslobjectfactory::add("forcefield", new forcefield::Factory);
 		nslobjectfactory::add("linear_zgradient", new linear_zgradient::Factory);
 		nslobjectfactory::add("efield", new efield::Factory);
+		
+		// Reporters!
+		nslobjectfactory::add("reporter", new reporter::Factory);
+		nslobjectfactory::add("impactreporter", new impactreporter::Factory);
+		nslobjectfactory::add("phasereporter", new phasereporter::Factory);
+		
 		
 		// Build the tree
 		rootobject.parse("./scripts/testexperiment.nsl");

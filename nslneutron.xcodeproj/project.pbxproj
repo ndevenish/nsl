@@ -28,6 +28,7 @@
 		0A3B6EBD0AC9940B002CC2AF /* physics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB50AC9940B002CC2AF /* physics.h */; };
 		0A72C9B40AF37F5B0079760D /* reporters.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A72C9B30AF37F5B0079760D /* reporters.h */; };
 		0A72C9D10AF380670079760D /* reporters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C9D00AF380670079760D /* reporters.cpp */; };
+		0A72CA450AF6452C0079760D /* nslprops.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A72CA440AF6452C0079760D /* nslprops.txt */; };
 		0AB232B90ADA3BE400323FF0 /* edmexperiment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */; };
 		0AB232BA0ADA3BE500323FF0 /* edmexperiment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB232B80ADA3BE400323FF0 /* edmexperiment.h */; };
 		0AB236A10ADD292B00323FF0 /* vector3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB236A00ADD292B00323FF0 /* vector3.h */; };
@@ -53,6 +54,7 @@
 				0AB236A10ADD292B00323FF0 /* vector3.h in CopyFiles */,
 				0AB236BB0ADD29D900323FF0 /* datasets.h in CopyFiles */,
 				0A72C9B40AF37F5B0079760D /* reporters.h in CopyFiles */,
+				0A72CA450AF6452C0079760D /* nslprops.txt in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -81,6 +83,7 @@
 		0A3B6EB50AC9940B002CC2AF /* physics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = physics.h; path = src/physics.h; sourceTree = "<group>"; };
 		0A72C9B30AF37F5B0079760D /* reporters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reporters.h; path = src/reporters.h; sourceTree = "<group>"; };
 		0A72C9D00AF380670079760D /* reporters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reporters.cpp; path = src/reporters.cpp; sourceTree = "<group>"; };
+		0A72CA440AF6452C0079760D /* nslprops.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = nslprops.txt; path = doc/nslprops.txt; sourceTree = "<group>"; };
 		0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = edmexperiment.cpp; path = src/edmexperiment.cpp; sourceTree = "<group>"; };
 		0AB232B80ADA3BE400323FF0 /* edmexperiment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = edmexperiment.h; path = src/edmexperiment.h; sourceTree = "<group>"; };
 		0AB236A00ADD292B00323FF0 /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector3.h; path = src/vector3.h; sourceTree = "<group>"; };
@@ -161,6 +164,7 @@
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
+				0A72CA440AF6452C0079760D /* nslprops.txt */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";

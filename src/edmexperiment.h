@@ -26,19 +26,33 @@
 #include "nslobject.h"
 #include "nslobjectfactory.h"
 
+#include "reporters.h"
+
+//#include "physics.h"
+#include "datasets.h"
+
 class container;
 class particle;
 class bfield;
 class efield;
 class vector3;
+class reporter;
 
 const int MAX_PARTICLES = 32;
+const int MAX_REPORTERS = 16;
+
 
 /** Object to handle running of EDM Experiment */
 class edmexperiment : public nslobject {
 
+	friend class reporter;
 	container *particlebox; ///< A shortcut link to the box the particle is stored in
-	particle *particles[MAX_PARTICLES]; ///< An array of particles we control
+	//particle *particles[MAX_PARTICLES]; ///< An array of particles we control
+	//reporter *reporters[MAX_REPORTERS]; ///< An array of reporters to call
+	
+	std::vector<reporter*>	report_bounce, report_run, report_step;
+	
+	
 	bfield * magfield; ///< The magnetic field object
 	efield *elecfield; ///< The electric field object
 	
@@ -54,6 +68,9 @@ class edmexperiment : public nslobject {
 
 	/// A count of how many particles we are controlling
 	int particlecount;
+	/// A count of how many reporters we have
+	//int reportercount;
+	
 
 	bool prepareobject();
 	bool runobject();	
@@ -71,12 +88,20 @@ class edmexperiment : public nslobject {
 	void smallstep(particle& part, long double time);
 	
 	/** Performs the necessary spin calculations.
-	* This function spins the particle */
-	void spin_calculation( vector3& spinvector, const vector3& mag_field, const long double time);
+	* This function spins the particle, and returns the phase change in the horizontal plane */
+	long double spin_calculation( vector3& spinvector, const long double gyromag, const vector3& mag_field, const long double time);
+
+protected:
 
 public:
 	edmexperiment();
 
+	dataset change;
+	long double tmpld;
+	
+	/// Shortcut to a list of particles
+	std::vector<particle*>	particles;
+	
 	// Allow this to be created from the object factory
 	class Factory : public nslobjectfactory {
 		nslobject *create() { return new edmexperiment; }

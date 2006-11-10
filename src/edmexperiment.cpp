@@ -28,6 +28,9 @@
 #include <cmath>
 #include <cassert>
 #include <cstdlib>
+#include <ctime>
+
+#include "boost/foreach.hpp"
 
 #include "errors.h"
 
@@ -43,9 +46,12 @@
 #include "physics.h"
 #include "datasets.h"
 
+#include "reporters.h"
+
 using std::runtime_error;
 using std::endl;
 using std::ofstream;
+using std::ios;
 
 //using std::floorl;
 
@@ -57,12 +63,15 @@ using std::ofstream;
 edmexperiment::edmexperiment()
 {
 	particlecount = 0;
+	//reportercount = 0;
 	particlebox = 0;
 	magfield = 0;
 	elecfield = 0;
-	for (int i = 0; i < MAX_PARTICLES; i++)
-		particles[i] = 0;
-
+	/*for (int i = 0; i < MAX_PARTICLES; i++)
+		particles[i] = 0;*/
+	/*for (int i = 0; i < MAX_REPORTERS; i++)
+		reporters[i] = 0;
+*/
 	phase_steps = 0;
 	steptime = 0.0;
 	bounces = 0;
@@ -81,18 +90,51 @@ bool edmexperiment::prepareobject()
 	if (countchildren("container") != 1)
 		throw runtime_error("Container number other than one specified");
 	//particle = findbytype("container", 0);
+	
 	// Find and add the container object
-	for (sublist = subobjects.begin(); sublist != subobjects.end(); sublist++)
-		if ((*sublist)->isoftype("container"))
-			particlebox = (container*)(*sublist);
+	//for (sublist = subobjects.begin(); sublist != subobjects.end(); sublist++)
+	BOOST_FOREACH( nslobject *sublist, subobjects )
+	{
+		if (sublist->isoftype("container"))
+			particlebox = (container*)sublist;
+	}
 
 	// And that we have at least one particle
-	if (countchildren("particle") < 1)
+	if ((particlecount = countchildren("particle")) < 1)
 		throw runtime_error("No particles specified under edmexperiment object");
 	// Add the particles to the list
-	for (sublist = subobjects.begin(); sublist != subobjects.end(); sublist++)
-		if ((*sublist)->isoftype("particle"))
-			particles[particlecount++] = (particle*)(*sublist);
+	//for (sublist = subobjects.begin(); sublist != subobjects.end(); sublist++)
+	BOOST_FOREACH( nslobject *subobject, subobjects )
+	{
+		if (subobject->isoftype("particle"))
+//			particles[particlecount++] = (particle*)sublist;
+			particles.push_back((particle*)subobject);
+	}
+	
+	// Now collect the reporters together in their piles
+	BOOST_FOREACH( nslobject *subobject, subobjects )
+	{
+		if (subobject->isoftype("reporter"))
+		{
+			switch (((reporter*)subobject)->when()) {
+				case reporter::rfreq_run:
+					report_run.push_back((reporter*)subobject);
+					break;
+				case reporter::rfreq_step:
+					report_step.push_back((reporter*)subobject);
+					break;
+				case reporter::rfreq_bounce:
+					report_bounce.push_back((reporter*)subobject);
+					break;
+			}
+		}
+	}
+					
+					
+					
+					
+					
+					//reporters[reportercount++] = (reporter*)(*sublist);
 	
 	// EM field objects
 	if (countchildren("efield") != 1)
@@ -117,6 +159,13 @@ bool edmexperiment::prepareobject()
 	
 	collision_offset = getlongdouble("collision_compensation_distance", 0.0);
 	
+	// Log the start time of this simulation run
+	time_t rawtime;
+	tm * timeinfo;
+	time ( &rawtime );
+	timeinfo = localtime ( &rawtime );
+	set("runtime",  asctime(timeinfo));
+	
 	// If we are at this point we have the particlebox, particles, bfield and efield objects
 	// configured
 
@@ -133,61 +182,67 @@ bool edmexperiment::runobject()
 	ofstream poslog("poslog.txt");
 	
 	// Ensure that all of our particles are within the starting volume
-	for (int i = 0; i < particlecount; i++)
-		if (!particlebox->isinside(particles[i]->position))
+	BOOST_FOREACH( particle* part, particles) {
+		if (!particlebox->isinside(part->position))
 			throw runtime_error("Particle is not starting inside of a container volume");
+	}
 
 
 	// for now assume that everything is set up correctly
 	
-	// FOR EACH PARTICLE
-	particle *part;
-	int partloop = 0;
-	for (partloop = 0; partloop < particlecount; partloop++)
+	// Tell our reporters to initialise, here for now.
+	BOOST_FOREACH( nslobject *ob, subobjects) {
+		if (ob->isoftype("reporter"))
+			((reporter*)(ob))->preparefile(*this);
+	}
+	
+	////////////////////////////////////////////////////////////////////////////
+	// Start the simulation loops
+	
+	// First loop over starting phases
+	for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
 	{
-		// Assign the current particle
-		part = particles[partloop];
-		
-		//We want to perform this calculation over multiple starting phase
-		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
-		{
-			logger << "Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
-			// Copy the stored particle to part
-			//*part = storeparticle;
-			
-			////////////////////////////////
-			// Reset the particle each phase
-			
-			
+		logger << "Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+
+		// Reset the particle each phase
+		BOOST_FOREACH( particle* part, particles ) {
 			part->reset();
-			
-			for (int bounce = 0; bounce < bounces; bounce++)
+		}
+		
+		// Now loop over bounces
+		for (int bounce = 0; bounce < bounces; bounce++)
+		{
+			// NOW loop over particles - having them here means that they move together
+			BOOST_FOREACH( particle *part, particles)
 			{
 				// This section is run every bounce
+/*
+				// Reset the particle to an exact position and velocity to compare the entire process
+				// with the old, original code
+				part->position = vector3(0.,0.,0.1);
+				part->velocity_vec = vector3(0.5, 0.4, 0.0);
+				part->velocity_vec.scaleto(3.0);
 				
-				// Log each bounces position to a file (this will not output the last bounce here, but that
-				// doesn't really matter)
-				//poslog << bounce << ", " << part->position << endl;
+				part->spinEplus = vector3(1., 0., 0.);
+				part->spinEminus = part->spinEplus;
+*/				
 				
 				// Calculate the next point of intersection
 				intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
-					// Normalise the Normal! (see cast documentation)
-					collisionpoint.normal.scaleto(1.0);
-					// Fill out the collisionpoint location
-					collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
+				// Normalise the Normal! (see cast documentation)
+				collisionpoint.normal.scaleto(1.0);
+				// Fill out the collisionpoint location
+				collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
 				
 				//logger << " " <<  bounce << ": Time to Collision: " << collisionpoint.time << endl;
 				
 				// If we get a zero-time collision, make a note of it
 				if (collisionpoint.time == 0.)
 					logger << "\t------- Zero time Intersection" << endl; //	throw runtime_error("Zero Collision-point time");
-					
+				
 				// Now we know the time to collision, step over it calculating the spin changes as we go
 				if (collisionpoint.time > 0.)
 					bigstep(*part, collisionpoint.time);
-					
-				// Update the particles flytime
-				part->flytime += collisionpoint.time;
 				
 				// Reflect the particle now
 				if (collisionpoint.collideobject->reflection == container::reflection_specular) 
@@ -213,13 +268,28 @@ bool edmexperiment::runobject()
 				// 1e-30 anyway)
 				part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
 				
-			} // End of bounces
-			// This is run every phase loop
+			} // FOREACH particle
 			
-		} // End of phase loops
-		// Run every particle
+			// Now call the reporters that report each bounce
+			BOOST_FOREACH( reporter *repo, report_bounce) {
+				repo->report(*this);
+			}
+				
+		} //FOREACH bounce
+	} // FOREACH phase
+	
+	
+	// Now tell all the reporters that are supposed to report every run, to report
+	BOOST_FOREACH( reporter *rep, report_run ) {
+		rep->report(*this);
+	}
+	
+	// Tell all of the reporters to do the file-closing 'final report'
+	BOOST_FOREACH( nslobject *ob, subobjects) {
+		if (ob->isoftype("reporter"))
+			((reporter*)(ob))->closefile(*this);
+	}
 		
-	} // End of particle loop
 	return false;
 }
 
@@ -232,6 +302,16 @@ void edmexperiment::bigstep(particle& part, long double time)
 	// Calculate the number of steps we are going to take
 	steps = floorl(time / steptime);
 	
+	// calculate the ExB effect for the particle- this does not change over a bigstep
+	// Now (here for now) calculate the VxE effect
+	vector3 vxE; vector3 E;
+	elecfield->getfield(E, part.position);
+	part.vxEeffect = (crossproduct(E, part.velocity_vec) * part.vgamma)/ csquared;
+
+	// WAAGH WAAAGH WAAAGH Setting this to zero for debugging
+	//part.vxEeffect *= 0;
+	
+	
 	// Now do this many smallsteps - after which we will have one step of time less
 	// than one step to complete
 	for (int step = 0; step < steps; step++)
@@ -239,51 +319,121 @@ void edmexperiment::bigstep(particle& part, long double time)
 		// We can safely callthe smallstep with steptime as inside this loop it is 
 		// guaranteed to be so
 		smallstep(part, steptime);
+
 	}
 
 	// Check we still have a little excess time to step
-	if ((time-(steps*steptime)) < 0.0)
+	long double laststep = (time - (steps*steptime));
+	if (laststep < 0.0)
 		throw runtime_error("Stepping routine stepped over maximum time to impact");
 	// Now do the actual final step
-	smallstep(part, time-(steps*steptime));
+	smallstep(part, laststep);
+	static ofstream lasts("laststep.txt");
+	lasts.precision(20);
+	lasts << laststep << endl;
 }
 
 void edmexperiment::smallstep(particle& part, long double time)
 {
+//	time = 0.00014977692797960484496350153094113011;
+	
 	// Firstly calculate the step midpoint
 	vector3 midpoint;
 	midpoint = part.position + (part.velocity_vec*(time/2.0));
 	
-	// Now grab the electric and magnetic fields at this point
-	vector3 E, B;
+	// Just grab the magnetic field - now we have precalculated the magnetic field
+	// for the particle already
+	vector3 B;//, E;
 	magfield->getfield(B, midpoint);
-	elecfield->getfield(E, midpoint);
+	//elecfield->getfield(E, midpoint);
 	
-	// Now (here for now) calculate the VxE effect
-	vector3 vxE;
-	vxE = crossproduct(E, part.velocity_vec) / csquared;
 	
 	// Now calculate the two different magnetic fields
 	vector3 BplusvxE, BminusvxE;
-	BplusvxE = B + vxE;
-	BminusvxE = B - vxE;
-	
-	
-	
+	BplusvxE = B + part.vxEeffect;
+	BminusvxE = B - part.vxEeffect;
 	
 	// Now apply the new physical properties to the particle
 	
 	// Move it first
 	part.position += part.velocity_vec * time;
 	
-	// Now spin it
-	spin_calculation(part.spinEplus, BplusvxE, time);
-	spin_calculation(part.spinEminus, BminusvxE, time);
+	// Update the particles flytime
+	part.flytime += time;
 	
+	/*
+	static long double sumtime = 0;
+	vector3 spin = part.spinEplus;
+	
+	sumtime += time;
+	long double a, b, c;
+	
+	a = spin_calculation(spin, part.gamma, BplusvxE, time);
+	spin = part.spinEplus;
+	b = 100. * spin_calculation(spin, part.gamma, BplusvxE, time/10.);
+	
+	c = a - b;
+	tmpld = c;
+	*/
+	
+	
+	// Now spin it both ways 
+	//BplusvxE = vector3(8.38780388e-13, -2.6690424730e-11, 1.0e-6);
+	//BminusvxE = vector3(-8.38780388e-13, 2.669042473e-11, 1.0e-6);
+	//time = 0.0001497769279;
+	
+	long double plusphase, minusphase, framediff;
+	plusphase		= spin_calculation(part.spinEplus,	 part.gamma, BplusvxE,  time);
+	minusphase		= spin_calculation(part.spinEminus, part.gamma, BminusvxE, time);
+	framediff = plusphase - minusphase;
+	
+	static ofstream steplog("steplog.txt");
+	steplog << part.flytime << ", " << plusphase << ", " << minusphase << ", " << framediff << endl;
+	part.E_sum_phase += plusphase;
+	part.E_minus_sum_phase += minusphase;
+	/*
+	part.E_sum_phase		+= spin_calculation(part.spinEplus,	 part.gamma, BplusvxE,  time);
+	part.E_minus_sum_phase	+= spin_calculation(part.spinEminus, part.gamma, BminusvxE, time);
+	*/
+	
+	// Now (god forbid) call the reporters that report every step
+	BOOST_FOREACH( reporter *rep, report_step ) {
+		rep->report(*this);
+	}
 }
 
-void edmexperiment::spin_calculation( vector3 &spinvector, const vector3& mag_field, const long double time )
+long double edmexperiment::spin_calculation( vector3 &spinvector, const long double gyromag, const vector3& mag_field, const long double time )
 {
-	// for now, don't do anything
-	return;
+//	static ofstream steplog("steplog.txt");
+
+	// Let's twist again, like we did last summer
+	vector3 oldspin = spinvector;//vector3(spinvector.x, spinvector.y, 0.0);
+	long double oldxylength = sqrtl(spinvector.x*spinvector.x + spinvector.y*spinvector.y);
+	// Calculate the change in spin
+	vector3 dS = time * gyromag * crossproduct(spinvector, mag_field);
+	
+	// Now apply this to the spin vector
+	spinvector += dS;
+	
+	// Scale it to ensure that it remains of constant length
+	spinvector.scaleto(1.0);
+	
+	//calculate the planar angle shift from the dot product
+	long double newxylength = sqrtl(spinvector.x* spinvector.x + spinvector.y*spinvector.y);
+	
+	//long double cosphase = (oldspin.x*spinvector.x + oldspin.y*spinvector.y) / (oldspin.mod()*spinvector.mod());
+	long double cosphase = (oldspin.x*spinvector.x + oldspin.y*spinvector.y) / (oldxylength*newxylength);
+	
+	if (cosphase > 1.)
+		logger << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << endl;;//throw runtime_error("Cosphase > 1");
+	
+	long double phase_change = acos(cosphase);
+	
+	// this section was to track per step things  inside the spin function
+/*	steplog.setf(ios::scientific, ios::floatfield);
+	steplog.precision(20);
+	steplog << time << ", " << gyromag << ", " << mod(mag_field) << ", " << phase_change << endl;
+*/	
+	//change += (phase_change / time);
+	return phase_change;
 }

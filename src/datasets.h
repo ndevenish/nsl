@@ -34,6 +34,7 @@
 #define DATASETS_H
 
 #include <boost/operators.hpp>
+#include <cmath>
 
 /** Tracks information about a massive dataset.
 * This class does not track invididual dataset values, but keeps track

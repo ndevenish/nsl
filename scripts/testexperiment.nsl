@@ -1,25 +1,25 @@
-# Test 
+#test
 
 add edmexperiment theexperiment {
 	# set the steptime for the inbuilt solver to use
-	set steptime 3e-4
+	set steptime 1.5e-4
 	set phase_steps 1 #phase average loops
-	set bounces 50 #number of bounces to run the simulation over
+	set bounces 2000 #number of bounces to run the simulation over
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
 	#a few rather nasty floating-point rounding errors in the
 	#raytracer.
-	set collision_compensation_distance 1e-9
+	set collision_compensation_distance 1e-15
 	
 	add container bottle {
 		add volume_cylinder mainbottle {
 			set type negative
 			set radius 0.235
 			set height 0.12
-			set reflection specular
+			set reflection diffuse
 		}
-		add volume_cylinder sidebottle {
+		ignore add volume_cylinder sidebottle {
 			set type negative
 			set radius 0.235
 			set height 0.12
@@ -36,9 +36,12 @@ add edmexperiment theexperiment {
 		set vx 0.1
 		
 		# Set up the starting position
-		set startvolume mainbottle
-		set startposition edge
-
+		#set startvolume mainbottle
+		#set startposition edge
+		set z 0.1
+		set x 0
+		set y 0
+		
 		# Set up initial spin angle
 		set start_spin_polar_angle 0.5 #in units of pi
 		set spin_phase 0 #again in pi units
@@ -50,7 +53,16 @@ add edmexperiment theexperiment {
 			set D_DZ	1e-9
 		}
 	}
+	
 	add efield efield {
 		set e0z		8.e5
+	}
+	add impactreporter impact {
+		set output_file "poslog.txt"
+		#set report_frequency step
+	}
+	add phasereporter phase {
+		set output_file "phaselog.txt"
+	#	set report_frequency bounce
 	}
 }
