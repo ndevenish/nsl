@@ -1,6 +1,6 @@
 #test
 
-add edmexperiment theexperiment {
+add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set steptime 1.5e-4
 	set phase_steps 1 #phase average loops
@@ -12,14 +12,14 @@ add edmexperiment theexperiment {
 	#raytracer.
 	set collision_compensation_distance 1e-15
 	
-	add container bottle {
-		add volume_cylinder mainbottle {
+	add container "bottle" {
+		add volume_cylinder "mainbottle" {
 			set type negative
 			set radius 0.235
 			set height 0.12
 			set reflection diffuse
 		}
-		ignore add volume_cylinder sidebottle {
+		ignore add volume_cylinder "sidebottle" {
 			set type negative
 			set radius 0.235
 			set height 0.12
@@ -28,7 +28,7 @@ add edmexperiment theexperiment {
 		}
 	}
 
-	add particle neutron {
+	multiadd 3 particle "neutron" {
 		set gamma -29.1646870E+6
 		set velocity 3
 		# set up the velocity VECTOR (this will be scaled to velocity)
@@ -47,21 +47,21 @@ add edmexperiment theexperiment {
 		set spin_phase 0 #again in pi units
 	}
 
-	add bfield bfield {
+	add bfield "bfield" {
 		set b0z 	1.0E-6
 		add linear_zgradient "bfield gradient" {
 			set D_DZ	1e-9
 		}
 	}
 	
-	add efield efield {
+	add efield "Efield" {
 		set e0z		8.e5
 	}
-	add impactreporter impact {
+	ignore add impactreporter "Impact Reporter" {
 		set output_file "poslog.txt"
 		#set report_frequency step
 	}
-	add phasereporter phase {
+	ignore add phasereporter "Phase Change reporter" {
 		set output_file "phaselog.txt"
 	#	set report_frequency bounce
 	}

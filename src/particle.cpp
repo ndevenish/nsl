@@ -48,7 +48,8 @@ particle::particle()
 void particle::initvals( void )
 {
 	particlebox = 0;
-
+	fake_edm = 0.;
+	
 	flytime = 0.;
 	
 	gamma = 0.0;

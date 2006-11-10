@@ -216,16 +216,6 @@ bool edmexperiment::runobject()
 			BOOST_FOREACH( particle *part, particles)
 			{
 				// This section is run every bounce
-/*
-				// Reset the particle to an exact position and velocity to compare the entire process
-				// with the old, original code
-				part->position = vector3(0.,0.,0.1);
-				part->velocity_vec = vector3(0.5, 0.4, 0.0);
-				part->velocity_vec.scaleto(3.0);
-				
-				part->spinEplus = vector3(1., 0., 0.);
-				part->spinEminus = part->spinEplus;
-*/				
 				
 				// Calculate the next point of intersection
 				intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
@@ -269,7 +259,7 @@ bool edmexperiment::runobject()
 				part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
 				
 			} // FOREACH particle
-			
+
 			// Now call the reporters that report each bounce
 			BOOST_FOREACH( reporter *repo, report_bounce) {
 				repo->report(*this);
@@ -277,6 +267,16 @@ bool edmexperiment::runobject()
 				
 		} //FOREACH bounce
 	} // FOREACH phase
+	
+	// Calculate the EDM stuff for each particle
+	dataset collective_fedm;
+	BOOST_FOREACH(particle *part, particles) {
+		edmcalcs(*part);
+		collective_fedm += part->fake_edm;
+	}
+	
+	// Now output the calculated edm values
+	logger << "Calculated False-EDM : " << collective_fedm.average() << " +/- " << collective_fedm.stdev() << endl;
 	
 	
 	// Now tell all the reporters that are supposed to report every run, to report
@@ -386,11 +386,12 @@ void edmexperiment::smallstep(particle& part, long double time)
 	plusphase		= spin_calculation(part.spinEplus,	 part.gamma, BplusvxE,  time);
 	minusphase		= spin_calculation(part.spinEminus, part.gamma, BminusvxE, time);
 	framediff = plusphase - minusphase;
-	
+	/*
 	static ofstream steplog("steplog.txt");
 	steplog << part.flytime << ", " << plusphase << ", " << minusphase << ", " << framediff << endl;
 	part.E_sum_phase += plusphase;
 	part.E_minus_sum_phase += minusphase;
+	 */
 	/*
 	part.E_sum_phase		+= spin_calculation(part.spinEplus,	 part.gamma, BplusvxE,  time);
 	part.E_minus_sum_phase	+= spin_calculation(part.spinEminus, part.gamma, BminusvxE, time);
@@ -409,6 +410,7 @@ long double edmexperiment::spin_calculation( vector3 &spinvector, const long dou
 	// Let's twist again, like we did last summer
 	vector3 oldspin = spinvector;//vector3(spinvector.x, spinvector.y, 0.0);
 	long double oldxylength = sqrtl(spinvector.x*spinvector.x + spinvector.y*spinvector.y);
+	
 	// Calculate the change in spin
 	vector3 dS = time * gyromag * crossproduct(spinvector, mag_field);
 	
@@ -418,10 +420,10 @@ long double edmexperiment::spin_calculation( vector3 &spinvector, const long dou
 	// Scale it to ensure that it remains of constant length
 	spinvector.scaleto(1.0);
 	
-	//calculate the planar angle shift from the dot product
+	// Calculate the new length of the xy vectorshar
 	long double newxylength = sqrtl(spinvector.x* spinvector.x + spinvector.y*spinvector.y);
-	
-	//long double cosphase = (oldspin.x*spinvector.x + oldspin.y*spinvector.y) / (oldspin.mod()*spinvector.mod());
+
+	//calculate the planar angle shift from the dot product	
 	long double cosphase = (oldspin.x*spinvector.x + oldspin.y*spinvector.y) / (oldxylength*newxylength);
 	
 	if (cosphase > 1.)
@@ -429,11 +431,26 @@ long double edmexperiment::spin_calculation( vector3 &spinvector, const long dou
 	
 	long double phase_change = acos(cosphase);
 	
-	// this section was to track per step things  inside the spin function
-/*	steplog.setf(ios::scientific, ios::floatfield);
-	steplog.precision(20);
-	steplog << time << ", " << gyromag << ", " << mod(mag_field) << ", " << phase_change << endl;
-*/	
-	//change += (phase_change / time);
 	return phase_change;
+}
+
+void edmexperiment::edmcalcs( particle &part )
+{
+	// Firstly calculate the frequency differences between the two spins
+	part.frequencydiff = atan2( part.spinEplus.x * part.spinEminus.y - part.spinEplus.y*part.spinEminus.x,
+								part.spinEplus.x*part.spinEminus.x + part.spinEplus.y*part.spinEminus.y );
+	part.frequencydiff /= part.flytime;
+	/*
+	atan2((particle->spin_x*particle->minusE_spin_y - particle->spin_y*particle->minusE_spin_x),
+							   (particle->spin_x*particle->minusE_spin_x + particle->spin_y*particle->minusE_spin_y)	            
+							   )/particle->tot_time;
+	 */
+	
+	// Grab the E field vertical charge
+	vector3 E;
+	elecfield->getfield(E, vector3(0,0,0));
+	long double E_FIELD = E.z;
+	
+	// Now calculate the EDM from this
+	part.fake_edm = part.frequencydiff * hbar/E_FIELD/echarge*100*1e26/4;
 }

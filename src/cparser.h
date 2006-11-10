@@ -26,6 +26,7 @@
 
 //class string;
 #include <string>
+#include <sstream>
 
 #include <iosfwd> // Forward references to stream classes
 class cparser;
@@ -43,11 +44,19 @@ public:
 	/** Initialise a cparser object by opening a file.
 	* @param inputfile A string with the location and name of the file to parse. */
 	cparser( std::string inputfile );
+	//cparser( std::istringstream *inputstream );
+	
 	~cparser();
 
 //	char get( void );	// Retrieves a single character from the stream
 	/** Retrieves a token from the stream */
 	std::string gettoken( void ); //Retrieves a token
+	
+	/* Returns a whole code block.
+	* Returns a whole code block, starting with opener and ending with closed. If
+	* the block is unbalanced (i.e. closed without an associated opener) it will return anwyay. */
+	std::string getblock( std::string opener = "{", std::string closer = "}");
+	
 	/** Returns the current linenumber the stream is parsing on. */
 	int getline() { return linecount; }
 

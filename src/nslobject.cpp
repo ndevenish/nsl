@@ -132,10 +132,34 @@ void nslobject::tree(int level)
 	}
 }
 
+// Creates an object, parses it and returns a pointer to it
+// Made because we need multiple adding routines
+nslobject *nslobject::createadd( cparser &parser )
+{
+	string token;
+	//next token should be object type
+	string newtype = parser.gettoken();
+	
+	// Call the class factory to create a new object now
+	nslobject *newob = nslobjectfactory::createobject(newtype);
+	
+	// Next token is either a name or a {
+	token = parser.gettoken();
+	//if (token != "{" && token != "\n")
+	//	newob->set("name", token);
+	if (isalnum(token[0]))
+		newob->set("name", token);
+	
+	// Carry on parsing
+	newob->parseparser(parser);
+	
+	return newob;
+}
+
 tokens nslobject::parseparser( cparser & parser)
 {
 	string token;
-	tokens  retval;
+	//tokens  retval;
 	while(1)
 	{
 		token = parser.gettoken();
@@ -157,8 +181,8 @@ tokens nslobject::parseparser( cparser & parser)
 			set(propname, value);
 		} else if (token == "add") {
 			//next token should be object type
-			string newtype = parser.gettoken();
-
+//			string newtype = parser.gettoken();
+/*
 			// Call the class factory to create a new object now
 			nslobject *newob = nslobjectfactory::createobject(newtype);
 
@@ -171,12 +195,64 @@ tokens nslobject::parseparser( cparser & parser)
 			//	newob->set("name", token);
 			if (isalnum(token[0]))
 				newob->set("name", token);
-
+ */
+			
+			// Instead of doing this here, now do it externally.
+			nslobject *newob = createadd( parser );
+			add( *newob );
+			
 			//now contunue parsing in the new object
-			retval = newob->parseparser(parser);
+			/*retval = newob->parseparser(parser);
 			if (retval == token_stop)
 				return token_stop;
-
+			*/
+		} else if (token == "multiadd") {
+			// Next token should be number to add
+			string addcounts = parser.gettoken();
+			/*
+			if (isalnum(token[0]))
+				throw parse_error("Encountered alnum token when expecting particle add count");
+			*/
+			//convert this to an integer
+			istringstream iss(addcounts);
+			long addcount = 0;
+			
+			iss >> addcount;
+			
+			if (iss == 0)
+				throw parse_error("Encountered zero multiadd add count");
+			
+			//next object token should be object type
+			//string newtype = parser.gettoken();
+			
+			// Read in the next block, so we can add it multiple times
+			string addblock = parser.getblock();
+			//logger << "Scanning block recovered: " << endl << addblock << endl << "---------" << endl;
+			
+			// Declare a stream in order to pass to multiple addingses
+			stringstream parsingblock;
+			parsingblock << addblock;
+			
+			//Now add multiple versions of this object
+			for (int i = 0; i < addcount; i++)
+			{/*
+				// Convert the loop number to a string
+				ostringstream ss;
+				ss << "_" << i;
+				*/
+				// Rewind the stringstream to the beginning
+				parsingblock.seekg(0, ios::beg);
+				
+				// Make a parser for this stringstream
+				cparser ssparse(&parsingblock);
+				
+				// Add this object, not caring for now about name clashes
+				add( *createadd( ssparse ) );
+			}
+			// Now we should have added all the objects....
+		
+		/////////// end of multiadd //////////////////////
+		//////////////////////////////////////////////////
 		} else if (token == "load") {
 			//we want to load in an external file, open it in a new fstream
 			//and hand a new parser object to this objects parse routine
@@ -198,8 +274,11 @@ tokens nslobject::parseparser( cparser & parser)
 
 		} else if (token == "ignore") {
 			// We should ignore this object... loop until we hit the next }
-			while (parser.gettoken() != "}")
-				;
+			/*while (parser.gettoken() != "}")
+				;*/
+			// this new method should work for stacked blocks
+			parser.getblock();
+			
 		} else if (token == "{") {
 			//ignore this
 			;

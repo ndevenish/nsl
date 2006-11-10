@@ -24,6 +24,7 @@
 
 #include "cparser.h"
 #include <string>
+#include <sstream>
 #include <cctype>
 #include <iostream>
 #include <fstream>
@@ -57,7 +58,17 @@ cparser::cparser( std::string inputfile )
 	
 	initparser();
 }
-
+/*
+cparser::cparser( std::istringstream *inputstream )
+{
+	createdstream = false;
+	instream = inputstream;
+	
+	name("instringstream");
+	
+	initparser();
+}
+*/
 void cparser::initparser()
 {
 	linecount = 0;
@@ -176,4 +187,35 @@ bool cparser::isvalnum(char inchar)
 		return true;
 
 	return false;
+}
+
+std::string cparser::getblock( std::string opener , std::string closer )
+{
+	ostringstream block;
+	long level = 0, stepups = 0;
+	string token;
+	
+	while (1)
+	{
+		token = this->gettoken();
+		if (token == opener)
+		{
+			level++;
+			stepups++;
+		} else if (token == closer)
+			level--;
+		
+		// Add this token to the output
+		block << token << " ";
+		
+		if (stepups)
+			if (level <= 0)
+			{
+				// Finish scanning here
+				return block.str();
+			}
+		
+	}
+	
+	throw parse_error("Unexpected behaviour whilst scanning block");
 }

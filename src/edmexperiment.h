@@ -91,6 +91,9 @@ class edmexperiment : public nslobject {
 	* This function spins the particle, and returns the phase change in the horizontal plane */
 	long double spin_calculation( vector3& spinvector, const long double gyromag, const vector3& mag_field, const long double time);
 
+	/** Calculates false EDM values.*/
+	void edmcalcs( particle &part);
+	
 protected:
 
 public:

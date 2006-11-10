@@ -277,6 +277,10 @@ protected:
 
 	/** An output object for logging */
 	std::ostream &logger;
+	
+	/** Creates an object for adding. */
+	nslobject *createadd(cparser &parser);
+	
 private:
 	// Variables
 	

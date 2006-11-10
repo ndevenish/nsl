@@ -62,6 +62,10 @@ class particle : public nslobject {
 	
 	long double flytime;
 	
+	// Our calculated edm parameters
+	long double frequencydiff;
+	long double fake_edm;
+	
 	// Utility class pointers
 	container *particlebox;
 	bfield *mag_field;

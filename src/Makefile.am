@@ -1,6 +1,8 @@
 bin_PROGRAMS = nslneutron
 LDFLAGS=-lm
 
-nslneutron_SOURCES = container.cpp container.h cparser.cpp cparser.h electromagnetics.cpp electromagnetics.h errors.cpp errors.h main.cpp nslobject.cpp nslobject.h nslobjectfactory.cpp nslobjectfactory.h particle.cpp particle.h physics.cpp physics.h volume_cylinder.cpp edmexperiment.h edmexperiment.cpp
+nslneutron_SOURCES = electromagnetics.cpp    nsltest.cpp electromagnetics.h      particle.cpp errors.cpp              particle.h container.cpp           errors.h               physics.cpp container.h             main.cpp                physics.h cparser.cpp              reporters.cpp cparser.h               nslobject.cpp           reporters.h datasets.h              nslobject.h             vector3.h edmexperiment.cpp       nslobjectfactory.cpp    volume_cylinder.cpp edmexperiment.h         nslobjectfactory.h
+
 
 nslneutron_LDADD = -lm
+
