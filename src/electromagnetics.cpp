@@ -125,3 +125,4 @@ void linear_zgradient::field(vector3& field, const vector3 &position)
 	field.y += -position.y * (d_dz / 2.0);
 	field.z += position.z * d_dz;
 }
+

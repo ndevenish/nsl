@@ -52,3 +52,4 @@ const long double hbar = 1.054571596e-34; ///< h-bar (h/2*pi)
 // Other inline functions
 
 #endif
+

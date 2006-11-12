@@ -173,3 +173,4 @@ typedef vector3 vec3;
 std::ostream& operator<<(std::ostream& os, const vector3& vec);
 
 #endif
+
