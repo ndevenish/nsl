@@ -88,7 +88,7 @@ class dataset : boost::addable< dataset >//,
 		dataset() : vaverage(0), vaveragesq(0), vpointcount(0) {}
 };
 
-dataset dataset::operator+=(const long double& newpoint)
+inline dataset dataset::operator+=(const long double& newpoint)
 {
 	// Update the running average
 	vpointcount++;
@@ -102,24 +102,24 @@ dataset dataset::operator+=(const long double& newpoint)
 //dataset operator+( const dataset& rhs; const long double &lhs );
 		
 
-dataset dataset::operator+=( const dataset &mergeset )
+inline dataset dataset::operator+=( const dataset &mergeset )
 {
 	vaverage = ((vaverage*vpointcount)+(mergeset.vaverage*mergeset.vpointcount)) / (vpointcount+mergeset.vpointcount);
 	vaveragesq = ((vaveragesq*vpointcount)+(mergeset.vaveragesq*mergeset.vpointcount)) / (vpointcount+mergeset.vpointcount);
 	vpointcount += mergeset.vpointcount;
 	return *this;
 }
-long double dataset::variance ( void )
+inline long double dataset::variance ( void )
 {
 	return vaveragesq - (vaverage*vaverage);
 }
 
-long double dataset::stdev ( void )
+inline long double dataset::stdev ( void )
 {
 	return sqrtl(variance());
 }
 
-long double dataset::uncert ( void )
+inline long double dataset::uncert ( void )
 {
 	return stdev() / sqrtl((long double) vpointcount);
 }

@@ -4,7 +4,7 @@ add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set steptime 1.5e-4
 	set phase_steps 1 #phase average loops
-	set bounces 2000 #number of bounces to run the simulation over
+	set bounces 200 #number of bounces to run the simulation over
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -66,5 +66,8 @@ add edmexperiment "The Experiment" {
 	ignore add phasereporter "Phase Change reporter" {
 		set output_file "phaselog.txt"
 	#	set report_frequency bounce
+	}
+	add edmreporter "edmreporter" {
+		set output_file "reportt.txt"
 	}
 }

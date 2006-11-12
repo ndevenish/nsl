@@ -66,6 +66,8 @@ class container : public nslobject {
 
 	bool prepareobject();
 
+	void initvals( void );
+	
 	// List of intercepts
 	intercept interceptlist[MAX_INTERCEPTS];
 
@@ -125,6 +127,8 @@ public:
 class volume_cylinder : public container {
 	bool prepareobject();
 
+	void initvals( void );
+	
 	enum {
 		volume_none,
 		volume_negative,

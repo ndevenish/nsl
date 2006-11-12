@@ -30,6 +30,7 @@
 #include <stdexcept>
 #include <algorithm> // For string transformations
 
+#include "boost/foreach.hpp"
 #include "nslobject.h"
 #include "cparser.h"
 #include "errors.h"
@@ -695,5 +696,12 @@ int nslobject::countchildren(std::string type)
 
 void nslobject::reset( void )
 {
-	prepare();
+	initvals();
+	prepareobject();
+
+	// No do the same for each of our children
+	BOOST_FOREACH( nslobject *ob, subobjects )
+		ob->reset();
+	
+//	prepare();
 }

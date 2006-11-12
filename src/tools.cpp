@@ -28,7 +28,7 @@
 using std::istringstream;
 using std::ostringstream;
 
-long double strld ( std::string strin )
+long double strld ( std::string &strin )
 {
 	istringstream ss(strin);
 	long double a;
@@ -36,7 +36,7 @@ long double strld ( std::string strin )
 	return a;
 }
 
-int strint ( std::string strin )
+int strint ( std::string &strin )
 {
 	istringstream ss(strin);
 	int a;

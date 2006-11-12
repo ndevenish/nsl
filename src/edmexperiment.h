@@ -51,7 +51,8 @@ class edmexperiment : public nslobject {
 	//reporter *reporters[MAX_REPORTERS]; ///< An array of reporters to call
 	
 	std::vector<reporter*>	report_bounce, report_run, report_step;
-	
+
+	void initvals( void );
 	
 	bfield * magfield; ///< The magnetic field object
 	efield *elecfield; ///< The electric field object

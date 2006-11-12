@@ -34,15 +34,20 @@ using namespace std;
 
 volume_cylinder::volume_cylinder()
 {
+	initvals();
+}
+
+void volume_cylinder::initvals(void)
+{
 	icept_entry = interception_entry;
 	icept_exit = interception_exit;
-
+	
 	position.x = position.y = position.z = 0.0;
 	radius = 0.0;
 	height = 0.0;
 	volume_type = volume_none;
 	reflection = reflection_diffuse;
-
+	
 	objecttype = "volume_cylinder";
 	types.push_back(objecttype);
 }

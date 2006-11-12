@@ -146,7 +146,7 @@ public:
 	void report ( edmexperiment &experiment );
 	
 	class Factory : public nslobjectfactory {
-		nslobject *create() { return new phasereporter; }
+		nslobject *create() { return new edmreporter; }
 	};	
 };
 #endif

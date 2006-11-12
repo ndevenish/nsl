@@ -32,17 +32,22 @@ using std::runtime_error;
 
 forcefield::forcefield()
 {
+	initvals();
+}
+
+void forcefield::initvals ( void )
+{
 	objecttype = "forcefield";
 	types.push_back(objecttype);
-
+	
 	// Blank the sub field array
 	for (int i = 0; i < max_fieldmods; i++)
 		sub_fields[i] = 0;
-	sub_fieldcount = 0;
+	sub_fieldcount = 0;	
 }
-
 bool forcefield::prepareobject()
 {
+	
 	// Go through each of our subobjects, and if they are a field modifier
 	// add them to our 'call list'
 	std::vector<nslobject*>::iterator sublist;

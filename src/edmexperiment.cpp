@@ -63,12 +63,13 @@ using std::ios;
 	efield *elecfield;*/
 edmexperiment::edmexperiment()
 {
+	
 	particlecount = 0;
 	//reportercount = 0;
 	particlebox = 0;
 	magfield = 0;
 	elecfield = 0;
-
+	
 	variation.parameter = "";
 	variation.value = 0.;
 	variation.runs = 0;
@@ -77,10 +78,17 @@ edmexperiment::edmexperiment()
 	phase_steps = 0;
 	steptime = 0.0;
 	bounces = 0;
-	collision_offset = 0.;
+	collision_offset = 0.;	
+	initvals();
+	
 	
 	objecttype = "edmexperiment";
 	types.push_back(objecttype);
+}
+
+void edmexperiment::initvals( void )
+{
+
 }
 
 void edmexperiment::setvariation( std::string parameter, long double minval, long double maxval, int maxruns, nslobject *varyobject )
@@ -217,13 +225,17 @@ bool edmexperiment::runobject()
 	{
 		// Calculate the value for the variation this loop
 		long double varyval = variation.minval + (variation.maxval - variation.minval)*exprun / variation.runs;
-		logger << "Varying " << variation.parameter << ": Value = " << varyval;
+		logger << "Varying " << variation.parameter << ": Value = " << varyval << endl;
 		// now set it!
 		variation.varyobject->set(variation.parameter, str(varyval));
+		variation.value = varyval;
 		
-		// Now Reset all the children
-		BOOST_FOREACH ( nslobject *child, subobjects)
-			child->reset();
+		// Now Reset all the children, and myself!
+		BOOST_FOREACH(nslobject *chil, subobjects)
+		{
+			if (!chil->isoftype("reporter"))
+				chil->reset();
+		}
 		
 		// First loop over starting phases
 		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)

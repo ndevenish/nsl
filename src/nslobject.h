@@ -284,6 +284,10 @@ protected:
 private:
 	// Variables
 	
+	/** A virtual function to initialise values.
+	* This is in order so that the class can be properly reset. */
+	virtual void initvals() {};
+	
 	std::map<std::string, std::string> properties; ///< A list of object 'properties'
 	//std::vector<nslobject *> subobjects; // A list of the object's 'children
 

@@ -52,6 +52,8 @@ protected:
 public:
 	forcefield();
 
+	void initvals( void );
+	
 	/** Retrieves the strength of the field at a specified position.
 	* This is returned as a vector. */
 	virtual void field(vector3& field, const vector3& position) { return; }

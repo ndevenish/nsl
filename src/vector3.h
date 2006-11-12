@@ -94,35 +94,35 @@ long double mod( vector3 &vec )
 	return vec.mod();
 }
 */
-vector3 vector3::operator+=(const vector3& rt)
+inline vector3 vector3::operator+=(const vector3& rt)
 {
 	x+=rt.x; y+=rt.y; z+=rt.z;
 	return *this;
 }
-vector3 vector3::operator-=(const vector3& rt)
+inline vector3 vector3::operator-=(const vector3& rt)
 {
 	x-=rt.x; y-=rt.y; z-=rt.z;
 	return *this;
 }
-bool vector3::operator==(const vector3& rt)
+inline bool vector3::operator==(const vector3& rt)
 {
 	return (x==rt.x) && (y==rt.y) && (z==rt.z);
 }
-vector3 vector3::operator*=(const long double& rt)
+inline vector3 vector3::operator*=(const long double& rt)
 {
 	x *= rt; y *= rt; z *= rt;
 	return *this;
 }
-vector3 vector3::operator/=(const long double& rt)
+inline vector3 vector3::operator/=(const long double& rt)
 {
 	x /= rt; y /= rt; z /= rt;
 	return *this;
 }
-long double vector3::operator*(const vector3& rt)
+inline long double vector3::operator*(const vector3& rt)
 {
 	return x*rt.x + y* rt.y + z * rt.z;
 }
-long double operator*(const vector3& lt, const vector3& rt)
+inline long double operator*(const vector3& lt, const vector3& rt)
 {
 	return lt.x*rt.x + lt.y*rt.y + lt.z*rt.z;
 }
