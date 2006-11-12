@@ -80,7 +80,7 @@ public:
 	friend long double operator*(const vector3&, const vector3& );
 	
 	/// Returns the length of the vector
-	long double vector3::mod() {	return sqrtl(x*x + y*y + z*z); }
+	long double mod() {	return sqrtl(x*x + y*y + z*z); }
 
 	/// Scales the vector to a specified length
 	void scaleto(long double newlength);
