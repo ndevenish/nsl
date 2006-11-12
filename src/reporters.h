@@ -40,10 +40,10 @@ class particle;
 class reporter : public nslobject {
 public:
 	enum enum_report_frequency {
-		rfreq_none,
-		rfreq_run,
-		rfreq_bounce,
-		rfreq_step
+		rfreq_none,	// Don\t report - only call the open and close file routines
+		rfreq_run,	// Report every experimental run
+		rfreq_bounce, // Report every bounce
+		rfreq_step // report every step (gaah!)
 	};
 	enum enum_output_format {
 		format_plain
@@ -133,5 +133,20 @@ public:
 	class Factory : public nslobjectfactory {
 		nslobject *create() { return new phasereporter; }
 	};
+};
+
+/** Logs the variation of a variable along with the edm and any other values.
+* This is the general, all-purpose edm reporter. It will report the current variation along with the
+* false-edm generated, and any other information. */
+class edmreporter : public reporter {
+public:
+	edmreporter();
+	
+	void preparefile(edmexperiment &);
+	void report ( edmexperiment &experiment );
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new phasereporter; }
+	};	
 };
 #endif

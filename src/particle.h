@@ -40,6 +40,7 @@ class particle : public nslobject {
 	friend class reporter;
 	friend class impactreporter;
 	friend class phasereporter;
+	friend class edmreporter;
 	
 	// Physical Properties values
 	vector3	position;
@@ -61,6 +62,7 @@ class particle : public nslobject {
 	long double E_sum_phase, E_minus_sum_phase;
 	
 	long double flytime;
+	
 	
 	// Our calculated edm parameters
 	long double frequencydiff;

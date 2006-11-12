@@ -66,6 +66,7 @@ int main ( int argc, string argv )
 		nslobjectfactory::add("reporter", new reporter::Factory);
 		nslobjectfactory::add("impactreporter", new impactreporter::Factory);
 		nslobjectfactory::add("phasereporter", new phasereporter::Factory);
+		nslobjectfactory::add("edmreporter", new edmreporter::Factory);
 		
 		
 		// Build the tree

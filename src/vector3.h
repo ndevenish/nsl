@@ -88,12 +88,12 @@ public:
 };
 
 //template struct 
-
+/*
 long double mod( vector3 &vec )
 {
 	return vec.mod();
 }
-
+*/
 vector3 vector3::operator+=(const vector3& rt)
 {
 	x+=rt.x; y+=rt.y; z+=rt.z;

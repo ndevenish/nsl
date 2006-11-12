@@ -49,16 +49,17 @@ vector3 operator+(const vector3& lhs, const vector3&rhs)
 void vector3::scaleto(long double newlength)
 {
 	long double scale_ratio;
+	long double modcache;
 	
 	if (newlength == 0.0)
 	{
 		x = y = z = 0.0;
 		return;
-	} else if (mod() == 0.0) {
+	} else if ((modcache = mod()) == 0.0) {
 		throw runtime_error("Attempting to scale zero-length vector");
 	}
 	
-	scale_ratio = newlength/mod();
+	scale_ratio = newlength/modcache;
 	
 #ifdef WIN32
 	assert(_finite(scale_ratio));
@@ -68,6 +69,7 @@ void vector3::scaleto(long double newlength)
 	y *= scale_ratio;
 	z *= scale_ratio;
 }
+
 
 // Usable AlmostEqual function
 // Code from a paper by Bruce Dawson for comparing floats by integer representation

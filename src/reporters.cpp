@@ -31,6 +31,8 @@
 #include "edmexperiment.h"
 #include "particle.h"
 
+#include "boost/foreach.hpp"
+
 using std::string;
 using std::runtime_error;
 using std::ofstream;
@@ -183,4 +185,31 @@ void phasereporter::report ( edmexperiment &ex )
 				/*<< ", " << ex.change.average()
 				<< ", " << ex.tmpld*/
 				<< endl;
+}
+
+/////////////////////////////////////////////////////////
+// edmreporter - The main variational output class
+edmreporter::edmreporter()
+{
+	objecttype = "edmreporter";
+	types.push_back(objecttype);
+	
+	report_frequency = rfreq_run;
+}
+
+void edmreporter::preparefile(edmexperiment &exp)
+{
+	*outfile << "Edm loop report: " << exp.get("runtime") << endl;
+	*outfile << exp.variation.parameter << "\t" << "False-EDM" << endl;
+}
+void edmreporter::report ( edmexperiment &experiment )
+{
+	// Loop over all the particles and generate an average EDM
+	dataset edmav;
+	BOOST_FOREACH( particle *part, experiment.particles )
+	{
+		edmav += part->fake_edm;
+	}
+	
+	*outfile << experiment.variation.value << "\t" <<  edmav.average() << endl;
 }

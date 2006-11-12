@@ -101,6 +101,27 @@ public:
 
 	dataset change;
 	long double tmpld;
+
+	/** Sets a variable that is being varied.
+	* This function informs the edmexperiment class that a (single) parameter is being
+	* varied. Multiple variations are not currently supported.
+	* @param parameter The name of the parameter that is being varied
+	* @param thisrunvalue The value of the parameter in this run
+	* @param maxruns The number of runs to perform to vary over the full requested range. */
+	void setvariation( std::string parameter, long double minval, long double maxvalm, int maxruns, nslobject *varyobject );
+
+	/** Structure to hold information about a variation. */
+	struct {
+		std::string parameter; ///< What is the name of the parameter we are varying?
+		long double minval;
+		long double maxval;
+		long double value; ///< What value is the variation taking this run?
+		
+		int runs; ///< How many runs will the variation take?
+		bool varying; ///< Are we actually wanting a variation?
+		
+		nslobject *varyobject; ///< The object to vary
+	} variation;
 	
 	/// Shortcut to a list of particles
 	std::vector<particle*>	particles;

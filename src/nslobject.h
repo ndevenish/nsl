@@ -53,7 +53,7 @@ public:
 
 	////////////////////////////////////////////////
 	// Functions to set and get properties
-
+	
 	/** Checks to see if a property has been set.
 	* @param propertyname The property to check
 	* @return True or false
@@ -228,7 +228,7 @@ public:
 	* This function resets the class back to it's initial state, by recalling prepareobject().
 	* This can work because prepareobject() should only base it's initial configuration off of
 	* the internal parameter variables. */
-	void reset ( void ) { prepareobject(); }
+	void reset ( void );
 	
 	// The local instance of the object factory
 	class Factory : public nslobjectfactory {
@@ -317,6 +317,10 @@ private:
 	// A bool to say whether or not this is a deleteable object
 	bool candeletethis; ///< The internal flag used by candelete() and candelete(bool)
 
+	/// Counts the number of variations being enacted
+	static int variationcount;
+	/// The number of the current run
+	static int runid;
 };
 
 #endif

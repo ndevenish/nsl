@@ -33,9 +33,22 @@
 #include "nslobject.h"
 #include "cparser.h"
 #include "errors.h"
+#include "edmexperiment.h" // For variation
+#include "tools.h"
 
 using namespace std;
 
+
+
+int nslobject::variationcount = 0;
+int nslobject::runid = 0;
+
+/*	struct {
+bool isvariation;
+std::string parameter;
+long double value;
+} variation;*/
+//bool nslobject::variation::isvariation = false;
 
 nslobject::nslobject() : logger(cout)
 {
@@ -150,6 +163,11 @@ nslobject *nslobject::createadd( cparser &parser )
 	if (isalnum(token[0]))
 		newob->set("name", token);
 	
+	// Give the new object a parent!
+	//newob->parent 
+	
+	add( *newob );
+		 
 	// Carry on parsing
 	newob->parseparser(parser);
 	
@@ -179,6 +197,9 @@ tokens nslobject::parseparser( cparser & parser)
 				//return token_stop;
 			}
 			set(propname, value);
+			
+		//////////////////////////////////////////////////////////////////////////
+		// Adding subobjects	
 		} else if (token == "add") {
 			//next token should be object type
 //			string newtype = parser.gettoken();
@@ -198,14 +219,18 @@ tokens nslobject::parseparser( cparser & parser)
  */
 			
 			// Instead of doing this here, now do it externally.
-			nslobject *newob = createadd( parser );
-			add( *newob );
+			//nslobject *newob = createadd( parser );
+			//add( *newob );
+			createadd( parser );
 			
 			//now contunue parsing in the new object
 			/*retval = newob->parseparser(parser);
 			if (retval == token_stop)
 				return token_stop;
 			*/
+			
+		//////////////////////////////////////////////////////////////////////////
+		// Adding multiple copies of objects	
 		} else if (token == "multiadd") {
 			// Next token should be number to add
 			string addcounts = parser.gettoken();
@@ -247,17 +272,20 @@ tokens nslobject::parseparser( cparser & parser)
 				cparser ssparse(&parsingblock);
 				
 				// Add this object, not caring for now about name clashes
-				add( *createadd( ssparse ) );
+				createadd( ssparse );
 			}
 			// Now we should have added all the objects....
 		
-		/////////// end of multiadd //////////////////////
-		//////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Loading in external files	
 		} else if (token == "load") {
 			//we want to load in an external file, open it in a new fstream
 			//and hand a new parser object to this objects parse routine
 			token = parser.gettoken();
 			load(token);
+		
+		//////////////////////////////////////////////////////////////////////////
+		// Selecting a class to alter parameters
 		} else if (token == "with") {
 			// The next token should be a name
 			token = parser.gettoken();
@@ -272,13 +300,97 @@ tokens nslobject::parseparser( cparser & parser)
 			else
 				throw parse_error("Unidentified name");
 
+		//////////////////////////////////////////////////////////////////////////
+		// Ignoring blocks of code	
 		} else if (token == "ignore") {
 			// We should ignore this object... loop until we hit the next }
 			/*while (parser.gettoken() != "}")
 				;*/
 			// this new method should work for stacked blocks
 			parser.getblock();
+		
+		//////////////////////////////////////////////////////////////////////////
+		// Variation of parameters
+		} else if (token == "vary") {
 			
+			// Ensure we hav eno other variations active
+			if (variationcount)
+				throw parse_error("Being asked to do more than one variation");
+			
+			// Next token should be the name of the parameter to cary
+			string parameter = parser.gettoken();
+			
+			// Next token should be from
+			if (parser.gettoken() != "from")
+				throw parse_error("Unexpected token when expecting 'from' in varation");
+			
+			// Next token is start value for parameter
+			string sstartval= parser.gettoken();
+			long double startval = strld(sstartval);
+				
+			// Next token tells us how to vary
+			// (Currently supported is only 'to')
+			string varytype = parser.gettoken();
+			if (varytype == "to") {
+				// Next token is the value to vary to
+				string sendval = parser.gettoken();
+				long double endval = strld(sendval);
+				
+				// Next token should be 'in'
+				if (parser.gettoken() != "in")
+					throw parse_error("Unexpected token when expecting 'in' in variation");
+				
+				// Next should be number of steps!
+				string sstepcount = parser.gettoken();
+				int stepcount = strint(sstepcount);
+				
+				// Next token should be a throwaway - 'steps'
+				// otherwise return, so safe to grab
+				parser.gettoken();
+				
+				logger	<< "Two-point variation of " << parameter << ": From " << startval
+						<< " to " << endval << " in " << stepcount << " steps." << endl;
+				
+				// Calculate the value to set this round, and then set it
+				// runid is the current run count
+				long double thisrunval;
+				thisrunval = startval + ((endval-startval)*runid) / (long double) stepcount;
+				logger << "\tValue this time: " << thisrunval << endl;
+				
+				// set the actual parameter value - convert it to a string first!
+				ostringstream ss;
+				ss.precision(20);
+				ss << thisrunval;
+				set(parameter, ss.str());
+				
+				// Find the edmexperiment object and set the varaiation
+				edmexperiment *exproot = (edmexperiment*)findbytype("edmexperiment");
+				if (!exproot)
+					throw runtime_error("Cannot find edmexperiment object to set variation");
+				exproot->setvariation(parameter, startval, endval, stepcount, this);
+	//				void setvariation( std::string parameter, long double minval, long double maxvalm, int maxruns, nslobject *varyobject );
+
+				/*	struct {
+					std::string parameter; ///< What is the name of the parameter we are varying?
+				long double minval;
+				long double maxval;
+				long double value; ///< What value is the variation taking this run?
+				
+				int runs; ///< How many runs will the variation take?
+				bool varying; ///< Are we actually wanting a variation?
+				
+				nslobject *varyobject; ///< The object to vary
+				} variation;*/
+				
+			} else {
+				throw parse_error("Unrecognized variation type");
+			}
+			
+			
+			logger << "Varying parameter " << parameter << endl;
+		
+		//////////////////////////////////////////////////////////////////////////
+		// Random punctuation
 		} else if (token == "{") {
 			//ignore this
 			;
@@ -579,4 +691,9 @@ int nslobject::countchildren(std::string type)
 		if ((*sublist)->isoftype(type))
 			runningcount++;
 	return runningcount;
+}
+
+void nslobject::reset( void )
+{
+	prepare();
 }

@@ -47,6 +47,7 @@
 #include "datasets.h"
 
 #include "reporters.h"
+#include "tools.h"
 
 using std::runtime_error;
 using std::endl;
@@ -67,11 +68,12 @@ edmexperiment::edmexperiment()
 	particlebox = 0;
 	magfield = 0;
 	elecfield = 0;
-	/*for (int i = 0; i < MAX_PARTICLES; i++)
-		particles[i] = 0;*/
-	/*for (int i = 0; i < MAX_REPORTERS; i++)
-		reporters[i] = 0;
-*/
+
+	variation.parameter = "";
+	variation.value = 0.;
+	variation.runs = 0;
+	variation.varying = false;
+	
 	phase_steps = 0;
 	steptime = 0.0;
 	bounces = 0;
@@ -79,6 +81,22 @@ edmexperiment::edmexperiment()
 	
 	objecttype = "edmexperiment";
 	types.push_back(objecttype);
+}
+
+void edmexperiment::setvariation( std::string parameter, long double minval, long double maxval, int maxruns, nslobject *varyobject )
+//void edmexperiment::setvariation( std::string parameter, long double thisrunvalue, int maxruns )
+{
+	if (variation.varying)
+		throw runtime_error("Trying to set variation in edmexperiment object twice");
+	
+	variation.parameter = parameter;
+//	variation.value = thisrunvalue;
+	variation.runs = maxruns;
+	variation.maxval = maxval;
+	variation.minval = minval;
+	variation.varyobject = varyobject;
+	
+	variation.varying = true;
 }
 
 bool edmexperiment::prepareobject()
@@ -175,12 +193,8 @@ bool edmexperiment::prepareobject()
 bool edmexperiment::runobject()
 {
 	// Dataset to track the false EDM
-	dataset false_edm;
-	
-	//particle storeparticle;
-	
-	ofstream poslog("poslog.txt");
-	
+//	dataset false_edm;
+
 	// Ensure that all of our particles are within the starting volume
 	BOOST_FOREACH( particle* part, particles) {
 		if (!particlebox->isinside(part->position))
@@ -198,91 +212,105 @@ bool edmexperiment::runobject()
 	
 	////////////////////////////////////////////////////////////////////////////
 	// Start the simulation loops
-	
-	// First loop over starting phases
-	for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
-	{
-		logger << "Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
 
-		// Reset the particle each phase
-		BOOST_FOREACH( particle* part, particles ) {
-			part->reset();
+	for (int exprun = 0; exprun < variation.runs; exprun++)
+	{
+		// Calculate the value for the variation this loop
+		long double varyval = variation.minval + (variation.maxval - variation.minval)*exprun / variation.runs;
+		logger << "Varying " << variation.parameter << ": Value = " << varyval;
+		// now set it!
+		variation.varyobject->set(variation.parameter, str(varyval));
+		
+		// Now Reset all the children
+		BOOST_FOREACH ( nslobject *child, subobjects)
+			child->reset();
+		
+		// First loop over starting phases
+		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
+		{
+			logger << "Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+
+			// Reset the particle each phase
+			BOOST_FOREACH( particle* part, particles ) {
+				part->reset();
+			}
+			
+			// Now loop over bounces
+			for (int bounce = 0; bounce < bounces; bounce++)
+			{
+				// NOW loop over particles - having them here means that they move together
+				BOOST_FOREACH( particle *part, particles)
+				{
+					// This section is run every bounce
+					
+					// Calculate the next point of intersection
+					intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
+					// Normalise the Normal! (see cast documentation)
+					collisionpoint.normal.scaleto(1.0);
+					// Fill out the collisionpoint location
+					collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
+					
+					//logger << " " <<  bounce << ": Time to Collision: " << collisionpoint.time << endl;
+					
+					// If we get a zero-time collision, make a note of it
+					if (collisionpoint.time == 0.)
+						logger << "\t------- Zero time Intersection" << endl; //	throw runtime_error("Zero Collision-point time");
+					
+					// Now we know the time to collision, step over it calculating the spin changes as we go
+					if (collisionpoint.time > 0.)
+						bigstep(*part, collisionpoint.time);
+					
+					// Reflect the particle now
+					if (collisionpoint.collideobject->reflection == container::reflection_specular) 
+					{
+						part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
+					} else { // Assume diffuse reflection otherwise (for now)
+						part->velocity_vec.x = rand()-(RAND_MAX/2);
+						part->velocity_vec.y = rand()-(RAND_MAX/2);
+						part->velocity_vec.z = rand()-(RAND_MAX/2);
+						
+						// Ensure it faces away from the normal
+						if ((part->velocity_vec * collisionpoint.normal) < 0.)
+							part->velocity_vec *= -1.0;
+					}
+					// Ensure velocity is kept constant
+					part->velocity_vec.scaleto(part->velocity);
+					
+					// Output the difference between particle and calculated impact position
+					//logger << "\tPositional Difference: " << mod(part->position - collisionpoint.location) << endl;
+					
+					// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
+					// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
+					// 1e-30 anyway)
+					part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
+					
+				} // FOREACH particle
+
+				// Now call the reporters that report each bounce
+				BOOST_FOREACH( reporter *repo, report_bounce) {
+					repo->report(*this);
+				}
+					
+			} //FOREACH bounce
+		} // FOREACH phase
+		
+		// Calculate the EDM stuff for each particle
+		dataset collective_fedm;
+		BOOST_FOREACH(particle *part, particles) {
+			edmcalcs(*part);
+			collective_fedm += part->fake_edm;
 		}
 		
-		// Now loop over bounces
-		for (int bounce = 0; bounce < bounces; bounce++)
-		{
-			// NOW loop over particles - having them here means that they move together
-			BOOST_FOREACH( particle *part, particles)
-			{
-				// This section is run every bounce
-				
-				// Calculate the next point of intersection
-				intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
-				// Normalise the Normal! (see cast documentation)
-				collisionpoint.normal.scaleto(1.0);
-				// Fill out the collisionpoint location
-				collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
-				
-				//logger << " " <<  bounce << ": Time to Collision: " << collisionpoint.time << endl;
-				
-				// If we get a zero-time collision, make a note of it
-				if (collisionpoint.time == 0.)
-					logger << "\t------- Zero time Intersection" << endl; //	throw runtime_error("Zero Collision-point time");
-				
-				// Now we know the time to collision, step over it calculating the spin changes as we go
-				if (collisionpoint.time > 0.)
-					bigstep(*part, collisionpoint.time);
-				
-				// Reflect the particle now
-				if (collisionpoint.collideobject->reflection == container::reflection_specular) 
-				{
-					part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
-				} else { // Assume diffuse reflection otherwise (for now)
-					part->velocity_vec.x = rand()-(RAND_MAX/2);
-					part->velocity_vec.y = rand()-(RAND_MAX/2);
-					part->velocity_vec.z = rand()-(RAND_MAX/2);
-					
-					// Ensure it faces away from the normal
-					if ((part->velocity_vec * collisionpoint.normal) < 0.)
-						part->velocity_vec *= -1.0;
-				}
-				// Ensure velocity is kept constant
-				part->velocity_vec.scaleto(part->velocity);
-				
-				// Output the difference between particle and calculated impact position
-				//logger << "\tPositional Difference: " << mod(part->position - collisionpoint.location) << endl;
-				
-				// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
-				// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
-				// 1e-30 anyway)
-				part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
-				
-			} // FOREACH particle
-
-			// Now call the reporters that report each bounce
-			BOOST_FOREACH( reporter *repo, report_bounce) {
-				repo->report(*this);
-			}
-				
-		} //FOREACH bounce
-	} // FOREACH phase
-	
-	// Calculate the EDM stuff for each particle
-	dataset collective_fedm;
-	BOOST_FOREACH(particle *part, particles) {
-		edmcalcs(*part);
-		collective_fedm += part->fake_edm;
-	}
-	
-	// Now output the calculated edm values
-	logger << "Calculated False-EDM : " << collective_fedm.average() << " +/- " << collective_fedm.stdev() << endl;
-	
-	
-	// Now tell all the reporters that are supposed to report every run, to report
-	BOOST_FOREACH( reporter *rep, report_run ) {
-		rep->report(*this);
-	}
+		// Now output the calculated edm values
+		logger << "Calculated False-EDM : " << collective_fedm.average() << " +/- " << collective_fedm.stdev() << endl;
+		
+		
+		// Now tell all the reporters that are supposed to report every run, to report
+		BOOST_FOREACH( reporter *rep, report_run ) {
+			rep->report(*this);
+		}
+		
+	} // Close per value loop
 	
 	// Tell all of the reporters to do the file-closing 'final report'
 	BOOST_FOREACH( nslobject *ob, subobjects) {
