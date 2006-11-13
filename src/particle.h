@@ -30,6 +30,8 @@
 #include "nslobject.h"
 #include "nslobjectfactory.h"
 
+#include "datasets.h"
+
 class container;
 class bfield;
 class efield;
@@ -67,6 +69,8 @@ class particle : public nslobject {
 	// Our calculated edm parameters
 	long double frequencydiff;
 	long double fake_edm;
+	
+	dataset cumulativeedm;
 	
 	// Utility class pointers
 	container *particlebox;

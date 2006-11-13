@@ -210,6 +210,6 @@ void edmreporter::report ( edmexperiment &experiment )
 	{
 		edmav += part->fake_edm;
 	}
-	
-	*outfile << experiment.variation.value << "\t" <<  edmav.average() << endl;
+
+	*outfile << experiment.variation.value << "\t" <<  edmav.average() << "\t" << edmav.stdev() << endl;
 }

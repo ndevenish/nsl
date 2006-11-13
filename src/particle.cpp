@@ -76,6 +76,11 @@ bool particle::prepareobject()
 }
 void particle::readsettings(void)
 {
+	// Reset frame stuff here
+	fake_edm = 0.;
+	flytime = 0.;
+	frequencydiff = 0.;
+	
 	// ***************************************
 	// Get and validate the velocities
 	

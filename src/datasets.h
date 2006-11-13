@@ -85,6 +85,9 @@ class dataset : boost::addable< dataset >//,
 		* it is not necessaraly as accurate as adding a plain data point. */
 		dataset operator+=( const dataset& newset );
 		
+		/** Resets the dataset. */
+		void reset ( void )  { vaverage = vaveragesq = vpointcount = 0; } 
+		
 		dataset() : vaverage(0), vaveragesq(0), vpointcount(0) {}
 };
 

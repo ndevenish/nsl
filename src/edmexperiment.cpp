@@ -230,20 +230,23 @@ bool edmexperiment::runobject()
 		variation.varyobject->set(variation.parameter, str(varyval));
 		variation.value = varyval;
 		
-		// Now Reset all the children, and myself!
-//		BOOST_FOREACH(nslobject *chil, subobjects)
-//		{
 		// Resetting this should also get all our children to read!
 			this->reset();
-//		}
-		
+			
+		// Reset all the particles cumulative phase average things
+		BOOST_FOREACH(particle *part, particles)
+			part->cumulativeedm.reset();
+			
 		// First loop over starting phases
 		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
 		{
 			logger << "Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+			// Calculate the phase
+			long double phaseavg = phase_loop * (2.0 / phase_steps);
 
-			// Reset the particle each phase
+			// Reset the particle each phase, and set it's phase
 			BOOST_FOREACH( particle* part, particles ) {
+				part->set("spin_phase", str(phaseavg));
 				part->reset();
 			}
 			
@@ -304,17 +307,24 @@ bool edmexperiment::runobject()
 				}
 					
 			} //FOREACH bounce
+			
+			BOOST_FOREACH(particle *part, particles) {
+				edmcalcs(*part);
+				part->cumulativeedm += part->fake_edm;
+//				falseedmav += part->fake_edm;
+			}
 		} // FOREACH phase
 		
-		// Calculate the EDM stuff for each particle
-		dataset collective_fedm;
-		BOOST_FOREACH(particle *part, particles) {
-			edmcalcs(*part);
-			collective_fedm += part->fake_edm;
+		// Calculate the edm!
+		//dataset collective_fedm;
+		dataset falseedmav;
+		BOOST_FOREACH(particle *part, particles)
+		{
+			falseedmav += part->cumulativeedm;
 		}
 		
 		// Now output the calculated edm values
-		logger << "Calculated False-EDM : " << collective_fedm.average() << " +/- " << collective_fedm.stdev() << endl;
+		logger << "Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.stdev() << endl;
 		
 		
 		// Now tell all the reporters that are supposed to report every run, to report

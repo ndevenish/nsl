@@ -582,6 +582,8 @@ void nslobject::prepare ( void )
 
 	// Now prepare us!
 	prepareobject();
+	readsettings();
+	
 	initialised = true;
 }
 
