@@ -2,9 +2,9 @@
 
 add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
-	set steptime 1e-6
-	set phase_steps 2 #phase average loops
-	set bounces 50 #number of bounces to run the simulation over
+	set steptime 1e-5
+	set phase_steps 5 #phase average loops
+	set bounces 2000 #number of bounces to run the simulation over
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -19,20 +19,13 @@ add edmexperiment "The Experiment" {
 			set height 0.12
 			set reflection diffuse
 		}
-		ignore add volume_cylinder "sidebottle" {
-			set type negative
-			set radius 0.235
-			set height 0.12
-			set reflection diffuse
-			set x 0.3
-		}
 	}
 
 	#multiadd 3 particle "neutron" {
 	add particle neutron {
 		set gamma -29.1646870E+6
-		#set velocity 3
-		vary velocity from 3 to 100 in 40 steps
+		set velocity 100
+		#vary velocity from 3 to 100 in 40 steps
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 1
 		set vx 0.1
@@ -55,8 +48,8 @@ add edmexperiment "The Experiment" {
 			set D_DZ	1e-9
 		}
 		add dipole_zmagnetic "Z magnetic dipole" {
-			set z		-0.2
-			set mz
+			vary z from -0.1 to -1.0 in 12 steps
+			set mz		-1e-5
 		}
 	}
 	
@@ -72,6 +65,6 @@ add edmexperiment "The Experiment" {
 	#	set report_frequency bounce
 	}
 	add edmreporter "edmreporter" {
-		set output_file "report.txt"
+		set output_file "dipolerep.txt"
 	}
 }
