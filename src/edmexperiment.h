@@ -52,7 +52,8 @@ class edmexperiment : public nslobject {
 	
 	std::vector<reporter*>	report_bounce, report_run, report_step;
 
-	void initvals( void );
+	//void initvals( void );
+	void readsettings ( void );
 	
 	bfield * magfield; ///< The magnetic field object
 	efield *elecfield; ///< The electric field object

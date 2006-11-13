@@ -34,11 +34,7 @@ using namespace std;
 
 volume_cylinder::volume_cylinder()
 {
-	initvals();
-}
-
-void volume_cylinder::initvals(void)
-{
+//	initvals();
 	icept_entry = interception_entry;
 	icept_exit = interception_exit;
 	
@@ -52,17 +48,23 @@ void volume_cylinder::initvals(void)
 	types.push_back(objecttype);
 }
 
-bool volume_cylinder::prepareobject()
+void volume_cylinder::readsettings(void)
 {
+	position.x = position.y = position.z = 0.0;
+	radius = 0.0;
+	height = 0.0;
+	volume_type = volume_none;
+	reflection = reflection_diffuse;
+
 	// The requirements
 	require("radius");
 	require("height");
-
+	
 	//if (isset("x"))
 	position.x = getlongdouble("x", 0.0);
 	position.y = getlongdouble("y", 0.0);
 	position.z = getlongdouble("z", 0.0);
-
+	
 	string voltype = get("type", "none");
 	if (voltype == "none")
 		volume_type = volume_none;
@@ -81,14 +83,14 @@ bool volume_cylinder::prepareobject()
 	}
 	else
 		throw runtime_error("Unrecognised volume type");
-
+	
 	radius = getlongdouble("radius", 0.0);
 	height = getlongdouble("height", 0.0);
-
+	
 	// Now set up the starting positions - edge and center
 	positionlist["edge"] = position + vector3(0.0, -radius, height/2.0);
 	positionlist["center"] = position + vector3(0.0, 0.0, (height/2.0));
-
+	
 	string reflectiontype;
 	reflectiontype = get("reflection", "diffuse");
 	if (reflectiontype == "diffuse")
@@ -97,9 +99,8 @@ bool volume_cylinder::prepareobject()
 		reflection = reflection_specular;
 	else
 		throw runtime_error("Reflection type not recognised");
-
-	return true;
 }
+
 
 int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& direction, intercept *nextplace )
 {

@@ -52,7 +52,8 @@ protected:
 public:
 	forcefield();
 
-	void initvals( void );
+	//void initvals( void );
+	//void readsettings( void );
 	
 	/** Retrieves the strength of the field at a specified position.
 	* This is returned as a vector. */
@@ -78,6 +79,7 @@ class bfield : public forcefield {
 	//vector3 dbd;
 
 	bool prepareobject();
+	void readsettings( void );
 
 protected:
 	void field(vector3& field, const vector3& position) { field += b0; }
@@ -100,6 +102,7 @@ class efield : public forcefield {
 	//vector3 dbd;
 
 	bool prepareobject();
+	void readsettings( void );
 
 protected:
 	void field(vector3& field, const vector3& position) { field += e0; }
@@ -124,7 +127,8 @@ protected:
 	void field(vector3& field, const vector3 &position);
 	void fieldgradient(vector3& field, const vector3 &position) { field += vector3(0,0,d_dz); }
 
-	bool prepareobject();
+//	bool prepareobject();
+	void readsettings(void);
 
 public:
 	linear_zgradient();

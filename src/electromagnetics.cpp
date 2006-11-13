@@ -32,19 +32,15 @@ using std::runtime_error;
 
 forcefield::forcefield()
 {
-	initvals();
-}
-
-void forcefield::initvals ( void )
-{
 	objecttype = "forcefield";
 	types.push_back(objecttype);
 	
 	// Blank the sub field array
 	for (int i = 0; i < max_fieldmods; i++)
 		sub_fields[i] = 0;
-	sub_fieldcount = 0;	
+	sub_fieldcount = 0;
 }
+
 bool forcefield::prepareobject()
 {
 	
@@ -91,22 +87,29 @@ bool bfield::prepareobject()
 	// need to call.
 	forcefield::prepareobject();
 
+	return true;
+}
+
+void bfield::readsettings( void )
+{
+	
 	b0.x = getlongdouble("b0x", 0.0);
 	b0.y = getlongdouble("b0y", 0.0);
-	b0.z = getlongdouble("b0z", 0.0);
-
-	return true;
+	b0.z = getlongdouble("b0z", 0.0);	
 }
 
 bool efield::prepareobject()
 {
 	forcefield::prepareobject();
 
+	return true;
+}
+
+void efield::readsettings()
+{
 	e0.x = getlongdouble("e0x", 0.0);
 	e0.y = getlongdouble("e0y", 0.0);
-	e0.z = getlongdouble("e0z", 0.0);
-
-	return true;
+	e0.z = getlongdouble("e0z", 0.0);	
 }
 
 linear_zgradient::linear_zgradient()
@@ -115,13 +118,10 @@ linear_zgradient::linear_zgradient()
 	types.push_back(objecttype);
 }
 
-bool linear_zgradient::prepareobject()
+void linear_zgradient::readsettings( void )
 {
 	d_dz = getlongdouble("d_dz", 0.0);
-	
-	return true;
 }
-
 void linear_zgradient::field(vector3& field, const vector3 &position)
 {
 	//vector3 thefield(0,0,0);

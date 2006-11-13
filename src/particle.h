@@ -74,6 +74,7 @@ class particle : public nslobject {
 	efield *elec_field;
 
 	bool prepareobject();
+	void readsettings(void);
 	
 	// Initialise the values in the class
 	void initvals();

@@ -696,8 +696,7 @@ int nslobject::countchildren(std::string type)
 
 void nslobject::reset( void )
 {
-	initvals();
-	prepareobject();
+	readsettings();
 
 	// No do the same for each of our children
 	BOOST_FOREACH( nslobject *ob, subobjects )

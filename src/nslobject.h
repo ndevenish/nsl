@@ -286,7 +286,12 @@ private:
 	
 	/** A virtual function to initialise values.
 	* This is in order so that the class can be properly reset. */
-	virtual void initvals() {};
+	//virtual void initvals() {};
+	
+	/** Virtual function to read the settings in.
+	* This should read in any settings from the parameters and set them - it should not
+	* do any other initialisation. */
+	virtual void readsettings ( void ) { } 
 	
 	std::map<std::string, std::string> properties; ///< A list of object 'properties'
 	//std::vector<nslobject *> subobjects; // A list of the object's 'children

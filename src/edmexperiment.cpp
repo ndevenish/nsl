@@ -79,16 +79,11 @@ edmexperiment::edmexperiment()
 	steptime = 0.0;
 	bounces = 0;
 	collision_offset = 0.;	
-	initvals();
+	//initvals();
 	
 	
 	objecttype = "edmexperiment";
 	types.push_back(objecttype);
-}
-
-void edmexperiment::initvals( void )
-{
-
 }
 
 void edmexperiment::setvariation( std::string parameter, long double minval, long double maxval, int maxruns, nslobject *varyobject )
@@ -178,12 +173,6 @@ bool edmexperiment::prepareobject()
 
 	// Grab the steptime from the property set
 	//if (isset("steptime"))
-	steptime = getlongdouble("steptime", 3e-4);
-		
-	phase_steps = getint("phase_steps", 1);
-	bounces = getlong("bounces", 1);
-	
-	collision_offset = getlongdouble("collision_compensation_distance", 0.0);
 	
 	// Log the start time of this simulation run
 	time_t rawtime;
@@ -196,6 +185,17 @@ bool edmexperiment::prepareobject()
 	// configured
 
 	return true;
+}
+
+void edmexperiment::readsettings ( void )
+{
+	steptime = getlongdouble("steptime", 3e-4);
+	
+	phase_steps = getint("phase_steps", 1);
+	bounces = getlong("bounces", 1);
+	
+	collision_offset = getlongdouble("collision_compensation_distance", 0.0);
+	
 }
 
 bool edmexperiment::runobject()
@@ -231,11 +231,11 @@ bool edmexperiment::runobject()
 		variation.value = varyval;
 		
 		// Now Reset all the children, and myself!
-		BOOST_FOREACH(nslobject *chil, subobjects)
-		{
-			if (!chil->isoftype("reporter"))
-				chil->reset();
-		}
+//		BOOST_FOREACH(nslobject *chil, subobjects)
+//		{
+		// Resetting this should also get all our children to read!
+			this->reset();
+//		}
 		
 		// First loop over starting phases
 		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)

@@ -66,7 +66,7 @@ class container : public nslobject {
 
 	bool prepareobject();
 
-	void initvals( void );
+	//void readsettings();
 	
 	// List of intercepts
 	intercept interceptlist[MAX_INTERCEPTS];
@@ -125,9 +125,9 @@ public:
 
 /** Represents an upright, finite, cylindrical volume. */
 class volume_cylinder : public container {
-	bool prepareobject();
+//	bool prepareobject();
 
-	void initvals( void );
+	void readsettings( void );
 	
 	enum {
 		volume_none,

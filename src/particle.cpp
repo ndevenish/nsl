@@ -70,10 +70,15 @@ bool particle::prepareobject()
 	particlebox = (container*)findbytype("container");
 	if (!particlebox)
 		throw runtime_error("Unable to find a container for particle");
-
+	
+	return true;
+	
+}
+void particle::readsettings(void)
+{
 	// ***************************************
 	// Get and validate the velocities
-
+	
 	// First get the vector if we have one
 	if (isset("vx") || isset("vy") || isset("vz"))
 	{
@@ -83,39 +88,39 @@ bool particle::prepareobject()
 	} else {
 		velocity_vec.x = velocity_vec.y = velocity_vec.z = 1.0;
 	}
-
+	
 	if (isset("velocity")) {
 		velocity = getlongdouble("velocity", 0.0);
 		velocity_vec.scaleto(velocity);
 	} else {
 		velocity = velocity_vec.mod();
 	}
-
+	
 	vgamma = sqrtl(1. / (1. - (velocity*velocity)/csquared));
-				   
+	
 	// Warn for zero velocity
 	if (velocity == 0.0)
 		Warning("Velocity in particle is unset (or set to 0.0)");
-
+	
 	// **************************************
 	// Get and validate the positions
 	position.x = getlongdouble("x", 0.0);
 	position.y = getlongdouble("y", 0.0);
 	position.z = getlongdouble("z", 0.0);
-
+	
 	// See if we have set a startvolume
 	string startvolume;
 	if (isset("startvolume"))
 	{
 		startvolume = get("startvolume");
-
+		
 		string startposition;
 		startposition = get("startposition", "center");
 		/*if (isset("startposition"))
 			startposition = get("startposition");
 		else
 			startposition = "center";
-*/
+		*/
 		// Get the base position for this 
 		nslobject *startvol;
 		startvol = particlebox->findbyname(startvolume);
@@ -124,11 +129,11 @@ bool particle::prepareobject()
 		else
 			throw runtime_error("Attempting to start particle in non-container volume");
 	}
-
-
+	
+	
 	// *********************************************************
 	// Extract all the physical properties from the property set
-
+	
 	// Gamma value
 	gamma = getlongdouble("gamma", 0.0);
 	if (gamma == 0.0)
@@ -141,18 +146,16 @@ bool particle::prepareobject()
 	// Start by getting the spin polar angles
 	start_spin_polar_angle = pi*getlongdouble("start_spin_polar_angle", 0.5);
 	start_spin_phase = pi*getlongdouble("start_spin_phase", 0.0);
-
+	
 	spinEplus.x = sinl(start_spin_polar_angle)*cosl(start_spin_phase);
 	spinEplus.y = sinl(start_spin_polar_angle)*sinl(start_spin_phase);
 	spinEplus.z = cosl(start_spin_polar_angle);
 	spinEminus = spinEplus;
-
+	
 	// ************************************************************
 	// Find a magnetic field to link to
 	mag_field = (bfield*)findbytype("bfield");
-
+	
 	// Look for an electric field to link to
 	elec_field = (efield*)findbytype("efield");
-
-	return true;
 }

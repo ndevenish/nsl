@@ -40,15 +40,10 @@ using std::endl;
 
 container::container()
 {
-	initvals();
-}
-
-void container::initvals( void )
-{
 	reflection = reflection_specular;
 	
 	objecttype = "container";
-	types.push_back(objecttype);	
+	types.push_back(objecttype);
 }
 
 // Get a named position in the volume
