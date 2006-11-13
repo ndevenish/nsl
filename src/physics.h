@@ -46,7 +46,8 @@ const long double pi = 3.1415926535897932384626433832795028841971693993751058209
 const long double echarge = 1.60217646e-19; ///< The charge of an electron
 const long double csquared = (299792458.*299792458.); ///< The speed of light squared
 const long double hbar = 1.054571596e-34; ///< h-bar (h/2*pi)
-
+const long double mu0 = 12.566370614E-7;
+const long double dipole_mult = mu0 / (4*pi);
 
 // ***************************************************************
 // Other inline functions

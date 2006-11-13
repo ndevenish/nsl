@@ -138,12 +138,26 @@ public:
 	};
 };
 
-
-
-
-
-
-
+/** Provides dipole calculations.
+* This is for a purely 'z' magnetic dipole - that is, a magnetic dipole purely
+* in the z plane and centered with only a vertical position. */
+class dipole_zmagnetic : public forcefield {
+	long double mz;
+	long double z;
+	
+protected:
+	void field(vector3 &field, const vector3 &position);
+	void fieldgradient(vector3 &field, const vector3 &position);
+	
+	void readsettings();
+	
+public:
+	dipole_zmagnetic();
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new dipole_zmagnetic; }
+	};
+};
 
 
 

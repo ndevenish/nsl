@@ -266,7 +266,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>19</integer>
+									<integer>20</integer>
 									<integer>2</integer>
 									<integer>0</integer>
 								</array>
@@ -309,7 +309,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>edmexperiment.cpp</string>
+								<string>electromagnetics.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -317,14 +317,13 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>edmexperiment.cpp</string>
+										<string>electromagnetics.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0A348D390B0897FE00F8771E</string>
+										<string>0A348D800B08B16300F8771E</string>
 										<key>history</key>
 										<array>
-											<string>0A348AEA0B072D6D00F8771E</string>
 											<string>0A348BAD0B07BBCF00F8771E</string>
 											<string>0A348BAF0B07BBCF00F8771E</string>
 											<string>0A348BB20B07BBCF00F8771E</string>
@@ -332,26 +331,27 @@
 											<string>0A348BB60B07BBCF00F8771E</string>
 											<string>0A348BB90B07BBCF00F8771E</string>
 											<string>0A348BBC0B07BBCF00F8771E</string>
-											<string>0A348BBF0B07BBCF00F8771E</string>
 											<string>0A348BC10B07BBCF00F8771E</string>
-											<string>0A348C580B07C25300F8771E</string>
 											<string>0A348C9C0B088FA800F8771E</string>
 											<string>0A348C9D0B088FA800F8771E</string>
 											<string>0A348C9F0B088FA800F8771E</string>
-											<string>0A348CA20B088FA800F8771E</string>
-											<string>0A348CA60B088FA800F8771E</string>
 											<string>0A348CDF0B08908400F8771E</string>
 											<string>0A348CE10B08908400F8771E</string>
 											<string>0A348CE40B08908400F8771E</string>
 											<string>0A348CE50B08908400F8771E</string>
 											<string>0A348CF90B0892C600F8771E</string>
 											<string>0A348CFB0B0892C600F8771E</string>
-											<string>0A348D270B0897FE00F8771E</string>
 											<string>0A348D280B0897FE00F8771E</string>
 											<string>0A348D290B0897FE00F8771E</string>
 											<string>0A348D2A0B0897FE00F8771E</string>
 											<string>0A348D2B0B0897FE00F8771E</string>
-											<string>0A348D2C0B0897FE00F8771E</string>
+											<string>0A348D510B08AC8500F8771E</string>
+											<string>0A348D5E0B08AE6900F8771E</string>
+											<string>0A348D5F0B08AE6900F8771E</string>
+											<string>0A348D600B08AE6900F8771E</string>
+											<string>0A348D6A0B08AFA600F8771E</string>
+											<string>0A348D720B08B01800F8771E</string>
+											<string>0A348D730B08B01800F8771E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -599,6 +599,18 @@
 											<string>0A348D360B0897FE00F8771E</string>
 											<string>0A348D370B0897FE00F8771E</string>
 											<string>0A348D380B0897FE00F8771E</string>
+											<string>0A348D3E0B08AAEA00F8771E</string>
+											<string>0A348D540B08AC8500F8771E</string>
+											<string>0A348D550B08AC8500F8771E</string>
+											<string>0A348D560B08AC8500F8771E</string>
+											<string>0A348D570B08AC8500F8771E</string>
+											<string>0A348D620B08AE6900F8771E</string>
+											<string>0A348D630B08AE6900F8771E</string>
+											<string>0A348D640B08AE6900F8771E</string>
+											<string>0A348D650B08AE6900F8771E</string>
+											<string>0A348D6B0B08AFA600F8771E</string>
+											<string>0A348D6C0B08AFA600F8771E</string>
+											<string>0A348D740B08B01800F8771E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -827,7 +839,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>particle.h</string>
+								<string>electromagnetics.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>

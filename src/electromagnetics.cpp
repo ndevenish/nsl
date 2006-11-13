@@ -131,3 +131,37 @@ void linear_zgradient::field(vector3& field, const vector3 &position)
 	field.z += position.z * d_dz;
 }
 
+/////////////////////////////////////////////////////////////////
+// Magnetic dipole
+
+dipole_zmagnetic::dipole_zmagnetic()
+{
+	mz = 0;
+	z = 0;
+}
+
+void dipole_zmagnetic::readsettings( void )
+{
+	require("mz");
+	require("z");
+	
+	mz = getlongdouble("mz", 0.0);
+	z = getlongdouble("z", 0.0);
+}
+
+void dipole_zmagnetic::field( vector3 &field, const vector3 &position )
+{
+	// Calculate the radius and relative z positions
+	long double relz = position.z - z;
+	long double r = sqrtl(position.x*position.x + position.y*position.y + relz*relz);
+	long double rto5 = powl(r, 5);
+		
+	field.x += dipole_mult * (mz / rto5) * ( 3 * position.x * z			);
+	field.y += dipole_mult * (mz / rto5) * ( 3 * position.y * z			);
+	field.z += dipole_mult * (mz / rto5) * ( 3 * z			* z	- r*r	);
+}
+
+void dipole_zmagnetic::fieldgradient( vector3 &field, const vector3 &position)
+{
+	throw runtime_error("Dipole Vertical field gradient not yet implemented");
+}

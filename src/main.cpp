@@ -61,6 +61,7 @@ int main ( int argc, string argv )
 		nslobjectfactory::add("forcefield", new forcefield::Factory);
 		nslobjectfactory::add("linear_zgradient", new linear_zgradient::Factory);
 		nslobjectfactory::add("efield", new efield::Factory);
+		nslobjectfactory::add("dipole_zmagnetic", new dipole_zmagnetic::Factory);
 		
 		// Reporters!
 		nslobjectfactory::add("reporter", new reporter::Factory);

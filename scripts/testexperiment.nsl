@@ -3,8 +3,8 @@
 add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set steptime 1e-6
-	set phase_steps 5 #phase average loops
-	set bounces 3000 #number of bounces to run the simulation over
+	set phase_steps 2 #phase average loops
+	set bounces 50 #number of bounces to run the simulation over
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -54,6 +54,10 @@ add edmexperiment "The Experiment" {
 		add linear_zgradient "bfield gradient" {
 			set D_DZ	1e-9
 		}
+		add dipole_zmagnetic "Z magnetic dipole" {
+			set z		-0.2
+			set mz
+		}
 	}
 	
 	add efield "Efield" {
@@ -68,6 +72,6 @@ add edmexperiment "The Experiment" {
 	#	set report_frequency bounce
 	}
 	add edmreporter "edmreporter" {
-		set output_file "reportt.txt"
+		set output_file "report.txt"
 	}
 }

@@ -504,3 +504,5 @@ void edmexperiment::edmcalcs( particle &part )
 	// Now calculate the EDM from this
 	part.fake_edm = part.frequencydiff * hbar/E_FIELD/echarge*100*1e26/4;
 }
+
+
