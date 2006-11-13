@@ -200,7 +200,7 @@ edmreporter::edmreporter()
 void edmreporter::preparefile(edmexperiment &exp)
 {
 	*outfile << "Edm loop report: " << exp.get("runtime") << endl;
-	*outfile << exp.variation.parameter << "\t" << "False-EDM" << endl;
+	*outfile << exp.variation.parameter << "\t" << "False-EDM" << "\t" << "Error"<< endl;
 }
 void edmreporter::report ( edmexperiment &experiment )
 {
@@ -208,7 +208,7 @@ void edmreporter::report ( edmexperiment &experiment )
 	dataset edmav;
 	BOOST_FOREACH( particle *part, experiment.particles )
 	{
-		edmav += part->fake_edm;
+		edmav += part->cumulativeedm;
 	}
 
 	*outfile << experiment.variation.value << "\t" <<  edmav.average() << "\t" << edmav.stdev() << endl;

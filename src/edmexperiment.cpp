@@ -225,7 +225,7 @@ bool edmexperiment::runobject()
 	{
 		// Calculate the value for the variation this loop
 		long double varyval = variation.minval + (variation.maxval - variation.minval)*exprun / variation.runs;
-		logger << "Varying " << variation.parameter << ": Value = " << varyval << endl;
+		logger << "Outer Loop " << exprun+1 << "/" << variation.runs << " of " << variation.parameter << ": Value = " << varyval << endl;
 		// now set it!
 		variation.varyobject->set(variation.parameter, str(varyval));
 		variation.value = varyval;
@@ -240,7 +240,7 @@ bool edmexperiment::runobject()
 		// First loop over starting phases
 		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
 		{
-			logger << "Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+			logger << "   Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
 			// Calculate the phase
 			long double phaseavg = phase_loop * (2.0 / phase_steps);
 
@@ -324,7 +324,7 @@ bool edmexperiment::runobject()
 		}
 		
 		// Now output the calculated edm values
-		logger << "Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.stdev() << endl;
+		logger << "   Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.stdev() << endl;
 		
 		
 		// Now tell all the reporters that are supposed to report every run, to report
@@ -350,7 +350,7 @@ void edmexperiment::bigstep(particle& part, long double time)
 	long steps;
 	
 	// Calculate the number of steps we are going to take
-	steps = floorl(time / steptime);
+	steps = floorl((long double)time / (long double)steptime);
 	
 	// calculate the ExB effect for the particle- this does not change over a bigstep
 	// Now (here for now) calculate the VxE effect
