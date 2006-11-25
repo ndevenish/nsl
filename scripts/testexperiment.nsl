@@ -2,9 +2,9 @@
 
 add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
-	set steptime 1e-5
-	set phase_steps 5 #phase average loops
-	set bounces 2000 #number of bounces to run the simulation over
+	set steptime 3e-5
+	set phase_steps 15 #phase average loops
+	set bounces 10000 #number of bounces to run the simulation over
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -22,10 +22,10 @@ add edmexperiment "The Experiment" {
 	}
 
 	#multiadd 3 particle "neutron" {
-	add particle neutron {
+	ignore add particle neutron {
 		set gamma -29.1646870E+6
 		set velocity 100
-		#vary velocity from 3 to 100 in 40 steps
+		#vary velocity from 100 to 80 in 15 steps
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 1
 		set vx 0.1
@@ -41,15 +41,30 @@ add edmexperiment "The Experiment" {
 		set start_spin_polar_angle 0.5 #in units of pi
 		set spin_phase 0 #again in pi units
 	}
+	
+	add particle "mercury" {
+		set gamma 7.5901309e+6
+		set velocity 100
 
+		set vy 1
+		set vx 0.1
+
+		set z 0.1
+		set x 0
+		set y -
+
+		set start_spin_polar_angle 0.5
+		set spin_phase 0
+	}
 	add bfield "bfield" {
 		set b0z 	1.0E-6
-		add linear_zgradient "bfield gradient" {
+		ignore add linear_zgradient "bfield gradient" {
 			set D_DZ	1e-9
 		}
 		add dipole_zmagnetic "Z magnetic dipole" {
-			vary z from -0.1 to -1.0 in 12 steps
-			set mz		-1e-5
+			set z -0.115 #vary z from -0.1 to -1.0 in 12 steps
+			#set mz		-1e-5
+			vary mz from -1e-5 to -0.4e-3 in 50 steps
 		}
 	}
 	
@@ -65,6 +80,6 @@ add edmexperiment "The Experiment" {
 	#	set report_frequency bounce
 	}
 	add edmreporter "edmreporter" {
-		set output_file "dipolerep.txt"
+		set output_file "dipoli-merc.txt"
 	}
 }

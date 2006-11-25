@@ -211,5 +211,5 @@ void edmreporter::report ( edmexperiment &experiment )
 		edmav += part->cumulativeedm;
 	}
 
-	*outfile << experiment.variation.value << "\t" <<  edmav.average() << "\t" << edmav.stdev() << endl;
+	*outfile << experiment.variation.value << "\t" <<  edmav.average() << "\t" << edmav.uncert() << endl;
 }

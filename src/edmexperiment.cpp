@@ -264,7 +264,6 @@ bool edmexperiment::runobject()
 					collisionpoint.normal.scaleto(1.0);
 					// Fill out the collisionpoint location
 					collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
-					
 					//logger << " " <<  bounce << ": Time to Collision: " << collisionpoint.time << endl;
 					
 					// If we get a zero-time collision, make a note of it
@@ -299,6 +298,13 @@ bool edmexperiment::runobject()
 					// 1e-30 anyway)
 					part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
 					
+					// See if this was a wall, and if not then reduce the bouncecount
+					if (collisionpoint.normal.z < 0.001)
+						;//logger << "Wall bounce" << endl;
+					else {
+						//logger << "ceil bounce";
+						bounce--;
+					}
 				} // FOREACH particle
 
 				// Now call the reporters that report each bounce
@@ -324,7 +330,7 @@ bool edmexperiment::runobject()
 		}
 		
 		// Now output the calculated edm values
-		logger << "   Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.stdev() << endl;
+		logger << "   Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.uncert() << endl;
 		
 		
 		// Now tell all the reporters that are supposed to report every run, to report
