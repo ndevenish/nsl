@@ -178,10 +178,6 @@
 				RelativePath=".\src\main.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\src\physics.cpp"
-				>
-			</File>
 			<Filter
 				Name="nsl Objects"
 				>
@@ -206,6 +202,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\reporters.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\volume_cylinder.cpp"
 					>
 				</File>
@@ -225,6 +225,14 @@
 					RelativePath=".\src\nslobjectfactory.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\src\physics.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\tools.cpp"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -232,10 +240,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\src\physics.h"
-				>
-			</File>
 			<Filter
 				Name="Objects"
 				>
@@ -259,6 +263,10 @@
 					RelativePath=".\src\particle.h"
 					>
 				</File>
+				<File
+					RelativePath=".\src\reporters.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Systematics"
@@ -268,11 +276,27 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\datasets.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\errors.h"
 					>
 				</File>
 				<File
 					RelativePath=".\src\nslobjectfactory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\physics.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\tools.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\vector3.h"
 					>
 				</File>
 			</Filter>

@@ -350,7 +350,7 @@ void edmexperiment::bigstep(particle& part, long double time)
 	long steps;
 	
 	// Calculate the number of steps we are going to take
-	steps = floorl((long double)time / (long double)steptime);
+	steps = (long)floorl((long double)time / (long double)steptime);
 	
 	// calculate the ExB effect for the particle- this does not change over a bigstep
 	// Now (here for now) calculate the VxE effect

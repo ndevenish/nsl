@@ -211,6 +211,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\datasets.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\edmexperiment.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\edmexperiment.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\electromagnetics.cpp"
 				>
 			</File>
@@ -256,6 +268,26 @@
 			</File>
 			<File
 				RelativePath=".\src\physics.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\reporters.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\reporters.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\tools.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\tools.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\vector3.h"
 				>
 			</File>
 			<File
