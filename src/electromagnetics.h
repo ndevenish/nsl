@@ -65,6 +65,12 @@ public:
 	* This function will iterate through all of it's children, asking them for
 	* their field modifiers and will modify the passed vector by this. */
 	void getfield( vector3& field, const vector3 &position );
+	
+	/** Retrieves the field gradient from the object tree.
+	* This function will iterate through all of it's children and 
+	* accumulate a value for the field gradient */
+	void getfieldgradient( vector3& field, const vector3 &position);
+	
 
 	// Allow this to be created from the object factory
 	class Factory : public nslobjectfactory {

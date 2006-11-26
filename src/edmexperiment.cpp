@@ -221,6 +221,17 @@ bool edmexperiment::runobject()
 	////////////////////////////////////////////////////////////////////////////
 	// Start the simulation loops
 
+	// give it something to vary
+	if (!variation.varying)
+	{
+		variation.minval = 1;
+		variation.maxval = 1;
+		variation.runs = 1;
+		variation.parameter = "None";
+		variation.varying = false;
+		variation.varyobject = this;
+	}
+	
 	for (int exprun = 0; exprun < variation.runs; exprun++)
 	{
 		// Calculate the value for the variation this loop

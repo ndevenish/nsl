@@ -99,6 +99,13 @@ void volume_cylinder::readsettings(void)
 		reflection = reflection_specular;
 	else
 		throw runtime_error("Reflection type not recognised");
+	
+	// Setup the boundaries
+	boundaries.radius = radius;
+	boundaries.height = height;
+	boundaries.position = position;
+	boundaries.position.z += height*0.5;
+	boundaries.real = true;
 }
 
 

@@ -67,7 +67,15 @@ void forcefield::getfield(vector3 &ffield, const vector3 &position)
 		sub_fields[i]->getfield(ffield, position);
 }
 
-
+void forcefield::getfieldgradient( vector3& ffield, const vector3 &position)
+{
+	// apply our field gradient
+	fieldgradient(ffield, position);
+	
+	// now apply each of our subobjects gradients
+	for (int i = 0; i < sub_fieldcount; i++)
+		sub_fields[i]->getfieldgradient(ffield, position);
+}
 
 bfield::bfield()
 {
@@ -160,10 +168,17 @@ void dipole_zmagnetic::field( vector3 &field, const vector3 &position )
 		
 	field.x += (mz / rto5) * ( 3 * position.x * relz			);
 	field.y += (mz / rto5) * ( 3 * position.y * relz			);
-	field.z += (mz / rto5) * ( 3 * relz			* relz	- r*r	);
+	field.z += (mz / rto5) * ( 3 * relz		  * relz	- r*r	);
 }
 
 void dipole_zmagnetic::fieldgradient( vector3 &field, const vector3 &position)
 {
-	throw runtime_error("Dipole Vertical field gradient not yet implemented");
+	//throw runtime_error("Dipole Vertical field gradient not yet implemented");
+	
+	// Calculate the radius and relative z positions
+	long double relz = position.z - z;
+	long double r = sqrtl(position.x*position.x + position.y*position.y + relz*relz);
+	long double rto7 = powl(r, 7.);
+
+	field.z += mz * ((3. * relz) / rto7 ) * (3. * r * r - 5 * relz * relz );
 }

@@ -26,10 +26,18 @@
 #include <string>
 #include <ctime>
 
+#include <boost/random.hpp>
+#include <boost/random/uniform_real.hpp>
+#include <boost/random/variate_generator.hpp>
+
+
 #include "errors.h"
 #include "reporters.h"
 #include "edmexperiment.h"
 #include "particle.h"
+#include "container.h"
+
+#include "electromagnetics.h"
 
 #include "boost/foreach.hpp"
 
@@ -38,6 +46,8 @@ using std::runtime_error;
 using std::ofstream;
 
 using std::endl;
+
+using boost::mt11213b;
 
 
 //using namespace std;
@@ -200,8 +210,14 @@ edmreporter::edmreporter()
 void edmreporter::preparefile(edmexperiment &exp)
 {
 	*outfile << "# Edm loop report: " << exp.get("runtime") << endl;
-	*outfile << "# " << exp.variation.parameter << "\t" << "False-EDM" << "\t" << "Error"<< endl;
+	*outfile << "# " << exp.variation.parameter << "\t" << "False-EDM" << "\t" << "Error";
+	
+	if (volaverage)
+		*outfile << "\t" << "volavg-dbzdz";
+	
+	*outfile << endl;
 }
+
 void edmreporter::report ( edmexperiment &experiment )
 {
 	// Loop over all the particles and generate an average EDM
@@ -210,6 +226,98 @@ void edmreporter::report ( edmexperiment &experiment )
 	{
 		edmav += part->cumulativeedm;
 	}
+	
+	*outfile << experiment.variation.value << "\t" <<  edmav.average() << "\t" << edmav.uncert();
+	
+	// Calculate an average vertical field gradient if required
+	if (volaverage)
+	{
+		// Grab pointers to the container and magnetic field
+		container *box = experiment.particlebox;
+		bfield* b = experiment.magfield;
+		dataset vergrad = calc_dbdz(*b, *box);
+		
+		
+		
+	}
+		
+	*outfile << endl;
+}
 
-	*outfile << experiment.variation.value << "\t" <<  edmav.average() << "\t" << edmav.uncert() << endl;
+bool edmreporter::prepareobject()
+{
+	reporter::prepareobject();
+	
+	if (isset("volaverage_dbdz"))
+		volaverage = true;
+
+	return true;
+}
+
+
+/// Calcualte the volume average dbz/dz value
+dataset edmreporter::calc_dbdz(bfield &b, container &cont)
+{
+	// Create and initialise the random number generator 
+	mt11213b rng;
+	rng.seed(static_cast<unsigned> (std::time(0)));
+	boost::uniform_real<> uni_r(0,1);
+	boost::variate_generator<mt11213b&, boost::uniform_real<> > uni(rng, uni_r);
+	
+	// Let's grab the size of the volume to generate over
+	cylbounds cyl = cont.getcylinder();
+	
+	unsigned long hits = 0, misses = 0, throws = 0;
+	
+//	long double x, y, z;
+	vector3 pos, magfield;
+	dataset vertgrad;
+	
+	while (1)
+	{
+		//r = sqrtl(uni()) * cyl.radius;
+		pos.z =(uni() - 0.5) * cyl.height;
+		pos.x = uni() * cyl.radius*2. - cyl.radius;
+		pos.y = uni() * cyl.radius*2. - cyl.radius;
+		
+		// Throw these out if outside test cylinder
+		if (pos.x*pos.x + pos.y*pos.y > cyl.radius *cyl.radius)
+		{
+			throws++;
+			continue;
+		}
+		pos += cyl.position;
+		
+		//Now, test to see if these points are inside a container
+		if (!cont.isinside(pos))
+		{
+			// If it isn't inside a container, this is a miss. This can be used to estimate the colume
+			misses++;
+			continue;
+		} else {
+			hits++;
+			magfield = vector3(0.0,0.0,0.0);
+			b.getfieldgradient(magfield,pos);
+			
+			vertgrad += magfield.z;
+		}
+		
+		if (hits > 1e6)
+			break;
+	}
+	// Calculate the estimated volume
+	long double hitratio = (long double)hits / (long double)(hits+misses);
+	long double volumeestimate = hitratio * pi * cyl.radius * cyl.radius * cyl.height;
+	// Estimate the error on the volume, by culculating the volume estimate change by a
+	// single hit difference
+	long double volumeplushitest = (((long double)(hits+1) / (long double)(hits+misses+1))) * pi * cyl.radius * cyl.height * cyl.radius;
+	long double volerrest = volumeestimate * ((volumeestimate / volumeplushitest) - 1.);
+	
+	
+	logger << "  DBDZ averaging: Hits: " << hits << ", Misses: " << misses << endl;
+	logger << "     Estimated Volume = " << volumeestimate << " +- " << volerrest << endl;
+	logger << "		dBz/dz			 = " << vertgrad.average() << " +- " << vertgrad.uncert() << endl;
+	logger << "   Average field gradient over volume : " << vertgrad.average() / volumeestimate << " +- " << vertgrad.uncert() / volumeestimate << endl;
+	
+	return vertgrad;
 }

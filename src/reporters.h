@@ -29,10 +29,12 @@
 
 #include "nslobject.h"
 #include "nslobjectfactory.h"
+#include "datasets.h"
 
 class edmexperiment;
 class particle;
-
+class bfield;
+class container;
 
 /** Reports statuses to log files.
 * This class is the base object for logging and tracking aspects
@@ -139,6 +141,14 @@ public:
 * This is the general, all-purpose edm reporter. It will report the current variation along with the
 * false-edm generated, and any other information. */
 class edmreporter : public reporter {
+protected:
+	bool prepareobject();
+	
+	bool volaverage; // should calculate volume average?
+	
+	/// Calcualte the volume average dbz/dz value
+	dataset calc_dbdz(bfield &b, container &cont);
+	
 public:
 	edmreporter();
 	
@@ -149,4 +159,5 @@ public:
 		nslobject *create() { return new edmreporter; }
 	};	
 };
+
 #endif

@@ -37,6 +37,7 @@ class bfield;
 class efield;
 class vector3;
 class reporter;
+class edmreporter;
 
 const int MAX_PARTICLES = 32;
 const int MAX_REPORTERS = 16;
@@ -46,6 +47,8 @@ const int MAX_REPORTERS = 16;
 class edmexperiment : public nslobject {
 
 	friend class reporter;
+	friend class edmreporter;
+	
 	container *particlebox; ///< A shortcut link to the box the particle is stored in
 	//particle *particles[MAX_PARTICLES]; ///< An array of particles we control
 	//reporter *reporters[MAX_REPORTERS]; ///< An array of reporters to call

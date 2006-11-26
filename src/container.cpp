@@ -33,6 +33,8 @@
 
 #include "physics.h"
 
+#include "boost/foreach.hpp"
+
 using std::runtime_error;
 using std::cout;
 using std::endl;
@@ -189,4 +191,70 @@ int container::isinside(const vector3 &pos)
 	for (sublist = subcontainers.begin(); sublist != subcontainers.end(); sublist++)
 		count += (*sublist)->isinside(pos);
 	return count;
+}
+
+cylbounds container::getcylinder( void )
+{
+	cylbounds borders = boundaries;
+	
+	/** Update our cylinder boundaries */
+	BOOST_FOREACH( container* sub, subcontainers)
+	{
+		cylbounds tborders = sub->getcylinder();
+		// Only use real borders
+		if (tborders.real)
+			borders += tborders;
+	}
+
+	// Now, this should be the outer boundaries!
+	return borders;
+}
+
+cylbounds cylbounds::operator+=(const cylbounds& rt)
+{
+	// check for reality - don't merge with unreal sets
+	if (!real)
+		if (rt.real)
+		{
+			radius = rt.radius;
+			height = rt.height;
+			real = true;
+			position = rt.position;
+			return *this;
+		}
+	else if (!rt.real)
+		return *this;
+	
+	// Calculate the average position
+	
+	//Firstly calculate the halfway vector between them, so they are equidistant
+	vector3 diffvec = (rt.position - position) * 0.5;
+	
+	// Take the largest radial distance to extremum as the radius
+	if ( radius > rt.radius )
+		radius = modxy(diffvec) + radius;
+	else
+		radius = modxy(diffvec) + rt.radius;
+	
+	
+	// Now, calculate height and z positions
+	long double min1, max1, min2, max2;
+	min1 = position.z - height/2.; max1 = min1 + height;
+	min2 = rt.position.z - rt.height/2.; max2 = min2 + rt.height;
+
+	// Change the 1 vars to be the bounds
+	if (min1 > min2)
+		min1 = min2;
+	if (max1 < max2)
+		max1 = max2;
+	// Calculate and set the height
+	height = max1 - min1;
+	
+	// Now set the vertical position
+	diffvec.z = min1 + height*0.5;
+
+	// Now set he centerpos as our position
+	position = diffvec;
+	
+	return *this;
 }

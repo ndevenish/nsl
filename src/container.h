@@ -55,6 +55,18 @@ struct intercept {
 	intercept() : time(0.0), type(interception_none), location(0,0,0), normal(0,0,0), collideobject(0) {}
 };
 
+struct cylbounds {
+	friend class container;
+	
+	cylbounds() : radius(0.0), height(0.0), real(false) {}
+	long double radius;
+	long double height;
+	vector3 position;
+	bool real;
+	
+	cylbounds operator+=(const cylbounds& rt);
+};
+	
 // ******************************************************************
 // Classes
 
@@ -88,6 +100,10 @@ protected:
 		reflection_specular
 	} reflection;
 	
+	/** The boundaries of this object, and all of it's subobjects */
+	cylbounds boundaries;
+	
+	
 public:
 	container();
 
@@ -102,6 +118,12 @@ public:
 	* @return The number of objects that the particle is inside of (counts current+subobjects) */
 	virtual int isinside( const vector3 &position );
 
+	/** Get's the cylindrical boundaries of the container.
+		The 'volume' is the size and position of a cylinder that would encompass all container
+		objects in the scene. The position is taken to be the center of the cylinder, i.e.
+		the caps are at position.z +/-  height/2 */
+	cylbounds getcylinder ( void );
+	
 	/** Casts a ray and returns the intersection point.
 	* Cast a ray from a position, and returns (through manipulation of the supplied
 	* result and surface parameters) a reference to an intercept object with the:

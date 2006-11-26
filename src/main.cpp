@@ -69,7 +69,7 @@ int main ( int argc, string argv )
 		nslobjectfactory::add("phasereporter", new phasereporter::Factory);
 		nslobjectfactory::add("edmreporter", new edmreporter::Factory);
 		
-		
+
 		// Build the tree
 		rootobject.parse("./scripts/testexperiment.nsl");
 

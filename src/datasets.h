@@ -124,6 +124,6 @@ inline long double dataset::stdev ( void )
 
 inline long double dataset::uncert ( void )
 {
-	return stdev() / sqrtl((long double) vpointcount);
+	return stdev() / sqrtl((long double) (vpointcount-1));
 }
 #endif

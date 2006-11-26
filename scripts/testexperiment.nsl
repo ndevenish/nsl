@@ -4,7 +4,7 @@ add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set steptime 3e-5
 	set phase_steps 15 #phase average loops
-	set bounces 10000 #number of bounces to run the simulation over
+	set bounces 1 #10000 #number of bounces to run the simulation over
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -62,9 +62,9 @@ add edmexperiment "The Experiment" {
 			set D_DZ	1e-9
 		}
 		add dipole_zmagnetic "Z magnetic dipole" {
-			set z -0.115 #vary z from -0.1 to -1.0 in 12 steps
-			#set mz		-1e-5
-			vary mz from -1e-5 to -0.4e-3 in 50 steps
+			#vary z from -0.1 to -1.0 in 12 steps
+			set z 		-0.5
+			set mz		-1e-5
 		}
 	}
 	
@@ -81,5 +81,6 @@ add edmexperiment "The Experiment" {
 	}
 	add edmreporter "edmreporter" {
 		set output_file "dipoli-merc.txt"
+		set volaverage_dbdz true
 	}
 }

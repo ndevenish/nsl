@@ -82,6 +82,9 @@ public:
 	/// Returns the length of the vector
 	long double mod() {	return sqrtl(x*x + y*y + z*z); }
 
+	/// Returns the length of the xy vector
+	long double modxy() { return sqrtl(x*x + y*y); }
+ 
 	/// Scales the vector to a specified length
 	void scaleto(long double newlength);
 
@@ -131,6 +134,11 @@ inline long double mod( const vector3& vc)
 {
 	/// Returns the length of the vector
 	return sqrtl(vc.x*vc.x + vc.y*vc.y + vc.z*vc.z);
+}
+
+inline long double modxy( const vector3& vc)
+{
+	return sqrtl(vc.x*vc.x + vc.y*vc.y);
 }
 
 /*
