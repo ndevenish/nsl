@@ -39,8 +39,8 @@
 /** Tracks information about a massive dataset.
 * This class does not track invididual dataset values, but keeps track
 * of the bulk values such as mean, variance etc. */
-class dataset : boost::addable< dataset >//,
-				// boost::addable< long double > >
+class dataset : boost::addable< dataset ,
+				boost::multiplicative< dataset, long double > >
 {
 	long double vaverage;
 	long double vaveragesq;
@@ -48,7 +48,7 @@ class dataset : boost::addable< dataset >//,
 	
 	public:
 		/// Retrieves the average value of the dataset
-		long double average( void ) { return vaverage; }
+		long double average( void ) const { return vaverage; }
 		/// Retrieves the average square value of the dataset
 		long double averagesq( void ) { return vaveragesq; }
 		/// Retrieves the number of points in the dataset
@@ -56,13 +56,13 @@ class dataset : boost::addable< dataset >//,
 		
 		/** Retrieves the varaiance of the dataset.
 		* This value is only calculated when it is requested. */
-		long double variance ( void );
+		long double variance ( void ) const;
 		/** Retrieves the standard deviation of the dataset.
 		* This value is only calculated when requested. */
-		long double stdev ( void );
+		long double stdev ( void ) const;
 		/** Retrieves the uncertainty in the dataset.
 		* This is calculated as the standard error i.e. stdev / sqrt(N) */
-		long double uncert ( void );
+		long double uncert ( void ) const;
 		
 		/** Adds a new point to the data set.
 		*	A new point is added to the data set by, literally, adding it on.
@@ -84,6 +84,9 @@ class dataset : boost::addable< dataset >//,
 		* This will combine two datasets, however with the method used
 		* it is not necessaraly as accurate as adding a plain data point. */
 		dataset operator+=( const dataset& newset );
+		
+		dataset operator*=( const long double &scalar );
+		dataset operator/=( const long double &scalar );
 		
 		/** Resets the dataset. */
 		void reset ( void )  { vaverage = vaveragesq = vpointcount = 0; } 
@@ -112,18 +115,42 @@ inline dataset dataset::operator+=( const dataset &mergeset )
 	vpointcount += mergeset.vpointcount;
 	return *this;
 }
-inline long double dataset::variance ( void )
+inline long double dataset::variance ( void ) const
 {
 	return vaveragesq - (vaverage*vaverage);
 }
 
-inline long double dataset::stdev ( void )
+inline long double dataset::stdev ( void ) const
 {
 	return sqrtl(variance());
 }
 
-inline long double dataset::uncert ( void )
+inline long double dataset::uncert ( void ) const
 {
 	return stdev() / sqrtl((long double) (vpointcount-1));
 }
+
+inline dataset dataset::operator*=( const long double &scalar )
+{
+	//The average value get's straight multiplied
+	vaverage *= scalar;
+	
+	// The average squared value gets multiplied by the square
+	vaveragesq *= (scalar * scalar);
+	
+	return *this;
+}
+
+inline dataset dataset::operator/=( const long double &scalar )
+{
+	vaverage /= scalar;
+	vaveragesq /= (scalar*scalar);
+	
+	return *this;
+}
+
+// Define the output stream function
+/// A function to allow datasets to be sent to output stream objects
+std::ostream& operator<<(std::ostream& os, const dataset& dst);
+
 #endif

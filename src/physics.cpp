@@ -30,6 +30,8 @@
 
 #include "physics.h"
 
+#include "datasets.h"
+
 using namespace std;
 
 std::ostream& operator<<(std::ostream& os, const vector3& vec)
@@ -38,6 +40,12 @@ std::ostream& operator<<(std::ostream& os, const vector3& vec)
   //os << "[ " << vec.x << ", " << vec.y << ", " << vec.z << " ]";
   os << vec.x << ", " << vec.y << ", " << vec.z;
   return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const dataset& dst)
+{
+	os << dst.average() << " +/- " << dst.uncert();
+	return os;
 }
 /*
 vector3 operator+(const vector3& lhs, const vector3&rhs)
