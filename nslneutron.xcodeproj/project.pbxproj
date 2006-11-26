@@ -73,7 +73,6 @@
 		0A3B6E9B0AC993DB002CC2AF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
 		0A3B6E9C0AC993DB002CC2AF /* nslobject.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = nslobject.cpp; path = src/nslobject.cpp; sourceTree = "<group>"; };
 		0A3B6E9D0AC993DB002CC2AF /* nslobjectfactory.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = nslobjectfactory.cpp; path = src/nslobjectfactory.cpp; sourceTree = "<group>"; };
-		0A3B6E9E0AC993DB002CC2AF /* nsltest.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = nsltest.cpp; path = src/nsltest.cpp; sourceTree = "<group>"; };
 		0A3B6E9F0AC993DB002CC2AF /* particle.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = particle.cpp; path = src/particle.cpp; sourceTree = "<group>"; };
 		0A3B6EA00AC993DB002CC2AF /* physics.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = physics.cpp; path = src/physics.cpp; sourceTree = "<group>"; };
 		0A3B6EA10AC993DB002CC2AF /* volume_cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = volume_cylinder.cpp; path = src/volume_cylinder.cpp; sourceTree = "<group>"; };
@@ -129,7 +128,6 @@
 				0A3B6E9B0AC993DB002CC2AF /* main.cpp */,
 				0A3B6E9C0AC993DB002CC2AF /* nslobject.cpp */,
 				0A3B6E9D0AC993DB002CC2AF /* nslobjectfactory.cpp */,
-				0A3B6E9E0AC993DB002CC2AF /* nsltest.cpp */,
 				0A3B6E9F0AC993DB002CC2AF /* particle.cpp */,
 				0A3B6EA00AC993DB002CC2AF /* physics.cpp */,
 				0A3B6EA10AC993DB002CC2AF /* volume_cylinder.cpp */,
