@@ -62,8 +62,8 @@ add edmexperiment "The Experiment" {
 			set D_DZ	1e-9
 		}
 		add dipole_zmagnetic "Z magnetic dipole" {
-			#vary z from -0.1 to -1.0 in 12 steps
-			set z 		-0.5
+			vary z from -0.1 to -1.0 in 100 steps
+			#set z 		-0.5
 			set mz		-1e-5
 		}
 	}
@@ -80,7 +80,7 @@ add edmexperiment "The Experiment" {
 	#	set report_frequency bounce
 	}
 	add edmreporter "edmreporter" {
-		set output_file "dipoli-merc.txt"
+		set output_file "dbdzfile.txt"
 		set volaverage_dbdz true
 	}
 }
