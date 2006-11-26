@@ -213,7 +213,7 @@ void edmreporter::preparefile(edmexperiment &exp)
 	*outfile << "# " << exp.variation.parameter << "\t" << "False-EDM" << "\t" << "Error";
 	
 	if (volaverage)
-		*outfile << "\t" << "volavg-dbzdz";
+		*outfile << "\t" << "volavg-dbzdz" << "\t" << "error";
 	
 	*outfile << endl;
 }
@@ -237,7 +237,7 @@ void edmreporter::report ( edmexperiment &experiment )
 		bfield* b = experiment.magfield;
 		dataset vergrad = calc_dbdz(*b, *box);
 		
-		
+		*outfile << "\t" << vergrad.average() << "\t" << vergrad.uncert();
 		
 	}
 		
