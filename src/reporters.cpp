@@ -169,8 +169,8 @@ phasereporter::phasereporter()
 
 void phasereporter::preparefile (edmexperiment &exp)
 {
-	*outfile << "Phase progress log file: " << exp.get("runtime") << endl;
-	*outfile << "#Num, flytime, phase_e+, diff" << endl << "------------------------------------" << endl;
+	*outfile << "# Phase progress log file: " << exp.get("runtime") << endl;
+	*outfile << "# #Num, flytime, phase_e+, diff" << endl << "------------------------------------" << endl;
 }
 void phasereporter::report ( edmexperiment &ex )
 {
@@ -199,8 +199,8 @@ edmreporter::edmreporter()
 
 void edmreporter::preparefile(edmexperiment &exp)
 {
-	*outfile << "Edm loop report: " << exp.get("runtime") << endl;
-	*outfile << exp.variation.parameter << "\t" << "False-EDM" << "\t" << "Error"<< endl;
+	*outfile << "# Edm loop report: " << exp.get("runtime") << endl;
+	*outfile << "# " << exp.variation.parameter << "\t" << "False-EDM" << "\t" << "Error"<< endl;
 }
 void edmreporter::report ( edmexperiment &experiment )
 {
