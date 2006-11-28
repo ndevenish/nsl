@@ -66,8 +66,8 @@ add edmexperiment "The Experiment" {
 			set D_DZ	1e-9
 		}
 		add dipole_zmagnetic "Z magnetic dipole" {
-			#vary z from -0.1 to -1.0 in 100 steps
-			set z 		-0.5
+			vary z from -0.1 to -1.0 in 100 steps
+			#set z 		-0.5
 			set mz		-1e-5
 		}
 	}
@@ -83,14 +83,14 @@ add edmexperiment "The Experiment" {
 		set output_file "phaselog.txt"
 	#	set report_frequency bounce
 	}
-	ignore add edmreporter "edmreporter" {
+	add edmreporter "edmreporter" {
 		set output_file "dbdzfile.txt"
-		set volaverage_dbdz true
+	#set volaverage_dbdz true
 	}
 	ignore add intervalreporter "intervalreporter" {
 		set output_file "intervaltimes.txt"
 	}
-	add polreporter "Polarization tracker" {
+	ignore add polreporter "Polarization tracker" {
 		set output_file "pol.txt"
 	}
 }
