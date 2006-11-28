@@ -107,7 +107,7 @@ std::string cparser::gettoken( void )
 		//ignore it as we know it is there
 		(*instream).ignore();
 		//Let's grab a string - this cannot span multiple lines
-		while (nextchar =((*instream).peek()))
+		while ((nextchar =((*instream).peek())))
 		{
 			if (isreturn(nextchar))
 			{

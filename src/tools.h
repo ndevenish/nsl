@@ -30,4 +30,5 @@ int			strint ( std::string &strin );
 std::string str ( long double inld );
 std::string str ( long inl );
 
+#define trace(x)	(logger << " TRACE: " << __FILE__ << ":" << __LINE__ << ": " << #x << ": " << x << endl)
 #endif

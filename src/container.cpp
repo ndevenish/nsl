@@ -34,6 +34,7 @@
 #include "physics.h"
 
 #include "boost/foreach.hpp"
+#include "tools.h"
 
 using std::runtime_error;
 using std::cout;
@@ -78,6 +79,9 @@ bool container::prepareobject( void )
 
 const intercept &container::cast ( const vector3 &position, const vector3 &direction, int in_volumes )
 {
+	//logger << __FILE__ << ":" << __LINE__ << ": " << position << endl;
+//	trace ( position );
+
 	// Firstly fill out the intercept list
 	int intercepts;
 	intercepts = castinternal( position, direction, interceptlist );
@@ -93,7 +97,13 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 	}
 
 	// Make sure we have collected intercepts
-	assert(intercepts);
+	if (intercepts == 0)
+	{
+		logger << "Zero intercepts detected:" << endl;
+		logger << " Pos:   " << position << endl;
+		logger << " Direc: " << direction << endl;
+		throw runtime_error("Zero intercepts detected");
+	}
 	assert(intercepts < MAX_INTERCEPTS); // this would mean we have violated internal memory
 
 	// Now sort the list of intercepts

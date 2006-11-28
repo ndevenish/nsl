@@ -180,5 +180,5 @@ void dipole_zmagnetic::fieldgradient( vector3 &field, const vector3 &position)
 	long double r = sqrtl(position.x*position.x + position.y*position.y + relz*relz);
 	long double rto7 = powl(r, 7.);
 
-	field.z += mz * ((3. * relz) / rto7 ) * (3. * r * r - 5 * relz * relz );
+	field.z += mz * ((3. * relz) / rto7 ) * (3. * r * r - 5. * relz * relz );
 }

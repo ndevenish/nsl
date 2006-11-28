@@ -5,6 +5,10 @@ add edmexperiment "The Experiment" {
 	set steptime 3e-5
 	set phase_steps 15 #phase average loops
 	set bounces 1 #10000 #number of bounces to run the simulation over
+	set lifetime 2.0	#The lifetime of a particle
+	#This is the time to bounce a particle around for
+	#before calling the 'interval' reporters
+	set intervaltime 1.01 
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix

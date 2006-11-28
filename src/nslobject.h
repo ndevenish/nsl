@@ -49,7 +49,7 @@ enum tokens {
 class nslobject {
 public:
 	nslobject();
-	~nslobject();
+	virtual ~nslobject();
 
 	////////////////////////////////////////////////
 	// Functions to set and get properties

@@ -53,7 +53,7 @@ class edmexperiment : public nslobject {
 	//particle *particles[MAX_PARTICLES]; ///< An array of particles we control
 	//reporter *reporters[MAX_REPORTERS]; ///< An array of reporters to call
 	
-	std::vector<reporter*>	report_bounce, report_run, report_step;
+	std::vector<reporter*>	report_bounce, report_run, report_step, report_interval;
 
 	//void initvals( void );
 	void readsettings ( void );
@@ -67,6 +67,10 @@ class edmexperiment : public nslobject {
 	int phase_steps;
 	/// How many bounces to take
 	long bounces;
+	/// The amount of time for a particle to exist!
+	long double lifetime;
+	long double intervaltime;
+	bool uselifetime; // Using lifetime?
 	
 	/// The floating-point-error collision compensation distance
 	long double collision_offset;
@@ -95,6 +99,11 @@ class edmexperiment : public nslobject {
 	/** Performs the necessary spin calculations.
 	* This function spins the particle, and returns the phase change in the horizontal plane */
 	long double spin_calculation( vector3& spinvector, const long double gyromag, const vector3& mag_field, const long double time);
+
+	/** Performs an interval step.
+	* This means that it will run bounces for only a certain amount of time, for each particle.
+	* @Returns a bool - false if should stop (i.e. bounces have run out) */
+	void runinterval( long double intervaltime );
 
 	/** Calculates false EDM values.*/
 	void edmcalcs( particle &part);

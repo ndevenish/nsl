@@ -88,6 +88,8 @@ bool reporter::prepareobject()
 			report_frequency = rfreq_bounce;
 		else if (runfreq == "step")
 			report_frequency = rfreq_step;
+		else if (runfreq == "interval")
+			report_frequency = rfreq_interval;
 		else
 			throw runtime_error("Unknown report frequency being set in reporter");
 	}

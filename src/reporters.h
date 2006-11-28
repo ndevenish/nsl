@@ -45,7 +45,8 @@ public:
 		rfreq_none,	// Don\t report - only call the open and close file routines
 		rfreq_run,	// Report every experimental run
 		rfreq_bounce, // Report every bounce
-		rfreq_step // report every step (gaah!)
+		rfreq_step, // report every step (gaah!)
+		rfreq_interval // Report every set time interval
 	};
 	enum enum_output_format {
 		format_plain

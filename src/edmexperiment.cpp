@@ -49,6 +49,9 @@
 #include "reporters.h"
 #include "tools.h"
 
+//#include "efence.h"
+//#include "efencepp.h"
+
 using std::runtime_error;
 using std::endl;
 using std::ofstream;
@@ -78,6 +81,7 @@ edmexperiment::edmexperiment()
 	phase_steps = 0;
 	steptime = 0.0;
 	bounces = 0;
+	lifetime = 0.0;
 	collision_offset = 0.;	
 	//initvals();
 	
@@ -147,6 +151,11 @@ bool edmexperiment::prepareobject()
 				case reporter::rfreq_bounce:
 					report_bounce.push_back((reporter*)subobject);
 					break;
+				case reporter::rfreq_none:
+					break; // Don't do anything in this case
+				case reporter::rfreq_interval:
+					report_interval.push_back((reporter*)subobject);
+					break;
 			}
 		}
 	}
@@ -193,6 +202,19 @@ void edmexperiment::readsettings ( void )
 	
 	phase_steps = getint("phase_steps", 1);
 	bounces = getlong("bounces", 1);
+	lifetime = getlongdouble("lifetime", 0.0);
+	
+	// If we have set a lifetime, null out the bounces
+	uselifetime = isset("lifetime");
+
+	// If no intervaltime set, then set it to lifetime + 1 second
+	if (uselifetime)
+	{
+		if (!isset("intervaltime"))
+			intervaltime = lifetime + 1.0;
+		else
+			intervaltime = getlongdouble("intervaltime", 0.0);
+	}
 	
 	collision_offset = getlongdouble("collision_compensation_distance", 0.0);
 	
@@ -232,6 +254,13 @@ bool edmexperiment::runobject()
 		variation.varyobject = this;
 	}
 	
+	// shout out what we are doing loopwise
+	if (uselifetime)
+		logger << "Lifetime-based looping: Intervals of " << intervaltime << " for " << lifetime << " (seconds)" << endl;
+	else
+		logger << "Using bounce-based looping: For " << bounces << " bounces." << endl;
+		
+	// Run over experimental runs
 	for (int exprun = 0; exprun < variation.runs; exprun++)
 	{
 		// Calculate the value for the variation this loop
@@ -254,77 +283,56 @@ bool edmexperiment::runobject()
 			logger << "   Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
 			// Calculate the phase
 			long double phaseavg = phase_loop * (2.0 / phase_steps);
-
 			// Reset the particle each phase, and set it's phase
 			BOOST_FOREACH( particle* part, particles ) {
 				part->set("spin_phase", str(phaseavg));
 				part->reset();
 			}
+		
 			
-			// Now loop over bounces
-			for (int bounce = 0; bounce < bounces; bounce++)
+			// Decide how to loop - two choices:
+			// 1) Bounce for a certain number of bounces
+			// 2) Start a loop for intervals - this will run all the particles for a specified time,
+			//    after which they will all have identical running times (so that reports that
+			//    depend on having an ensemble of equal-time particles can be made)
+			
+			bool runningintervals = true; // are we still runnning/planning to run intervals?
+			
+			// If we are not doing lifetime based looping, don't even bother with the loop
+			if (!uselifetime)
 			{
-				// NOW loop over particles - having them here means that they move together
-				BOOST_FOREACH( particle *part, particles)
-				{
-					// This section is run every bounce
-					
-					// Calculate the next point of intersection
-					intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
-					// Normalise the Normal! (see cast documentation)
-					collisionpoint.normal.scaleto(1.0);
-					// Fill out the collisionpoint location
-					collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
-					//logger << " " <<  bounce << ": Time to Collision: " << collisionpoint.time << endl;
-					
-					// If we get a zero-time collision, make a note of it
-					if (collisionpoint.time == 0.)
-						logger << "\t------- Zero time Intersection" << endl; //	throw runtime_error("Zero Collision-point time");
-					
-					// Now we know the time to collision, step over it calculating the spin changes as we go
-					if (collisionpoint.time > 0.)
-						bigstep(*part, collisionpoint.time);
-					
-					// Reflect the particle now
-					if (collisionpoint.collideobject->reflection == container::reflection_specular) 
-					{
-						part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
-					} else { // Assume diffuse reflection otherwise (for now)
-						part->velocity_vec.x = rand()-(RAND_MAX/2);
-						part->velocity_vec.y = rand()-(RAND_MAX/2);
-						part->velocity_vec.z = rand()-(RAND_MAX/2);
-						
-						// Ensure it faces away from the normal
-						if ((part->velocity_vec * collisionpoint.normal) < 0.)
-							part->velocity_vec *= -1.0;
-					}
-					// Ensure velocity is kept constant
-					part->velocity_vec.scaleto(part->velocity);
-					
-					// Output the difference between particle and calculated impact position
-					//logger << "\tPositional Difference: " << mod(part->position - collisionpoint.location) << endl;
-					
-					// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
-					// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
-					// 1e-30 anyway)
-					part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
-					
-					// See if this was a wall, and if not then reduce the bouncecount
-					if (collisionpoint.normal.z < 0.001)
-						;//logger << "Wall bounce" << endl;
-					else {
-						//logger << "ceil bounce";
-						bounce--;
-					}
-				} // FOREACH particle
-
-				// Now call the reporters that report each bounce
-				BOOST_FOREACH( reporter *repo, report_bounce) {
-					repo->report(*this);
-				}
-					
-			} //FOREACH bounce
+				runningintervals = false; // This cancels the loop ahead so it won't happen
+				runinterval(0.0); // This runs the interval - it doesn't care about time in this case
+			}
 			
+			// Loop over the time intervals, as long as we have time left.. signified by 
+			// a counter of life!
+			long double timeleft = lifetime; //lifetime remaining
+			while (runningintervals)
+			{
+				// Loop through, running the simulation for an intervals length
+				// Firstly, check to see if we have enough time left!
+				if (timeleft < intervaltime)
+				{
+					// We have less than one intervals time remaining... run what is left
+					// then check the var to quit the loop
+					runinterval(timeleft);
+					timeleft = 0;
+					runningintervals = false;
+				} else {
+					// We have more than one interval left, so run one and reduce that from the overall
+					// time remaining.
+					runinterval(intervaltime);
+					timeleft -= intervaltime;
+				}
+				
+				// Call the interval reporters
+				BOOST_FOREACH( reporter *rep, report_interval )
+					rep->report(*this);
+			} // End of running intervals
+			// At this point we have run over al time, whether it be from bounce or interval based procedures
+			
+			// Calculate an edm for each particle, and accumulate it
 			BOOST_FOREACH(particle *part, particles) {
 				edmcalcs(*part);
 				part->cumulativeedm += part->fake_edm;
@@ -359,6 +367,132 @@ bool edmexperiment::runobject()
 		
 	return false;
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// Runinterval function
+
+
+// The task now is to run over bounces, but to stop if we run out of time
+void edmexperiment::runinterval( long double time )
+{
+	// Run this routine for a particle-at-a-time - this may be better moved to the main loop
+	// for easier paralellization
+	
+	// Use an iterator since the compiler threw a wobbly here when it was in the main
+	// function and I don't want to tempt fate again
+	std::vector<particle*>::iterator parts;
+	for (parts = particles.begin(); parts != particles.end(); parts++)
+	//BOOST_FOREACH( part, particles)
+	{
+		particle *part = *parts; // Reassign our working pointer from the little boost debacle
+		
+		// Reset the time counter for this particle
+		long double timeleft = time;
+		
+		// Start a loop over bounces, but keep it infinite as if we are in lifetime mode then
+		// we don't care about the bounces
+		unsigned long bounce = 0; // Tracks the bounce count
+		while (1)
+		{
+			// If we are doing bounce-based looping, track that here
+			// Stop if we have reached the maximum number of bounces
+			if (!uselifetime)
+				if(bounces == bounce++)
+					break;
+			
+			// Calculate the next point of intersection
+			intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
+
+			// Complete the collisionpoint variable with stuff not calculated in cast
+			collisionpoint.normal.scaleto(1.0);
+			collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
+			
+			// If we get a zero-time collision, make a note of it
+			if (collisionpoint.time == 0.)
+				logger << "\t------- Zero time Intersection" << endl; //	throw runtime_error("Zero Collision-point time");
+			
+			/* Now we have three possibilities:
+				1)	We have enough time for a bounce to complete
+				2)	We don't so, have to go halfway
+				3)	We are bounce-looping - in which case (for now) short-circuit the test */
+			
+			// If doing bounce mode, short circuit the test ahead DISASSEMBLE
+			if (!uselifetime)
+				timeleft = collisionpoint.time + 1.;
+			
+			// check to see what the case is
+			if (collisionpoint.time < timeleft)
+			{
+				// We have no problem with time here!
+			
+				// Now we know the time to collision, step over it calculating the spin changes as we go
+				if (collisionpoint.time > 0.)
+					bigstep(*part, collisionpoint.time);
+				
+				// Reflect the particle now
+				if (collisionpoint.collideobject->reflection == container::reflection_specular) 
+				{
+					part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
+				} else { // Assume diffuse reflection otherwise (for now)
+					part->velocity_vec.x = rand()-(RAND_MAX/2);
+					part->velocity_vec.y = rand()-(RAND_MAX/2);
+					part->velocity_vec.z = rand()-(RAND_MAX/2);
+					
+					// Ensure it faces away from the normal
+					if ((part->velocity_vec * collisionpoint.normal) < 0.)
+						part->velocity_vec *= -1.0;
+				}
+				// Ensure velocity is kept constant
+				part->velocity_vec.scaleto(part->velocity);
+				
+				// Take away the time for the travel for this bounce from the time left
+				timeleft -= collisionpoint.time;
+				
+				// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
+				// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
+				// 1e-30 anyway)
+				part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
+				
+				// See if this was a wall, and if not then reduce the bouncecount
+				if (collisionpoint.normal.z < 0.001)
+					;//logger << "Wall bounce" << endl;
+				else {
+					//logger << "ceil bounce";
+					bounce--;
+				}
+				
+				// Now call the reporters that report each bounce
+				BOOST_FOREACH( reporter *repo, report_bounce) {
+					repo->report(*this);
+				}
+			}
+			else
+			{
+				// Now process the case where there is not enough time for a full trip across the bottle..
+				// .. do a partial trip
+				bigstep(*part, timeleft);
+				timeleft = 0; // probably not needed - but better safe...
+				
+				// finish this and go to the next particle
+				break;
+			}
+		
+		} //FOREACH bounce
+	
+	} // FOREACH particle
+
+	// This ending point should be reached by both modes of looping
+	
+	return;
+}
+
+
+
+
+
+
 
 // Performs a large step between successive collisions. Use the E and B fields tied to
 // the edmexperiment object for now

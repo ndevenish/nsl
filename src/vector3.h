@@ -64,7 +64,7 @@ public:
 	//vector3& operator+=(const vector3& rhs) { x += rhs.x; y += rhs.y; z += rhs.z; return *this; }
 	vector3& operator*=(const long double &rhs) { x *= rhs; y *= rhs; z *= rhs; return *this; }
 	
-/*	int operator==(const vector3 &rt) {
+	int operator==(const vector3 &rt) {
 		return (x == rt.x) && (y == rt.y) && (z == rt.z);
 	}*/
 	vector3 operator+=(const vector3&);
