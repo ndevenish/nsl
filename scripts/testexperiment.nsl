@@ -46,7 +46,7 @@ add edmexperiment "The Experiment" {
 		set spin_phase 0 #again in pi units
 	}
 	
-	multiadd 2 particle "mercury" {
+	multiadd 100 particle "mercury" {
 		set gamma 7.5901309e+6
 		set velocity 100
 
@@ -66,8 +66,8 @@ add edmexperiment "The Experiment" {
 			set D_DZ	1e-9
 		}
 		add dipole_zmagnetic "Z magnetic dipole" {
-			vary z from -0.1 to -1.0 in 100 steps
-			#set z 		-0.5
+			#vary z from -0.1 to -1.0 in 100 steps
+			set z 		-0.5
 			set mz		-1e-5
 		}
 	}
