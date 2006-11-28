@@ -90,7 +90,7 @@ add edmexperiment "The Experiment" {
 	ignore add intervalreporter "intervalreporter" {
 		set output_file "intervaltimes.txt"
 	}
-	add polarizationrepoter "Polarization tracker" {
+	add polreporter "Polarization tracker" {
 		set output_file "pol.txt"
 	}
 }

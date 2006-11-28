@@ -385,13 +385,13 @@ void polreporter::report( edmexperiment &exp )
 	// Firstly, calculate the average cumulative frequencies
 	dataset cumfreq, cumfreqminus, flighttime;
 	
-	BOOST_FOREACH(particle *p, experiment.particles)
+	BOOST_FOREACH(particle *p, exp.particles)
 	{
 		cumfreq		+= p->E_sum_phase;	//long double E_sum_phase, E_minus_sum_phase;
 		cumfreqminus+= p->E_minus_sum_phase;
 		flighttime += p->flytime;
 	}
-	if (flighttime.stdev > 1e-12)
+	if (flighttime.stdev() > 1e-12)
 	{
 		logger << "Flighttime: " << flighttime << endl;
 		throw runtime_error("Flight-time of particles do not all agree");
@@ -400,3 +400,4 @@ void polreporter::report( edmexperiment &exp )
 	*outfile << flighttime.average() << cumfreq.average() << cumfreq.stdev()
 			 << cumfreqminus.average() << cumfreqminus.stdev();
 }
+
