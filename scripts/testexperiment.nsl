@@ -3,7 +3,7 @@
 add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set steptime 3e-5
-	set phase_steps 15 #phase average loops
+	set phase_steps 1#5 #phase average loops
 	#set bounces 1 #10000 #number of bounces to run the simulation over
 	set lifetime 90.0	#The lifetime of a particle
 	#This is the time to bounce a particle around for
