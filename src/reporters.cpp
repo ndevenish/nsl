@@ -122,7 +122,12 @@ bool reporter::prepareobject()
 }
 
 void reporter::preparefile( edmexperiment &experiment )
-{/*
+{
+	
+	// Warn the user if no output file being written
+	logger << "Warning: No header being written for output file " << get("output_file") << endl;
+	
+	/*
 	*outfile << "Base Data file" << endl;
 	
 	*outfile << experiment.get("runtime") << endl;
@@ -199,6 +204,38 @@ void phasereporter::report ( edmexperiment &ex )
 				<< endl;
 }
 
+
+/////////////////////////////////////////////////////////
+// Interval reporter - a simple test of interval reporting
+
+intervalreporter::intervalreporter()
+{
+	objecttype = "intervalreporter";
+	types.push_back(objecttype);
+	
+	report_frequency = rfreq_interval;
+}
+
+void intervalreporter::preparefile(edmexperiment &exp)
+{
+	*outfile << "# Interval reporter test run " << endl;
+	*outfile << "# List of times at the inteval" << endl;
+}
+
+void intervalreporter::report ( edmexperiment & experiment )
+{
+	dataset ensemble;
+	
+	// calculate the average flytime
+	BOOST_FOREACH(particle *p, experiment.particles)
+	{
+		ensemble += p->flytime;
+	}
+	*outfile << ensemble.points() << "\t" << ensemble << endl;;
+	
+	
+}
+ 
 /////////////////////////////////////////////////////////
 // edmreporter - The main variational output class
 edmreporter::edmreporter()
@@ -323,4 +360,43 @@ dataset edmreporter::calc_dbdz(bfield &b, container &cont)
 	logger << "   Average field gradient over volume : " << vertgrad<< endl;
 	
 	return vertgrad;
+}
+
+/////////////////////////////////////////////////////////
+// Polarizationrepoter - reports on the polarisation of the particles
+// at an interval step
+
+polreporter::polreporter()
+{
+	objecttype = "polreporter";
+	types.push_back(objecttype);
+	
+	report_frequency = rfreq_interval;
+}
+
+void polreporter::preparefile(edmexperiment &exp)
+{
+	*outfile << "# Polarization report: " << exp.get("time") << endl;
+	*outfile << "# Flight-time\t Average_phase\t Stdev\t Average_Phase(-E)\t Stdev" << endl;
+}
+
+void polreporter::report( edmexperiment &exp )
+{
+	// Firstly, calculate the average cumulative frequencies
+	dataset cumfreq, cumfreqminus, flighttime;
+	
+	BOOST_FOREACH(particle *p, experiment.particles)
+	{
+		cumfreq		+= p->E_sum_phase;	//long double E_sum_phase, E_minus_sum_phase;
+		cumfreqminus+= p->E_minus_sum_phase;
+		flighttime += p->flytime;
+	}
+	if (flighttime.stdev > 1e-12)
+	{
+		logger << "Flighttime: " << flighttime << endl;
+		throw runtime_error("Flight-time of particles do not all agree");
+	}
+	
+	*outfile << flighttime.average() << cumfreq.average() << cumfreq.stdev()
+			 << cumfreqminus.average() << cumfreqminus.stdev();
 }

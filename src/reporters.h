@@ -161,4 +161,32 @@ public:
 	};	
 };
 
+
+//// Test interval reporting
+class intervalreporter : public reporter {
+protected:
+	void preparefile( edmexperiment &exp );
+	
+public:
+	intervalreporter();
+	void report ( edmexperiment &experiment );
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new intervalreporter; }
+	};	
+};
+
+class polreporter : public reporter {
+protected:
+	void preparefile( edmexperiment &exp );
+	
+public:
+	polreporter();
+	void report ( edmexperiment &experiment );
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new polreporter; }
+	};	
+};
+
 #endif

@@ -265,13 +265,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>19</integer>
+									<integer>28</integer>
 									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {190, 625}}</string>
+							<string>{{0, 51}, {190, 625}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -308,7 +308,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>edmexperiment.cpp</string>
+								<string>reporters.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -316,11 +316,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>edmexperiment.cpp</string>
+										<string>reporters.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0A69CEAB0B1BE0490067CD3A</string>
+										<string>0A69CF280B1C4A950067CD3A</string>
 										<key>history</key>
 										<array>
 											<string>0A348BAD0B07BBCF00F8771E</string>
@@ -339,17 +339,17 @@
 											<string>0A69CD9B0B1A3A4D0067CD3A</string>
 											<string>0A69CDC30B1A3C660067CD3A</string>
 											<string>0A69CDCD0B1A3F9B0067CD3A</string>
-											<string>0A69CDCE0B1A3F9C0067CD3A</string>
 											<string>0A69CDD80B1B013C0067CD3A</string>
-											<string>0A69CDE20B1B11700067CD3A</string>
 											<string>0A69CDEC0B1BB92E0067CD3A</string>
 											<string>0A69CDF50B1BB9520067CD3A</string>
-											<string>0A69CE300B1BCBFC0067CD3A</string>
 											<string>0A69CE320B1BCBFC0067CD3A</string>
-											<string>0A69CE590B1BD0D70067CD3A</string>
 											<string>0A69CE6D0B1BD21A0067CD3A</string>
 											<string>0A69CE930B1BDC030067CD3A</string>
-											<string>0A69CE940B1BDC030067CD3A</string>
+											<string>0A69CEFF0B1C45890067CD3A</string>
+											<string>0A69CF000B1C45890067CD3A</string>
+											<string>0A69CF0C0B1C45D80067CD3A</string>
+											<string>0A69CF240B1C4A950067CD3A</string>
+											<string>0A69CF250B1C4A950067CD3A</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -507,6 +507,25 @@
 											<string>0A69CE7C0B1BD5A10067CD3A</string>
 											<string>0A69CE950B1BDC030067CD3A</string>
 											<string>0A69CE960B1BDC030067CD3A</string>
+											<string>0A69CEBB0B1C3E210067CD3A</string>
+											<string>0A69CEBC0B1C3E210067CD3A</string>
+											<string>0A69CEBD0B1C3E210067CD3A</string>
+											<string>0A69CEBE0B1C3E210067CD3A</string>
+											<string>0A69CEBF0B1C3E210067CD3A</string>
+											<string>0A69CED80B1C3FA70067CD3A</string>
+											<string>0A69CED90B1C3FA70067CD3A</string>
+											<string>0A69CEE70B1C42CF0067CD3A</string>
+											<string>0A69CEE80B1C42CF0067CD3A</string>
+											<string>0A69CF020B1C45890067CD3A</string>
+											<string>0A69CF030B1C45890067CD3A</string>
+											<string>0A69CF040B1C45890067CD3A</string>
+											<string>0A69CF050B1C45890067CD3A</string>
+											<string>0A69CF060B1C45890067CD3A</string>
+											<string>0A69CF070B1C45890067CD3A</string>
+											<string>0A69CF080B1C45890067CD3A</string>
+											<string>0A69CF0D0B1C45D80067CD3A</string>
+											<string>0A69CF260B1C4A950067CD3A</string>
+											<string>0A69CF270B1C4A950067CD3A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -708,8 +727,8 @@
 		<string>0A3B6EC30AC9944B002CC2AF</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>0A69CA770B18AE210067CD3A</string>
-		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>0A3B6EDB0AC9957E002CC2AF</string>
+		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>/Users/xgkkp/Documents/neutron/nslneutron/nslneutron.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -729,14 +748,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>edmexperiment.cpp</string>
+								<string>reporters.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -753,6 +770,8 @@
 							<string>271pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
