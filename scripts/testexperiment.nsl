@@ -83,14 +83,14 @@ add edmexperiment "The Experiment" {
 		set output_file "phaselog.txt"
 	#	set report_frequency bounce
 	}
-	add edmreporter "edmreporter" {
+	ignore add edmreporter "edmreporter" {
 		set output_file "dbdzfile.txt"
 	#set volaverage_dbdz true
 	}
 	ignore add intervalreporter "intervalreporter" {
 		set output_file "intervaltimes.txt"
 	}
-	ignore add polreporter "Polarization tracker" {
+	add polreporter "Polarization tracker" {
 		set output_file "pol.txt"
 	}
 }
