@@ -589,10 +589,10 @@ void edmexperiment::smallstep(particle& part, long double time)
 	framediff = plusphase - minusphase;
 	/*
 	static ofstream steplog("steplog.txt");
-	steplog << part.flytime << ", " << plusphase << ", " << minusphase << ", " << framediff << endl;
+	steplog << part.flytime << ", " << plusphase << ", " << minusphase << ", " << framediff << endl; */
 	part.E_sum_phase += plusphase;
 	part.E_minus_sum_phase += minusphase;
-	 */
+	
 	/*
 	part.E_sum_phase		+= spin_calculation(part.spinEplus,	 part.gamma, BplusvxE,  time);
 	part.E_minus_sum_phase	+= spin_calculation(part.spinEminus, part.gamma, BminusvxE, time);
