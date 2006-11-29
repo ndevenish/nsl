@@ -46,7 +46,7 @@ add edmexperiment "The Experiment" {
 		set spin_phase 0 #again in pi units
 	}
 	
-	multiadd 100 particle "mercury" {
+	multiadd 1000 particle "mercury" {
 		set gamma 7.5901309e+6
 		set velocity 100
 
@@ -75,6 +75,7 @@ add edmexperiment "The Experiment" {
 	add efield "Efield" {
 		set e0z		8.e5
 	}
+
 	ignore add impactreporter "Impact Reporter" {
 		set output_file "poslog.txt"
 		#set report_frequency step
@@ -91,9 +92,9 @@ add edmexperiment "The Experiment" {
 		set output_file "intervaltimes.txt"
 	}
 	add polreporter "Polarization tracker" {
-		set output_file "pollong.txt"
+		set output_file "1kmpollong.txt"
 	}
 	add poldistreporter "Polarisation Distribution reporter" {
-		set output_filr "poldist.txt"
+		set output_file "1kmpoldist.txt"
 	}
 }

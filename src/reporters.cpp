@@ -441,15 +441,19 @@ void poldistreporter::preparefile( edmexperiment &exp )
 
 void poldistreporter::report( edmexperiment &exp )
 {
-	dataset time;
+	dataset time, phase;
 	//Grab the elapsed time
 	BOOST_FOREACH(particle *p, exp.particles)
+	{
 		time += p->flytime;
+		phase += p->E_sum_phase;
+	}
 	
 	*outfile << time.average();
 	
+	outfile->precision(20);
 	BOOST_FOREACH(particle *p, exp.particles)
-		*outfile << "\t" << p->E_sum_phase;
+		*outfile << "\t" << (p->E_sum_phase-phase.average());
 	
 	*outfile << endl;
 }
