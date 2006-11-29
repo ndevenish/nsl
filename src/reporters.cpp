@@ -400,8 +400,8 @@ void polreporter::report( edmexperiment &exp )
 	}
 	if (flighttime.stdev() > 1e-7)
 	{
-		logger << "Flighttime: " << flighttime << endl;
-		throw runtime_error("Flight-time of particles do not all agree");
+		logger << "Flighttime Deviation: Flighttime: " << flighttime << endl;
+		//throw runtime_error("Flight-time of particles do not all agree");
 	}
 	
 	*outfile << flighttime.average() << "\t" << cumfreq.average() << "\t" << cumfreq.stdev()
