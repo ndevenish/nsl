@@ -265,8 +265,9 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>31</integer>
-									<integer>30</integer>
+									<integer>12</integer>
+									<integer>3</integer>
+									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -308,7 +309,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>nslprops.txt</string>
+								<string>particle.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -316,11 +317,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>nslprops.txt</string>
+										<string>particle.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0A69CFB90B1E45F30067CD3A</string>
+										<string>0A69CFCB0B1E48A80067CD3A</string>
 										<key>history</key>
 										<array>
 											<string>0A348BAD0B07BBCF00F8771E</string>
@@ -343,13 +344,13 @@
 											<string>0A69CDF50B1BB9520067CD3A</string>
 											<string>0A69CE930B1BDC030067CD3A</string>
 											<string>0A69CEFF0B1C45890067CD3A</string>
-											<string>0A69CF240B1C4A950067CD3A</string>
 											<string>0A69CF4C0B1C54530067CD3A</string>
 											<string>0A69CF6E0B1C650E0067CD3A</string>
 											<string>0A69CFA40B1E451D0067CD3A</string>
 											<string>0A69CFA50B1E451D0067CD3A</string>
-											<string>0A69CFB60B1E45F30067CD3A</string>
-											<string>0A69CFB70B1E45F30067CD3A</string>
+											<string>0A69CFC60B1E48A80067CD3A</string>
+											<string>0A69CFC70B1E48A80067CD3A</string>
+											<string>0A69CFC80B1E48A80067CD3A</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -548,6 +549,8 @@
 											<string>0A69CFAD0B1E451D0067CD3A</string>
 											<string>0A69CFAE0B1E451D0067CD3A</string>
 											<string>0A69CFB80B1E45F30067CD3A</string>
+											<string>0A69CFC90B1E48A80067CD3A</string>
+											<string>0A69CFCA0B1E48A80067CD3A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -747,10 +750,10 @@
 		<string>0A69CAA30B18B0C30067CD3A</string>
 		<string>0A69CAA40B18B0C30067CD3A</string>
 		<string>0A3B6EDB0AC9957E002CC2AF</string>
+		<string>0A3B6EC30AC9944B002CC2AF</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>0A69CA770B18AE210067CD3A</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
-		<string>0A3B6EC30AC9944B002CC2AF</string>
 		<string>/Users/xgkkp/Documents/neutron/nslneutron/nslneutron.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -770,14 +773,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>edmexperiment.cpp</string>
+								<string>particle.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -794,6 +795,8 @@
 							<string>271pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -844,7 +847,7 @@
 			<key>WindowToolGUID</key>
 			<string>0A3B6EC30AC9944B002CC2AF</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

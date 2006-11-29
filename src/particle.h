@@ -45,6 +45,7 @@ class particle : public nslobject {
 	friend class edmreporter;
 	friend class intervalreporter;
 	friend class polreporter;
+	friend class poldistreporter;
 	
 	// Physical Properties values
 	vector3	position;

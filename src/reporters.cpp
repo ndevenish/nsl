@@ -433,7 +433,7 @@ poldistreporter::poldistreporter()
 	report_frequency = rfreq_interval;
 }
 
-void poldistreporter::preparefile( edmexperiment &experiment )
+void poldistreporter::preparefile( edmexperiment &exp )
 {
 	*outfile << "# Polarization Distribution report: " << exp.get("time") << endl;
 	*outfile << "# Flight-time\t List_of_particle_positive_phases...." << endl;
