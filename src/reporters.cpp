@@ -380,6 +380,13 @@ void polreporter::preparefile(edmexperiment &exp)
 	*outfile << "# Flight-time\t Average_phase\t Stdev\t Average_Phase(-E)\t Stdev" << endl;
 }
 
+bool polreporter::prepareobject()
+{
+	reporter::prepareobject();
+	
+	return true;
+}
+
 void polreporter::report( edmexperiment &exp )
 {
 	// Firstly, calculate the average cumulative frequencies
@@ -403,3 +410,46 @@ void polreporter::report( edmexperiment &exp )
 	*outfile << endl;
 }
 
+/////////////////////////////////////////////////////////
+// Poldistreporter - reports on the distribution of particles
+/*
+class poldistreporter : public reporter {
+protected:
+	void preparefile( edmexperiment &exp );
+	
+public:
+	poldistreporter();
+	void report ( edmexperiment &experiment );
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new poldistreporter; }
+	};	
+};*/
+poldistreporter::poldistreporter()
+{
+	objecttype = "poldistreporter";
+	types.push_back(objecttype);
+	
+	report_frequency = rfreq_interval;
+}
+
+void poldistreporter::preparefile( edmexperiment &experiment )
+{
+	*outfile << "# Polarization Distribution report: " << exp.get("time") << endl;
+	*outfile << "# Flight-time\t List_of_particle_positive_phases...." << endl;
+}
+
+void poldistreporter::report( edmexperiment &exp )
+{
+	dataset time;
+	//Grab the elapsed time
+	BOOST_FOREACH(particle *p, exp.particles)
+		time += p->flytime;
+	
+	*outfile << time.average();
+	
+	BOOST_FOREACH(particle *p, exp.particles)
+		*outfile << "\t" << p->E_sum_phase;
+	
+	*outfile << endl;
+}

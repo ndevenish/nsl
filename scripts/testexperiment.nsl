@@ -8,7 +8,7 @@ add edmexperiment "The Experiment" {
 	set lifetime 90.0	#The lifetime of a particle
 	#This is the time to bounce a particle around for
 	#before calling the 'interval' reporters
-	set intervaltime 1.01 
+	set intervaltime 1.0
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -92,5 +92,8 @@ add edmexperiment "The Experiment" {
 	}
 	add polreporter "Polarization tracker" {
 		set output_file "pol.txt"
+	}
+	add poldistreporter "Polarisation Distribution reporter" {
+		set output_filr "poldist.txt"
 	}
 }

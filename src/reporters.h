@@ -176,9 +176,15 @@ public:
 	};	
 };
 
+
+///////////////////////////////////////////////
+// Polarisation reporter classes
+
+/** Reports on overall polarisation of a set of particles */
 class polreporter : public reporter {
 protected:
 	void preparefile( edmexperiment &exp );
+	bool prepareobject();
 	
 public:
 	polreporter();
@@ -186,6 +192,19 @@ public:
 	
 	class Factory : public nslobjectfactory {
 		nslobject *create() { return new polreporter; }
+	};	
+};
+
+class poldistreporter : public reporter {
+protected:
+	void preparefile( edmexperiment &exp );
+	
+public:
+	poldistreporter();
+	void report ( edmexperiment &experiment );
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new poldistreporter; }
 	};	
 };
 
