@@ -399,7 +399,7 @@ void edmexperiment::runinterval( long double time )
 			// If we are doing bounce-based looping, track that here
 			// Stop if we have reached the maximum number of bounces
 			if (!uselifetime)
-				if(bounces == bounce++)
+				if(bounces == (unsigned long)(bounce++))
 					break;
 			
 			// Calculate the next point of intersection

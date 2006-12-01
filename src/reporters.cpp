@@ -400,7 +400,7 @@ void polreporter::report( edmexperiment &exp )
 	}
 	if (flighttime.stdev() > 1e-7)
 	{
-		logger << "Flighttime Deviation: Flighttime: " << flighttime << endl;
+		logger << "Flighttime Deviation: Flighttime: " << flighttime.average() << " +/- " << flighttime.stdev() << endl;
 		//throw runtime_error("Flight-time of particles do not all agree");
 	}
 	
@@ -433,10 +433,30 @@ poldistreporter::poldistreporter()
 	report_frequency = rfreq_interval;
 }
 
+bool poldistreporter::prepareobject ( void )
+{
+	reporter::prepareobject();
+
+	if (isset("negphase"))
+		logphase = phase_negative;
+	else
+		logphase = phase_positive;
+
+	return true;
+}
 void poldistreporter::preparefile( edmexperiment &exp )
 {
 	*outfile << "# Polarization Distribution report: " << exp.get("time") << endl;
-	*outfile << "# Flight-time\t List_of_particle_positive_phases...." << endl;
+	*outfile << "# Reporting ";
+	if (logphase == phase_negative)
+		*outfile << "negative ";
+	else	
+		*outfile << "positive ";
+	*outfile << "phase." << endl;
+	*outfile << "# Flight-time\tAverage_phase";
+	for (unsigned int i = 0; i < exp.particles.size(); i++)
+		*outfile << "\t" << "Part_" << i+1 << "_phase";
+	*outfile << endl;
 }
 
 void poldistreporter::report( edmexperiment &exp )
@@ -446,14 +466,20 @@ void poldistreporter::report( edmexperiment &exp )
 	BOOST_FOREACH(particle *p, exp.particles)
 	{
 		time += p->flytime;
-		phase += p->E_sum_phase;
+		if(logphase == phase_positive)
+			phase += p->E_sum_phase;
+		else
+			phase += p->E_minus_sum_phase;
 	}
 	
-	*outfile << time.average();
-	
 	outfile->precision(20);
+	*outfile << time.average() << "\t" << phase.average();
+	
 	BOOST_FOREACH(particle *p, exp.particles)
-		*outfile << "\t" << (p->E_sum_phase-phase.average());
+		if (logphase == phase_positive)
+			*outfile << "\t" << (p->E_sum_phase-phase.average());
+		else 
+			*outfile << "\t" << (p->E_minus_sum_phase-phase.average());
 	
 	*outfile << endl;
 }

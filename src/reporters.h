@@ -196,9 +196,15 @@ public:
 };
 
 class poldistreporter : public reporter {
+	/// What phase to log
+	enum {
+		phase_positive,
+		phase_negative
+	} logphase;
 protected:
 	void preparefile( edmexperiment &exp );
-	
+	bool prepareobject( void );
+
 public:
 	poldistreporter();
 	void report ( edmexperiment &experiment );

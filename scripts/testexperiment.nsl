@@ -94,7 +94,14 @@ add edmexperiment "The Experiment" {
 	add polreporter "Polarization tracker" {
 		set output_file "1kmpollong.txt"
 	}
+	#Have two distribution reporters - otherwise we are throwing away half the data
 	add poldistreporter "Polarisation Distribution reporter" {
-		set output_file "1kmpoldist.txt"
+		set output_file "pluspoldist.txt"
+		#Uncomment the following to track negative instead of positive phase
+		#set negphase true
+	}
+	add poldistreporter "Polarisation positive" {
+		set output_file "minuspoldist.txt"
+		set negphase true
 	}
 }
