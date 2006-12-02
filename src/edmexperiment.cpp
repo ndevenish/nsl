@@ -259,7 +259,7 @@ bool edmexperiment::runobject()
 		if (intervaltime < lifetime)
 			logger << "Lifetime-based looping: Intervals of " << intervaltime << " for " << lifetime << " (seconds)" << endl;
 		else
-			logger << "Lifetime-based looping for " << lifetime << " seconds";
+			logger << "Lifetime-based looping for " << lifetime << " seconds" << endl;
 	else
 		logger << "Using bounce-based looping: For " << bounces << " bounces." << endl;
 		
