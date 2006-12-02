@@ -91,7 +91,7 @@ void nslobject::set ( std::string propertyname, std::string value )
 			//Warning("Throwing a warning");
 			stringstream thewarn;
 			thewarn << "Duplicate name \"" << value << "\"";
-			Warning( thewarn.str() );
+			//Warning( thewarn.str() );
 			//cout << "Warning: Name \"" << value << "\" already exists and so is duplicate" << endl;
 		}
 		else

@@ -256,7 +256,10 @@ bool edmexperiment::runobject()
 	
 	// shout out what we are doing loopwise
 	if (uselifetime)
-		logger << "Lifetime-based looping: Intervals of " << intervaltime << " for " << lifetime << " (seconds)" << endl;
+		if (intervaltime < lifetime)
+			logger << "Lifetime-based looping: Intervals of " << intervaltime << " for " << lifetime << " (seconds)" << endl;
+		else
+			logger << "Lifetime-based looping for " << lifetime << " seconds";
 	else
 		logger << "Using bounce-based looping: For " << bounces << " bounces." << endl;
 		
@@ -399,7 +402,7 @@ void edmexperiment::runinterval( long double time )
 			// If we are doing bounce-based looping, track that here
 			// Stop if we have reached the maximum number of bounces
 			if (!uselifetime)
-				if(bounces == (unsigned long)(bounce++))
+				if((unsigned long)bounces == (unsigned long)(bounce++))
 					break;
 			
 			// Calculate the next point of intersection

@@ -39,11 +39,34 @@
 
 #include <stdio.h>
 
+#include <boost/program_options.hpp>
 
 using namespace std;
+namespace po = boost::program_options;
 
-int main ( int argc, string argv )
+int main ( int argc, char *argv[] )
 {	
+	po::options_description desc("Allowed Options");
+	po::positional_options_description p;
+	p.add("input-file", -1);
+
+	desc.add_options()
+		("help,h", "Produces help message")
+		("tree,t", "Prints an object tree before starting")
+		("no-run,d", "Does a dry run - script file will be parsed and prepared, but not run.")
+		("input-file,f", po::value<string>(), "The nsl script file to load and run");
+	;
+	po::variables_map vm;
+	po::store(po::command_line_parser(argc, argv).options(desc).positional(p).run() , vm);
+	po::notify(vm);
+
+	//Print the options if the user demanded so!
+	if (vm.count("help")) {
+		cout << desc << endl;
+		return 0;
+	}
+
+	
 	try {
 
 		nslobject rootobject;
@@ -73,10 +96,20 @@ int main ( int argc, string argv )
 		nslobjectfactory::add("poldistreporter", new poldistreporter::Factory);
 
 		// Build the tree
-		rootobject.parse("./scripts/testexperiment.nsl");
+		if (!vm.count("input-file"))
+		{
+			cout << "No input script specified, defaulting to testexperiment.nsl" << endl;
+			rootobject.parse("./scripts/testexperiment.nsl");
+		} else {
+			cout << "Running script " << vm["input-file"].as<string>() << endl;
+			rootobject.parse(vm["input-file"].as<string>());
+		}
 
-		cout << "Read in structure:" << endl;
-		rootobject.tree();
+		if (vm.count("tree")) {
+			cout << "Read in structure:" << endl;
+			rootobject.tree();
+		}
+//		return 0;
 
 		// hold off on regeneration for now
 		/*cout << endl << "Regeneration:" << endl;*/
@@ -84,7 +117,12 @@ int main ( int argc, string argv )
 
 		rootobject.prepare();
 
-		rootobject.run();
+		// Allow the user to specify an option not to run
+		if (!vm.count("no-run"))
+		{
+			cout << endl << "Starting Run:" << endl;
+			rootobject.run();
+		}
 		
 
 

@@ -66,7 +66,7 @@ class edmexperiment : public nslobject {
 	/// How many phase averaging steps to take
 	int phase_steps;
 	/// How many bounces to take
-	long bounces;
+	unsigned long bounces;
 	/// The amount of time for a particle to exist!
 	long double lifetime;
 	long double intervaltime;
