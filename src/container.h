@@ -50,7 +50,7 @@ struct intercept {
 	vector3 location; ///< The spatial position of the intercept
 	vector3 normal; ///< The surface normal at the point of interception
 
-	container *collideobject; ///< Pointer to the object with which the ray collides
+	const container *collideobject; ///< Pointer to the object with which the ray collides
 
 	intercept() : time(0.0), type(interception_none), location(0,0,0), normal(0,0,0), collideobject(0) {}
 };
@@ -70,10 +70,9 @@ struct cylbounds {
 // ******************************************************************
 // Classes
 
-const int MAX_INTERCEPTS = 32;
-
 /** Ties together multiple volumes as a single large volume. */
 class container : public nslobject {
+	static const int MAX_INTERCEPTS = 32;
 	friend class edmexperiment;
 
 	bool prepareobject();
@@ -81,11 +80,11 @@ class container : public nslobject {
 	//void readsettings();
 	
 	// List of intercepts
-	intercept interceptlist[MAX_INTERCEPTS];
+	//intercept interceptlist[MAX_INTERCEPTS];
 
 	// Internal version of cast - this produces a list of intersections for the current
 	// and all subobjects. Called by cast. 
-	int castinternal ( const vector3& position, const vector3& direction, intercept *nextintercept);
+	int castinternal ( const vector3& position, const vector3& direction, intercept *nextintercept) const;
 
 protected:
 	std::map<std::string, vector3>	positionlist;
@@ -93,7 +92,7 @@ protected:
 
 	// Virtual function that we pass an intersection list, and it fills it out with any
 	// intersections that occur, and returns the number of intersections.
-	virtual int findintersections ( const vector3& position, const vector3& direction, intercept *nextintercept ) { return 0; };
+	virtual int findintersections ( const vector3& position, const vector3& direction, intercept *nextintercept ) const { return 0; };
 
 	enum {
 		reflection_diffuse,
@@ -107,7 +106,8 @@ protected:
 public:
 	container();
 
-	// Get a named position in the volume
+	// Get a named position in the volume - Needs to be non-const as may need to
+	// initialise
 	vector3 getposition(std::string);
 
 	/** Test to see if a position is inside the current object.
@@ -116,13 +116,13 @@ public:
 	* inherit the same behaviour.
 	* @param position The position of the particle
 	* @return The number of objects that the particle is inside of (counts current+subobjects) */
-	virtual int isinside( const vector3 &position );
+	virtual int isinside( const vector3 &position ) const;
 
 	/** Get's the cylindrical boundaries of the container.
 		The 'volume' is the size and position of a cylinder that would encompass all container
 		objects in the scene. The position is taken to be the center of the cylinder, i.e.
 		the caps are at position.z +/-  height/2 */
-	cylbounds getcylinder ( void );
+	cylbounds getcylinder ( void ) const;
 	
 	/** Casts a ray and returns the intersection point.
 	* Cast a ray from a position, and returns (through manipulation of the supplied
@@ -137,7 +137,7 @@ public:
 	* @param direction The direction the particle is facing i.e. the velocity
 	* @param unused Currently unused.
 	* @return an intercept object with the interception parameters. */
-	const intercept &cast ( const vector3 &position, const vector3 &direction, int unused = 0);
+	const intercept &cast ( const vector3 &position, const vector3 &direction, int unused = 0) const;
 
 	// Allow this to be created from the object factory
 	class Factory : public nslobjectfactory {
@@ -163,12 +163,12 @@ class volume_cylinder : public container {
 	itype icept_entry;
 	itype icept_exit;
 	
-	int findintersections ( const vector3& position, const vector3& direction, intercept *nextintercept );
+	int findintersections ( const vector3& position, const vector3& direction, intercept *nextintercept ) const;
 
 public:
 	volume_cylinder();
 
-	int isinside(const vector3 &position);
+	int isinside(const vector3 &position) const;
 
 	// Allow this to be created from the object factory
 	class Factory : public nslobjectfactory {

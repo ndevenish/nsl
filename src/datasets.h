@@ -50,9 +50,9 @@ class dataset : boost::addable< dataset ,
 		/// Retrieves the average value of the dataset
 		long double average( void ) const { return vaverage; }
 		/// Retrieves the average square value of the dataset
-		long double averagesq( void ) { return vaveragesq; }
+		long double averagesq( void ) const { return vaveragesq; }
 		/// Retrieves the number of points in the dataset
-		long points( void ) { return vpointcount; }
+		long points( void ) const { return vpointcount; }
 		
 		/** Retrieves the varaiance of the dataset.
 		* This value is only calculated when it is requested. */

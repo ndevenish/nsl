@@ -73,17 +73,17 @@ public:
 	vector3 operator*=(const long double&);
 	vector3 operator/=(const long double&);
 	
-	bool operator==(const vector3&);
+	bool operator==(const vector3&) const;
 	
 	// Inner product operators
 	long double operator*(const vector3&);
 	friend long double operator*(const vector3&, const vector3& );
 	
 	/// Returns the length of the vector
-	long double mod() {	return sqrtl(x*x + y*y + z*z); }
+	long double mod() const {	return sqrtl(x*x + y*y + z*z); }
 
 	/// Returns the length of the xy vector
-	long double modxy() { return sqrtl(x*x + y*y); }
+	long double modxy() const { return sqrtl(x*x + y*y); }
  
 	/// Scales the vector to a specified length
 	void scaleto(long double newlength);
@@ -107,7 +107,7 @@ inline vector3 vector3::operator-=(const vector3& rt)
 	x-=rt.x; y-=rt.y; z-=rt.z;
 	return *this;
 }
-inline bool vector3::operator==(const vector3& rt)
+inline bool vector3::operator==(const vector3& rt) const
 {
 	return (x==rt.x) && (y==rt.y) && (z==rt.z);
 }

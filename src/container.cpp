@@ -77,13 +77,14 @@ bool container::prepareobject( void )
 	return true;
 }
 
-const intercept &container::cast ( const vector3 &position, const vector3 &direction, int in_volumes )
+const intercept &container::cast ( const vector3 &position, const vector3 &direction, int in_volumes ) const
 {
 	//logger << __FILE__ << ":" << __LINE__ << ": " << position << endl;
 //	trace ( position );
 
 	// Firstly fill out the intercept list
 	int intercepts;
+	intercept interceptlist[MAX_INTERCEPTS];
 	intercepts = castinternal( position, direction, interceptlist );
 
 	// If intercepts is equal to one, just pass it back without anything further -
@@ -181,29 +182,33 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 	return *(sortinglist[intercepts-1]);
 }
 
-int container::castinternal ( const vector3& position, const vector3& direction, intercept *nextintercept )
+int container::castinternal ( const vector3& position, const vector3& direction, intercept *nextintercept ) const
 {
 	int intercepts = 0;
 	intercepts += findintersections(position, direction, nextintercept);
 
 	// Now iterate through each subobject
-	std::vector<container*>::iterator sublist;
-	for (sublist = subcontainers.begin(); sublist != subcontainers.end(); sublist++)
-		intercepts += (*sublist)->castinternal(position, direction, nextintercept+intercepts);
-
+//	std::vector<container*>::iterator sublist;
+//	for (sublist = subcontainers.begin(); sublist != subcontainers.end(); sublist++)
+//		intercepts += (*sublist)->castinternal(position, direction, nextintercept+intercepts);
+	BOOST_FOREACH(const container *cont, subcontainers)
+		intercepts += cont->castinternal(position, direction, nextintercept+intercepts);
+	
 	return intercepts;
 }
 
-int container::isinside(const vector3 &pos)
+int container::isinside(const vector3 &pos) const
 {
 	int count = 0;
 	std::vector<container*>::iterator sublist;
-	for (sublist = subcontainers.begin(); sublist != subcontainers.end(); sublist++)
-		count += (*sublist)->isinside(pos);
+// 	for (sublist = subcontainers.begin(); sublist != subcontainers.end(); sublist++)
+// 		count += (*sublist)->isinside(pos);
+	BOOST_FOREACH(const container *cont, subcontainers)
+		count += cont->isinside(pos);
 	return count;
 }
 
-cylbounds container::getcylinder( void )
+cylbounds container::getcylinder( void ) const
 {
 	cylbounds borders = boundaries;
 	

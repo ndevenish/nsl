@@ -265,14 +265,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>12</integer>
-									<integer>3</integer>
+									<integer>19</integer>
 									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 51}, {190, 555}}</string>
+							<string>{{0, 87}, {190, 555}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -309,7 +308,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>particle.h</string>
+								<string>edmexperiment.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -317,28 +316,22 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>particle.h</string>
+										<string>edmexperiment.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0A69CFCB0B1E48A80067CD3A</string>
+										<string>0A69D0450B21EF530067CD3A</string>
 										<key>history</key>
 										<array>
 											<string>0A348BAD0B07BBCF00F8771E</string>
 											<string>0A348BAF0B07BBCF00F8771E</string>
-											<string>0A348BB40B07BBCF00F8771E</string>
 											<string>0A348BB60B07BBCF00F8771E</string>
 											<string>0A348BB90B07BBCF00F8771E</string>
 											<string>0A348BBC0B07BBCF00F8771E</string>
 											<string>0A348C9F0B088FA800F8771E</string>
-											<string>0A69CB8D0B19E8570067CD3A</string>
-											<string>0A69CCD80B1A02AC0067CD3A</string>
 											<string>0A69CCD90B1A02AC0067CD3A</string>
 											<string>0A69CCDB0B1A02AC0067CD3A</string>
-											<string>0A69CD980B1A3A4D0067CD3A</string>
 											<string>0A69CD9B0B1A3A4D0067CD3A</string>
-											<string>0A69CDC30B1A3C660067CD3A</string>
-											<string>0A69CDCD0B1A3F9B0067CD3A</string>
 											<string>0A69CDD80B1B013C0067CD3A</string>
 											<string>0A69CDEC0B1BB92E0067CD3A</string>
 											<string>0A69CDF50B1BB9520067CD3A</string>
@@ -346,11 +339,17 @@
 											<string>0A69CEFF0B1C45890067CD3A</string>
 											<string>0A69CF4C0B1C54530067CD3A</string>
 											<string>0A69CF6E0B1C650E0067CD3A</string>
-											<string>0A69CFA40B1E451D0067CD3A</string>
-											<string>0A69CFA50B1E451D0067CD3A</string>
 											<string>0A69CFC60B1E48A80067CD3A</string>
-											<string>0A69CFC70B1E48A80067CD3A</string>
-											<string>0A69CFC80B1E48A80067CD3A</string>
+											<string>0A69CFCC0B1E51100067CD3A</string>
+											<string>0A69CFD30B21BF5F0067CD3A</string>
+											<string>0A69CFD90B21BFBC0067CD3A</string>
+											<string>0A69D02C0B21C38C0067CD3A</string>
+											<string>0A69D02D0B21C38C0067CD3A</string>
+											<string>0A69D02E0B21C38C0067CD3A</string>
+											<string>0A69D02F0B21C38C0067CD3A</string>
+											<string>0A69D0300B21C38C0067CD3A</string>
+											<string>0A69D0420B21EF530067CD3A</string>
+											<string>0A69D0430B21EF530067CD3A</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -551,6 +550,24 @@
 											<string>0A69CFB80B1E45F30067CD3A</string>
 											<string>0A69CFC90B1E48A80067CD3A</string>
 											<string>0A69CFCA0B1E48A80067CD3A</string>
+											<string>0A69CFCE0B1E51100067CD3A</string>
+											<string>0A69CFD50B21BF600067CD3A</string>
+											<string>0A69CFDB0B21BFBC0067CD3A</string>
+											<string>0A69D0320B21C38C0067CD3A</string>
+											<string>0A69D0330B21C38C0067CD3A</string>
+											<string>0A69D0340B21C38C0067CD3A</string>
+											<string>0A69D0350B21C38C0067CD3A</string>
+											<string>0A69D0360B21C38C0067CD3A</string>
+											<string>0A69D0370B21C38C0067CD3A</string>
+											<string>0A69D0380B21C38C0067CD3A</string>
+											<string>0A69D0390B21C38C0067CD3A</string>
+											<string>0A69D03A0B21C38C0067CD3A</string>
+											<string>0A69D03B0B21C38C0067CD3A</string>
+											<string>0A69D03C0B21C38C0067CD3A</string>
+											<string>0A69D03D0B21C38C0067CD3A</string>
+											<string>0A69D03E0B21C38C0067CD3A</string>
+											<string>0A69D03F0B21C38C0067CD3A</string>
+											<string>0A69D0440B21EF530067CD3A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -773,12 +790,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>particle.h</string>
+								<string>volume_cylinder.cpp</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -795,8 +814,6 @@
 							<string>271pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

@@ -109,7 +109,7 @@ void volume_cylinder::readsettings(void)
 }
 
 
-int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& direction, intercept *nextplace )
+int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& direction, intercept *nextplace ) const
 {
 	// count of the intercepts so far
 	int intercepts = 0;//, invalids = 0;
@@ -160,7 +160,7 @@ int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& 
 				nextplace->normal.z = 0.0;
 				nextplace->normal.x = position.x - (rayposi.x+ i1*direction.x);
 				nextplace->normal.y = position.y - (rayposi.y+ i1*direction.y);
-				nextplace->collideobject = this;
+				nextplace->collideobject = (container*)this;
 				
 				nextplace++;
 				intercepts++;
@@ -182,7 +182,7 @@ int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& 
 				nextplace->normal.z = 0.0;
 				nextplace->normal.x = position.x - (rayposi.x+ i2*direction.x);
 				nextplace->normal.y = position.y - (rayposi.y+ i2*direction.y);
-				nextplace->collideobject = this;
+				nextplace->collideobject = (container*)this;
 				
 				//nextplace->location.
 				nextplace++;
@@ -224,7 +224,7 @@ int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& 
 				nextplace->type = icept_exit;
 			nextplace->normal.x = nextplace->normal.y = 0.0;
 			nextplace->normal.z = -1;
-			nextplace->collideobject = this;
+			nextplace->collideobject = (container*)this;
 			
 			nextplace++;
 			// return if this makes two intercepts
@@ -254,7 +254,7 @@ int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& 
 				nextplace->type = icept_entry;
 			nextplace->normal.x = nextplace->normal.y = 0.0;
 			nextplace->normal.z = 1;
-			nextplace->collideobject = this;
+			nextplace->collideobject = (container*)this;
 
 			nextplace++;
 
@@ -275,7 +275,7 @@ int volume_cylinder::findintersections ( const vector3& rayposi, const vector3& 
 	return 0;
 }
 
-int volume_cylinder::isinside(const vector3 &pos)
+int volume_cylinder::isinside(const vector3 &pos) const
 {
 	int count = 0;
 	vector3 adjpos;
