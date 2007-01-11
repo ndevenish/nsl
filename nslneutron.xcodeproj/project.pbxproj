@@ -34,6 +34,7 @@
 		0AB232BA0ADA3BE500323FF0 /* edmexperiment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB232B80ADA3BE400323FF0 /* edmexperiment.h */; };
 		0AB236A10ADD292B00323FF0 /* vector3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB236A00ADD292B00323FF0 /* vector3.h */; };
 		0AB236BB0ADD29D900323FF0 /* datasets.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB236BA0ADD29D900323FF0 /* datasets.h */; };
+		0AD2AF9A0B52F55200960C16 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD2AF990B52F55200960C16 /* libboost_program_options.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +92,7 @@
 		0AB232B80ADA3BE400323FF0 /* edmexperiment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = edmexperiment.h; path = src/edmexperiment.h; sourceTree = "<group>"; };
 		0AB236A00ADD292B00323FF0 /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector3.h; path = src/vector3.h; sourceTree = "<group>"; };
 		0AB236BA0ADD29D900323FF0 /* datasets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = datasets.h; path = src/datasets.h; sourceTree = "<group>"; };
+		0AD2AF990B52F55200960C16 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = /usr/local/lib/libboost_program_options.a; sourceTree = "<absolute>"; };
 		8DD76F6C0486A84900D96B5E /* nslneutron */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nslneutron; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD2AF9A0B52F55200960C16 /* libboost_program_options.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				0A232F6B0AC99A0D00ABB21F /* ChangeLog */,
+				0AD2AF990B52F55200960C16 /* libboost_program_options.a */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -236,12 +240,14 @@
 		1DEB923208733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = ppc;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = nslneutron;
 				ZERO_LINK = YES;
 			};
@@ -250,13 +256,11 @@
 		1DEB923308733DC60010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = ppc;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = nslneutron;
 			};
 			name = Release;
