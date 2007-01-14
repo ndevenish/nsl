@@ -1,7 +1,7 @@
 // !$*UTF8*$!
 {
 	08FB7793FE84155DC02AAC07 /* Project object */ = {
-		activeBuildConfigurationName = Release;
+		activeBuildConfigurationName = Debug;
 		activeExecutable = 0A3B6E830AC99355002CC2AF /* nslneutron */;
 		activeTarget = 8DD76F620486A84900D96B5E /* nslneutron */;
 		addToTargets = (
@@ -11,6 +11,10 @@
 			0A69CF3D0B1C512A0067CD3A /* reporters.cpp:448 */,
 			0A69CF830B1C66770067CD3A /* edmexperiment.cpp:304 */,
 			0A69CF880B1C67230067CD3A /* reporters.cpp:381 */,
+			0A7BDBCB0B594C81008D1188 /* edmexperiment.cpp:413 */,
+			0A7BDBE10B5956B8008D1188 /* edmexperiment.cpp:529 */,
+			0A7BDBEC0B59593C008D1188 /* edmexperiment.cpp:503 */,
+			0A7BDBF70B595F66008D1188 /* electromagnetics.cpp:149 */,
 		);
 		breakpointsGroup = 0A3B6EC80AC99489002CC2AF /* XCBreakpointsBucket */;
 		codeSenseManager = 0A3B6E8C0AC99360002CC2AF /* Code sense */;
@@ -87,7 +91,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					417,
+					626,
 					20,
 					48,
 					43,
@@ -190,6 +194,20 @@
 			0A7BDB780B5434FB008D1188 = 0A7BDB780B5434FB008D1188 /* PBXTextBookmark */;
 			0A7BDB790B5434FB008D1188 = 0A7BDB790B5434FB008D1188 /* PBXTextBookmark */;
 			0A7BDB820B556934008D1188 /* PBXTextBookmark */ = 0A7BDB820B556934008D1188 /* PBXTextBookmark */;
+			0A7BDBB00B594BBE008D1188 /* PBXTextBookmark */ = 0A7BDBB00B594BBE008D1188 /* PBXTextBookmark */;
+			0A7BDBB10B594BBE008D1188 /* PBXTextBookmark */ = 0A7BDBB10B594BBE008D1188 /* PBXTextBookmark */;
+			0A7BDBB20B594BBE008D1188 /* PBXTextBookmark */ = 0A7BDBB20B594BBE008D1188 /* PBXTextBookmark */;
+			0A7BDBB30B594BBE008D1188 /* PBXTextBookmark */ = 0A7BDBB30B594BBE008D1188 /* PBXTextBookmark */;
+			0A7BDBCF0B594C9D008D1188 /* PBXTextBookmark */ = 0A7BDBCF0B594C9D008D1188 /* PBXTextBookmark */;
+			0A7BDBED0B5959A8008D1188 /* PBXTextBookmark */ = 0A7BDBED0B5959A8008D1188 /* PBXTextBookmark */;
+			0A7BDBF20B595E0D008D1188 /* PBXTextBookmark */ = 0A7BDBF20B595E0D008D1188 /* PBXTextBookmark */;
+			0A7BDC0E0B5A4CA5008D1188 /* PBXTextBookmark */ = 0A7BDC0E0B5A4CA5008D1188 /* PBXTextBookmark */;
+			0A7BDC0F0B5A4CA5008D1188 /* PBXTextBookmark */ = 0A7BDC0F0B5A4CA5008D1188 /* PBXTextBookmark */;
+			0A7BDC100B5A4CA5008D1188 /* PBXTextBookmark */ = 0A7BDC100B5A4CA5008D1188 /* PBXTextBookmark */;
+			0A7BDC110B5A4CA5008D1188 /* PBXTextBookmark */ = 0A7BDC110B5A4CA5008D1188 /* PBXTextBookmark */;
+			0A7BDC120B5A4CA5008D1188 /* PBXTextBookmark */ = 0A7BDC120B5A4CA5008D1188 /* PBXTextBookmark */;
+			0A7BDC130B5A4CA5008D1188 /* PBXTextBookmark */ = 0A7BDC130B5A4CA5008D1188 /* PBXTextBookmark */;
+			0A7BDC170B5A5D6E008D1188 /* PBXTextBookmark */ = 0A7BDC170B5A5D6E008D1188 /* PBXTextBookmark */;
 			0AD2AF9F0B53B02900960C16 = 0AD2AF9F0B53B02900960C16 /* PBXTextBookmark */;
 			0AD2AFA00B53B02900960C16 = 0AD2AFA00B53B02900960C16 /* PBXTextBookmark */;
 			0AD2AFA10B53B02900960C16 = 0AD2AFA10B53B02900960C16 /* PBXTextBookmark */;
@@ -331,6 +349,40 @@
 		);
 		startupPath = "<<ProjectDirectory>>";
 		variableFormatDictionary = {
+			$v0 = 1;
+			$v1 = 1;
+			$v10 = 1;
+			$v11 = 1;
+			$v12 = 1;
+			$v13 = 1;
+			$v14 = 1;
+			$v15 = 1;
+			$v16 = 1;
+			$v17 = 1;
+			$v18 = 1;
+			$v19 = 1;
+			$v2 = 1;
+			$v20 = 1;
+			$v21 = 1;
+			$v22 = 1;
+			$v23 = 1;
+			$v24 = 1;
+			$v25 = 1;
+			$v26 = 1;
+			$v27 = 1;
+			$v28 = 1;
+			$v29 = 1;
+			$v3 = 1;
+			$v30 = 1;
+			$v31 = 1;
+			$v4 = 1;
+			$v5 = 1;
+			$v6 = 1;
+			$v7 = 1;
+			$v8 = 1;
+			$v9 = 1;
+			$vrsave = 1;
+			$vscr = 1;
 		};
 	};
 	0A3B6E8B0AC99360002CC2AF /* Source Control */ = {
@@ -364,9 +416,9 @@
 	};
 	0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {765, 2282}}";
-			sepNavSelRange = "{2973, 0}";
-			sepNavVisRect = "{{0, 1676}, {765, 606}}";
+			sepNavIntBoundsRect = "{{0, 0}, {629, 2310}}";
+			sepNavSelRange = "{2887, 0}";
+			sepNavVisRect = "{{0, 419}, {629, 380}}";
 			sepNavWindowFrame = "{{437, 48}, {1013, 746}}";
 		};
 	};
@@ -380,9 +432,9 @@
 	};
 	0A3B6E9B0AC993DB002CC2AF /* main.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {620, 1750}}";
-			sepNavSelRange = "{1007, 0}";
-			sepNavVisRect = "{{0, 385}, {609, 366}}";
+			sepNavIntBoundsRect = "{{0, 0}, {767, 1750}}";
+			sepNavSelRange = "{2074, 0}";
+			sepNavVisRect = "{{0, 862}, {767, 405}}";
 			sepNavWindowFrame = "{{215, 188}, {750, 558}}";
 		};
 	};
@@ -443,9 +495,9 @@
 	};
 	0A3B6EB00AC9940B002CC2AF /* electromagnetics.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {765, 2240}}";
-			sepNavSelRange = "{1027, 0}";
-			sepNavVisRect = "{{0, 371}, {765, 366}}";
+			sepNavIntBoundsRect = "{{0, 0}, {629, 2240}}";
+			sepNavSelRange = "{2003, 0}";
+			sepNavVisRect = "{{0, 769}, {629, 380}}";
 			sepNavWindowFrame = "{{173, 75}, {1013, 671}}";
 		};
 	};
@@ -482,9 +534,9 @@
 	};
 	0A3B6EB50AC9940B002CC2AF /* physics.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {765, 490}}";
-			sepNavSelRange = "{341, 0}";
-			sepNavVisRect = "{{0, 0}, {765, 366}}";
+			sepNavIntBoundsRect = "{{0, 0}, {818, 621}}";
+			sepNavSelRange = "{523, 0}";
+			sepNavVisRect = "{{0, 0}, {818, 621}}";
 			sepNavWindowFrame = "{{150, 217}, {1013, 671}}";
 		};
 	};
@@ -495,6 +547,10 @@
 			0A69CF3D0B1C512A0067CD3A /* reporters.cpp:448 */,
 			0A69CF830B1C66770067CD3A /* edmexperiment.cpp:304 */,
 			0A69CF880B1C67230067CD3A /* reporters.cpp:381 */,
+			0A7BDBCB0B594C81008D1188 /* edmexperiment.cpp:413 */,
+			0A7BDBE10B5956B8008D1188 /* edmexperiment.cpp:529 */,
+			0A7BDBEC0B59593C008D1188 /* edmexperiment.cpp:503 */,
+			0A7BDBF70B595F66008D1188 /* electromagnetics.cpp:149 */,
 		);
 	};
 	0A58A73A0B32B5C20024E986 /* PBXTextBookmark */ = {
@@ -528,9 +584,8 @@
 		functionName = "polreporter::report()";
 		hitCount = 1;
 		lineNumber = 448;
-		location = reporters.ob;
-		modificationTime = 186410859.93706;
-		state = 1;
+		modificationTime = 190471521.982473;
+		state = 0;
 	};
 	0A69CF830B1C66770067CD3A /* edmexperiment.cpp:304 */ = {
 		isa = PBXFileBreakpoint;
@@ -544,8 +599,8 @@
 		hitCount = 1;
 		lineNumber = 304;
 		location = edmexperiment.ob;
-		modificationTime = 186410909.856211;
-		state = 1;
+		modificationTime = 190471521.370847;
+		state = 2;
 	};
 	0A69CF880B1C67230067CD3A /* reporters.cpp:381 */ = {
 		isa = PBXFileBreakpoint;
@@ -558,15 +613,14 @@
 		functionName = "polreporter::report()";
 		hitCount = 1;
 		lineNumber = 381;
-		location = reporters.ob;
-		modificationTime = 186410860.320932;
-		state = 1;
+		modificationTime = 190471522.047874;
+		state = 0;
 	};
 	0A72C9B30AF37F5B0079760D /* reporters.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {765, 2772}}";
-			sepNavSelRange = "{4436, 0}";
-			sepNavVisRect = "{{0, 2222}, {765, 536}}";
+			sepNavIntBoundsRect = "{{0, 0}, {818, 2856}}";
+			sepNavSelRange = "{3710, 0}";
+			sepNavVisRect = "{{0, 1643}, {818, 621}}";
 			sepNavWindowFrame = "{{211, 17}, {813, 617}}";
 		};
 	};
@@ -695,11 +749,204 @@
 		vrLen = 699;
 		vrLoc = 488;
 	};
+	0A7BDBB00B594BBE008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9B0AC993DB002CC2AF /* main.cpp */;
+		name = "main.cpp: 71";
+		rLen = 0;
+		rLoc = 2074;
+		rType = 0;
+		vrLen = 1213;
+		vrLoc = 1544;
+	};
+	0A7BDBB10B594BBE008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 281";
+		rLen = 0;
+		rLoc = 7867;
+		rType = 0;
+		vrLen = 1222;
+		vrLoc = 7255;
+	};
+	0A7BDBB20B594BBE008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9B0AC993DB002CC2AF /* main.cpp */;
+		name = "main.cpp: 71";
+		rLen = 0;
+		rLoc = 2074;
+		rType = 0;
+		vrLen = 1213;
+		vrLoc = 1544;
+	};
+	0A7BDBB30B594BBE008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 381";
+		rLen = 0;
+		rLoc = 11306;
+		rType = 0;
+		vrLen = 1842;
+		vrLoc = 10558;
+	};
+	0A7BDBCB0B594C81008D1188 /* edmexperiment.cpp:413 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		delayBeforeContinue = 0;
+		fileReference = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		functionName = "edmexperiment::runinterval()";
+		hitCount = 1;
+		lineNumber = 413;
+		modificationTime = 190471522.1271;
+		state = 0;
+	};
+	0A7BDBCF0B594C9D008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 387";
+		rLen = 0;
+		rLoc = 11485;
+		rType = 0;
+		vrLen = 1842;
+		vrLoc = 10558;
+	};
+	0A7BDBE10B5956B8008D1188 /* edmexperiment.cpp:529 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		delayBeforeContinue = 0;
+		fileReference = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		functionName = "edmexperiment::smallstep()";
+		hitCount = 1;
+		lineNumber = 529;
+		modificationTime = 190471522.197639;
+		state = 0;
+	};
+	0A7BDBEC0B59593C008D1188 /* edmexperiment.cpp:503 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		delayBeforeContinue = 0;
+		fileReference = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		functionName = "edmexperiment::bigstep()";
+		hitCount = 1;
+		lineNumber = 503;
+		modificationTime = 190471523.149762;
+		state = 0;
+	};
+	0A7BDBED0B5959A8008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 387";
+		rLen = 0;
+		rLoc = 11485;
+		rType = 0;
+		vrLen = 1842;
+		vrLoc = 10558;
+	};
+	0A7BDBF20B595E0D008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 387";
+		rLen = 0;
+		rLoc = 11485;
+		rType = 0;
+		vrLen = 1842;
+		vrLoc = 10558;
+	};
+	0A7BDBF70B595F66008D1188 /* electromagnetics.cpp:149 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		delayBeforeContinue = 0;
+		fileReference = 0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */;
+		functionName = "dipole_zmagnetic::field()";
+		hitCount = 1;
+		lineNumber = 149;
+		modificationTime = 190471523.249574;
+		state = 0;
+	};
+	0A7BDC0E0B5A4CA5008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 387";
+		rLen = 0;
+		rLoc = 11485;
+		rType = 0;
+		vrLen = 1842;
+		vrLoc = 10558;
+	};
+	0A7BDC0F0B5A4CA5008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */;
+		name = dipole_mult;
+		rLen = 11;
+		rLoc = 2766;
+		rType = 0;
+		vrLen = 1088;
+		vrLoc = 2171;
+	};
+	0A7BDC100B5A4CA5008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB50AC9940B002CC2AF /* physics.h */;
+		rLen = 1;
+		rLoc = 27;
+		rType = 1;
+	};
+	0A7BDC110B5A4CA5008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 387";
+		rLen = 0;
+		rLoc = 11485;
+		rType = 0;
+		vrLen = 1842;
+		vrLoc = 10558;
+	};
+	0A7BDC120B5A4CA5008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */;
+		name = dipole_mult;
+		rLen = 11;
+		rLoc = 2766;
+		rType = 0;
+		vrLen = 1088;
+		vrLoc = 2171;
+	};
+	0A7BDC130B5A4CA5008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB50AC9940B002CC2AF /* physics.h */;
+		name = "3.1415926535897932384626433832795028841971693993751058209;";
+		rLen = 58;
+		rLoc = 774;
+		rType = 0;
+		vrLen = 1255;
+		vrLoc = 0;
+	};
+	0A7BDC170B5A5D6E008D1188 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB50AC9940B002CC2AF /* physics.h */;
+		name = "physics.h: 16";
+		rLen = 0;
+		rLoc = 523;
+		rType = 0;
+		vrLen = 1255;
+		vrLoc = 0;
+	};
 	0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {878, 8974}}";
-			sepNavSelRange = "{7867, 0}";
-			sepNavVisRect = "{{0, 3659}, {609, 536}}";
+			sepNavSelRange = "{12573, 0}";
+			sepNavVisRect = "{{0, 7209}, {629, 380}}";
 			sepNavWindowFrame = "{{188, 163}, {1013, 671}}";
 		};
 	};
@@ -713,9 +960,9 @@
 	};
 	0AB236A00ADD292B00323FF0 /* vector3.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {765, 2282}}";
-			sepNavSelRange = "{3502, 0}";
-			sepNavVisRect = "{{0, 1746}, {765, 536}}";
+			sepNavIntBoundsRect = "{{0, 0}, {629, 2282}}";
+			sepNavSelRange = "{2230, 0}";
+			sepNavVisRect = "{{0, 923}, {629, 380}}";
 			sepNavWindowFrame = "{{130, 146}, {1013, 746}}";
 		};
 	};

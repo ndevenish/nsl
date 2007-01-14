@@ -356,8 +356,8 @@ dataset edmreporter::calc_dbdz(bfield &b, container &cont)
 	logger << "  DBDZ averaging: Hits: " << hits << ", Misses: " << misses << endl;
 	logger << "     Estimated Volume = " << volumeestimate << " +- " << volerrest << endl;
 	logger << "		dBz/dz			 = " << vertgrad << endl;
-	vertgrad /= volumeestimate;
-	logger << "   Average field gradient over volume : " << vertgrad<< endl;
+	//vertgrad /= volumeestimate;
+	//logger << "   Average field gradient over volume : " << vertgrad<< endl;
 	
 	return vertgrad;
 }
