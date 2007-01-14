@@ -22,13 +22,17 @@
 
 
 
+
+
 #include <iostream>
 #include <fstream>
 
 #include <cmath>
 #include <cassert>
-#include <cstdlib>
+//#include <cstdlib>
 #include <ctime>
+
+
 
 #include "boost/foreach.hpp"
 
@@ -46,8 +50,13 @@
 #include "physics.h"
 #include "datasets.h"
 
-#include "reporters.h"
 #include "tools.h"
+
+#include "reporters.h"
+
+#include "random.h"
+
+using nsl::rand_uniform;
 
 //#include "efence.h"
 //#include "efencepp.h"
@@ -56,6 +65,7 @@ using std::runtime_error;
 using std::endl;
 using std::ofstream;
 using std::ios;
+
 
 //using std::floorl;
 
@@ -380,6 +390,7 @@ bool edmexperiment::runobject()
 // The task now is to run over bounces, but to stop if we run out of time
 void edmexperiment::runinterval( long double time )
 {
+	
 	// Run this routine for a particle-at-a-time - this may be better moved to the main loop
 	// for easier paralellization
 	
@@ -439,17 +450,33 @@ void edmexperiment::runinterval( long double time )
 				{
 					part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
 				} else { // Assume diffuse reflection otherwise (for now)
-					part->velocity_vec.x = rand()-(RAND_MAX/2);
-					part->velocity_vec.y = rand()-(RAND_MAX/2);
-					part->velocity_vec.z = rand()-(RAND_MAX/2);
+					
+					
+					// Generate a random z and theta
+					part->velocity_vec.z = (rand_uniform()-0.5)*2.;
+					
+					long double phi = rand_uniform()*pi*2;
+					// Calculate the flat-plane (z=0.) radius of this point
+					long double planarr = cosl(asinl( part->velocity_vec.z ));
+					
+					part->velocity_vec.x = planarr * cosl(phi);
+					part->velocity_vec.y = planarr * sinl(phi);
+
+					// Old method - not perfect? Untested distribution.
+//					part->velocity_vec.x = rand()-(RAND_MAX/2);
+//					part->velocity_vec.y = rand()-(RAND_MAX/2);
+//					part->velocity_vec.z = rand()-(RAND_MAX/2);
 					
 					// Ensure it faces away from the normal
 					if ((part->velocity_vec * collisionpoint.normal) < 0.)
 						part->velocity_vec *= -1.0;
 				}
-				// Ensure velocity is kept constant
-				part->velocity_vec.scaleto(part->velocity);
+				logger << part->velocity_vec.mod() << endl;
 				
+				// Scale the velocity up to the particles velocity.
+				part->velocity_vec *= part->velocity;
+				logger << part->velocity_vec.mod() << endl;
+
 				// Take away the time for the travel for this bounce from the time left
 				timeleft -= collisionpoint.time;
 				

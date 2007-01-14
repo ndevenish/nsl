@@ -32,7 +32,8 @@
 
 #include "datasets.h"
 
-using namespace std;
+using std::runtime_error;
+
 
 std::ostream& operator<<(std::ostream& os, const vector3& vec)
 {
@@ -130,3 +131,5 @@ long long lddistance(long double A, long double B)
 
 	return llDiff;
 }
+
+

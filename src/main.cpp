@@ -26,6 +26,7 @@
 
 #include <sstream>
 
+#include "random.h"
 #include "nslobject.h"
 #include "nslobjectfactory.h"
 
@@ -115,6 +116,9 @@ int main ( int argc, char *argv[] )
 		/*cout << endl << "Regeneration:" << endl;*/
 		//rootobject.regenerate(cout);
 
+		// initialise the random number generator
+		nsl::seedrand();
+		
 		rootobject.prepare();
 
 		// Allow the user to specify an option not to run
