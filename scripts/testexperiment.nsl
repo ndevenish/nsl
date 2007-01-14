@@ -3,9 +3,10 @@
 add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set steptime 3e-5
-	set phase_steps 5#5 #phase average loops
-	set bounces 10000 #10000 #number of bounces to run the simulation over
+	set phase_steps 10 #phase average loops
+	set bounces 10000 #number of bounces to run the simulation over
 	#set lifetime 300.0	#The lifetime of a particle
+
 	#This is the time to bounce a particle around for
 	#before calling the 'interval' reporters
 	set intervaltime 1.0 
@@ -28,9 +29,9 @@ add edmexperiment "The Experiment" {
 	#multiadd 3 particle "neutron" {
 	add particle neutron {
 		set gamma -29.1646870E+6
-		#set velocity 3
-		vary velocity from 5 to 100 in 20 steps
-		#vary velocity from 100 to 80 in 15 steps
+
+		vary velocity from 10 to 200 in 20 steps
+
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 0
 		set vx 1
@@ -80,32 +81,9 @@ add edmexperiment "The Experiment" {
 		#set e0z			0
 	}
 
-	ignore add impactreporter "Impact Reporter" {
-		set output_file "poslog.txt"
-		#set report_frequency step
-	}
-	ignore add phasereporter "Phase Change reporter" {
-		set output_file "phaselog.txt"
-	#	set report_frequency bounce
-	}
-	ignore add edmreporter "edmreporter" {
-		set output_file "dbdzfile.txt"
-	#set volaverage_dbdz true
-	}
-	ignore add intervalreporter "intervalreporter" {
-		set output_file "intervaltimes.txt"
-	}
-	add polreporter "Polarization tracker" {
-		set output_file "1kmpollong.txt"
-	}
-	#Have two distribution reporters - otherwise we are throwing away half the data
-	add poldistreporter "Polarisation Distribution reporter" {
-		set output_file "pluspoldist.txt"
-		#Uncomment the following to track negative instead of positive phase
-		#set negphase true
-	}
-	add poldistreporter "Polarisation positive" {
-		set output_file "minuspoldist.txt"
-		set negphase true
+	
+	add edmreporter "edmreporter" {
+		set output_file "veltest_200.txt"
+		set volaverage_dbdz true
 	}
 }

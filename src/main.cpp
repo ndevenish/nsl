@@ -143,6 +143,7 @@ int main ( int argc, char *argv[] )
 
 	// Hold at the end of execution until they hit enter
 	#ifdef WIN32
+		cout << "Completed Run. Press any key to continue." << endl; 
 		getchar();
 	#endif
 

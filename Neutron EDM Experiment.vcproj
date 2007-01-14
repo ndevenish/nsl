@@ -230,6 +230,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\random.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\tools.cpp"
 					>
 				</File>
@@ -289,6 +293,10 @@
 				</File>
 				<File
 					RelativePath=".\src\physics.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\random.h"
 					>
 				</File>
 				<File
