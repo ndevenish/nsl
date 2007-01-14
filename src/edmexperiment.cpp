@@ -462,10 +462,6 @@ void edmexperiment::runinterval( long double time )
 					part->velocity_vec.x = planarr * cosl(phi);
 					part->velocity_vec.y = planarr * sinl(phi);
 
-					// Old method - not perfect? Untested distribution.
-//					part->velocity_vec.x = rand()-(RAND_MAX/2);
-//					part->velocity_vec.y = rand()-(RAND_MAX/2);
-//					part->velocity_vec.z = rand()-(RAND_MAX/2);
 					
 					// Ensure it faces away from the normal
 					if ((part->velocity_vec * collisionpoint.normal) < 0.)
