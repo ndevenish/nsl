@@ -92,7 +92,7 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 	if (intercepts == 1)
 	{
 		// FUDGE
-		interceptlist[0].time *= fudge;
+		//interceptlist[0].time *= fudge;
 		//interceptlist[0].normal.scaleto(1.0);
 		return interceptlist[0];
 	}
@@ -113,7 +113,7 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 	// Firstly, read the list into a pointer array
 	for (int i = 0; i < intercepts; i++)
 	{
-		interceptlist[i].time *= fudge;
+		//interceptlist[i].time *= fudge;
 		sortinglist[i] = &interceptlist[i];
 	}
 	// Now sort this

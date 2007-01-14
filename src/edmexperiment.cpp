@@ -471,11 +471,9 @@ void edmexperiment::runinterval( long double time )
 					if ((part->velocity_vec * collisionpoint.normal) < 0.)
 						part->velocity_vec *= -1.0;
 				}
-				logger << part->velocity_vec.mod() << endl;
-				
+
 				// Scale the velocity up to the particles velocity.
 				part->velocity_vec *= part->velocity;
-				logger << part->velocity_vec.mod() << endl;
 
 				// Take away the time for the travel for this bounce from the time left
 				timeleft -= collisionpoint.time;

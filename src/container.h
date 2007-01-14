@@ -33,7 +33,7 @@
 // Predeclarations
 class container;
 
-const long double fudge = 1.0; //0.9999;
+//const long double fudge = 1.0; //0.9999;
 
 // *****************************************************************
 // Structures and enums
