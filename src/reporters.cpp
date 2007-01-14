@@ -50,9 +50,6 @@ using std::endl;
 using boost::mt11213b;
 
 
-//using namespace std;
-
-
 reporter::reporter()
 {
 	outfile = 0;

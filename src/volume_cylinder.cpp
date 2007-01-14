@@ -30,7 +30,8 @@
 
 #include "physics.h"
 
-using namespace std;
+using std::string;
+using std::runtime_error;
 
 volume_cylinder::volume_cylinder()
 {

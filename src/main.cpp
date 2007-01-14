@@ -42,7 +42,11 @@
 
 #include <boost/program_options.hpp>
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
+using std::runtime_error;
+
 namespace po = boost::program_options;
 
 int main ( int argc, char *argv[] )

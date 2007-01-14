@@ -26,7 +26,8 @@
 
 #include "errors.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
 
 Warning::Warning(std::string message)
 {

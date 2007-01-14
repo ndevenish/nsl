@@ -37,8 +37,14 @@
 #include "edmexperiment.h" // For variation
 #include "tools.h"
 
-using namespace std;
-
+using std::cout;
+using std::endl;
+using std::string;
+using std::stringstream;
+using std::istringstream;
+using std::ostringstream;
+using std::runtime_error;
+using std::ios;
 
 
 int nslobject::variationcount = 0;

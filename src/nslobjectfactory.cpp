@@ -27,7 +27,10 @@
 #include "nslobjectfactory.h"
 #include "nslobject.h"
 
-using namespace std;
+using std::map;
+using std::string;
+using std::cout;
+using std::endl;
 
 map<string, nslobjectfactory*> nslobjectfactory::factories;
 

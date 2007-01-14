@@ -31,7 +31,13 @@
 #include "errors.h"
 
 
-using namespace std;
+using std::ifstream;
+using std::cout;
+using std::endl;
+using std::string;
+using std::ostringstream;
+
+
 cparser::cparser( std::istream *inputstream )
 {
 	createdstream = false; // We did not create this stream... do not destroy it

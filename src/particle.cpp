@@ -34,7 +34,8 @@
 
 #include "errors.h"
 
-using namespace std;
+using std::runtime_error;
+using std::string;
 
 
 particle::particle()
