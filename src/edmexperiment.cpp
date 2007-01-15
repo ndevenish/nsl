@@ -61,6 +61,12 @@ using nsl::rand_uniform;
 //#include "efence.h"
 //#include "efencepp.h"
 
+
+#include <boost/thread/thread.hpp>
+#include <boost/thread/mutex.hpp>
+
+#include <boost/bind.hpp>
+
 using std::runtime_error;
 using std::endl;
 using std::ofstream;
@@ -391,128 +397,178 @@ bool edmexperiment::runobject()
 void edmexperiment::runinterval( long double time )
 {
 	
-	// Run this routine for a particle-at-a-time - this may be better moved to the main loop
-	// for easier paralellization
+	// How many threads do we want doing the particles?
+	const int thread_max = 1;
+	int thread_count = 0;
+	
+	int partsleft = particles.size();
+	
+	//boost::thread *threads[thread_max];
+	
+	boost::thread_group threads;
+	
+	// Just launch a bunch of threads, and let them sort out the mess.
+	for (thread_count = 0; thread_count < thread_max; thread_count++)
+	{
+		threads.create_thread( boost::bind(&edmexperiment::runruninterval, this, time, &partsleft) );
+		logger << "Thread created and run..." << endl;
+	}
+
+	threads.join_all();
+
+/*
 	
 	// Use an iterator since the compiler threw a wobbly here when it was in the main
 	// function and I don't want to tempt fate again
-	std::vector<particle*>::iterator parts;
-	for (parts = particles.begin(); parts != particles.end(); parts++)
+	std::vector<particle*>::iterator part;
+	for (part = particles.begin(); part != particles.end(); part++)
 	//BOOST_FOREACH( part, particles)
 	{
-		particle *part = *parts; // Reassign our working pointer from the little boost debacle
+//		particle *part = *parts; // Reassign our working pointer from the little boost debacle
 		
-		// Reset the time counter for this particle
-		long double timeleft = time;
-		
-		// Start a loop over bounces, but keep it infinite as if we are in lifetime mode then
-		// we don't care about the bounces
-		unsigned long bounce = 0; // Tracks the bounce count
-		while (1)
-		{
-			// If we are doing bounce-based looping, track that here
-			// Stop if we have reached the maximum number of bounces
-			if (!uselifetime)
-				if((unsigned long)bounces == (unsigned long)(bounce++))
-					break;
-			
-			// Calculate the next point of intersection
-			intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
-
-			// Complete the collisionpoint variable with stuff not calculated in cast
-			collisionpoint.normal.scaleto(1.0);
-			collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
-			
-			// If we get a zero-time collision, make a note of it
-			if (collisionpoint.time == 0.)
-				logger << "\t------- Zero time Intersection" << endl; //	throw runtime_error("Zero Collision-point time");
-			
-			/* Now we have three possibilities:
-				1)	We have enough time for a bounce to complete
-				2)	We don't so, have to go halfway
-				3)	We are bounce-looping - in which case (for now) short-circuit the test */
-			
-			// If doing bounce mode, short circuit the test ahead DISASSEMBLE
-			if (!uselifetime)
-				timeleft = collisionpoint.time + 1.;
-			
-			// check to see what the case is
-			if (collisionpoint.time < timeleft)
-			{
-				// We have no problem with time here!
-			
-				// Now we know the time to collision, step over it calculating the spin changes as we go
-				if (collisionpoint.time > 0.)
-					bigstep(*part, collisionpoint.time);
-				
-				// Reflect the particle now
-				if (collisionpoint.collideobject->reflection == container::reflection_specular) 
-				{
-					part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
-				} else { // Assume diffuse reflection otherwise (for now)
-					
-					
-					// Generate a random z and theta
-					part->velocity_vec.z = (rand_uniform()-0.5)*2.;
-					
-					long double phi = rand_uniform()*pi*2;
-					// Calculate the flat-plane (z=0.) radius of this point
-					long double planarr = cosl(asinl( part->velocity_vec.z ));
-					
-					part->velocity_vec.x = planarr * cosl(phi);
-					part->velocity_vec.y = planarr * sinl(phi);
-
-					
-					// Ensure it faces away from the normal
-					if ((part->velocity_vec * collisionpoint.normal) < 0.)
-						part->velocity_vec *= -1.0;
-				}
-
-				// Scale the velocity up to the particles velocity.
-				part->velocity_vec *= part->velocity;
-
-				// Take away the time for the travel for this bounce from the time left
-				timeleft -= collisionpoint.time;
-				
-				// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
-				// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
-				// 1e-30 anyway)
-				part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
-				
-				// See if this was a wall, and if not then reduce the bouncecount
-				if (collisionpoint.normal.z < 0.001)
-					;//logger << "Wall bounce" << endl;
-				else {
-					//logger << "ceil bounce";
-					bounce--;
-				}
-				
-				// Now call the reporters that report each bounce
-				BOOST_FOREACH( reporter *repo, report_bounce) {
-					repo->report(*this);
-				}
-			}
-			else
-			{
-				// Now process the case where there is not enough time for a full trip across the bottle..
-				// .. do a partial trip
-				bigstep(*part, timeleft);
-				timeleft = 0; // probably not needed - but better safe...
-				
-				// finish this and go to the next particle
-				break;
-			}
-		
-		} //FOREACH bounce
+		runinterval(time, *part);
 	
 	} // FOREACH particle
-
+*/
 	// This ending point should be reached by both modes of looping
 	
 	return;
 }
 
+void edmexperiment::runruninterval ( edmexperiment *thisp, long double intervaltime, int *partsleft )
+{
+	// We want a static local mutex so that all threads passing through here can share it.
+	static boost::mutex readnum_mutex;
+	
+	thisp->logger << "Running thread spawn" << endl;
 
+	while(1)
+	{
+		// Which particle shall we run?
+		int partnum = 0;
+		
+		// Read in the Next particle to process... it is slightly easier to do this
+		// backwards, counting down the number of particles left.
+		{
+			boost::mutex::scoped_lock lock(readnum_mutex);
+			partnum = --(*partsleft);
+		}
+		
+		// Have we exhausted all particles? If so, quit this function.
+		if (partnum < 0)
+			return;
+		
+		// We have generated a particle index number... run it's interval!
+		thisp->runinterval(intervaltime, thisp->particles[partnum]);
+		
+	}
+}
+
+void edmexperiment::runinterval ( long double time, particle *part )
+{
+	// Reset the time counter for this particle
+	long double timeleft = time;
+	
+	// Start a loop over bounces, but keep it infinite as if we are in lifetime mode then
+	// we don't care about the bounces
+	unsigned long bounce = 0; // Tracks the bounce count
+	while (1)
+	{
+		// If we are doing bounce-based looping, track that here
+		// Stop if we have reached the maximum number of bounces
+		if (!uselifetime)
+			if((unsigned long)bounces == (unsigned long)(bounce++))
+				break;
+		
+		// Calculate the next point of intersection
+		intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
+		
+		// Complete the collisionpoint variable with stuff not calculated in cast
+		collisionpoint.normal.scaleto(1.0);
+		collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
+		
+		// If we get a zero-time collision, make a note of it
+		if (collisionpoint.time == 0.)
+			logger << "\t------- Zero time Intersection" << endl; //	throw runtime_error("Zero Collision-point time");
+		
+		/* Now we have three possibilities:
+			1)	We have enough time for a bounce to complete
+2)	We don't so, have to go halfway
+3)	We are bounce-looping - in which case (for now) short-circuit the test */
+		
+		// If doing bounce mode, short circuit the test ahead DISASSEMBLE
+		if (!uselifetime)
+			timeleft = collisionpoint.time + 1.;
+		
+		// check to see what the case is
+		if (collisionpoint.time < timeleft)
+		{
+			// We have no problem with time here!
+			
+			// Now we know the time to collision, step over it calculating the spin changes as we go
+			if (collisionpoint.time > 0.)
+				bigstep(*part, collisionpoint.time);
+			
+			// Reflect the particle now
+			if (collisionpoint.collideobject->reflection == container::reflection_specular) 
+			{
+				part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
+			} else { // Assume diffuse reflection otherwise (for now)
+				
+				
+				// Generate a random z and theta
+				part->velocity_vec.z = (rand_uniform()-0.5)*2.;
+				
+				long double phi = rand_uniform()*pi*2;
+				// Calculate the flat-plane (z=0.) radius of this point
+				long double planarr = cosl(asinl( part->velocity_vec.z ));
+				
+				part->velocity_vec.x = planarr * cosl(phi);
+				part->velocity_vec.y = planarr * sinl(phi);
+				
+				
+				// Ensure it faces away from the normal
+				if ((part->velocity_vec * collisionpoint.normal) < 0.)
+					part->velocity_vec *= -1.0;
+			}
+			
+			// Scale the velocity up to the particles velocity.
+			part->velocity_vec *= part->velocity;
+			
+			// Take away the time for the travel for this bounce from the time left
+			timeleft -= collisionpoint.time;
+			
+			// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
+			// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
+			// 1e-30 anyway)
+			part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
+			
+			// See if this was a wall, and if not then reduce the bouncecount
+			if (collisionpoint.normal.z < 0.001)
+				;//logger << "Wall bounce" << endl;
+			else {
+				//logger << "ceil bounce";
+				bounce--;
+			}
+			
+			// Now call the reporters that report each bounce
+			BOOST_FOREACH( reporter *repo, report_bounce) {
+				repo->report(*this);
+			}
+		}
+		else
+		{
+			// Now process the case where there is not enough time for a full trip across the bottle..
+			// .. do a partial trip
+			bigstep(*part, timeleft);
+			timeleft = 0; // probably not needed - but better safe...
+			
+			// finish this and go to the next particle
+			break;
+		}
+		
+		} //FOREACH bounce	
+}
 
 
 

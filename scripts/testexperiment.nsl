@@ -4,7 +4,7 @@ add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set steptime 3e-5
 	set phase_steps 10 #phase average loops
-	set bounces 10000 #number of bounces to run the simulation over
+	set bounces 1 #number of bounces to run the simulation over
 	#set lifetime 300.0	#The lifetime of a particle
 
 	#This is the time to bounce a particle around for
@@ -27,11 +27,11 @@ add edmexperiment "The Experiment" {
 	}
 
 	#multiadd 3 particle "neutron" {
-	add particle neutron {
+	multiadd 2 particle neutron {
 		set gamma -29.1646870E+6
 
-		vary velocity from 10 to 200 in 20 steps
-
+		#vary velocity from 10 to 200 in 20 steps
+		set velocity 3
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 0
 		set vx 1

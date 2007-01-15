@@ -32,6 +32,7 @@
 		0A72CA450AF6452C0079760D /* nslprops.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A72CA440AF6452C0079760D /* nslprops.txt */; };
 		0A7BDC750B5AC30B008D1188 /* random.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A7BDC740B5AC30B008D1188 /* random.h */; };
 		0A7BDC7E0B5AC353008D1188 /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A7BDC7D0B5AC353008D1188 /* random.cpp */; };
+		0A7BDE430B5B245A008D1188 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7BDE420B5B245A008D1188 /* libboost_thread.a */; };
 		0AB232B90ADA3BE400323FF0 /* edmexperiment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */; };
 		0AB232BA0ADA3BE500323FF0 /* edmexperiment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB232B80ADA3BE400323FF0 /* edmexperiment.h */; };
 		0AB236A10ADD292B00323FF0 /* vector3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB236A00ADD292B00323FF0 /* vector3.h */; };
@@ -93,6 +94,7 @@
 		0A72CA440AF6452C0079760D /* nslprops.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = nslprops.txt; path = doc/nslprops.txt; sourceTree = "<group>"; };
 		0A7BDC740B5AC30B008D1188 /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = random.h; path = src/random.h; sourceTree = "<group>"; };
 		0A7BDC7D0B5AC353008D1188 /* random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = random.cpp; path = src/random.cpp; sourceTree = "<group>"; };
+		0A7BDE420B5B245A008D1188 /* libboost_thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_thread.a; path = /usr/local/lib/libboost_thread.a; sourceTree = "<absolute>"; };
 		0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = edmexperiment.cpp; path = src/edmexperiment.cpp; sourceTree = "<group>"; };
 		0AB232B80ADA3BE400323FF0 /* edmexperiment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = edmexperiment.h; path = src/edmexperiment.h; sourceTree = "<group>"; };
 		0AB236A00ADD292B00323FF0 /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector3.h; path = src/vector3.h; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AD2AF9A0B52F55200960C16 /* libboost_program_options.a in Frameworks */,
+				0A7BDE430B5B245A008D1188 /* libboost_thread.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				0A232F6B0AC99A0D00ABB21F /* ChangeLog */,
+				0A7BDE420B5B245A008D1188 /* libboost_thread.a */,
 				0AD2AF990B52F55200960C16 /* libboost_program_options.a */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,

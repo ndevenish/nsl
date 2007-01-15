@@ -105,6 +105,15 @@ class edmexperiment : public nslobject {
 	* @Returns a bool - false if should stop (i.e. bounces have run out) */
 	void runinterval( long double intervaltime );
 
+	/** Performs an interval step on an individual particle.
+	* This should only ever be called by runinterval! */
+	void runinterval( long double intervaltime, particle *part);
+	
+	/** HACK HACK HACK passes execution to runinterval. Really shitty method, but I can't see a better way to
+	launch a thread into runinterval AND have it access member functions. partsleft is how many particles there are
+	left to be processed.*/
+	static void runruninterval ( edmexperiment *thisp, long double intervaltime, int* partsleft);//, particle *part );
+	
 	/** Calculates false EDM values.*/
 	void edmcalcs( particle &part);
 	
