@@ -68,6 +68,8 @@ class particle : public nslobject {
 	
 	long double flytime;
 	
+	// particles mass
+	long double mass;
 	
 	// Our calculated edm parameters
 	long double frequencydiff;

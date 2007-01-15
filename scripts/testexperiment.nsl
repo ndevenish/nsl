@@ -17,6 +17,9 @@ add edmexperiment "The Experiment" {
 	#raytracer.
 	set collision_compensation_distance 1e-15
 	
+	#Gravity!
+	set gravity on
+	
 	add container "bottle" {
 		add volume_cylinder "mainbottle" {
 			set type negative
@@ -27,11 +30,15 @@ add edmexperiment "The Experiment" {
 	}
 
 	#multiadd 3 particle "neutron" {
-	multiadd 2 particle neutron {
+	multiadd 1000 particle neutron {
 		set gamma -29.1646870E+6
 
 		#vary velocity from 10 to 200 in 20 steps
 		set velocity 3
+		#This will 'spread out' the velocity to a random point on a
+		#maxwell-boltzmann distribution of velocities
+		set maxwelldistribution on
+		
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 0
 		set vx 1
@@ -47,8 +54,10 @@ add edmexperiment "The Experiment" {
 		# Set up initial spin angle
 		set start_spin_polar_angle 0.5 #in units of pi
 		set spin_phase 0 #again in pi units
+		
+		set mass 1.6749e-27
 	}
-	
+
 	ignore multiadd 1000 particle "mercury" {
 		set gamma 7.5901309e+6
 		set velocity 100

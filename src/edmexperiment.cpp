@@ -398,7 +398,7 @@ void edmexperiment::runinterval( long double time )
 {
 	
 	// How many threads do we want doing the particles?
-	const int thread_max = 1;
+	const int thread_max = 2;
 	int thread_count = 0;
 	
 	int partsleft = particles.size();

@@ -49,6 +49,9 @@ const long double hbar = 1.054571596e-34; ///< h-bar (h/2*pi)
 const long double mu0 = 12.566370614E-7;
 const long double dipole_mult = mu0 / (4.*pi);
 
+const long double g = 9.80665;
+const long double k = 1.3806503e-23;
+
 // ***************************************************************
 // Other inline functions
 

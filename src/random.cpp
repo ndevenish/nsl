@@ -29,6 +29,7 @@
 
 #include <boost/random.hpp>
 #include <boost/random/uniform_real.hpp>
+#include <boost/random/normal_distribution.hpp>
 #include <boost/random/variate_generator.hpp>
 
 using boost::mt11213b;
@@ -37,7 +38,10 @@ using std::endl;
 
 static mt11213b rng;
 static boost::uniform_real<> uni_r(0,1);
+static boost::normal_distribution<> norm_r(0,1);
+
 static boost::variate_generator<mt11213b&, boost::uniform_real<> > uni(rng, uni_r);
+static boost::variate_generator<mt11213b&, boost::normal_distribution<> > norm(rng, norm_r);
 
 // Initialise the random number generator
 //initrn initirandomm();
@@ -52,6 +56,11 @@ void seedrand()
 long double rand_uniform()
 {
 	return uni();
+}
+
+long double rand_normal()
+{
+	return norm();
 }
 
 }

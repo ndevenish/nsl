@@ -32,11 +32,16 @@
 #include "particle.h"
 #include "container.h"
 
+#include "physics.h"
 #include "errors.h"
+
+#include "random.h"
 
 using std::runtime_error;
 using std::string;
 
+using nsl::rand_normal;
+using std::endl;
 
 particle::particle()
 {
@@ -107,6 +112,34 @@ void particle::readsettings(void)
 	// Warn for zero velocity
 	if (velocity == 0.0)
 		Warning("Velocity in particle is unset (or set to 0.0)");
+	
+	/////////////////////////////////////////////
+	// Maxwell-Boltzmann distribution
+	if (get("maxwelldistribution", "off") == "on")
+	{
+		//We want this particle to have a velocity on a maxwell-boltzmann distribution
+		
+		// Don't do it if we have no mass information
+		if (!isset("mass"))
+			throw runtime_error("Cannot set maxwell-boltzmann velocity without mass information.");
+		
+		mass = getlongdouble("mass", 0);
+		if (mass <= 0.)
+			throw runtime_error("Zero and negative mass particles unsupported");
+		
+		// Calculate the effective temperature for the desired velocity
+		long double T = (velocity*velocity * mass ) / (2.*k);
+		
+		long double factor = sqrtl((k*T) / mass );
+		
+		// Generate random maxwellian velocities - http://research.chem.psu.edu/shsgroup/chem647/project14/project14.html
+		velocity_vec.x = rand_normal() * factor;
+		velocity_vec.y = rand_normal() * factor;
+		velocity_vec.z = rand_normal() * factor;
+		
+		// Read back the velocity magnitude
+		velocity = velocity_vec.mod();
+	}
 	
 	// **************************************
 	// Get and validate the positions
