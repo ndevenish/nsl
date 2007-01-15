@@ -30,7 +30,7 @@ add edmexperiment "The Experiment" {
 	}
 
 	#multiadd 3 particle "neutron" {
-	multiadd 1000 particle neutron {
+	multiadd 2 particle neutron {
 		set gamma -29.1646870E+6
 
 		#vary velocity from 10 to 200 in 20 steps
