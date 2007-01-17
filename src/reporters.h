@@ -214,4 +214,21 @@ public:
 	};	
 };
 
+////////////////////////////////////////////////////////
+// Reports the position of the particle at every step!
+class posreporter : public reporter {
+protected:
+	void preparefile( edmexperiment &exp );
+	bool prepareobject( void );
+	
+public:
+	posreporter();
+	void report ( edmexperiment &experiment );
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new posreporter; }
+	};	
+};
+
+
 #endif

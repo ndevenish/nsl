@@ -137,7 +137,7 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 //	if (in_volumes > 1)
 //		cout << "inv>1" << endl;
 	if (in_volumes == 0)
-		cout << "inv0" << endl;
+		cout << "In Zero Volumes...." << endl;
 
 	for (int i = 0; i < intercepts; i++)
 	{

@@ -80,6 +80,8 @@ class edmexperiment : public nslobject {
 	/// A count of how many reporters we have
 	//int reportercount;
 	
+	//Is gravity turned on?
+	bool gravity;
 
 	bool prepareobject();
 	bool runobject();	

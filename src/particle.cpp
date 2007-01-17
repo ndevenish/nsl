@@ -33,9 +33,11 @@
 #include "container.h"
 
 #include "physics.h"
+#include "vector3.h"
 #include "errors.h"
 
 #include "random.h"
+#include "electromagnetics.h"
 
 using std::runtime_error;
 using std::string;
@@ -198,3 +200,13 @@ void particle::readsettings(void)
 	// Look for an electric field to link to
 	elec_field = (efield*)findbytype("efield");
 }
+
+
+/** Updates the Exv effect for the particle. */
+void particle::updateExv ( efield &elecfield )
+{
+	vector3 vxE; vector3 E;
+	elecfield.getfield(E, this->position);
+	this->vxEeffect = (crossproduct(E, this->velocity_vec) * this->vgamma)/ csquared;
+}
+

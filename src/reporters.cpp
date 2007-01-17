@@ -480,3 +480,36 @@ void poldistreporter::report( edmexperiment &exp )
 	
 	*outfile << endl;
 }
+
+
+/////////////////////////////////////////////////////////
+// Posreporter - reports on the position of particles
+
+posreporter::posreporter()
+{
+	objecttype = "posreporter";
+	types.push_back(objecttype);
+	
+	report_frequency = rfreq_step;
+}
+
+bool posreporter::prepareobject ( void )
+{
+	reporter::prepareobject();
+	
+	return true;
+}
+void posreporter::preparefile( edmexperiment &exp )
+{
+	*outfile << "# Position reporter: " << exp.get("time") << endl;
+	*outfile << "# Flight-time\tx\ty\tz\t";
+	*outfile << endl;
+}
+
+void posreporter::report( edmexperiment &exp )
+{
+	outfile->precision(20);
+	particle &part = *(exp.particles[0]);
+	
+	*outfile << part.flytime << "\t" << part.position.x << "\t" << part.position.y << "\t" << part.position.z << endl;
+}

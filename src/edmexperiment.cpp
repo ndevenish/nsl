@@ -71,6 +71,7 @@ using std::runtime_error;
 using std::endl;
 using std::ofstream;
 using std::ios;
+using std::cout;
 
 
 //using std::floorl;
@@ -93,6 +94,8 @@ edmexperiment::edmexperiment()
 	variation.value = 0.;
 	variation.runs = 0;
 	variation.varying = false;
+	
+	gravity = false;
 	
 	phase_steps = 0;
 	steptime = 0.0;
@@ -234,6 +237,10 @@ void edmexperiment::readsettings ( void )
 	
 	collision_offset = getlongdouble("collision_compensation_distance", 0.0);
 	
+	if(get("gravity", "off") == "on")
+		gravity = true;
+	else
+		gravity = false;
 }
 
 bool edmexperiment::runobject()
@@ -407,29 +414,15 @@ void edmexperiment::runinterval( long double time )
 	
 	boost::thread_group threads;
 	
-	// Just launch a bunch of threads, and let them sort out the mess.
+	// Just launch a bunch of threads, and let them sort out the mess. (which particles to do)
 	for (thread_count = 0; thread_count < thread_max; thread_count++)
 	{
 		threads.create_thread( boost::bind(&edmexperiment::runruninterval, this, time, &partsleft) );
-		logger << "Thread created and run..." << endl;
+		//logger << "Thread created and run..." << endl;
 	}
 
 	threads.join_all();
 
-/*
-	
-	// Use an iterator since the compiler threw a wobbly here when it was in the main
-	// function and I don't want to tempt fate again
-	std::vector<particle*>::iterator part;
-	for (part = particles.begin(); part != particles.end(); part++)
-	//BOOST_FOREACH( part, particles)
-	{
-//		particle *part = *parts; // Reassign our working pointer from the little boost debacle
-		
-		runinterval(time, *part);
-	
-	} // FOREACH particle
-*/
 	// This ending point should be reached by both modes of looping
 	
 	return;
@@ -437,31 +430,48 @@ void edmexperiment::runinterval( long double time )
 
 void edmexperiment::runruninterval ( edmexperiment *thisp, long double intervaltime, int *partsleft )
 {
-	// We want a static local mutex so that all threads passing through here can share it.
-	static boost::mutex readnum_mutex;
+	// Enclose this in an exception block to catch any exceptions... This doesn't otherwise
+	// seem to happen with threads - Any execution here is going to be in a thread seperate from
+	// the main one
+	try {
 	
-	thisp->logger << "Running thread spawn" << endl;
+		
+		// We want a static local mutex so that all threads passing through here can share it.
+		static boost::mutex readnum_mutex;
+		
+		//thisp->logger << "Running thread spawn" << endl;
 
-	while(1)
-	{
-		// Which particle shall we run?
-		int partnum = 0;
-		
-		// Read in the Next particle to process... it is slightly easier to do this
-		// backwards, counting down the number of particles left.
+		while(1)
 		{
-			boost::mutex::scoped_lock lock(readnum_mutex);
-			partnum = --(*partsleft);
+			// Which particle shall we run?
+			int partnum = 0;
+			
+			// Read in the Next particle to process... it is slightly easier to do this
+			// backwards, counting down the number of particles left.
+			{
+				boost::mutex::scoped_lock lock(readnum_mutex);
+				partnum = --(*partsleft);
+			}
+			
+			// Have we exhausted all particles? If so, quit this function.
+			if (partnum < 0)
+				return;
+			
+			// We have generated a particle index number... run it's interval!
+			thisp->runinterval(intervaltime, thisp->particles[partnum]);
+			
 		}
-		
-		// Have we exhausted all particles? If so, quit this function.
-		if (partnum < 0)
-			return;
-		
-		// We have generated a particle index number... run it's interval!
-		thisp->runinterval(intervaltime, thisp->particles[partnum]);
-		
+	} catch (runtime_error runt) {
+		cout << "\a\a\aA runtime error has occured in a seperate thread";
+		if (runt.what())
+			cout << ": " << runt.what();
+		cout << endl << endl;
+		assert(0);
+	} catch (...) {
+		cout << "\aAn unrecoverable, unidentified exception occured - terminating program." << endl;
+		assert(0);
 	}
+	
 }
 
 void edmexperiment::runinterval ( long double time, particle *part )
@@ -474,18 +484,34 @@ void edmexperiment::runinterval ( long double time, particle *part )
 	unsigned long bounce = 0; // Tracks the bounce count
 	while (1)
 	{
+		logger << bounce << "\n";
+		
 		// If we are doing bounce-based looping, track that here
 		// Stop if we have reached the maximum number of bounces
 		if (!uselifetime)
 			if((unsigned long)bounces == (unsigned long)(bounce++))
 				break;
 		
+		/*
+		part->position.x = 0.2207799832839370257620004167620209;
+		part->position.y = 0.080505894077042686185485820260510081;
+		part->position.z = 0.076777422998069458359715611095452914;
+		
+		part->velocity_vec.x = -2.3072321910636222064283629151759669;
+		part->velocity_vec.y =  1.5048785684221324121523366557084955;
+		part->velocity_vec.z =  1.3665619196858571626762568484991789;
+		part->velocity = 3.0749750193313740709299963782541454;
+		*/		
 		// Calculate the next point of intersection
 		intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
 		
 		// Complete the collisionpoint variable with stuff not calculated in cast
 		collisionpoint.normal.scaleto(1.0);
 		collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
+
+		// add the adjustments for gravity, if we are using it
+		if (gravity)
+			collisionpoint.location.z -= 0.5*g*collisionpoint.time*collisionpoint.time;
 		
 		// If we get a zero-time collision, make a note of it
 		if (collisionpoint.time == 0.)
@@ -493,8 +519,8 @@ void edmexperiment::runinterval ( long double time, particle *part )
 		
 		/* Now we have three possibilities:
 			1)	We have enough time for a bounce to complete
-2)	We don't so, have to go halfway
-3)	We are bounce-looping - in which case (for now) short-circuit the test */
+			2)	We don't so, have to go halfway
+			3)	We are bounce-looping - in which case (for now) short-circuit the test */
 		
 		// If doing bounce mode, short circuit the test ahead DISASSEMBLE
 		if (!uselifetime)
@@ -532,7 +558,7 @@ void edmexperiment::runinterval ( long double time, particle *part )
 					part->velocity_vec *= -1.0;
 			}
 			
-			// Scale the velocity up to the particles velocity.
+			// Scale the velocity up to the particles velocity. (it has length 1 after this reflection)
 			part->velocity_vec *= part->velocity;
 			
 			// Take away the time for the travel for this bounce from the time left
@@ -541,9 +567,13 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
 			// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
 			// 1e-30 anyway)
+			// Note... this automatically accounts for gravity via collisionpoint.location
 			part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
 			
-			// See if this was a wall, and if not then reduce the bouncecount
+			
+			// See if this was a wall, and if not then reduce the bouncecount.
+			// This is for compatability with the old system, which didn't count ceiling bounces as
+			// true bounces.
 			if (collisionpoint.normal.z < 0.001)
 				;//logger << "Wall bounce" << endl;
 			else {
@@ -580,18 +610,14 @@ void edmexperiment::bigstep(particle& part, long double time)
 {
 	long steps;
 	
+	// calculate the Exv effect for the particle- this does not change over a bigstep
+	// Now (here for now) calculate the VxE effect
+	// NOTE: if gravity is on, this does change over a bigstep so don't do this here
+	if (!gravity)
+		part.updateExv(*elecfield);
+
 	// Calculate the number of steps we are going to take
 	steps = (long)floorl((long double)time / (long double)steptime);
-	
-	// calculate the ExB effect for the particle- this does not change over a bigstep
-	// Now (here for now) calculate the VxE effect
-	vector3 vxE; vector3 E;
-	elecfield->getfield(E, part.position);
-	part.vxEeffect = (crossproduct(E, part.velocity_vec) * part.vgamma)/ csquared;
-
-	// WAAGH WAAAGH WAAAGH Setting this to zero for debugging
-	//part.vxEeffect *= 0;
-	
 	
 	// Now do this many smallsteps - after which we will have one step of time less
 	// than one step to complete
@@ -616,19 +642,31 @@ void edmexperiment::bigstep(particle& part, long double time)
 
 void edmexperiment::smallstep(particle& part, long double time)
 {
-//	time = 0.00014977692797960484496350153094113011;
+	long double halftime = time / 2.0;
 	
 	// Firstly calculate the step midpoint
 	vector3 midpoint;
-	midpoint = part.position + (part.velocity_vec*(time/2.0));
+	midpoint = part.position + (part.velocity_vec*halftime);
+
+	// If gravity is turned on, adjust the relevant properties
+	if (gravity)
+	{
+		// the midpoint is different...
+		midpoint.z -= 0.5*g*halftime*halftime;
+		
+		// Update the particles velocity....
+		part.velocity_vec.z -= g*halftime;
+		part.velocity = mod(part.velocity_vec);
+		
+		// And the particles Exv effect
+		part.updateExv(*elecfield);
+	}
 	
 	// Just grab the magnetic field - now we have precalculated the magnetic field
 	// for the particle already
-	vector3 B;//, E;
+	vector3 B;
 	magfield->getfield(B, midpoint);
-	//elecfield->getfield(E, midpoint);
-	
-	
+
 	// Now calculate the two different magnetic fields
 	vector3 BplusvxE, BminusvxE;
 	BplusvxE = B + part.vxEeffect;
@@ -638,45 +676,29 @@ void edmexperiment::smallstep(particle& part, long double time)
 	
 	// Move it first
 	part.position += part.velocity_vec * time;
+	//...and gravity adjustments
+	if (gravity)
+	{
+		// Update the position properly
+		part.position.z -= 0.5*g*time*time;
+		
+		//and finish adjusting the velocity with the other half of the step
+		part.velocity_vec.z -= g*halftime;
+		part.velocity = mod(part.velocity_vec);
+		
+	}
 	
 	// Update the particles flytime
 	part.flytime += time;
 	
-	/*
-	static long double sumtime = 0;
-	vector3 spin = part.spinEplus;
-	
-	sumtime += time;
-	long double a, b, c;
-	
-	a = spin_calculation(spin, part.gamma, BplusvxE, time);
-	spin = part.spinEplus;
-	b = 100. * spin_calculation(spin, part.gamma, BplusvxE, time/10.);
-	
-	c = a - b;
-	tmpld = c;
-	*/
-	
-	
 	// Now spin it both ways 
-	//BplusvxE = vector3(8.38780388e-13, -2.6690424730e-11, 1.0e-6);
-	//BminusvxE = vector3(-8.38780388e-13, 2.669042473e-11, 1.0e-6);
-	//time = 0.0001497769279;
-	
 	long double plusphase, minusphase, framediff;
 	plusphase		= spin_calculation(part.spinEplus,	 part.gamma, BplusvxE,  time);
 	minusphase		= spin_calculation(part.spinEminus, part.gamma, BminusvxE, time);
 	framediff = plusphase - minusphase;
-	/*
-	static ofstream steplog("steplog.txt");
-	steplog << part.flytime << ", " << plusphase << ", " << minusphase << ", " << framediff << endl; */
+
 	part.E_sum_phase += plusphase;
 	part.E_minus_sum_phase += minusphase;
-	
-	/*
-	part.E_sum_phase		+= spin_calculation(part.spinEplus,	 part.gamma, BplusvxE,  time);
-	part.E_minus_sum_phase	+= spin_calculation(part.spinEminus, part.gamma, BminusvxE, time);
-	*/
 	
 	// Now (god forbid) call the reporters that report every step
 	BOOST_FOREACH( reporter *rep, report_step ) {

@@ -99,7 +99,8 @@ int main ( int argc, char *argv[] )
 		nslobjectfactory::add("intervalreporter", new intervalreporter::Factory);
 		nslobjectfactory::add("polreporter", new polreporter::Factory);
 		nslobjectfactory::add("poldistreporter", new poldistreporter::Factory);
-
+		nslobjectfactory::add("posreporter", new posreporter::Factory);
+		
 		// Build the tree
 		if (!vm.count("input-file"))
 		{

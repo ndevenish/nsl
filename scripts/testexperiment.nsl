@@ -3,8 +3,8 @@
 add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set steptime 3e-5
-	set phase_steps 10 #phase average loops
-	set bounces 1 #number of bounces to run the simulation over
+	set phase_steps 1 #phase average loops
+	set bounces 10 #number of bounces to run the simulation over
 	#set lifetime 300.0	#The lifetime of a particle
 
 	#This is the time to bounce a particle around for
@@ -30,14 +30,14 @@ add edmexperiment "The Experiment" {
 	}
 
 	#multiadd 3 particle "neutron" {
-	multiadd 2 particle neutron {
+	add particle neutron {
 		set gamma -29.1646870E+6
 
 		#vary velocity from 10 to 200 in 20 steps
-		set velocity 3
+		set velocity 1
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
-		set maxwelldistribution on
+		# set maxwelldistribution on
 		
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 0
@@ -63,11 +63,11 @@ add edmexperiment "The Experiment" {
 		set velocity 100
 
 		set vy 1
-		set vx 0.1
+		set vx 0
 
 		set z 0.1
 		set x 0
-		set y -
+		set y 0
 
 		set start_spin_polar_angle 0.5
 		set spin_phase 0
@@ -87,12 +87,17 @@ add edmexperiment "The Experiment" {
 	
 	add efield "Efield" {
 		set e0z		8.e5
-		#set e0z			0
 	}
-
 	
-	add edmreporter "edmreporter" {
+	ignore add edmreporter "edmreporter" {
 		set output_file "veltest_200.txt"
 		set volaverage_dbdz true
+	}
+	
+	add posreporter "posreporter" {
+		set output_file "poslog.txt"
+	}
+	add impactreporter "impacts" {
+		set output_file "impacts.txt"
 	}
 }
