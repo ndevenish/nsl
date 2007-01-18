@@ -30,14 +30,14 @@ add edmexperiment "The Experiment" {
 	}
 
 	#multiadd 3 particle "neutron" {
-	add particle neutron {
+	multiadd 2 particle neutron {
 		set gamma -29.1646870E+6
 
 		#vary velocity from 10 to 200 in 20 steps
 		set velocity 1
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
-		# set maxwelldistribution on
+		set maxwelldistribution on
 		
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 0
@@ -96,8 +96,10 @@ add edmexperiment "The Experiment" {
 	
 	add posreporter "posreporter" {
 		set output_file "poslog.txt"
+		set particle 0
 	}
-	add impactreporter "impacts" {
-		set output_file "impacts.txt"
+	add posreporter "posreporter" {
+		set output_file "poslog2.txt"
+		set particle 1
 	}
 }

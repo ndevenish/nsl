@@ -30,6 +30,7 @@
 #include <boost/random/uniform_real.hpp>
 #include <boost/random/variate_generator.hpp>
 
+#include <boost/thread/mutex.hpp>
 
 #include "errors.h"
 #include "reporters.h"
@@ -153,7 +154,13 @@ void reporter::report( edmexperiment &experiment )
 {
 	static long stepcount = 0;
 	
-	*outfile << "Report #" << ++stepcount << endl;
+	// Enclose this in a block for mutexing, to prevent two threads simultaneously writing out
+	{
+		static boost::mutex output_mutex;
+		boost::mutex::scoped_lock lock(output_mutex);
+		
+		*outfile << "Report #" << ++stepcount << endl;
+	}
 }
 
 /////////////////////////////////////////////////////////
@@ -164,10 +171,17 @@ impactreporter::impactreporter() {
 	objecttype = "impactreporter";
 	types.push_back(objecttype);
 }
+
 void impactreporter::report( edmexperiment &experiment ) {
 	static long bounce = 0;
-	
-	*outfile << bounce++ << ", " << experiment.particles[0]->flytime << ", " << experiment.particles[0]->position << endl;
+
+	// Enclose this in a block for mutexing, to prevent two threads simultaneously writing out
+	{
+		static boost::mutex output_mutex;
+		boost::mutex::scoped_lock lock(output_mutex);
+		
+		*outfile << bounce++ << ", " << experiment.particles[0]->flytime << ", " << experiment.particles[0]->position << endl;
+	}
 }
 
 /////////////////////////////////////////////////////////
@@ -189,16 +203,23 @@ void phasereporter::preparefile (edmexperiment &exp)
 void phasereporter::report ( edmexperiment &ex )
 {
 	static long stepa = 0;
-	outfile->precision(20);
-	*outfile << ++stepa << ", " << ex.particles[0]->flytime 
-				//<< ", " << ex.particles[0]->spinEplus << endl;
 	
-				<< ", " << ex.particles[0]->E_sum_phase 
-				<< ", " << ex.particles[0]->E_minus_sum_phase
-				<< ", " << ex.particles[0]->E_sum_phase - ex.particles[0]->E_minus_sum_phase
-				/*<< ", " << ex.change.average()
-				<< ", " << ex.tmpld*/
-				<< endl;
+	// Enclose this in a block for mutexing, to prevent two threads simultaneously writing out
+	{
+		static boost::mutex output_mutex;
+		boost::mutex::scoped_lock lock(output_mutex);
+		
+		outfile->precision(20);
+		*outfile << ++stepa << ", " << ex.particles[0]->flytime 
+					//<< ", " << ex.particles[0]->spinEplus << endl;
+		
+					<< ", " << ex.particles[0]->E_sum_phase 
+					<< ", " << ex.particles[0]->E_minus_sum_phase
+					<< ", " << ex.particles[0]->E_sum_phase - ex.particles[0]->E_minus_sum_phase
+					/*<< ", " << ex.change.average()
+					<< ", " << ex.tmpld*/
+					<< endl;
+	}
 }
 
 
@@ -228,9 +249,14 @@ void intervalreporter::report ( edmexperiment & experiment )
 	{
 		ensemble += p->flytime;
 	}
-	*outfile << ensemble.points() << "\t" << ensemble << endl;;
 	
-	
+	// Enclose this in a block for mutexing, to prevent two threads simultaneously writing out
+	{
+		static boost::mutex output_mutex;
+		boost::mutex::scoped_lock lock(output_mutex);
+		
+		*outfile << ensemble.points() << "\t" << ensemble << endl;;
+	}
 }
  
 /////////////////////////////////////////////////////////
@@ -262,19 +288,25 @@ void edmreporter::report ( edmexperiment &experiment )
 	{
 		edmav += part->cumulativeedm;
 	}
-	
-	*outfile << experiment.variation.value << "\t" <<  edmav.average() << "\t" << edmav.uncert();
-	
+
 	// Calculate an average vertical field gradient if required
+	dataset vergrad;
 	if (volaverage)
 	{
 		// Grab pointers to the container and magnetic field
 		container *box = experiment.particlebox;
 		bfield* b = experiment.magfield;
-		dataset vergrad = calc_dbdz(*b, *box);
+		vergrad = calc_dbdz(*b, *box);
+	}
+	
+	// Enclose this in a block for mutexing, to prevent two threads simultaneously writing out
+	{
+		static boost::mutex output_mutex;
+		boost::mutex::scoped_lock lock(output_mutex);
 		
-		*outfile << "\t" << vergrad.average() << "\t" << vergrad.uncert();
-		
+		*outfile << experiment.variation.value << "\t" <<  edmav.average() << "\t" << edmav.uncert();
+		if (volaverage)
+			*outfile << "\t" << vergrad.average() << "\t" << vergrad.uncert();
 	}
 		
 	*outfile << endl;
@@ -401,10 +433,16 @@ void polreporter::report( edmexperiment &exp )
 		//throw runtime_error("Flight-time of particles do not all agree");
 	}
 	
-	*outfile << flighttime.average() << "\t" << cumfreq.average() << "\t" << cumfreq.stdev()
-			 << "\t" << cumfreqminus.average() << "\t" << cumfreqminus.stdev();
+	// Enclose this in a block for mutexing, to prevent two threads simultaneously writing out
+	{
+		static boost::mutex output_mutex;
+		boost::mutex::scoped_lock lock(output_mutex);
+		
+		*outfile << flighttime.average() << "\t" << cumfreq.average() << "\t" << cumfreq.stdev()
+				 << "\t" << cumfreqminus.average() << "\t" << cumfreqminus.stdev();
 
-	*outfile << endl;
+		*outfile << endl;
+	}
 }
 
 /////////////////////////////////////////////////////////
@@ -469,16 +507,22 @@ void poldistreporter::report( edmexperiment &exp )
 			phase += p->E_minus_sum_phase;
 	}
 	
-	outfile->precision(20);
-	*outfile << time.average() << "\t" << phase.average();
-	
-	BOOST_FOREACH(particle *p, exp.particles)
-		if (logphase == phase_positive)
-			*outfile << "\t" << (p->E_sum_phase-phase.average());
-		else 
-			*outfile << "\t" << (p->E_minus_sum_phase-phase.average());
-	
-	*outfile << endl;
+	// Enclose this in a block for mutexing, to prevent two threads simultaneously writing out
+	{
+		static boost::mutex output_mutex;
+		boost::mutex::scoped_lock lock(output_mutex);
+
+		outfile->precision(20);
+		*outfile << time.average() << "\t" << phase.average();
+		
+		BOOST_FOREACH(particle *p, exp.particles)
+			if (logphase == phase_positive)
+				*outfile << "\t" << (p->E_sum_phase-phase.average());
+			else 
+				*outfile << "\t" << (p->E_minus_sum_phase-phase.average());
+		
+		*outfile << endl;
+	}
 }
 
 
@@ -497,6 +541,8 @@ bool posreporter::prepareobject ( void )
 {
 	reporter::prepareobject();
 	
+	tparticle = getint("particle", 0);
+	
 	return true;
 }
 void posreporter::preparefile( edmexperiment &exp )
@@ -508,8 +554,18 @@ void posreporter::preparefile( edmexperiment &exp )
 
 void posreporter::report( edmexperiment &exp )
 {
+
 	outfile->precision(20);
 	particle &part = *(exp.particles[0]);
 	
-	*outfile << part.flytime << "\t" << part.position.x << "\t" << part.position.y << "\t" << part.position.z << endl;
+	if (tparticle+1 > exp.particles.size())
+		throw runtime_error("Particle asked to track does not exist");
+	
+	// Enclose this in a block for mutexing, to prevent two threads simultaneously writing out
+	{
+		static boost::mutex output_mutex;
+		boost::mutex::scoped_lock lock(output_mutex);
+		
+		*outfile << part.flytime << "\t" << part.position.x << "\t" << part.position.y << "\t" << part.position.z << endl;
+	}
 }

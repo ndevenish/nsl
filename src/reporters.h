@@ -221,6 +221,8 @@ protected:
 	void preparefile( edmexperiment &exp );
 	bool prepareobject( void );
 	
+	int tparticle;
+	
 public:
 	posreporter();
 	void report ( edmexperiment &experiment );

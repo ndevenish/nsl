@@ -20,67 +20,45 @@
  * 
  */
 
+// Standard Headers
+#include <iostream> // For endl, and cout inside exception handlers
 
+// C Headers
+#include <cmath>   // for maths functions
+#include <cassert> // For assertion
+#include <ctime>   // For getting the current time
 
-
-
-#include <iostream>
-#include <fstream>
-
-#include <cmath>
-#include <cassert>
-//#include <cstdlib>
-#include <ctime>
-
-
-
-#include "boost/foreach.hpp"
+// Boost headers for boost functions we are using
+#include <boost/thread/thread.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/bind.hpp>
+#include <boost/foreach.hpp>
 
 #include "errors.h"
-
 #include "nslobject.h"
 #include "nslobjectfactory.h"
-
 #include "container.h"
 #include "electromagnetics.h"
 #include "particle.h"
-
 #include "edmexperiment.h"
-
 #include "physics.h"
 #include "datasets.h"
-
 #include "tools.h"
-
 #include "reporters.h"
-
 #include "random.h"
-
-using nsl::rand_uniform;
-
-//#include "efence.h"
-//#include "efencepp.h"
-
-
-#include <boost/thread/thread.hpp>
-#include <boost/thread/mutex.hpp>
-
-#include <boost/bind.hpp>
 
 using std::runtime_error;
 using std::endl;
-using std::ofstream;
 using std::ios;
 using std::cout;
 
+using nsl::rand_uniform;
 
-//using std::floorl;
 
 
-/*container *particlebox;
-	particle *particles[MAX_PARTICLES];
-	bfield * magfield;
-	efield *elecfield;*/
+
+
+
 edmexperiment::edmexperiment()
 {
 	
@@ -635,9 +613,12 @@ void edmexperiment::bigstep(particle& part, long double time)
 		throw runtime_error("Stepping routine stepped over maximum time to impact");
 	// Now do the actual final step
 	smallstep(part, laststep);
+	
+	/*
 	static ofstream lasts("laststep.txt");
 	lasts.precision(20);
 	lasts << laststep << endl;
+	 */
 }
 
 void edmexperiment::smallstep(particle& part, long double time)
