@@ -59,6 +59,9 @@ class particle : public nslobject {
 	
 	long double velocity;
 
+	/// The steptime is particle-dependant for more complicated solvers
+	long double steptime;
+	
 	// Gyromagnetic ratio of the particle
 	long double gamma;
 	

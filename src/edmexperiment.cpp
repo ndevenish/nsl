@@ -277,9 +277,13 @@ bool edmexperiment::runobject()
 		// Resetting this should also get all our children to read!
 			this->reset();
 			
-		// Reset all the particles cumulative phase average things
+		// Reset all the particles cumulative phase average things,
+		// and set each particles steptime to be our global steptime
 		BOOST_FOREACH(particle *part, particles)
+		{
 			part->cumulativeedm.reset();
+			part->steptime = steptime;
+		}
 			
 		// First loop over starting phases
 		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
@@ -378,115 +382,109 @@ bool edmexperiment::runobject()
 /// Runinterval function
 
 
-// The task now is to run over bounces, but to stop if we run out of time
+// The first of the runinterval functions - we are handed a time and tasked with running
+// the particles for this amount of time (over bounces or whatever).
+// This particular function is now responsible for launching threads which then sort out
+// the tasks themselves.
 void edmexperiment::runinterval( long double time )
 {
 	
 	// How many threads do we want doing the particles?
 	const int thread_max = 2;
-	int thread_count = 0;
 	
+	// Build the storage that all threads will store access to
 	int partsleft = particles.size();
 	
-	//boost::thread *threads[thread_max];
-	
+	// Create the controller for the threads
 	boost::thread_group threads;
 	
 	// Just launch a bunch of threads, and let them sort out the mess. (which particles to do)
-	for (thread_count = 0; thread_count < thread_max; thread_count++)
+	for (int thread_count = 0; thread_count < thread_max; thread_count++)
 	{
+		// Launch a thread - the function has to be static which is why we pass a this pointer
 		threads.create_thread( boost::bind(&edmexperiment::runruninterval, this, time, &partsleft) );
-		//logger << "Thread created and run..." << endl;
 	}
 
+	// Sit and wait for all of our little pets to return to us
 	threads.join_all();
-
-	// This ending point should be reached by both modes of looping
 	
 	return;
 }
 
+/** Launching point for a thread to process particles. * * * * * * * * * * * * * * * * 
+* Threads are created into this function, where they sort out getting a new particle  *
+* to process, and return once there are no more jobs left to do.					  *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void edmexperiment::runruninterval ( edmexperiment *thisp, long double intervaltime, int *partsleft )
 {
 	// Enclose this in an exception block to catch any exceptions... This doesn't otherwise
 	// seem to happen with threads - Any execution here is going to be in a thread seperate from
 	// the main one
 	try {
-	
-		
-		// We want a static local mutex so that all threads passing through here can share it.
-		static boost::mutex readnum_mutex;
-		
-		//thisp->logger << "Running thread spawn" << endl;
-
+		// Loop infinitely and let threads find out inside whether there is anything left to do
 		while(1)
 		{
 			// Which particle shall we run?
 			int partnum = 0;
 			
 			// Read in the Next particle to process... it is slightly easier to do this
-			// backwards, counting down the number of particles left.
+			// backwards, counting down the number of particles left. This definitely has to
+			// be mutex locked otherwise we could get multiple threads acting on the same particle
 			{
+				// We want a static local mutex so that all threads passing through here can share it.
+				static boost::mutex readnum_mutex;
 				boost::mutex::scoped_lock lock(readnum_mutex);
+				
 				partnum = --(*partsleft);
 			}
 			
-			// Have we exhausted all particles? If so, quit this function.
+			// Have we exhausted all particles? If so, quit this function (and thread).
 			if (partnum < 0)
 				return;
 			
 			// We have generated a particle index number... run it's interval!
 			thisp->runinterval(intervaltime, thisp->particles[partnum]);
 			
-		}
+		} //while(1)
+		
+	// do the exception handling stuff
 	} catch (runtime_error runt) {
 		cout << "\a\a\aA runtime error has occured in a seperate thread";
 		if (runt.what())
 			cout << ": " << runt.what();
 		cout << endl << endl;
-		assert(0);
+		assert(0); // Kill the application!
 	} catch (...) {
 		cout << "\aAn unrecoverable, unidentified exception occured - terminating program." << endl;
-		assert(0);
+		assert(0); // Kill the application!
 	}
 	
 }
 
+// This is the second (and original) runinterval function. Rather than processing threads, this
+// actually does what it's name says - runs a particle for a specified length of time!
 void edmexperiment::runinterval ( long double time, particle *part )
 {
 	// Reset the time counter for this particle
 	long double timeleft = time;
-	
-	// Start a loop over bounces, but keep it infinite as if we are in lifetime mode then
-	// we don't care about the bounces
 	unsigned long bounce = 0; // Tracks the bounce count
+	
+	// Start a loop over bounces, but keep it infinite, as if we are in lifetime mode then
+	// we don't care about the bounces and we can decide on this later
 	while (1)
 	{
-		logger << bounce << "\n";
-		
 		// If we are doing bounce-based looping, track that here
 		// Stop if we have reached the maximum number of bounces
 		if (!uselifetime)
 			if((unsigned long)bounces == (unsigned long)(bounce++))
 				break;
-		
-		/*
-		part->position.x = 0.2207799832839370257620004167620209;
-		part->position.y = 0.080505894077042686185485820260510081;
-		part->position.z = 0.076777422998069458359715611095452914;
-		
-		part->velocity_vec.x = -2.3072321910636222064283629151759669;
-		part->velocity_vec.y =  1.5048785684221324121523366557084955;
-		part->velocity_vec.z =  1.3665619196858571626762568484991789;
-		part->velocity = 3.0749750193313740709299963782541454;
-		*/		
+			
 		// Calculate the next point of intersection
 		intercept	collisionpoint = particlebox->cast(part->position, part->velocity_vec);
 		
 		// Complete the collisionpoint variable with stuff not calculated in cast
 		collisionpoint.normal.scaleto(1.0);
 		collisionpoint.location = part->position + (part->velocity_vec*collisionpoint.time);
-
 		// add the adjustments for gravity, if we are using it
 		if (gravity)
 			collisionpoint.location.z -= 0.5*g*collisionpoint.time*collisionpoint.time;
@@ -497,7 +495,7 @@ void edmexperiment::runinterval ( long double time, particle *part )
 		
 		/* Now we have three possibilities:
 			1)	We have enough time for a bounce to complete
-			2)	We don't so, have to go halfway
+			2)	We don't, so have to go halfway
 			3)	We are bounce-looping - in which case (for now) short-circuit the test */
 		
 		// If doing bounce mode, short circuit the test ahead DISASSEMBLE
@@ -509,41 +507,19 @@ void edmexperiment::runinterval ( long double time, particle *part )
 		{
 			// We have no problem with time here!
 			
+			
 			// Now we know the time to collision, step over it calculating the spin changes as we go
 			if (collisionpoint.time > 0.)
 				bigstep(*part, collisionpoint.time);
 			
-			// Reflect the particle now
-			if (collisionpoint.collideobject->reflection == container::reflection_specular) 
-			{
-				part->velocity_vec = part->velocity_vec - ((collisionpoint.normal * 2.)*(collisionpoint.normal * part->velocity_vec));
-			} else { // Assume diffuse reflection otherwise (for now)
-				
-				
-				// Generate a random z and theta
-				part->velocity_vec.z = (rand_uniform()-0.5)*2.;
-				
-				long double phi = rand_uniform()*pi*2;
-				// Calculate the flat-plane (z=0.) radius of this point
-				long double planarr = cosl(asinl( part->velocity_vec.z ));
-				
-				part->velocity_vec.x = planarr * cosl(phi);
-				part->velocity_vec.y = planarr * sinl(phi);
-				
-				
-				// Ensure it faces away from the normal
-				if ((part->velocity_vec * collisionpoint.normal) < 0.)
-					part->velocity_vec *= -1.0;
-			}
-			
-			// Scale the velocity up to the particles velocity. (it has length 1 after this reflection)
-			part->velocity_vec *= part->velocity;
+			// Calculate the reflection - now done by the container being hit
+			collisionpoint.collideobject->reflect(part->velocity_vec, collisionpoint.normal, part->velocity);
 			
 			// Take away the time for the travel for this bounce from the time left
 			timeleft -= collisionpoint.time;
 			
 			// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
-			// whilst having a minimal physical impact (preliminary tests indicate this is usually or order
+			// whilst having a minimal physical impact (preliminary tests indicate this is usually of order
 			// 1e-30 anyway)
 			// Note... this automatically accounts for gravity via collisionpoint.location
 			part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
@@ -563,19 +539,13 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			BOOST_FOREACH( reporter *repo, report_bounce) {
 				repo->report(*this);
 			}
-		}
-		else
-		{
+		} else {
 			// Now process the case where there is not enough time for a full trip across the bottle..
-			// .. do a partial trip
+			// .. just do a partial trip
 			bigstep(*part, timeleft);
 			timeleft = 0; // probably not needed - but better safe...
-			
-			// finish this and go to the next particle
-			break;
 		}
-		
-		} //FOREACH bounce	
+	} //while(1) over bounces	
 }
 
 
@@ -589,13 +559,12 @@ void edmexperiment::bigstep(particle& part, long double time)
 	long steps;
 	
 	// calculate the Exv effect for the particle- this does not change over a bigstep
-	// Now (here for now) calculate the VxE effect
 	// NOTE: if gravity is on, this does change over a bigstep so don't do this here
 	if (!gravity)
 		part.updateExv(*elecfield);
 
 	// Calculate the number of steps we are going to take
-	steps = (long)floorl((long double)time / (long double)steptime);
+	steps = (long)floorl((long double)time / (long double)part.steptime);
 	
 	// Now do this many smallsteps - after which we will have one step of time less
 	// than one step to complete
@@ -603,22 +572,16 @@ void edmexperiment::bigstep(particle& part, long double time)
 	{
 		// We can safely callthe smallstep with steptime as inside this loop it is 
 		// guaranteed to be so
-		smallstep(part, steptime);
+		smallstep(part, part.steptime);
 
 	}
 
 	// Check we still have a little excess time to step
-	long double laststep = (time - (steps*steptime));
+	long double laststep = (time - (steps*part.steptime));
 	if (laststep < 0.0)
 		throw runtime_error("Stepping routine stepped over maximum time to impact");
 	// Now do the actual final step
 	smallstep(part, laststep);
-	
-	/*
-	static ofstream lasts("laststep.txt");
-	lasts.precision(20);
-	lasts << laststep << endl;
-	 */
 }
 
 void edmexperiment::smallstep(particle& part, long double time)
@@ -657,6 +620,7 @@ void edmexperiment::smallstep(particle& part, long double time)
 	
 	// Move it first
 	part.position += part.velocity_vec * time;
+	
 	//...and gravity adjustments
 	if (gravity)
 	{
@@ -689,8 +653,6 @@ void edmexperiment::smallstep(particle& part, long double time)
 
 long double edmexperiment::spin_calculation( vector3 &spinvector, const long double gyromag, const vector3& mag_field, const long double time )
 {
-//	static ofstream steplog("steplog.txt");
-
 	// Let's twist again, like we did last summer
 	vector3 oldspin = spinvector;//vector3(spinvector.x, spinvector.y, 0.0);
 	long double oldxylength = sqrtl(spinvector.x*spinvector.x + spinvector.y*spinvector.y);

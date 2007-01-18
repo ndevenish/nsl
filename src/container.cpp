@@ -33,13 +33,15 @@
 
 #include "physics.h"
 
+#include "random.h"
+
 #include "boost/foreach.hpp"
 #include "tools.h"
 
 using std::runtime_error;
 using std::cout;
 using std::endl;
-
+using nsl::rand_uniform;
 
 container::container()
 {
@@ -206,6 +208,41 @@ int container::isinside(const vector3 &pos) const
 	BOOST_FOREACH(const container *cont, subcontainers)
 		count += cont->isinside(pos);
 	return count;
+}
+
+
+void container::reflect ( vector3& velocity_vec, const vector3& normal, const long double& velocity ) const
+{
+	// Is it specular reflection?
+	if (reflection == reflection_specular)
+	{
+		velocity_vec =  velocity_vec - ((normal * 2.)*(normal * velocity_vec));
+		return;
+	}
+	// If not, is it diffuse?
+	else if(reflection == reflection_diffuse)
+	{
+		// Generate a random z and theta
+		velocity_vec.z = (rand_uniform()-0.5)*2.;
+		
+		long double phi = rand_uniform()*pi*2;
+		// Calculate the flat-plane (z=0.) radius of this point
+		long double planarr = cosl(asinl( velocity_vec.z ));
+		
+		velocity_vec.x = planarr * cosl(phi);
+		velocity_vec.y = planarr * sinl(phi);
+		
+		
+		// Ensure it faces away from the normal
+		if ((velocity_vec * normal) < 0.)
+			velocity_vec *= -1.0;
+		
+		// Scale the velocity to the proper one
+		velocity_vec *= velocity;
+		return;
+	}
+	else
+		throw runtime_error("Unrecognised reflection type requested for reflection");
 }
 
 cylbounds container::getcylinder( void ) const

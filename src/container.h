@@ -139,6 +139,12 @@ public:
 	* @return an intercept object with the interception parameters. */
 	const intercept &cast ( const vector3 &position, const vector3 &direction, int unused = 0) const;
 
+	/* Calculates the new direction of a reflected ray.
+	* @param attack the direction of attack (i.e. a particles velocity at point of collision) - this will be updated
+	* @param normal The normal vector. 
+	* @param length The length of the vector to return (i.e. velocity) */
+	void reflect ( vector3& attack, const vector3& normal, const long double& length ) const;
+	
 	// Allow this to be created from the object factory
 	class Factory : public nslobjectfactory {
 		nslobject *create() { return new container; }
