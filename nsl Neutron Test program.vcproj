@@ -247,6 +247,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\neutronphysics.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\neutronphysics.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\nslobject.cpp"
 				>
 			</File>

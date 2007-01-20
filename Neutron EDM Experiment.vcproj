@@ -198,6 +198,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\nslobjectfactory.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\particle.cpp"
 					>
 				</File>
@@ -222,7 +226,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\nslobjectfactory.cpp"
+					RelativePath=".\src\neutronphysics.cpp"
 					>
 				</File>
 				<File
@@ -264,6 +268,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\nslobjectfactory.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\particle.h"
 					>
 				</File>
@@ -288,7 +296,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\nslobjectfactory.h"
+					RelativePath=".\src\neutronphysics.h"
 					>
 				</File>
 				<File

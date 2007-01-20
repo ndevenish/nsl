@@ -32,7 +32,9 @@
 #include <boost/thread/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/bind.hpp>
-#include <boost/foreach.hpp>
+
+// Include our local copy to src, as foreach is not a standard yet
+#include "boost/foreach.hpp"
 
 #include "errors.h"
 #include "nslobject.h"
