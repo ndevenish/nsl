@@ -100,7 +100,7 @@ class edmexperiment : public nslobject {
 	
 	/** Performs the necessary spin calculations.
 	* This function spins the particle, and returns the phase change in the horizontal plane */
-	long double spin_calculation( vector3& spinvector, const long double gyromag, const vector3& mag_field, const long double time);
+//	long double spin_calculation( vector3& spinvector, const long double gyromag, const vector3& mag_field, const long double time);
 
 	/** Performs an interval step.
 	* This means that it will run bounces for only a certain amount of time, for each particle.
@@ -115,9 +115,6 @@ class edmexperiment : public nslobject {
 	launch a thread into runinterval AND have it access member functions. partsleft is how many particles there are
 	left to be processed.*/
 	static void runruninterval ( edmexperiment *thisp, long double intervaltime, int* partsleft);//, particle *part );
-	
-	/** Calculates false EDM values.*/
-	void edmcalcs( particle &part);
 	
 protected:
 

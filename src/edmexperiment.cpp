@@ -46,6 +46,7 @@
 #include "tools.h"
 #include "reporters.h"
 #include "random.h"
+#include "neutronphysics.h"
 
 using std::runtime_error;
 using std::endl;
@@ -342,7 +343,7 @@ bool edmexperiment::runobject()
 			
 			// Calculate an edm for each particle, and accumulate it
 			BOOST_FOREACH(particle *part, particles) {
-				edmcalcs(*part);
+				neutron_physics::edmcalcs(*part, *elecfield);
 				part->cumulativeedm += part->fake_edm;
 //				falseedmav += part->fake_edm;
 			}
@@ -611,13 +612,8 @@ void edmexperiment::smallstep(particle& part, long double time)
 	vector3 B;
 	magfield->getfield(B, midpoint);
 
-	// Now calculate the two different magnetic fields
-	vector3 BplusvxE, BminusvxE;
-	BplusvxE = B + part.vxEeffect;
-	BminusvxE = B - part.vxEeffect;
-	
+
 	// Now apply the new physical properties to the particle
-	
 	// Move it first
 	part.position += part.velocity_vec * time;
 	
@@ -636,69 +632,12 @@ void edmexperiment::smallstep(particle& part, long double time)
 	// Update the particles flytime
 	part.flytime += time;
 	
-	// Now spin it both ways 
-	long double plusphase, minusphase, framediff;
-	plusphase		= spin_calculation(part.spinEplus,	 part.gamma, BplusvxE,  time);
-	minusphase		= spin_calculation(part.spinEminus, part.gamma, BminusvxE, time);
-	framediff = plusphase - minusphase;
-
-	part.E_sum_phase += plusphase;
-	part.E_minus_sum_phase += minusphase;
+	// Now spin the particle
+	neutron_physics::spin_calculation(part, B, time);
 	
 	// Now (god forbid) call the reporters that report every step
 	BOOST_FOREACH( reporter *rep, report_step ) {
 		rep->report(*this);
 	}
 }
-
-long double edmexperiment::spin_calculation( vector3 &spinvector, const long double gyromag, const vector3& mag_field, const long double time )
-{
-	// Let's twist again, like we did last summer
-	vector3 oldspin = spinvector;//vector3(spinvector.x, spinvector.y, 0.0);
-	long double oldxylength = sqrtl(spinvector.x*spinvector.x + spinvector.y*spinvector.y);
-	
-	// Calculate the change in spin
-	vector3 dS = time * gyromag * crossproduct(spinvector, mag_field);
-	
-	// Now apply this to the spin vector
-	spinvector += dS;
-	
-	// Scale it to ensure that it remains of constant length
-	spinvector.scaleto(1.0);
-	
-	// Calculate the new length of the xy vectorshar
-	long double newxylength = sqrtl(spinvector.x* spinvector.x + spinvector.y*spinvector.y);
-
-	//calculate the planar angle shift from the dot product	
-	long double cosphase = (oldspin.x*spinvector.x + oldspin.y*spinvector.y) / (oldxylength*newxylength);
-	
-	if (cosphase > 1.)
-		logger << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << endl;;//throw runtime_error("Cosphase > 1");
-	
-	long double phase_change = acos(cosphase);
-	
-	return phase_change;
-}
-
-void edmexperiment::edmcalcs( particle &part )
-{
-	// Firstly calculate the frequency differences between the two spins
-	part.frequencydiff = atan2( part.spinEplus.x * part.spinEminus.y - part.spinEplus.y*part.spinEminus.x,
-								part.spinEplus.x*part.spinEminus.x + part.spinEplus.y*part.spinEminus.y );
-	part.frequencydiff /= part.flytime;
-	/*
-	atan2((particle->spin_x*particle->minusE_spin_y - particle->spin_y*particle->minusE_spin_x),
-							   (particle->spin_x*particle->minusE_spin_x + particle->spin_y*particle->minusE_spin_y)	            
-							   )/particle->tot_time;
-	 */
-	
-	// Grab the E field vertical charge
-	vector3 E;
-	elecfield->getfield(E, vector3(0,0,0));
-	long double E_FIELD = E.z;
-	
-	// Now calculate the EDM from this
-	part.fake_edm = part.frequencydiff * hbar/E_FIELD/echarge*100*1e26/4;
-}
-
 
