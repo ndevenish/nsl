@@ -35,6 +35,8 @@
 		0A7BDE430B5B245A008D1188 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7BDE420B5B245A008D1188 /* libboost_thread.a */; };
 		0A863CF10B61AE4F00FF32EA /* neutronphysics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */; };
 		0A863CF20B61AE4F00FF32EA /* neutronphysics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */; };
+		0A863DB10B62ABB400FF32EA /* solver.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A863DAF0B62ABB400FF32EA /* solver.h */; };
+		0A863DB20B62ABB400FF32EA /* solver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */; };
 		0AB232B90ADA3BE400323FF0 /* edmexperiment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */; };
 		0AB232BA0ADA3BE500323FF0 /* edmexperiment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB232B80ADA3BE400323FF0 /* edmexperiment.h */; };
 		0AB236A10ADD292B00323FF0 /* vector3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB236A00ADD292B00323FF0 /* vector3.h */; };
@@ -65,6 +67,7 @@
 				0A348B3D0B07B52900F8771E /* tools.h in CopyFiles */,
 				0A7BDC750B5AC30B008D1188 /* random.h in CopyFiles */,
 				0A863CF10B61AE4F00FF32EA /* neutronphysics.h in CopyFiles */,
+				0A863DB10B62ABB400FF32EA /* solver.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -100,6 +103,8 @@
 		0A7BDE420B5B245A008D1188 /* libboost_thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_thread.a; path = /usr/local/lib/libboost_thread.a; sourceTree = "<absolute>"; };
 		0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = neutronphysics.h; path = src/neutronphysics.h; sourceTree = "<group>"; };
 		0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = neutronphysics.cpp; path = src/neutronphysics.cpp; sourceTree = "<group>"; };
+		0A863DAF0B62ABB400FF32EA /* solver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = solver.h; path = src/solver.h; sourceTree = "<group>"; };
+		0A863DB00B62ABB400FF32EA /* solver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = solver.cpp; path = src/solver.cpp; sourceTree = "<group>"; };
 		0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = edmexperiment.cpp; path = src/edmexperiment.cpp; sourceTree = "<group>"; };
 		0AB232B80ADA3BE400323FF0 /* edmexperiment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = edmexperiment.h; path = src/edmexperiment.h; sourceTree = "<group>"; };
 		0AB236A00ADD292B00323FF0 /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector3.h; path = src/vector3.h; sourceTree = "<group>"; };
@@ -144,15 +149,16 @@
 				0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */,
 				0A3B6E9A0AC993DB002CC2AF /* errors.cpp */,
 				0A3B6E9B0AC993DB002CC2AF /* main.cpp */,
+				0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */,
 				0A3B6E9C0AC993DB002CC2AF /* nslobject.cpp */,
 				0A3B6E9D0AC993DB002CC2AF /* nslobjectfactory.cpp */,
 				0A3B6E9F0AC993DB002CC2AF /* particle.cpp */,
 				0A3B6EA00AC993DB002CC2AF /* physics.cpp */,
-				0A3B6EA10AC993DB002CC2AF /* volume_cylinder.cpp */,
 				0A7BDC7D0B5AC353008D1188 /* random.cpp */,
 				0A72C9D00AF380670079760D /* reporters.cpp */,
 				0A348B400B07B5A500F8771E /* tools.cpp */,
-				0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */,
+				0A863DB00B62ABB400FF32EA /* solver.cpp */,
+				0A3B6EA10AC993DB002CC2AF /* volume_cylinder.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -160,21 +166,22 @@
 		0A3B6EAD0AC993EA002CC2AF /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				0A72C9B30AF37F5B0079760D /* reporters.h */,
-				0AB232B80ADA3BE400323FF0 /* edmexperiment.h */,
 				0A3B6EAE0AC9940B002CC2AF /* container.h */,
 				0A3B6EAF0AC9940B002CC2AF /* cparser.h */,
+				0AB236BA0ADD29D900323FF0 /* datasets.h */,
+				0AB232B80ADA3BE400323FF0 /* edmexperiment.h */,
 				0A3B6EB00AC9940B002CC2AF /* electromagnetics.h */,
 				0A3B6EB10AC9940B002CC2AF /* errors.h */,
 				0A3B6EB20AC9940B002CC2AF /* nslobject.h */,
 				0A3B6EB30AC9940B002CC2AF /* nslobjectfactory.h */,
 				0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */,
 				0A3B6EB40AC9940B002CC2AF /* particle.h */,
-				0A7BDC740B5AC30B008D1188 /* random.h */,
 				0A3B6EB50AC9940B002CC2AF /* physics.h */,
-				0AB236A00ADD292B00323FF0 /* vector3.h */,
-				0AB236BA0ADD29D900323FF0 /* datasets.h */,
+				0A7BDC740B5AC30B008D1188 /* random.h */,
+				0A72C9B30AF37F5B0079760D /* reporters.h */,
+				0A863DAF0B62ABB400FF32EA /* solver.h */,
 				0A348B3C0B07B52900F8771E /* tools.h */,
+				0AB236A00ADD292B00323FF0 /* vector3.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -251,6 +258,7 @@
 				0A348B410B07B5A500F8771E /* tools.cpp in Sources */,
 				0A7BDC7E0B5AC353008D1188 /* random.cpp in Sources */,
 				0A863CF20B61AE4F00FF32EA /* neutronphysics.cpp in Sources */,
+				0A863DB20B62ABB400FF32EA /* solver.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

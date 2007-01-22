@@ -37,6 +37,7 @@
 #include "container.h"
 #include "electromagnetics.h"
 #include "reporters.h"
+#include "solver.h"
 
 #include <stdio.h>
 
@@ -90,6 +91,7 @@ int main ( int argc, char *argv[] )
 		nslobjectfactory::add("linear_zgradient", new linear_zgradient::Factory);
 		nslobjectfactory::add("efield", new efield::Factory);
 		nslobjectfactory::add("dipole_zmagnetic", new dipole_zmagnetic::Factory);
+		nslobjectfactory::add("midpointsolver", new midpointsolver::Factory);
 		
 		// Reporters!
 		nslobjectfactory::add("reporter", new reporter::Factory);

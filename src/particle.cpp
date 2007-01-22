@@ -134,13 +134,30 @@ void particle::readsettings(void)
 		
 		long double factor = sqrtl((k*T) / mass );
 		
-		// Generate random maxwellian velocities - http://research.chem.psu.edu/shsgroup/chem647/project14/project14.html
-		velocity_vec.x = rand_normal() * factor;
-		velocity_vec.y = rand_normal() * factor;
-		velocity_vec.z = rand_normal() * factor;
+		while(1)
+		{
+			// Generate random maxwellian velocities - http://research.chem.psu.edu/shsgroup/chem647/project14/project14.html
+			velocity_vec.x = rand_normal() * factor;
+			velocity_vec.y = rand_normal() * factor;
+			velocity_vec.z = rand_normal() * factor;
+			
+			// Read back the velocity magnitude
+			velocity = velocity_vec.mod();
+			
+			// Are we using a cutoff height?
+			if (isset("maxwelliancutoff")) {
+				// Is this above our cutoff?
+				long double cutoff = sqrtl(2*g*(getlongdouble("maxwelliancutoff", 0.79) - position.z));
+				
+				// If not, it is valid! otherwise recast.
+				if (velocity < cutoff)
+					break;
+			} else {
+				break;
+			}
+		} // while(1)
+		logger << velocity << endl;
 		
-		// Read back the velocity magnitude
-		velocity = velocity_vec.mod();
 	}
 	
 	// **************************************

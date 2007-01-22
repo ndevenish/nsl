@@ -49,6 +49,7 @@
 #include "reporters.h"
 #include "random.h"
 #include "neutronphysics.h"
+#include "solver.h"
 
 using std::runtime_error;
 using std::endl;
@@ -180,6 +181,14 @@ bool edmexperiment::prepareobject()
 		if ((*sublist)->isoftype("efield"))
 			elecfield = (efield*)(*sublist);
 
+	// Find and grab the solver object!
+	if (countchildren("solver") != 1)
+		throw runtime_error("Could not find one solver!");
+	thesolver = (solver*)findbytype("solver", 0);
+	if (!thesolver)
+		throw runtime_error("Could not find solver object!");
+	
+	
 	// Grab the steptime from the property set
 	//if (isset("steptime"))
 	
@@ -513,7 +522,8 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			
 			// Now we know the time to collision, step over it calculating the spin changes as we go
 			if (collisionpoint.time > 0.)
-				bigstep(*part, collisionpoint.time);
+				//bigstep(*part, collisionpoint.time);
+				thesolver->step(*part, collisionpoint.time);
 			
 			// Calculate the reflection - now done by the container being hit
 			collisionpoint.collideobject->reflect(part->velocity_vec, collisionpoint.normal, part->velocity);
@@ -545,7 +555,8 @@ void edmexperiment::runinterval ( long double time, particle *part )
 		} else {
 			// Now process the case where there is not enough time for a full trip across the bottle..
 			// .. just do a partial trip
-			bigstep(*part, timeleft);
+			//bigstep(*part, timeleft);
+			thesolver->step(*part, timeleft);
 			timeleft = 0; // probably not needed - but better safe...
 		}
 	} //while(1) over bounces	
@@ -554,7 +565,7 @@ void edmexperiment::runinterval ( long double time, particle *part )
 
 
 
-
+/*
 // Performs a large step between successive collisions. Use the E and B fields tied to
 // the edmexperiment object for now
 void edmexperiment::bigstep(particle& part, long double time)
@@ -586,7 +597,9 @@ void edmexperiment::bigstep(particle& part, long double time)
 	// Now do the actual final step
 	smallstep(part, laststep);
 }
+*/
 
+/*
 void edmexperiment::smallstep(particle& part, long double time)
 {
 	long double halftime = time / 2.0;
@@ -643,3 +656,4 @@ void edmexperiment::smallstep(particle& part, long double time)
 	}
 }
 
+*/

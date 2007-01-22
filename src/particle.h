@@ -48,6 +48,8 @@ class particle : public nslobject {
 	friend class poldistreporter;
 	friend class posreporter;
 	friend class neutron_physics;
+	friend class solver;
+	friend class midpointsolver;
 	
 	// Physical Properties values
 	vector3	position;
@@ -60,9 +62,6 @@ class particle : public nslobject {
 	
 	long double velocity;
 
-	/// The steptime is particle-dependant for more complicated solvers
-	long double steptime;
-	
 	// Gyromagnetic ratio of the particle
 	long double gamma;
 	
@@ -97,6 +96,9 @@ class particle : public nslobject {
 
 public:
 	particle();
+
+	/// The steptime is particle-dependant for more complicated solvers
+	long double steptime;
 	
 	// Update the vxe effect
 	void updateExv ( efield &Efield );

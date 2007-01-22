@@ -48,6 +48,7 @@ class edmexperiment : public nslobject {
 
 	friend class reporter;
 	friend class edmreporter;
+	friend class midpointsolver;
 	
 	container *particlebox; ///< A shortcut link to the box the particle is stored in
 	//particle *particles[MAX_PARTICLES]; ///< An array of particles we control
@@ -61,6 +62,7 @@ class edmexperiment : public nslobject {
 	bfield * magfield; ///< The magnetic field object
 	efield *elecfield; ///< The electric field object
 	
+	class solver* thesolver; ///< Solver object link
 	/// the steptime to be used by the basic inbuilt midpoint solver
 	long double steptime;
 	/// How many phase averaging steps to take
@@ -91,12 +93,12 @@ class edmexperiment : public nslobject {
 	* It essentially acts as the solver function because it is passed a
 	* particle and a time and alters the particle along that path. Based
 	* on naming scheme from phil harris' original edm program. */
-	void bigstep(particle& part, long double time);
+//	void bigstep(particle& part, long double time);
 	
 	/** Performs a midpoint integrator step.
 	* This function steps a particle forwards a very small amount and then calculates
 	* the spin changes. */
-	void smallstep(particle& part, long double time);
+//	void smallstep(particle& part, long double time);
 	
 	/** Performs the necessary spin calculations.
 	* This function spins the particle, and returns the phase change in the horizontal plane */
