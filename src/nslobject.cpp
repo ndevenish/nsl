@@ -208,43 +208,17 @@ tokens nslobject::parseparser( cparser & parser)
 		//////////////////////////////////////////////////////////////////////////
 		// Adding subobjects	
 		} else if (token == "add") {
-			//next token should be object type
-//			string newtype = parser.gettoken();
-/*
-			// Call the class factory to create a new object now
-			nslobject *newob = nslobjectfactory::createobject(newtype);
-
-			// Add the new object to our child array
-			add( *newob );
-
-			// Next token is either a name or a {
-			token = parser.gettoken();
-			//if (token != "{" && token != "\n")
-			//	newob->set("name", token);
-			if (isalnum(token[0]))
-				newob->set("name", token);
- */
-			
 			// Instead of doing this here, now do it externally.
 			//nslobject *newob = createadd( parser );
 			//add( *newob );
 			createadd( parser );
-			
-			//now contunue parsing in the new object
-			/*retval = newob->parseparser(parser);
-			if (retval == token_stop)
-				return token_stop;
-			*/
 			
 		//////////////////////////////////////////////////////////////////////////
 		// Adding multiple copies of objects	
 		} else if (token == "multiadd") {
 			// Next token should be number to add
 			string addcounts = parser.gettoken();
-			/*
-			if (isalnum(token[0]))
-				throw parse_error("Encountered alnum token when expecting particle add count");
-			*/
+
 			//convert this to an integer
 			istringstream iss(addcounts);
 			long addcount = 0;
@@ -388,14 +362,15 @@ tokens nslobject::parseparser( cparser & parser)
 				
 				nslobject *varyobject; ///< The object to vary
 				} variation;*/
-				
 			} else {
 				throw parse_error("Unrecognized variation type");
 			}
 			
 			
 			logger << "Varying parameter " << parameter << endl;
-		
+		} else if(token == "tree") {
+			this->tree();
+			
 		//////////////////////////////////////////////////////////////////////////
 		// Random punctuation
 		} else if (token == "{") {

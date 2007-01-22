@@ -63,6 +63,7 @@ class edmexperiment : public nslobject {
 	efield *elecfield; ///< The electric field object
 	
 	class solver* thesolver; ///< Solver object link
+	
 	/// the steptime to be used by the basic inbuilt midpoint solver
 	long double steptime;
 	/// How many phase averaging steps to take

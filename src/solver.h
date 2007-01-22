@@ -39,7 +39,7 @@ public:
 	solver();
 
 	// Runs a particle for a specified length of time
-	virtual void step( particle &part, long double &time ) {};
+	virtual void step( particle &part, const long double &time ) {};
 	
 	virtual void prepareparticles( std::vector<particle*> &particles ) {};
 };

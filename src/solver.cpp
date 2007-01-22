@@ -76,6 +76,11 @@ bool midpointsolver::prepareobject ( void )
 	if (!exp)
 		throw runtime_error("Experiment not found from midpointsolver");
 	
+	if (exp->get("gravity") == "on")
+		gravity = true;
+	else
+		gravity = false;
+	
 	return true;
 }
 
@@ -125,8 +130,12 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	long double halftime = time / 2.0;
 	
 	// Firstly calculate the step midpoint
-	vector3 midpoint;
+	vector3 midpoint, newposition;
 	midpoint = part.position + (part.velocity_vec*halftime);
+	
+	// Calculate the (non-gravitational) position after this step... this is because we recalculate
+	// velocity here (gravitationally) and this messes up the later calculation!
+	newposition = part.position += part.velocity_vec * time;
 	
 	// If gravity is turned on, adjust the relevant properties
 	if (gravity)
@@ -134,10 +143,10 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 		// the midpoint is different...
 		midpoint.z -= 0.5*g*halftime*halftime;
 		
-		// Update the particles velocity....
+		// update the velocity at the halfway point
 		part.velocity_vec.z -= g*halftime;
 		part.velocity = mod(part.velocity_vec);
-		
+
 		// And the particles Exv effect
 		part.updateExv(*elecfield);
 	}
@@ -149,8 +158,9 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	
 	
 	// Now apply the new physical properties to the particle
+	
 	// Move it first
-	part.position += part.velocity_vec * time;
+	part.position = newposition;
 	
 	//...and gravity adjustments
 	if (gravity)
@@ -158,10 +168,9 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 		// Update the position properly
 		part.position.z -= 0.5*g*time*time;
 		
-		//and finish adjusting the velocity with the other half of the step
+		// and finish adjusting the velocity with the other half of the step
 		part.velocity_vec.z -= g*halftime;
 		part.velocity = mod(part.velocity_vec);
-		
 	}
 	
 	// Update the particles flytime

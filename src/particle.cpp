@@ -134,6 +134,10 @@ void particle::readsettings(void)
 		
 		long double factor = sqrtl((k*T) / mass );
 		
+		// Check we are not above the cutoff
+		if (getlongdouble("maxwelliancutoff", position.z + 1.) < position.z)
+			throw runtime_error("Particle start position is higher than maxwellian cutoff");
+		
 		while(1)
 		{
 			// Generate random maxwellian velocities - http://research.chem.psu.edu/shsgroup/chem647/project14/project14.html

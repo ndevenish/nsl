@@ -76,10 +76,6 @@ int main ( int argc, char *argv[] )
 	try {
 
 		nslobject rootobject;
-
-		// Add holders for the classes we want
-		// None held at the moment!
-		
 		
 		// the actual classes we want
 		nslobjectfactory::add("particle", new particle::Factory);
@@ -135,9 +131,6 @@ int main ( int argc, char *argv[] )
 			rootobject.run();
 		}
 		
-
-
-
 
 	} catch (runtime_error runt) {
 		cout << "\aA runtime error has occured ";
