@@ -2,10 +2,9 @@
 
 add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
-	set steptime 3e-5
 	set phase_steps 1 #phase average loops
-	set bounces 100 #number of bounces to run the simulation over
-	#set lifetime 300.0	#The lifetime of a particle
+	#set bounces 1000 #number of bounces to run the simulation over
+	set lifetime 60.0	#The lifetime of a particle
 
 	#This is the time to bounce a particle around for
 	#before calling the 'interval' reporters
@@ -18,10 +17,10 @@ add edmexperiment "The Experiment" {
 	set collision_compensation_distance 1e-15
 	
 	#Gravity!
-	set gravity on
+	#set gravity off
 	
 	add midpointsolver "midsolver" {
-		set steptime 3e-5
+		set steptime 3e-4
 	}
 	
 	add container "bottle" {
@@ -33,14 +32,14 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	add particle neutron {
+	multiadd 5 particle neutron {
 		set gamma -29.1646870E+6
 
 		#vary velocity from 10 to 200 in 20 steps
-		set velocity 1
+		set velocity 3
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
-		#set maxwelldistribution on
+		set maxwelldistribution on
 		# This sets the maximum height for cutting off the velocity
 		set maxwelliancutoff 0.79
 		
@@ -62,7 +61,7 @@ add edmexperiment "The Experiment" {
 		
 		set mass 1.6749e-27
 	}
-
+	
 	ignore multiadd 1000 particle "mercury" {
 		set gamma 7.5901309e+6
 		set velocity 100
@@ -99,13 +98,17 @@ add edmexperiment "The Experiment" {
 		set volaverage_dbdz true
 	}
 	
-	add posreporter "posreporter" {
+	ignore add posreporter "posreporter" {
 		set output_file "poslog.txt"
 		set particle 0
 	}
 	ignore add posreporter "posreporter" {
 		set output_file "poslog2.txt"
 		set particle 1
+	}
+	
+	add alphareporter "alphareporter" {
+		set output_file "alphalog.txt"
 	}
 }
 tree

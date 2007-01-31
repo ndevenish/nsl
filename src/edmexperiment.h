@@ -49,6 +49,7 @@ class edmexperiment : public nslobject {
 	friend class reporter;
 	friend class edmreporter;
 	friend class midpointsolver;
+	friend class alphareporter;
 	
 	container *particlebox; ///< A shortcut link to the box the particle is stored in
 	//particle *particles[MAX_PARTICLES]; ///< An array of particles we control

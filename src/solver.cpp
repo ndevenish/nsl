@@ -103,7 +103,13 @@ void midpointsolver::step( particle &part, const long double &time )
 	// NOTE: if gravity is on, this does change over a bigstep so don't do this here
 	if (!gravity)
 		part.updateExv(*elecfield);
-	
+/*
+	////////////////////////////////////
+	/// TEMPORARY DEBUG - match the other programs stepping algorithm
+	steps = (int)(time/3.e-5) + 1;
+	part.steptime = time / steps;
+#warning "Temporary debug code"
+*/	
 	// Calculate the number of steps we are going to take
 	steps = (long)floorl((long double)time / (long double)part.steptime);
 	

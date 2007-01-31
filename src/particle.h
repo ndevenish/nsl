@@ -50,6 +50,7 @@ class particle : public nslobject {
 	friend class neutron_physics;
 	friend class solver;
 	friend class midpointsolver;
+	friend class alphareporter;
 	
 	// Physical Properties values
 	vector3	position;

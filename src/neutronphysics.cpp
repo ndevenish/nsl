@@ -28,6 +28,7 @@
 #include "vector3.h"
 #include "electromagnetics.h" // for electric field for edm_calcs
 using std::endl;
+using std::cout;
 using std::cerr;
 
 
@@ -44,6 +45,8 @@ static long double spin_vector( vector3 &spinvector, const long double gyromag, 
 	spinvector += dS;
 	
 	// Scale it to ensure that it remains of constant length
+	/*cout.precision(1000);
+	cout << endl << spinvector.x << endl << spinvector.y << endl << spinvector.z << endl;*/
 	spinvector.scaleto(1.0);
 	
 	// Calculate the new length of the xy vectorshar

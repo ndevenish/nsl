@@ -558,6 +558,8 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			//bigstep(*part, timeleft);
 			thesolver->step(*part, timeleft);
 			timeleft = 0; // probably not needed - but better safe...
+			// Duuuuuuh actually quit out of the loop.....
+			break;
 		}
 	} //while(1) over bounces	
 }

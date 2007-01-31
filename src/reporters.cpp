@@ -25,10 +25,13 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <vector>
 
+/*
 #include <boost/random.hpp>
 #include <boost/random/uniform_real.hpp>
 #include <boost/random/variate_generator.hpp>
+*/
 
 #include <boost/thread/mutex.hpp>
 
@@ -37,8 +40,12 @@
 #include "edmexperiment.h"
 #include "particle.h"
 #include "container.h"
+#include "random.h"
 
 #include "electromagnetics.h"
+
+#include "variable.h"
+#include "spinpair.h"
 
 #include "boost/foreach.hpp"
 
@@ -46,9 +53,79 @@ using std::string;
 using std::runtime_error;
 using std::ofstream;
 
+using std::cout;
 using std::endl;
 
-using boost::mt11213b;
+//using boost::mt11213b;
+
+using std::vector;
+
+using nsl::rand_uniform;
+
+using nsl::variable;
+
+/// Calculate the volume average dbz/dz value, to a specified power
+dataset calc_dbdz(bfield &b, container &cont, long double power = 1.0)
+{
+	// Let's grab the size of the volume to generate over
+	cylbounds cyl = cont.getcylinder();
+	
+	unsigned long hits = 0, misses = 0, throws = 0;
+	
+	//	long double x, y, z;
+	vector3 pos, magfield;
+	dataset vertgrad;
+	
+	while (1)
+	{
+		//r = sqrtl(uni()) * cyl.radius;
+		pos.z =(rand_uniform() - 0.5) * cyl.height;
+		pos.x = rand_uniform() * cyl.radius*2. - cyl.radius;
+		pos.y = rand_uniform() * cyl.radius*2. - cyl.radius;
+		
+		// Throw these out if outside test cylinder
+		if (pos.x*pos.x + pos.y*pos.y > cyl.radius *cyl.radius)
+		{
+			throws++;
+			continue;
+		}
+		pos += cyl.position;
+		
+		//Now, test to see if these points are inside a container
+		if (!cont.isinside(pos))
+		{
+			// If it isn't inside a container, this is a miss. This can be used to estimate the volume
+			misses++;
+			continue;
+		} else {
+			hits++;
+			magfield = vector3(0.0,0.0,0.0);
+			b.getfieldgradient(magfield,pos);
+			
+			vertgrad += pow(magfield.z, power);
+		}
+		
+		if (hits > 1e6)
+			break;
+	}
+	// Calculate the estimated volume
+	long double hitratio = (long double)hits / (long double)(hits+misses);
+	long double volumeestimate = hitratio * pi * cyl.radius * cyl.radius * cyl.height;
+	// Estimate the error on the volume, by culculating the volume estimate change by a
+	// single hit difference
+	long double volumeplushitest = (((long double)(hits+1) / (long double)(hits+misses+1))) * pi * cyl.radius * cyl.height * cyl.radius;
+	long double volerrest = volumeestimate * ((volumeestimate / volumeplushitest) - 1.);
+	
+	
+	cout << "  DBDZ averaging: Hits: " << hits << ", Misses: " << misses << "; (power " << power << ")" << endl;
+	cout << "	Estimated Volume = " << volumeestimate << " +- " << volerrest << endl;
+	cout << "	dBz/dz			 = " << vertgrad << endl;
+	//vertgrad /= volumeestimate;
+	//logger << "   Average field gradient over volume : " << vertgrad<< endl;
+	
+	return vertgrad;
+}
+
 
 
 reporter::reporter()
@@ -322,75 +399,6 @@ bool edmreporter::prepareobject()
 	return true;
 }
 
-
-/// Calcualte the volume average dbz/dz value
-dataset edmreporter::calc_dbdz(bfield &b, container &cont)
-{
-	// Create and initialise the random number generator 
-	mt11213b rng;
-	rng.seed(static_cast<unsigned> (std::time(0)));
-	boost::uniform_real<> uni_r(0,1);
-	boost::variate_generator<mt11213b&, boost::uniform_real<> > uni(rng, uni_r);
-	
-	// Let's grab the size of the volume to generate over
-	cylbounds cyl = cont.getcylinder();
-	
-	unsigned long hits = 0, misses = 0, throws = 0;
-	
-//	long double x, y, z;
-	vector3 pos, magfield;
-	dataset vertgrad;
-	
-	while (1)
-	{
-		//r = sqrtl(uni()) * cyl.radius;
-		pos.z =(uni() - 0.5) * cyl.height;
-		pos.x = uni() * cyl.radius*2. - cyl.radius;
-		pos.y = uni() * cyl.radius*2. - cyl.radius;
-		
-		// Throw these out if outside test cylinder
-		if (pos.x*pos.x + pos.y*pos.y > cyl.radius *cyl.radius)
-		{
-			throws++;
-			continue;
-		}
-		pos += cyl.position;
-		
-		//Now, test to see if these points are inside a container
-		if (!cont.isinside(pos))
-		{
-			// If it isn't inside a container, this is a miss. This can be used to estimate the colume
-			misses++;
-			continue;
-		} else {
-			hits++;
-			magfield = vector3(0.0,0.0,0.0);
-			b.getfieldgradient(magfield,pos);
-			
-			vertgrad += magfield.z;
-		}
-		
-		if (hits > 1e6)
-			break;
-	}
-	// Calculate the estimated volume
-	long double hitratio = (long double)hits / (long double)(hits+misses);
-	long double volumeestimate = hitratio * pi * cyl.radius * cyl.radius * cyl.height;
-	// Estimate the error on the volume, by culculating the volume estimate change by a
-	// single hit difference
-	long double volumeplushitest = (((long double)(hits+1) / (long double)(hits+misses+1))) * pi * cyl.radius * cyl.height * cyl.radius;
-	long double volerrest = volumeestimate * ((volumeestimate / volumeplushitest) - 1.);
-	
-	
-	logger << "  DBDZ averaging: Hits: " << hits << ", Misses: " << misses << endl;
-	logger << "     Estimated Volume = " << volumeestimate << " +- " << volerrest << endl;
-	logger << "		dBz/dz			 = " << vertgrad << endl;
-	//vertgrad /= volumeestimate;
-	//logger << "   Average field gradient over volume : " << vertgrad<< endl;
-	
-	return vertgrad;
-}
-
 /////////////////////////////////////////////////////////
 // Polarizationrepoter - reports on the polarisation of the particles
 // at an interval step
@@ -568,4 +576,136 @@ void posreporter::report( edmexperiment &exp )
 		
 		*outfile << part.flytime << "\t" << part.position.x << "\t" << part.position.y << "\t" << part.position.z << endl;
 	}
+}
+
+
+/* class alphareporter : public reporter {
+protected:
+void preparefile( edmexperiment &exp );
+bool prepareobject( void );
+
+public:
+alphareporter();
+void report ( edmexperiment &experiment );
+
+class Factory : public nslobjectfactory {
+	nslobject *create() { return new alphareporter; }
+};	
+} */
+alphareporter::alphareporter()
+{
+	objecttype = "alphareporter";
+	types.push_back(objecttype);
+	
+	report_frequency = rfreq_run;
+}
+
+void alphareporter::preparefile( edmexperiment &exp )
+{
+	*outfile << "# Alpha-visibility reporter: " << exp.get("time") << endl;
+	*outfile << "# " << exp.variation.parameter << "\tRa\tuncert\talpha\tuncert\tvolume_dbdz\tuncert\tvolume_dbdzsq\tuncert" << endl;
+}
+
+bool alphareporter::prepareobject( void )
+{
+	reporter::prepareobject();
+	
+	return true;
+}
+
+void alphareporter::report( edmexperiment &exp )
+{
+	dataset frequencies;
+	
+	// We have two jobs - firstly calculate the Ra-1 value, and secondly to calculate the alpha value.
+	
+	// Calculate the alpha fringe visibility value
+	variable alpha = calculate_visibility( exp.particles );
+	
+	// Now calculate the Ra-1 value
+	variable Ra = calculate_frequencyratio( exp.particles );
+	
+	// Now calculate the volume average fields
+	dataset volaverage_dbdz  = calc_dbdz(*exp.magfield, *exp.particlebox);
+	dataset volaverage_dbdz2 = calc_dbdz(*exp.magfield, *exp.particlebox, 2.0);
+	
+	// Mutex the output to prevent the possibility of simultaneous writes
+	{
+		static boost::mutex output_mutex;
+		boost::mutex::scoped_lock lock(output_mutex);
+		
+		outfile->precision(20);
+		*outfile << exp.variation.value << "\t";
+		*outfile << Ra.value << "\t" << Ra.error << "\t";
+		*outfile << alpha.value << "\t" << alpha.error << "\t";
+		*outfile << volaverage_dbdz.average() << "\t" << volaverage_dbdz.uncert() << "\t";
+		*outfile << volaverage_dbdz2.average() << "\t" << volaverage_dbdz2.uncert();
+		*outfile << endl;
+	}
+}
+
+/// Function to calculate the alpha fringe visibility value for a set of particles.
+variable alphareporter::calculate_visibility( vector<particle*> &particles )
+{
+	variable cumPup, cumPdown;
+	
+	dataset averagefreq_plusE;//, averagefreq_minusE;
+	
+	// Calculate the average frequencies
+	int cont = 0;
+	BOOST_FOREACH(particle *p, particles)
+	{
+		averagefreq_plusE += p->E_sum_phase;
+	}
+	
+	// Run through every particle accumulating probabilities by calculating the projection of the frequency onto
+	// this average
+	BOOST_FOREACH(particle *p, particles)
+	{
+		// Calculate the difference from the mean
+		variable meandiff;
+		meandiff.value = p->E_sum_phase - averagefreq_plusE.average();
+		meandiff.error = averagefreq_plusE.uncert();
+		
+		// calculate the projection of this onto the mean-line
+		variable meanaxis_projection;
+		meanaxis_projection.value = cos(meandiff.value);
+		meanaxis_projection.error = sin(meandiff.value) * meandiff.error;
+		
+		// Scale this to [0, 1]
+		variable Pup = 0.5 * (meanaxis_projection + 1.);
+		//long double PupErr = 0.5 * (meanaxis_projectionerr + 1.);
+		
+		cumPup += Pup;
+
+		cumPdown += (1. - Pup);
+	}
+	
+	// Calculate the value
+#warning "unnecessary debug line"
+	variable sumverify = cumPup + cumPdown;
+	
+	variable alpha = (cumPup - cumPdown) / (cumPup + cumPdown);
+	
+	return alpha;
+}
+
+variable alphareporter::calculate_frequencyratio( vector<particle*> &particles )
+{
+	dataset freq_ratio;
+#warning "Assuming value for base magnetic field"
+	const long double B0 = 1e-6;
+	
+	// Calculate the frequency ratio for each particle, and then average them
+	BOOST_FOREACH(particle *p, particles)
+	{
+		long double rotfreq = (p->E_sum_phase / p->flytime) / (2 * pi); // Hertz
+		long double newgam  = fabsl(p->gamma)* B0 / (2*pi);
+		long double ratio = rotfreq / newgam;
+		ratio -= 1.;
+		freq_ratio += ratio;
+	}
+
+	// Convert this dataset into a variable and return it
+	return variable(freq_ratio);
 }

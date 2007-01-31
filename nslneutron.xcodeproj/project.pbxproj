@@ -27,6 +27,8 @@
 		0A3B6EBB0AC9940B002CC2AF /* nslobjectfactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB30AC9940B002CC2AF /* nslobjectfactory.h */; };
 		0A3B6EBC0AC9940B002CC2AF /* particle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */; };
 		0A3B6EBD0AC9940B002CC2AF /* physics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB50AC9940B002CC2AF /* physics.h */; };
+		0A6BB40A0B6E695000E89F6B /* variable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6BB4090B6E695000E89F6B /* variable.h */; };
+		0A6BB49E0B6E722B00E89F6B /* spinpair.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6BB49D0B6E722B00E89F6B /* spinpair.h */; };
 		0A72C9B40AF37F5B0079760D /* reporters.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A72C9B30AF37F5B0079760D /* reporters.h */; };
 		0A72C9D10AF380670079760D /* reporters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C9D00AF380670079760D /* reporters.cpp */; };
 		0A72CA450AF6452C0079760D /* nslprops.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A72CA440AF6452C0079760D /* nslprops.txt */; };
@@ -68,6 +70,8 @@
 				0A7BDC750B5AC30B008D1188 /* random.h in CopyFiles */,
 				0A863CF10B61AE4F00FF32EA /* neutronphysics.h in CopyFiles */,
 				0A863DB10B62ABB400FF32EA /* solver.h in CopyFiles */,
+				0A6BB40A0B6E695000E89F6B /* variable.h in CopyFiles */,
+				0A6BB49E0B6E722B00E89F6B /* spinpair.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -95,6 +99,8 @@
 		0A3B6EB30AC9940B002CC2AF /* nslobjectfactory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = nslobjectfactory.h; path = src/nslobjectfactory.h; sourceTree = "<group>"; };
 		0A3B6EB40AC9940B002CC2AF /* particle.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = particle.h; path = src/particle.h; sourceTree = "<group>"; };
 		0A3B6EB50AC9940B002CC2AF /* physics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = physics.h; path = src/physics.h; sourceTree = "<group>"; };
+		0A6BB4090B6E695000E89F6B /* variable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = variable.h; path = src/variable.h; sourceTree = "<group>"; };
+		0A6BB49D0B6E722B00E89F6B /* spinpair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spinpair.h; path = src/spinpair.h; sourceTree = "<group>"; };
 		0A72C9B30AF37F5B0079760D /* reporters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reporters.h; path = src/reporters.h; sourceTree = "<group>"; };
 		0A72C9D00AF380670079760D /* reporters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reporters.cpp; path = src/reporters.cpp; sourceTree = "<group>"; };
 		0A72CA440AF6452C0079760D /* nslprops.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = nslprops.txt; path = doc/nslprops.txt; sourceTree = "<group>"; };
@@ -180,7 +186,9 @@
 				0A7BDC740B5AC30B008D1188 /* random.h */,
 				0A72C9B30AF37F5B0079760D /* reporters.h */,
 				0A863DAF0B62ABB400FF32EA /* solver.h */,
+				0A6BB49D0B6E722B00E89F6B /* spinpair.h */,
 				0A348B3C0B07B52900F8771E /* tools.h */,
+				0A6BB4090B6E695000E89F6B /* variable.h */,
 				0AB236A00ADD292B00323FF0 /* vector3.h */,
 			);
 			name = Headers;

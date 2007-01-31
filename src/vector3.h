@@ -80,7 +80,7 @@ public:
 	friend long double operator*(const vector3&, const vector3& );
 	
 	/// Returns the length of the vector
-	long double mod() const {	return sqrtl(x*x + y*y + z*z); }
+	long double mod() const {	return sqrtl((long double)(x*x + y*y + z*z)); }
 
 	/// Returns the length of the xy vector
 	long double modxy() const { return sqrtl(x*x + y*y); }
@@ -133,12 +133,12 @@ inline long double operator*(const vector3& lt, const vector3& rt)
 inline long double mod( const vector3& vc)
 {
 	/// Returns the length of the vector
-	return sqrtl(vc.x*vc.x + vc.y*vc.y + vc.z*vc.z);
+	return vc.mod();
 }
 
 inline long double modxy( const vector3& vc)
 {
-	return sqrtl(vc.x*vc.x + vc.y*vc.y);
+	return vc.modxy();
 }
 
 /*

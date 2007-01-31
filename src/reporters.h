@@ -26,10 +26,12 @@
 
 #include <iosfwd>
 #include <string>
+#include <vector>
 
 #include "nslobject.h"
 #include "nslobjectfactory.h"
 #include "datasets.h"
+#include "variable.h"
 
 class edmexperiment;
 class particle;
@@ -148,7 +150,7 @@ protected:
 	bool volaverage; // should calculate volume average?
 	
 	/// Calcualte the volume average dbz/dz value
-	dataset calc_dbdz(bfield &b, container &cont);
+	//dataset calc_dbdz(bfield &b, container &cont);
 	
 public:
 	edmreporter();
@@ -232,5 +234,24 @@ public:
 	};	
 };
 
+
+///////////////////////////////////////////////
+// Alpha value and polarisation reporter!!!!
+class alphareporter : public reporter {
+protected:
+	void preparefile( edmexperiment &exp );
+	bool prepareobject( void );
+	
+	nsl::variable calculate_visibility( std::vector<particle*> &particles );
+	nsl::variable calculate_frequencyratio( std::vector<particle*> &particles );
+	
+public:
+	alphareporter();
+	void report ( edmexperiment &experiment );
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new alphareporter; }
+	};	
+};
 
 #endif

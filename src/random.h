@@ -29,7 +29,6 @@ namespace nsl {
 	void seedrand();
 	long double rand_uniform();
 	long double rand_normal();
-	
 }
 
 #endif
