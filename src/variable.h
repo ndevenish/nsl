@@ -55,70 +55,7 @@ public:
 	variable operator/=(const variable&);
 };
 
-variable variable::operator+=(const variable& r)
-{
-	// Combine two variables!
-	value += r.value;
-	error = sqrt(error*error + r.error*r.error);
-	return *this;
-}
-
-variable variable::operator-=(const variable& r)
-{
-	value -= r.value;
-	error = sqrt(error*error + r.error*r.error);
-	
-	return *this;	
-}
-
-variable variable::operator+=(const long double& r)
-{
-	value += r;
-	return *this;
-}
-
-
-variable variable::operator-=(const long double& r)
-{
-	value -= r;	
-	return *this;
-}
-
-variable variable::operator*=(const long double& r)
-{
-	value *= r;
-	error *= r;
-	return *this;
-}
-
-variable variable::operator/=(const long double& r)
-{
-	value /= r;
-	error /= r;
-	return *this;
-}
-
-variable variable::operator*=(const variable& r)
-{
-	// computer part of the error to update without introducing a median variable
-	error = sqrt( pow( error / value, 2.) + pow( r.error / r.value, 2.0) );
-	value *= r.value;
-	error *= value;
-	return *this;
-}
-
-variable variable::operator/=(const variable& r)
-{
-	error = sqrt( pow( error / value, 2.) + pow( r.error / r.value, 2.0) );
-	value /= r.value;
-	error *= value;
-	return *this;
-}
-
 };
+nsl::variable operator-(const long double &lt, const nsl::variable&rt);
 
-inline nsl::variable operator-(const long double &lt, const nsl::variable&rt)
-{
-	return nsl::variable(lt - rt.value, rt.error);
-}
 #endif

@@ -652,7 +652,6 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 	dataset averagefreq_plusE;//, averagefreq_minusE;
 	
 	// Calculate the average frequencies
-	int cont = 0;
 	BOOST_FOREACH(particle *p, particles)
 	{
 		averagefreq_plusE += p->E_sum_phase;

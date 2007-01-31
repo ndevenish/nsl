@@ -29,6 +29,7 @@
 		0A3B6EBD0AC9940B002CC2AF /* physics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A3B6EB50AC9940B002CC2AF /* physics.h */; };
 		0A6BB40A0B6E695000E89F6B /* variable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6BB4090B6E695000E89F6B /* variable.h */; };
 		0A6BB49E0B6E722B00E89F6B /* spinpair.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6BB49D0B6E722B00E89F6B /* spinpair.h */; };
+		0A6BB5B90B71034100E89F6B /* variable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A6BB5B80B71034100E89F6B /* variable.cpp */; };
 		0A72C9B40AF37F5B0079760D /* reporters.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A72C9B30AF37F5B0079760D /* reporters.h */; };
 		0A72C9D10AF380670079760D /* reporters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C9D00AF380670079760D /* reporters.cpp */; };
 		0A72CA450AF6452C0079760D /* nslprops.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A72CA440AF6452C0079760D /* nslprops.txt */; };
@@ -101,6 +102,7 @@
 		0A3B6EB50AC9940B002CC2AF /* physics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = physics.h; path = src/physics.h; sourceTree = "<group>"; };
 		0A6BB4090B6E695000E89F6B /* variable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = variable.h; path = src/variable.h; sourceTree = "<group>"; };
 		0A6BB49D0B6E722B00E89F6B /* spinpair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spinpair.h; path = src/spinpair.h; sourceTree = "<group>"; };
+		0A6BB5B80B71034100E89F6B /* variable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = variable.cpp; path = src/variable.cpp; sourceTree = "<group>"; };
 		0A72C9B30AF37F5B0079760D /* reporters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reporters.h; path = src/reporters.h; sourceTree = "<group>"; };
 		0A72C9D00AF380670079760D /* reporters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reporters.cpp; path = src/reporters.cpp; sourceTree = "<group>"; };
 		0A72CA440AF6452C0079760D /* nslprops.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = nslprops.txt; path = doc/nslprops.txt; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				0A72C9D00AF380670079760D /* reporters.cpp */,
 				0A348B400B07B5A500F8771E /* tools.cpp */,
 				0A863DB00B62ABB400FF32EA /* solver.cpp */,
+				0A6BB5B80B71034100E89F6B /* variable.cpp */,
 				0A3B6EA10AC993DB002CC2AF /* volume_cylinder.cpp */,
 			);
 			name = Source;
@@ -267,6 +270,7 @@
 				0A7BDC7E0B5AC353008D1188 /* random.cpp in Sources */,
 				0A863CF20B61AE4F00FF32EA /* neutronphysics.cpp in Sources */,
 				0A863DB20B62ABB400FF32EA /* solver.cpp in Sources */,
+				0A6BB5B90B71034100E89F6B /* variable.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
