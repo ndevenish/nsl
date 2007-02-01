@@ -20,8 +20,11 @@
  * 
  */
 
+#define _CRT_SECURE_NO_DEPRECATE
+
 // Standard Headers
 #include <iostream> // For endl, and cout inside exception handlers
+#include <fstream>
 
 // C Headers
 #include <cmath>   // for maths functions
@@ -55,6 +58,7 @@ using std::runtime_error;
 using std::endl;
 using std::ios;
 using std::cout;
+using std::ofstream;
 
 using nsl::rand_uniform;
 
@@ -369,7 +373,7 @@ bool edmexperiment::runobject()
 		}
 		
 		// Now output the calculated edm values
-		logger << "   Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.uncert() << endl;
+		logger << "   Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.uncert() << " E-26 e.cm"<< endl;
 		
 		// Now tell all the reporters that are supposed to report every run, to report
 		BOOST_FOREACH( reporter *rep, report_run ) {
@@ -540,6 +544,18 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			// whilst having a minimal physical impact (preliminary tests indicate this is usually of order
 			// 1e-30 anyway)
 			// Note... this automatically accounts for gravity via collisionpoint.location
+			
+			long double diff = mod(collisionpoint.location - part->position);
+			static long double biggest_diff = 0.;
+			static ofstream stepdev("stepsystem_deviation.txt");
+			if (biggest_diff < diff)
+			{
+				static boost::mutex output_mutex;
+				boost::mutex::scoped_lock lock(output_mutex);
+		
+				biggest_diff = diff;
+				stepdev << biggest_diff << endl;
+			}
 			part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
 			
 			

@@ -238,7 +238,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\solver.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\tools.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\variable.cpp"
 					>
 				</File>
 			</Filter>
@@ -308,7 +316,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\solver.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\tools.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\variable.h"
 					>
 				</File>
 				<File

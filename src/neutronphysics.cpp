@@ -104,6 +104,6 @@ void neutron_physics::edmcalcs( particle &part, efield &elecfield )
 	// Now calculate the EDM from this... The 2pi from the hbar removes the radians
 	part.fake_edm = part.frequencydiff * hbar/E_FIELD/4; // Meter Coulombs
 	// And convert into friendlier units
-	part.fake_edm *= echarge*100; // e.cm
+	part.fake_edm *= 100/echarge; // e.cm
 	part.fake_edm *= 1e26; // e.cm x10^(-26)
 }

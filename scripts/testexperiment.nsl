@@ -14,7 +14,7 @@ add edmexperiment "The Experiment" {
 	#surface after a collision has happened. This is in to fix
 	#a few rather nasty floating-point rounding errors in the
 	#raytracer.
-	set collision_compensation_distance 1e-25 # (Meters)
+	set collision_compensation_distance 1e-15 # (Meters)
 	
 	#Gravity!
 	#set gravity off
@@ -82,7 +82,7 @@ add edmexperiment "The Experiment" {
 		add linear_zgradient "bfield gradient" {
 			set D_DZ	1e-9 # (Tesla per meter)
 		}
-		add dipole_zmagnetic "Z magnetic dipole" {
+		ignore add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
 			set z 		-0.5 	# (Meters)
 			set mz		-1e-3 	# (Amps * Meters^2)

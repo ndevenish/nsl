@@ -45,7 +45,7 @@
 #include "electromagnetics.h"
 
 #include "variable.h"
-#include "spinpair.h"
+//#include "spinpair.h"
 
 #include "boost/foreach.hpp"
 
@@ -118,8 +118,8 @@ dataset calc_dbdz(bfield &b, container &cont, long double power = 1.0)
 	
 	
 	cout << "  DBDZ averaging: Hits: " << hits << ", Misses: " << misses << "; (power " << power << ")" << endl;
-	cout << "	Estimated Volume = " << volumeestimate << " +- " << volerrest << endl;
-	cout << "	dBz/dz			 = " << vertgrad << endl;
+	cout << "	Estimated Volume = " << volumeestimate << " +- " << volerrest << " m^3" << endl;
+	cout << "	dBz/dz			 = " << vertgrad << " T/(m^" << (int)power << ")" << endl;
 	//vertgrad /= volumeestimate;
 	//logger << "   Average field gradient over volume : " << vertgrad<< endl;
 	
@@ -681,9 +681,6 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 	}
 	
 	// Calculate the value
-#warning "unnecessary debug line"
-	variable sumverify = cumPup + cumPdown;
-	
 	variable alpha = (cumPup - cumPdown) / (cumPup + cumPdown);
 	
 	return alpha;
@@ -692,7 +689,7 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 variable alphareporter::calculate_frequencyratio( vector<particle*> &particles )
 {
 	dataset freq_ratio;
-#warning "Assuming value for base magnetic field"
+
 	const long double B0 = 1e-6; // Tesla
 	
 	// Calculate the frequency ratio for each particle, and then average them

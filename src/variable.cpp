@@ -71,7 +71,7 @@ variable variable::operator/=(const long double& r)
 variable variable::operator*=(const variable& r)
 {
 	// computer part of the error to update without introducing a median variable
-	error = sqrt( pow( error / value, 2.) + pow( r.error / r.value, 2.0) );
+	error = sqrt( powl( error / value, 2.) + powl( r.error / r.value, 2.0) );
 	value *= r.value;
 	error *= value;
 	return *this;
@@ -79,7 +79,7 @@ variable variable::operator*=(const variable& r)
 
 variable variable::operator/=(const variable& r)
 {
-	error = sqrt( pow( error / value, 2.) + pow( r.error / r.value, 2.0) );
+	error = sqrt( powl( error / value, 2.) + powl( r.error / r.value, 2.0) );
 	value /= r.value;
 	error *= value;
 	return *this;
