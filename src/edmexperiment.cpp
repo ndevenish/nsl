@@ -371,7 +371,6 @@ bool edmexperiment::runobject()
 		// Now output the calculated edm values
 		logger << "   Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.uncert() << endl;
 		
-		
 		// Now tell all the reporters that are supposed to report every run, to report
 		BOOST_FOREACH( reporter *rep, report_run ) {
 			rep->report(*this);
@@ -423,7 +422,8 @@ void edmexperiment::runinterval( long double time )
 	return;
 }
 
-/** Launching point for a thread to process particles. * * * * * * * * * * * * * * * * 
+/**************************************************************************************
+* Launching point for a thread to process particles. * * * * * * * * * * * * * * * * 
 * Threads are created into this function, where they sort out getting a new particle  *
 * to process, and return once there are no more jobs left to do.					  *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -452,12 +452,17 @@ void edmexperiment::runruninterval ( edmexperiment *thisp, long double intervalt
 			
 			// Have we exhausted all particles? If so, quit this function (and thread).
 			if (partnum < 0)
-				return;
+				break;
 			
 			// We have generated a particle index number... run it's interval!
 			thisp->runinterval(intervaltime, thisp->particles[partnum]);
 			
+			// Let the user know we are processing
+			cout << "." << std::flush;
+			
 		} //while(1)
+		
+		cout << endl;
 		
 	// do the exception handling stuff
 	} catch (runtime_error runt) {

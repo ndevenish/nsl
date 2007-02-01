@@ -88,7 +88,7 @@ class bfield : public forcefield {
 	void readsettings( void );
 
 protected:
-	void field(vector3& field, const vector3& position) { field += b0; }
+	void field(vector3& field, const vector3& position) { field += b0; } // Tesla
 
 public:
 	bfield();
@@ -111,7 +111,7 @@ class efield : public forcefield {
 	void readsettings( void );
 
 protected:
-	void field(vector3& field, const vector3& position) { field += e0; }
+	void field(vector3& field, const vector3& position) { field += e0; } // Volts per meter
 
 public:
 	efield();
@@ -152,8 +152,8 @@ class dipole_zmagnetic : public forcefield {
 	long double z;
 	
 protected:
-	void field(vector3 &field, const vector3 &position);
-	void fieldgradient(vector3 &field, const vector3 &position);
+	void field(vector3 &field, const vector3 &position); // Tesla
+	void fieldgradient(vector3 &field, const vector3 &position); // Tesla per meter
 	
 	void readsettings();
 	

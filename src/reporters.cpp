@@ -647,10 +647,10 @@ void alphareporter::report( edmexperiment &exp )
 /// Function to calculate the alpha fringe visibility value for a set of particles.
 variable alphareporter::calculate_visibility( vector<particle*> &particles )
 {
-	variable cumPup, cumPdown;
+	variable cumPup, cumPdown; // cumulative probability
 	
-	dataset averagefreq_plusE;//, averagefreq_minusE;
-	
+	dataset averagefreq_plusE; // radians
+		
 	// Calculate the average frequencies
 	BOOST_FOREACH(particle *p, particles)
 	{
@@ -662,7 +662,7 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 	BOOST_FOREACH(particle *p, particles)
 	{
 		// Calculate the difference from the mean
-		variable meandiff;
+		variable meandiff; //Radians
 		meandiff.value = p->E_sum_phase - averagefreq_plusE.average();
 		meandiff.error = averagefreq_plusE.uncert();
 		
@@ -693,15 +693,18 @@ variable alphareporter::calculate_frequencyratio( vector<particle*> &particles )
 {
 	dataset freq_ratio;
 #warning "Assuming value for base magnetic field"
-	const long double B0 = 1e-6;
+	const long double B0 = 1e-6; // Tesla
 	
 	// Calculate the frequency ratio for each particle, and then average them
 	BOOST_FOREACH(particle *p, particles)
 	{
 		long double rotfreq = (p->E_sum_phase / p->flytime) / (2 * pi); // Hertz
-		long double newgam  = fabsl(p->gamma)* B0 / (2*pi);
-		long double ratio = rotfreq / newgam;
-		ratio -= 1.;
+		// Convert the gamma factor into hertz for our purposes
+		long double newgam  = fabsl(p->gamma * B0) / (2*pi); // Hertz
+		//long double ratio = rotfreq / newgam; // Dimensionless
+		long double ratio = ( rotfreq - newgam ) / newgam; // dimensionless
+		//ratio -= 1.;
+		//long double aval = ratio - ratio2;
 		freq_ratio += ratio;
 	}
 

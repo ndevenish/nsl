@@ -43,14 +43,14 @@ bool AlmostEqual2sComplement(long double A, long double B, int maxUlps);
 // Physical Constants
 
 const long double pi = 3.1415926535897932384626433832795028841971693993751058209; ///< Pi
-const long double echarge = 1.60217646e-19; ///< The charge of an electron
-const long double csquared = (299792458.*299792458.); ///< The speed of light squared
-const long double hbar = 1.054571596e-34; ///< h-bar (h/2*pi)
-const long double mu0 = 12.566370614E-7;
-const long double dipole_mult = mu0 / (4.*pi);
+const long double echarge = 1.60217646e-19; ///< The charge of an electron (Coulombs)
+const long double csquared = (299792458.*299792458.); ///< The speed of light squared (Meters per second)
+const long double hbar = 1.054571596e-34; ///< h-bar Joul-seconds
+const long double mu0 = 12.566370614E-7; ///< Permeability of free space (Henry's per meter)
+const long double dipole_mult = mu0 / (4.*pi); // * 4*pi (Henry's per meter)
 
-const long double g = 9.80665;
-const long double k = 1.3806503e-23;
+const long double g = 9.80665; // (Meters per second^2)
+const long double k = 1.3806503e-23; // Boltzmanns constant, (Joules per Kelvin)
 
 // ***************************************************************
 // Other inline functions

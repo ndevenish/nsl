@@ -61,24 +61,24 @@ class particle : public nslobject {
 	// A 'cache' for the exB effect that only changes every bounce (in a linear electric field)
 	vector3 vxEeffect;
 	
-	long double velocity;
+	long double velocity; // m s^-1
 
 	// Gyromagnetic ratio of the particle
-	long double gamma;
+	long double gamma; // 2*pi*Hz/Tesla
 	
 	// Particles velocity gamma
 	long double vgamma;
 	
-	long double E_sum_phase, E_minus_sum_phase;
+	long double E_sum_phase, E_minus_sum_phase; // Radians
 	
-	long double flytime;
+	long double flytime; // s
 	
 	// particles mass
-	long double mass;
+	long double mass; // kg
 	
 	// Our calculated edm parameters
-	long double frequencydiff;
-	long double fake_edm;
+	long double frequencydiff; //radians
+	long double fake_edm; // e.cm x10(-26)
 	
 	dataset cumulativeedm;
 	

@@ -52,13 +52,13 @@ static long double spin_vector( vector3 &spinvector, const long double gyromag, 
 	// Calculate the new length of the xy vectorshar
 	long double newxylength = sqrtl(spinvector.x* spinvector.x + spinvector.y*spinvector.y);
 	
-	//calculate the planar angle shift from the dot product	
+	//calculate the planar angle shift from the dot product
 	long double cosphase = (oldspin.x*spinvector.x + oldspin.y*spinvector.y) / (oldxylength*newxylength);
 	
 	if (cosphase > 1.)
 		cerr << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << endl;;//throw runtime_error("Cosphase > 1");
 		
-	long double phase_change = acos(cosphase);
+	long double phase_change = acos(cosphase); // Radians
 		
 	return phase_change;
 }
@@ -67,18 +67,18 @@ static long double spin_vector( vector3 &spinvector, const long double gyromag, 
 void neutron_physics::spin_calculation( particle &part, const vector3 &B, const long double time)
 {
 	// First calculate the two different magnetic fields
-	vector3 BplusvxE, BminusvxE;
-	BplusvxE = B + part.vxEeffect;
-	BminusvxE = B - part.vxEeffect;
+	vector3 BplusvxE, BminusvxE; // Tesla
+	BplusvxE = B + part.vxEeffect; // Tesla
+	BminusvxE = B - part.vxEeffect; // Tesla
 	
 	// Now spin it both ways 
 	long double plusphase, minusphase, framediff;
-	plusphase		= spin_vector(part.spinEplus,	part.gamma, BplusvxE,  time);
-	minusphase		= spin_vector(part.spinEminus,	part.gamma, BminusvxE, time);
-	framediff = plusphase - minusphase;
+	plusphase		= spin_vector(part.spinEplus,	part.gamma, BplusvxE,  time); // Radians
+	minusphase		= spin_vector(part.spinEminus,	part.gamma, BminusvxE, time); // Radians
+	framediff = plusphase - minusphase; // Radians
 	
-	part.E_sum_phase += plusphase;
-	part.E_minus_sum_phase += minusphase;
+	part.E_sum_phase += plusphase; // Radians
+	part.E_minus_sum_phase += minusphase; // Radians
 	
 	return;
 }
@@ -86,10 +86,10 @@ void neutron_physics::spin_calculation( particle &part, const vector3 &B, const 
 // Calculates the false-edm effect value
 void neutron_physics::edmcalcs( particle &part, efield &elecfield )
 {
-	// Firstly calculate the frequency differences between the two spins
+	// Firstly calculate the frequency differences between the two spins (Radians)
 	part.frequencydiff = atan2( part.spinEplus.x * part.spinEminus.y - part.spinEplus.y*part.spinEminus.x,
 								part.spinEplus.x*part.spinEminus.x + part.spinEplus.y*part.spinEminus.y );
-	part.frequencydiff /= part.flytime;
+	part.frequencydiff /= part.flytime; // Radians per second
 	/*
 	 atan2((particle->spin_x*particle->minusE_spin_y - particle->spin_y*particle->minusE_spin_x),
 		   (particle->spin_x*particle->minusE_spin_x + particle->spin_y*particle->minusE_spin_y)	            
@@ -97,10 +97,13 @@ void neutron_physics::edmcalcs( particle &part, efield &elecfield )
 	 */
 	
 	// Grab the E field vertical charge
-	vector3 E;
-	elecfield.getfield(E, vector3(0,0,0));
-	const long double E_FIELD = E.z;
+	vector3 E; // Volts per meter
+	elecfield.getfield(E, vector3(0,0,0)); // Volts per meter
+	const long double E_FIELD = E.z; // Volts per meter
 	
-	// Now calculate the EDM from this
-	part.fake_edm = part.frequencydiff * hbar/E_FIELD/echarge*100*1e26/4;
+	// Now calculate the EDM from this... The 2pi from the hbar removes the radians
+	part.fake_edm = part.frequencydiff * hbar/E_FIELD/4; // Meter Coulombs
+	// And convert into friendlier units
+	part.fake_edm *= echarge*100; // e.cm
+	part.fake_edm *= 1e26; // e.cm x10^(-26)
 }

@@ -134,9 +134,9 @@ void linear_zgradient::field(vector3& field, const vector3 &position)
 {
 	//vector3 thefield(0,0,0);
 
-	field.x += -position.x * (d_dz / 2.0);
-	field.y += -position.y * (d_dz / 2.0);
-	field.z += position.z * d_dz;
+	field.x += -position.x * (d_dz / 2.0); // Tesla
+	field.y += -position.y * (d_dz / 2.0); // Tesla
+	field.z += position.z * d_dz;		   // Tesla
 }
 
 /////////////////////////////////////////////////////////////////
@@ -144,7 +144,7 @@ void linear_zgradient::field(vector3& field, const vector3 &position)
 
 dipole_zmagnetic::dipole_zmagnetic()
 {
-	mz = 0;
+	mz = 0; // amps . meters^2
 	z = 0;
 }
 
@@ -153,8 +153,8 @@ void dipole_zmagnetic::readsettings( void )
 	require("mz");
 	require("z");
 	
-	mz = getlongdouble("mz", 0.0);
-	mz *= dipole_mult;
+	mz = getlongdouble("mz", 0.0); // Amps.meters^2
+	mz *= dipole_mult; // *4*pi Amps.meters.Henrys
 	
 	z = getlongdouble("z", 0.0);
 }
@@ -166,9 +166,9 @@ void dipole_zmagnetic::field( vector3 &field, const vector3 &position )
 	long double r = sqrtl(position.x*position.x + position.y*position.y + relz*relz);
 	long double rto5 = powl(r, 5.);
 		
-	field.x += (mz / rto5) * ( 3 * position.x * relz			);
-	field.y += (mz / rto5) * ( 3 * position.y * relz			);
-	field.z += (mz / rto5) * ( 3 * relz		  * relz	- r*r	);
+	field.x += (mz / rto5) * ( 3 * position.x * relz			); // Tesla
+	field.y += (mz / rto5) * ( 3 * position.y * relz			); // Tesla
+	field.z += (mz / rto5) * ( 3 * relz		  * relz	- r*r	); // Tesla
 }
 
 void dipole_zmagnetic::fieldgradient( vector3 &field, const vector3 &position)
@@ -176,9 +176,9 @@ void dipole_zmagnetic::fieldgradient( vector3 &field, const vector3 &position)
 	//throw runtime_error("Dipole Vertical field gradient not yet implemented");
 	
 	// Calculate the radius and relative z positions
-	long double relz = position.z - z;
-	long double r = sqrtl(position.x*position.x + position.y*position.y + relz*relz);
-	long double rto7 = powl(r, 7.);
+	long double relz = position.z - z; // Meters
+	long double r = sqrtl(position.x*position.x + position.y*position.y + relz*relz); // Meters
+	long double rto7 = powl(r, 7.); // Meters^7
 
-	field.z += mz * ((3. * relz) / rto7 ) * (3. * r * r - 5. * relz * relz );
+	field.z += mz * ((3. * relz) / rto7 ) * (3. * r * r - 5. * relz * relz ); // Tesla
 }

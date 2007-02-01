@@ -160,7 +160,7 @@ void particle::readsettings(void)
 				break;
 			}
 		} // while(1)
-		logger << velocity << endl;
+		//logger << velocity << endl;
 		
 	}
 	
@@ -198,7 +198,7 @@ void particle::readsettings(void)
 	
 	// Gamma value
 	gamma = getlongdouble("gamma", 0.0);
-	if (gamma == 0.0)
+	if (!isset("gamma"))
 		Warning("Gamma in particle is unset (or set to 0.0)");
 	// Multiply by 2pi
 	gamma *= 2. * pi;

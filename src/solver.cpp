@@ -133,25 +133,25 @@ void midpointsolver::step( particle &part, const long double &time )
 
 void midpointsolver::smallstep( particle &part, const long double &time)
 {
-	long double halftime = time / 2.0;
+	long double halftime = time / 2.0; // Seconds
 	
 	// Firstly calculate the step midpoint
-	vector3 midpoint, newposition;
-	midpoint = part.position + (part.velocity_vec*halftime);
+	vector3 midpoint, newposition; // Meters
+	midpoint = part.position + (part.velocity_vec*halftime); // Meters
 	
 	// Calculate the (non-gravitational) position after this step... this is because we recalculate
 	// velocity here (gravitationally) and this messes up the later calculation!
-	newposition = part.position += part.velocity_vec * time;
+	newposition = part.position += part.velocity_vec * time; // Meters
 	
 	// If gravity is turned on, adjust the relevant properties
 	if (gravity)
 	{
 		// the midpoint is different...
-		midpoint.z -= 0.5*g*halftime*halftime;
+		midpoint.z -= 0.5*g*halftime*halftime; // Meters
 		
 		// update the velocity at the halfway point
-		part.velocity_vec.z -= g*halftime;
-		part.velocity = mod(part.velocity_vec);
+		part.velocity_vec.z -= g*halftime; // Meters per second
+		part.velocity = mod(part.velocity_vec); // Meters per second
 
 		// And the particles Exv effect
 		part.updateExv(*elecfield);
@@ -159,28 +159,28 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	
 	// Just grab the magnetic field - now we have precalculated the magnetic field
 	// for the particle already
-	vector3 B;
-	magfield->getfield(B, midpoint);
+	vector3 B; // Tesla
+	magfield->getfield(B, midpoint); // Tesla
 	
 	
 	// Now apply the new physical properties to the particle
 	
 	// Move it first
-	part.position = newposition;
+	part.position = newposition; // Meters
 	
 	//...and gravity adjustments
 	if (gravity)
 	{
 		// Update the position properly
-		part.position.z -= 0.5*g*time*time;
+		part.position.z -= 0.5*g*time*time; // Meters
 		
 		// and finish adjusting the velocity with the other half of the step
-		part.velocity_vec.z -= g*halftime;
-		part.velocity = mod(part.velocity_vec);
+		part.velocity_vec.z -= g*halftime; // Meters per second
+		part.velocity = mod(part.velocity_vec); // Meters per second
 	}
 	
 	// Update the particles flytime
-	part.flytime += time;
+	part.flytime += time; // Seconds
 	
 	// Now spin the particle
 	neutron_physics::spin_calculation(part, B, time);

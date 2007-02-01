@@ -4,7 +4,7 @@ add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set phase_steps 1 #phase average loops
 	#set bounces 1000 #number of bounces to run the simulation over
-	set lifetime 60.0	#The lifetime of a particle
+	set lifetime 60.0	#The lifetime of a particle (seconds)
 
 	#This is the time to bounce a particle around for
 	#before calling the 'interval' reporters
@@ -14,56 +14,56 @@ add edmexperiment "The Experiment" {
 	#surface after a collision has happened. This is in to fix
 	#a few rather nasty floating-point rounding errors in the
 	#raytracer.
-	set collision_compensation_distance 1e-15
+	set collision_compensation_distance 1e-25 # (Meters)
 	
 	#Gravity!
 	#set gravity off
 	
 	add midpointsolver "midsolver" {
-		set steptime 3e-4
+		set steptime 3e-4 # (Seconds)
 	}
 	
 	add container "bottle" {
 		add volume_cylinder "mainbottle" {
 			set type negative
-			set radius 0.235
-			set height 0.12
+			set radius 0.235 # (Meters)
+			set height 0.12 # (Meters)
 			set reflection diffuse
 		}
 	}
 
-	multiadd 5 particle neutron {
-		set gamma -29.1646870E+6
+	multiadd 100 particle neutron {
+		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
-		set velocity 3
+		set velocity 3 # (Meters per second)
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
 		set maxwelldistribution on
 		# This sets the maximum height for cutting off the velocity
-		set maxwelliancutoff 0.79
+		set maxwelliancutoff 0.79 # (Meters)
 		
 		# set up the velocity VECTOR (this will be scaled to velocity)
-		set vy 0
-		set vx 1
-		set vz 0
+		set vy 0 # (Meters per second)
+		set vx 1 # (Meters per second)
+		set vz 0 # (Meters per second)
 		
 		# Set up the starting position
 		#set startvolume mainbottle
 		#set startposition edge
-		set z 0.1
-		set x 0
-		set y 0
+		set z 0.1 	# (Meters)
+		set x 0		# (Meters)
+		set y 0		# (Meters)
 		
 		# Set up initial spin angle
-		set start_spin_polar_angle 0.5 #in units of pi
-		set spin_phase 0 #again in pi units
+		set start_spin_polar_angle 0.5 # * pi (Radians)
+		set spin_phase 0 # * pi (Radians)
 		
 		set mass 1.6749e-27
 	}
 	
 	ignore multiadd 1000 particle "mercury" {
-		set gamma 7.5901309e+6
+		set gamma 7.5901309e+6 # (Hertz per tesla)
 		set velocity 100
 
 		set vy 1
@@ -78,19 +78,19 @@ add edmexperiment "The Experiment" {
 	}
 
 	add bfield "bfield" {
-		set b0z 	1.0E-6
+		set b0z 	1.0E-6 # (Tesla)
 		add linear_zgradient "bfield gradient" {
-			set D_DZ	1e-9
+			set D_DZ	1e-9 # (Tesla per meter)
 		}
-		ignore add dipole_zmagnetic "Z magnetic dipole" {
+		add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
-			set z 		-0.5
-			set mz		-1e-5
+			set z 		-0.5 	# (Meters)
+			set mz		-1e-3 	# (Amps * Meters^2)
 		}
 	}
 	
 	add efield "Efield" {
-		set e0z		8.e5
+		set e0z		8.e5 # (Volts per meter)
 	}
 	
 	ignore add edmreporter "edmreporter" {
