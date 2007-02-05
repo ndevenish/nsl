@@ -172,7 +172,7 @@ class volume_cylinder : public container {
 	/** Tests a cap to see if it is intersected, and updates the interception information accordingly. */
 	int capintersections_gravity ( long double capheight, const vector3& position, const vector3& direction, intercept *nextintercept) const;
 	/** Tests for intersections with the side of the cylinder */	
-	int volume_cylinder::sideintersections ( const vector3& raypos, const vector3& direction, intercept *nextplace ) const;
+	int sideintersections ( const vector3& raypos, const vector3& direction, intercept *nextplace ) const;
 
 	int findintersections ( const vector3& position, const vector3& direction, intercept *nextintercept ) const;
 	int findintersections_gravity ( const vector3& position, const vector3& direction, intercept *nextintercept ) const;

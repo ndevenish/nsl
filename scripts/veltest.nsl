@@ -3,8 +3,8 @@
 add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
 	set steptime 3e-5
-	set phase_steps 3#10#5 #phase average loops
-	#set bounces 1 #10000 #number of bounces to run the simulation over
+	set phase_steps 10#10#5 #phase average loops
+	#set bounces 10000 #10000 #number of bounces to run the simulation over
 	set lifetime 110.0	#The lifetime of a particle
 	#This is the time to bounce a particle around for
 	#before calling the 'interval' reporters
@@ -21,14 +21,14 @@ add edmexperiment "The Experiment" {
 			set type negative
 			set radius 0.235
 			set height 0.12
-			set reflection specular
+			set reflection diffuse
 		}
 	}
 
 	#multiadd 3 particle "neutron" {
 	add particle neutron {
 		set gamma -29.1646870E+6
-		vary velocity from 1 to 100 in 15 steps
+		vary velocity from 100 to 200 in 10 steps
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 0.01
 		set vx 1
@@ -60,6 +60,6 @@ add edmexperiment "The Experiment" {
 	}
 
 	add edmreporter "edmreporter" {
-		set output_file "neutron-vel_spec.txt"
+		set output_file "neutron-vel_200.txt"
 	}
 }

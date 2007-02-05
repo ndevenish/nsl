@@ -59,3 +59,4 @@ public:
 nsl::variable operator-(const long double &lt, const nsl::variable&rt);
 
 #endif
+
