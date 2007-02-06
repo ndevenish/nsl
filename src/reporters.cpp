@@ -619,7 +619,7 @@ void alphareporter::report( edmexperiment &exp )
 	
 	// We have two jobs - firstly calculate the Ra-1 value, and secondly to calculate the alpha value.
 	
-	// Calculate the alpha fringe visibility value
+	// Calculate the alpha fringe visibility valuePhenomenology
 	variable alpha = calculate_visibility( exp.particles );
 	
 	// Now calculate the Ra-1 value

@@ -290,17 +290,20 @@ bool edmexperiment::runobject()
 		variation.varyobject->set(variation.parameter, str(varyval));
 		variation.value = varyval;
 		
-		// Resetting this should also get all our children to read!
-			this->reset();
-			
-		// Reset all the particles cumulative phase average things,
-		// and set each particles steptime to be our global steptime
+		// Reset all subobjects
+		this->reset();
+		
+		/* // THIS SECTION NOW OBSELETE? REPEATED BELOW INSIDE PHASE LOOP
+		// Reset all the particles cumulative phase average variables
+		// OLD: and set each particles steptime to be our global steptime
+		//		- Do this through midpointsolver now
 		BOOST_FOREACH(particle *part, particles)
 		{
 			part->cumulativeedm.reset();
-			part->steptime = steptime;
+			//part->steptime = steptime;
 		}
-			
+		*/
+		
 		// First loop over starting phases
 		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
 		{
@@ -309,9 +312,12 @@ bool edmexperiment::runobject()
 			long double phaseavg = phase_loop * (2.0 / phase_steps);
 			// Reset the particle each phase, and set it's phase
 			BOOST_FOREACH( particle* part, particles ) {
-				part->set("spin_phase", str(phaseavg));
+				part->set("start_spin_phase", str(phaseavg));
 				part->reset();
 			}
+			// Prepare the particles (solver-wise) - this means resetting their steptimes
+			// for a midpointsolver
+			thesolver->prepareparticles(particles);
 		
 			
 			// Decide how to loop - two choices:

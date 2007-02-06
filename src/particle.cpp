@@ -84,14 +84,30 @@ bool particle::prepareobject()
 }
 void particle::readsettings(void)
 {
-	// Reset frame stuff here
+	// Reset all the per-phase run variables here
 	fake_edm = 0.;
 	flytime = 0.;
 	frequencydiff = 0.;
+	E_sum_phase = E_minus_sum_phase = 0.;
 	
-	// ***************************************
 	// Get and validate the velocities
+	read_velocitysettings();
+
+	// Get and validate the positions
+	read_positionsettings();
 	
+	// Read the spin settings
+	read_spinsettings();
+	
+	// Find a magnetic field to link to
+	mag_field = (bfield*)findbytype("bfield");
+	
+	// Look for an electric field to link to
+	elec_field = (efield*)findbytype("efield");
+}
+
+void particle::read_velocitysettings( void )
+{
 	// First get the vector if we have one
 	if (isset("vx") || isset("vy") || isset("vz"))
 	{
@@ -109,8 +125,6 @@ void particle::readsettings(void)
 		velocity = velocity_vec.mod();
 	}
 	
-	vgamma = sqrtl(1. / (1. - (velocity*velocity)/csquared));
-	
 	// Warn for zero velocity
 	if (velocity == 0.0)
 		Warning("Velocity in particle is unset (or set to 0.0)");
@@ -118,54 +132,62 @@ void particle::readsettings(void)
 	/////////////////////////////////////////////
 	// Maxwell-Boltzmann distribution
 	if (get("maxwelldistribution", "off") == "on")
-	{
-		//We want this particle to have a velocity on a maxwell-boltzmann distribution
-		
-		// Don't do it if we have no mass information
-		if (!isset("mass"))
-			throw runtime_error("Cannot set maxwell-boltzmann velocity without mass information.");
-		
-		mass = getlongdouble("mass", 0);
-		if (mass <= 0.)
-			throw runtime_error("Zero and negative mass particles unsupported");
-		
-		// Calculate the effective temperature for the desired velocity
-		long double T = (velocity*velocity * mass ) / (2.*k);
-		
-		long double factor = sqrtl((k*T) / mass );
-		
-		// Check we are not above the cutoff
-		if (getlongdouble("maxwelliancutoff", position.z + 1.) < position.z)
-			throw runtime_error("Particle start position is higher than maxwellian cutoff");
-		
-		while(1)
-		{
-			// Generate random maxwellian velocities - http://research.chem.psu.edu/shsgroup/chem647/project14/project14.html
-			velocity_vec.x = rand_normal() * factor;
-			velocity_vec.y = rand_normal() * factor;
-			velocity_vec.z = rand_normal() * factor;
-			
-			// Read back the velocity magnitude
-			velocity = velocity_vec.mod();
-			
-			// Are we using a cutoff height?
-			if (isset("maxwelliancutoff")) {
-				// Is this above our cutoff?
-				long double cutoff = sqrtl(2*g*(getlongdouble("maxwelliancutoff", 0.79) - position.z));
-				
-				// If not, it is valid! otherwise recast.
-				if (velocity < cutoff)
-					break;
-			} else {
-				break;
-			}
-		} // while(1)
-		//logger << velocity << endl;
-		
-	}
+		generate_maxwellianvelocity();
 	
-	// **************************************
-	// Get and validate the positions
+	// Calculate the relativistic gamma factor
+	vgamma = sqrtl(1. / (1. - (velocity*velocity)/csquared));
+	
+}
+
+void particle::generate_maxwellianvelocity( void )
+{
+	//We want this particle to have a velocity on a maxwell-boltzmann distribution
+	
+	// Don't do it if we have no mass information
+	if (!isset("mass"))
+		throw runtime_error("Cannot set maxwell-boltzmann velocity without mass information.");
+
+	// Read in the mass information
+	mass = getlongdouble("mass", 0);
+	if (mass <= 0.)
+		throw runtime_error("Zero and negative mass particles unsupported");
+	
+	// Calculate the effective temperature for the desired maximum velocity
+	long double T = (velocity*velocity * mass ) / (2.*k);
+	// Precalculate the factor for this
+	long double factor = sqrtl((k*T) / mass );
+	
+	// Check we are not above the cutoff
+	if (getlongdouble("maxwelliancutoff", position.z + 1.) < position.z)
+		throw runtime_error("Particle start position is higher than maxwellian cutoff");
+	
+	// Loop until we have a valid velocity
+	while(1)
+	{
+		// Generate random maxwellian velocities - http://research.chem.psu.edu/shsgroup/chem647/project14/project14.html
+		velocity_vec.x = rand_normal() * factor;
+		velocity_vec.y = rand_normal() * factor;
+		velocity_vec.z = rand_normal() * factor;
+		
+		// Read back the velocity magnitude
+		velocity = velocity_vec.mod();
+		
+		// Are we using a cutoff height? If so, see if we are within it
+		if (isset("maxwelliancutoff")) {
+			// Is this above our cutoff?
+			long double cutoff = sqrtl(2*g*(getlongdouble("maxwelliancutoff", 0.79) - position.z));
+			
+			// If not, it is valid! otherwise recast.
+			if (velocity < cutoff)
+				break;
+		} else {
+			break;
+		}
+	} // while(1)
+}
+
+void particle::read_positionsettings( void )
+{
 	position.x = getlongdouble("x", 0.0);
 	position.y = getlongdouble("y", 0.0);
 	position.z = getlongdouble("z", 0.0);
@@ -191,16 +213,16 @@ void particle::readsettings(void)
 		else
 			throw runtime_error("Attempting to start particle in non-container volume");
 	}
-	
-	
-	// *********************************************************
-	// Extract all the physical properties from the property set
-	
+}
+
+void particle::read_spinsettings( void)
+{
 	// Gamma value
 	gamma = getlongdouble("gamma", 0.0);
 	if (!isset("gamma"))
 		Warning("Gamma in particle is unset (or set to 0.0)");
-	// Multiply by 2pi
+	// Multiply by 2pi Because we will mostly want to use this setting
+	// NOTE: Be careful if changing this in future, as is assumed to be 2*pi*gamma elsewhere
 	gamma *= 2. * pi;
 	
 	// ~~~~~ Spin stuff
@@ -213,15 +235,7 @@ void particle::readsettings(void)
 	spinEplus.y = sinl(start_spin_polar_angle)*sinl(start_spin_phase);
 	spinEplus.z = cosl(start_spin_polar_angle);
 	spinEminus = spinEplus;
-	
-	// ************************************************************
-	// Find a magnetic field to link to
-	mag_field = (bfield*)findbytype("bfield");
-	
-	// Look for an electric field to link to
-	elec_field = (efield*)findbytype("efield");
 }
-
 
 /** Updates the Exv effect for the particle. */
 void particle::updateExv ( efield &elecfield )

@@ -1,6 +1,9 @@
 #test
 
 add edmexperiment "The Experiment" {
+	
+	vary something from 1 to 10 in 10 steps
+	
 	# set the steptime for the inbuilt solver to use
 	set phase_steps 1 #phase average loops
 	#set bounces 1000 #number of bounces to run the simulation over
@@ -32,7 +35,7 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 100 particle neutron {
+	multiadd 1 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps

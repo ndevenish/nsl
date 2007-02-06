@@ -95,6 +95,11 @@ class particle : public nslobject {
 
 	//bool getvaluetoproperty(std::string valuename, long double &dest);
 
+	void read_velocitysettings( void );
+	void read_positionsettings( void );
+	void read_spinsettings( void );
+	void generate_maxwellianvelocity(void);
+	
 public:
 	particle();
 
