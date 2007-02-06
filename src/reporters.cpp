@@ -708,3 +708,4 @@ variable alphareporter::calculate_frequencyratio( vector<particle*> &particles )
 	// Convert this dataset into a variable and return it
 	return variable(freq_ratio);
 }
+
