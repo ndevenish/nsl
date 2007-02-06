@@ -235,43 +235,30 @@ void edmexperiment::readsettings ( void )
 		gravity = true;
 	else
 		gravity = false;
+	
+	
 }
 
 bool edmexperiment::runobject()
 {
-	// Dataset to track the false EDM
-//	dataset false_edm;
-
 	// Ensure that all of our particles are within the starting volume
 	BOOST_FOREACH( particle* part, particles) {
 		if (!particlebox->isinside(part->position))
 			throw runtime_error("Particle is not starting inside of a container volume");
 	}
 
-
-	// for now assume that everything is set up correctly
-	
-	// Tell our reporters to initialise, here for now.
-	BOOST_FOREACH( nslobject *ob, subobjects) {
-		if (ob->isoftype("reporter"))
-			((reporter*)(ob))->preparefile(*this);
-	}
-	
-	////////////////////////////////////////////////////////////////////////////
-	// Start the simulation loops
-
-	// give it something to vary
+	// If we are not runnning a variation, set up an 'empty' one.
 	if (!variation.varying)
 	{
 		variation.minval = 1;
 		variation.maxval = 1;
 		variation.runs = 1;
-		variation.parameter = "None";
+		variation.parameter = "No_variation";
 		variation.varying = false;
 		variation.varyobject = this;
 	}
 	
-	// shout out what we are doing loopwise
+	// Inform the user what type of looping we are doing
 	if (uselifetime)
 		if (intervaltime < lifetime)
 			logger << "Lifetime-based looping: Intervals of " << intervaltime << " for " << lifetime << " (seconds)" << endl;
@@ -279,104 +266,36 @@ bool edmexperiment::runobject()
 			logger << "Lifetime-based looping for " << lifetime << " seconds" << endl;
 	else
 		logger << "Using bounce-based looping: For " << bounces << " bounces." << endl;
-		
-	// Run over experimental runs
+	
+	// Tell our reporters to all initialise
+	BOOST_FOREACH( nslobject *ob, subobjects) {
+		if (ob->isoftype("reporter"))
+			((reporter*)(ob))->preparefile(*this);
+	}
+			
+	////////////////////////////////////////////////////////////////////////////
+	// Start the simulation loops
+
+	// Run over each variation of experimental run
 	for (int exprun = 0; exprun < variation.runs; exprun++)
 	{
-		// Calculate the value for the variation this loop
-		long double varyval = variation.minval + (variation.maxval - variation.minval)*exprun / variation.runs;
-		logger << "Outer Loop " << exprun+1 << "/" << variation.runs << " of " << variation.parameter << ": Value = " << varyval << endl;
-		// now set it!
-		variation.varyobject->set(variation.parameter, str(varyval));
-		variation.value = varyval;
+		update_variationparameters( exprun );
 		
-		// Reset all subobjects
+		// Reset all subobjects (this also resets all particles)
 		this->reset();
 		
-		/* // THIS SECTION NOW OBSELETE? REPEATED BELOW INSIDE PHASE LOOP
-		// Reset all the particles cumulative phase average variables
-		// OLD: and set each particles steptime to be our global steptime
-		//		- Do this through midpointsolver now
+		// Reset the cumulative EDM each set of phase loops
 		BOOST_FOREACH(particle *part, particles)
-		{
 			part->cumulativeedm.reset();
-			//part->steptime = steptime;
-		}
-		*/
-		
-		// First loop over starting phases
+
+		// Loop over each phase, accumulating an edm
 		for (int phase_loop = 0; phase_loop < phase_steps; phase_loop++)
-		{
-			logger << "   Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
-			// Calculate the phase
-			long double phaseavg = phase_loop * (2.0 / phase_steps);
-			// Reset the particle each phase, and set it's phase
-			BOOST_FOREACH( particle* part, particles ) {
-				part->set("start_spin_phase", str(phaseavg));
-				part->reset();
-			}
-			// Prepare the particles (solver-wise) - this means resetting their steptimes
-			// for a midpointsolver
-			thesolver->prepareparticles(particles);
+			run_phaseloop(phase_loop);
 		
-			
-			// Decide how to loop - two choices:
-			// 1) Bounce for a certain number of bounces
-			// 2) Start a loop for intervals - this will run all the particles for a specified time,
-			//    after which they will all have identical running times (so that reports that
-			//    depend on having an ensemble of equal-time particles can be made)
-			
-			bool runningintervals = true; // are we still runnning/planning to run intervals?
-			
-			// If we are not doing lifetime based looping, don't even bother with the loop
-			if (!uselifetime)
-			{
-				runningintervals = false; // This cancels the loop ahead so it won't happen
-				runinterval(0.0); // This runs the interval - it doesn't care about time in this case
-			}
-			
-			// Loop over the time intervals, as long as we have time left.. signified by 
-			// a counter of life!
-			long double timeleft = lifetime; //lifetime remaining
-			while (runningintervals)
-			{
-				// Loop through, running the simulation for an intervals length
-				// Firstly, check to see if we have enough time left!
-				if (timeleft < intervaltime)
-				{
-					// We have less than one intervals time remaining... run what is left
-					// then check the var to quit the loop
-					runinterval(timeleft);
-					timeleft = 0;
-					runningintervals = false;
-				} else {
-					// We have more than one interval left, so run one and reduce that from the overall
-					// time remaining.
-					runinterval(intervaltime);
-					timeleft -= intervaltime;
-				}
-				
-				// Call the interval reporters
-				BOOST_FOREACH( reporter *rep, report_interval )
-					rep->report(*this);
-			} // End of running intervals
-			// At this point we have run over al time, whether it be from bounce or interval based procedures
-			
-			// Calculate an edm for each particle, and accumulate it
-			BOOST_FOREACH(particle *part, particles) {
-				neutron_physics::edmcalcs(*part, *elecfield);
-				part->cumulativeedm += part->fake_edm;
-//				falseedmav += part->fake_edm;
-			}
-		} // FOREACH phase
-		
-		// Calculate the edm!
-		//dataset collective_fedm;
+		// Calculate the Average edm!
 		dataset falseedmav;
 		BOOST_FOREACH(particle *part, particles)
-		{
 			falseedmav += part->cumulativeedm;
-		}
 		
 		// Now output the calculated edm values
 		logger << "   Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.uncert() << " E-26 e.cm"<< endl;
@@ -397,6 +316,83 @@ bool edmexperiment::runobject()
 	return false;
 }
 
+void edmexperiment::update_variationparameters (int exprun )
+{
+	// Calculate the value for the variation this loop
+	long double varyval = variation.minval + (variation.maxval - variation.minval)*exprun / variation.runs;
+	logger << "Outer Loop " << exprun+1 << "/" << variation.runs << " of " << variation.parameter << ": Value = " << varyval << endl;
+	// now set it!
+	variation.varyobject->set(variation.parameter, str(varyval));
+	variation.value = varyval;
+}
+
+void edmexperiment::run_phaseloop( int phase_loop )
+{
+	logger << "   Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+	// Calculate the phase for this loop
+	long double phaseavg = phase_loop * (2.0 / phase_steps);
+	
+	// Reset the particles, and update their starting phase
+	BOOST_FOREACH( particle* part, particles ) {
+		part->set("start_spin_phase", str(phaseavg));
+		part->reset();
+	}
+	
+	// Prepare the particles (solver-wise) - this means resetting their steptimes
+	// for a midpointsolver
+	thesolver->prepareparticles(particles);
+	
+	
+	// Decide how to loop - two choices:
+	// 1) Bounce for a certain number of bounces
+	// 2) Start a loop for intervals - this will run all the particles for a specified time,
+	//    after which they will all have identical running times (so that reports that
+	//    depend on having an ensemble of equal-time particles can be made)
+	
+	bool runningintervals = true; // are we still runnning/planning to run intervals?
+	
+	// If we are not doing lifetime based looping, don't even bother with the loop
+	if (!uselifetime)
+	{
+		runningintervals = false; // This cancels the loop ahead so it won't happen
+		runinterval(0.0); // This runs the interval - it doesn't care about time in this case
+	}
+	
+	// Loop over the time intervals, as long as we have time left.. signified by 
+	// a counter of life!
+	long double timeleft = lifetime; //lifetime remaining
+	while (runningintervals)
+	{
+		// Loop through, running the simulation for an intervals length
+		// Firstly, check to see if we have enough time left!
+		if (timeleft < intervaltime)
+		{
+			// We have less than one intervals time remaining... run what is left
+			// then check the var to quit the loop
+			runinterval(timeleft);
+			timeleft = 0;
+			runningintervals = false;
+		} else {
+			// We have more than one interval left, so run one and reduce that from the overall
+			// time remaining.
+			runinterval(intervaltime);
+			timeleft -= intervaltime;
+		}
+		
+		// Call the interval reporters
+		BOOST_FOREACH( reporter *rep, report_interval )
+		rep->report(*this);
+	} // End of running intervals
+	  // At this point we have run over al time, whether it be from bounce or interval based procedures
+	
+	// Calculate an edm for each particle, and accumulate it
+	BOOST_FOREACH(particle *part, particles) {
+		neutron_physics::edmcalcs(*part, *elecfield);
+		part->cumulativeedm += part->fake_edm;
+		//				falseedmav += part->fake_edm;
+	}
+
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

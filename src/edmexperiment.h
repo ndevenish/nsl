@@ -120,6 +120,17 @@ class edmexperiment : public nslobject {
 	left to be processed.*/
 	static void runruninterval ( edmexperiment *thisp, long double intervaltime, int* partsleft);//, particle *part );
 	
+	/** Runs a single phase loop.
+	* The particles can be run over several starting phases for a single run. This function runs
+	* a single phase, after resetting all phase-specific particle properties (i.e. all except the cumulative
+	* edm value, though that should be held seperately anyway.
+	* @param which phase loop we are on (out of the total) */
+	void run_phaseloop( int phase_num ); 
+	
+	/** Updates the variation parameters.
+	* This updates the parameter being varied for the object which is being varied. */
+	void update_variationparameters ( int run_number );
+	
 protected:
 
 public:
