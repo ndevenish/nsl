@@ -383,7 +383,7 @@ void edmexperiment::run_phaseloop( int phase_loop )
 		BOOST_FOREACH( reporter *rep, report_interval )
 		rep->report(*this);
 	} // End of running intervals
-	  // At this point we have run over al time, whether it be from bounce or interval based procedures
+	  // At this point we have run over all time, whether it be from bounce or interval based procedures
 	
 	// Calculate an edm for each particle, and accumulate it
 	BOOST_FOREACH(particle *part, particles) {

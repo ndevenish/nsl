@@ -90,18 +90,13 @@ void neutron_physics::edmcalcs( particle &part, efield &elecfield )
 	part.frequencydiff = atan2( part.spinEplus.x * part.spinEminus.y - part.spinEplus.y*part.spinEminus.x,
 								part.spinEplus.x*part.spinEminus.x + part.spinEplus.y*part.spinEminus.y );
 	part.frequencydiff /= part.flytime; // Radians per second
-	/*
-	 atan2((particle->spin_x*particle->minusE_spin_y - particle->spin_y*particle->minusE_spin_x),
-		   (particle->spin_x*particle->minusE_spin_x + particle->spin_y*particle->minusE_spin_y)	            
-		   )/particle->tot_time;
-	 */
 	
 	// Grab the E field vertical charge
 	vector3 E; // Volts per meter
 	elecfield.getfield(E, vector3(0,0,0)); // Volts per meter
 	const long double E_FIELD = E.z; // Volts per meter
 	
-	// Now calculate the EDM from this... The 2pi from the hbar removes the radians
+	// Now calculate the EDM from this... The 2pi from the hbar removes the radian dependence
 	part.fake_edm = part.frequencydiff * hbar/E_FIELD/4; // Meter Coulombs
 	// And convert into friendlier units
 	part.fake_edm *= 100/echarge; // e.cm
