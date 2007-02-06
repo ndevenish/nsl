@@ -675,6 +675,15 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 		variable Pup = 0.5 * (meanaxis_projection + 1.);
 		//long double PupErr = 0.5 * (meanaxis_projectionerr + 1.);
 		
+		if (Pup.value < 0.)
+		{
+			cout << "ERROR: Probability value less than zero." << endl;
+			cout << "\tMeandiff:   " << meandiff.value << endl;
+			cout << "\tMean phase: " << averagefreq_plusE.average() << endl;
+			cout << "\tProjection: " << meanaxis_projection.value << endl;
+			throw runtime_error("Calculated negative probability in polarization reporter");
+		}
+		
 		cumPup += Pup;
 
 		cumPdown += (1. - Pup);

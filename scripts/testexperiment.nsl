@@ -82,7 +82,7 @@ add edmexperiment "The Experiment" {
 
 	add bfield "bfield" {
 		set b0z 	1.0E-6 # (Tesla)
-		add linear_zgradient "bfield gradient" {
+		ignore add linear_zgradient "bfield gradient" {
 			set D_DZ	1e-9 # (Tesla per meter)
 		}
 		ignore add dipole_zmagnetic "Z magnetic dipole" {
