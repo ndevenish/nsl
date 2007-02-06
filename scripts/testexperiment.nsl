@@ -85,7 +85,7 @@ add edmexperiment "The Experiment" {
 		ignore add linear_zgradient "bfield gradient" {
 			set D_DZ	1e-9 # (Tesla per meter)
 		}
-		ignore add dipole_zmagnetic "Z magnetic dipole" {
+		add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
 			set z 		-0.5 	# (Meters)
 			set mz		-1e-3 	# (Amps * Meters^2)

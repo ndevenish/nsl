@@ -1,45 +1,114 @@
-# Test 
 
-add edmexperiment theexperiment {
+add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
-	set steptime 3e-4
-	set phase_steps 5 #phase average loops
-	set bounces 1000 #number of bounces to run the simulation over
+	set phase_steps 1 #phase average loops
+	#set bounces 1000 #number of bounces to run the simulation over
+	set lifetime 60.0	#The lifetime of a particle (seconds)
+
+	#This is the time to bounce a particle around for
+	#before calling the 'interval' reporters
+	#set intervaltime 1.0 
 	
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
 	#a few rather nasty floating-point rounding errors in the
 	#raytracer.
-	set collision_compensation_distance 1e-9
+	set collision_compensation_distance 1e-15 # (Meters)
 	
-	add container bottle {
-		add volume_cylinder mainbottle {
+	#Gravity!
+	set gravity on
+	
+	add midpointsolver "midsolver" {
+		set steptime 3e-5 # (Seconds)
+	}
+	
+	add container "bottle" {
+		add volume_cylinder "mainbottle" {
 			set type negative
-			set radius 0.235
-			set height 0.12
-			set reflection specular
+			set radius 0.235 # (Meters)
+			set height 0.12 # (Meters)
+			set reflection diffuse
 		}
 	}
 
-	add particle neutron {
-		set gamma -29.1646870E+6
-		set velocity 3
+	multiadd 100 particle neutron {
+		set gamma -29.1646870E+6  # (Hertz per tesla)
+
+		#vary velocity from 10 to 200 in 20 steps
+		set velocity 3 # (Meters per second)
+		#This will 'spread out' the velocity to a random point on a
+		#maxwell-boltzmann distribution of velocities
+		set maxwelldistribution on
+		# This sets the maximum height for cutting off the velocity
+		set maxwelliancutoff 0.79 # (Meters)
+		
+		# set up the velocity VECTOR (this will be scaled to velocity)
+		set vy 0 # (Meters per second)
+		set vx 1 # (Meters per second)
+		set vz 0 # (Meters per second)
 		
 		# Set up the starting position
-		set startvolume mainbottle
-		set startposition edge
+		#set startvolume mainbottle
+		#set startposition edge
+		set z 0.1 	# (Meters)
+		set x 0		# (Meters)
+		set y 0		# (Meters)
+		
+		# Set up initial spin angle
+		set start_spin_polar_angle 0.5 # * pi (Radians)
+		set spin_phase 0 # * pi (Radians)
+		
+		set mass 1.6749e-27
+	}
+	
+	ignore multiadd 1000 particle "mercury" {
+		set gamma 7.5901309e+6 # (Hertz per tesla)
+		set velocity 100
 
-		set start_spin_polar_angle 0.5 #in units of pi
-		set spin_phase 0 #again in pi units
+		set vy 1
+		set vx 0
+
+		set z 0.1
+		set x 0
+		set y 0
+
+		set start_spin_polar_angle 0.5
+		set spin_phase 0
 	}
 
-	add bfield bfield {
-		set b0z 	1.0E-6
+	add bfield "bfield" {
+		set b0z 	1.0E-6 # (Tesla)
 		add linear_zgradient "bfield gradient" {
-			set D_DZ	1e-9
+			#set D_DZ	1.51e-8 #1e-9 # (Tesla per meter)
+			vary D_DZ from 0.1e-8 to 3.0e-8 in 30 steps
+		}
+		add dipole_zmagnetic "Z magnetic dipole" {
+			#vary z from -0.1 to -1.0 in 100 steps
+			set z 		-0.3 	# (Meters)
+			set mz		1e-3 	# (Amps * Meters^2)
 		}
 	}
-	add efield efield {
-		set e0z		8.e5
+	
+	add efield "Efield" {
+		set e0z		8.e5 # (Volts per meter)
+	}
+	
+	ignore add edmreporter "edmreporter" {
+		set output_file "veltest_200.txt"
+		set volaverage_dbdz true
+	}
+	
+	ignore add posreporter "posreporter" {
+		set output_file "poslog.txt"
+		set particle 0
+	}
+	ignore add posreporter "posreporter" {
+		set output_file "poslog2.txt"
+		set particle 1
+	}
+	
+	add alphareporter "alphareporter" {
+		set output_file "pollog.txt"
 	}
 }
+#tree
