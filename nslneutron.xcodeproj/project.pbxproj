@@ -45,6 +45,7 @@
 		0AB236A10ADD292B00323FF0 /* vector3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB236A00ADD292B00323FF0 /* vector3.h */; };
 		0AB236BB0ADD29D900323FF0 /* datasets.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB236BA0ADD29D900323FF0 /* datasets.h */; };
 		0AD2AF9A0B52F55200960C16 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD2AF990B52F55200960C16 /* libboost_program_options.a */; };
+		0AE8BC890B7B692800398D6A /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AE8BC880B7B692800398D6A /* libboost_filesystem.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -118,6 +119,7 @@
 		0AB236A00ADD292B00323FF0 /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector3.h; path = src/vector3.h; sourceTree = "<group>"; };
 		0AB236BA0ADD29D900323FF0 /* datasets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = datasets.h; path = src/datasets.h; sourceTree = "<group>"; };
 		0AD2AF990B52F55200960C16 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = /usr/local/lib/libboost_program_options.a; sourceTree = "<absolute>"; };
+		0AE8BC880B7B692800398D6A /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = /usr/local/lib/libboost_filesystem.a; sourceTree = "<absolute>"; };
 		8DD76F6C0486A84900D96B5E /* nslneutron */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nslneutron; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 			files = (
 				0AD2AF9A0B52F55200960C16 /* libboost_program_options.a in Frameworks */,
 				0A7BDE430B5B245A008D1188 /* libboost_thread.a in Frameworks */,
+				0AE8BC890B7B692800398D6A /* libboost_filesystem.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +140,7 @@
 		08FB7794FE84155DC02AAC07 /* nslneutron */ = {
 			isa = PBXGroup;
 			children = (
+				0AE8BC880B7B692800398D6A /* libboost_filesystem.a */,
 				0A232F6B0AC99A0D00ABB21F /* ChangeLog */,
 				0A7BDE420B5B245A008D1188 /* libboost_thread.a */,
 				0AD2AF990B52F55200960C16 /* libboost_program_options.a */,

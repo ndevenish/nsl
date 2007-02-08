@@ -42,11 +42,16 @@
 #include <stdio.h>
 
 #include <boost/program_options.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
+
 
 using std::cout;
 using std::endl;
 using std::string;
 using std::runtime_error;
+
+using boost::filesystem::path;
 
 namespace po = boost::program_options;
 
@@ -101,14 +106,22 @@ int main ( int argc, char *argv[] )
 		nslobjectfactory::add("alphareporter", new alphareporter::Factory);
 		
 		// Build the tree
+		path infile;
 		if (!vm.count("input-file"))
 		{
 			cout << "No input script specified, defaulting to testexperiment.nsl" << endl;
-			rootobject.parse("./scripts/testexperiment.nsl");
+			//rootobject.parse("./scripts/testexperiment.nsl");
+			infile = "./scripts/testexperiment.nsl";
 		} else {
 			cout << "Running script " << vm["input-file"].as<string>() << endl;
-			rootobject.parse(vm["input-file"].as<string>());
+			//rootobject.parse(vm["input-file"].as<string>());
+			infile = vm["input-file"].as<string>();
 		}
+		
+		if (!exists(infile))
+			throw runtime_error("Specified infile does not exist");
+		
+		rootobject.parse(infile.native_file_string());
 
 		if (vm.count("tree")) {
 			cout << "Read in structure:" << endl;
