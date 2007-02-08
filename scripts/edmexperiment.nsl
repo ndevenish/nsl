@@ -16,7 +16,7 @@ add edmexperiment "The Experiment" {
 	set collision_compensation_distance 1e-15 # (Meters)
 	
 	#Gravity!
-	set gravity on
+	#set gravity on
 	
 	add midpointsolver "midsolver" {
 		set steptime 3e-5 # (Seconds)
@@ -31,7 +31,7 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 100 particle neutron {
+	multiadd 250 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
@@ -80,7 +80,7 @@ add edmexperiment "The Experiment" {
 		set b0z 	1.0E-6 # (Tesla)
 		add linear_zgradient "bfield gradient" {
 			#set D_DZ	1.51e-8 #1e-9 # (Tesla per meter)
-			vary D_DZ from 0.1e-8 to 3.0e-8 in 30 steps
+			vary D_DZ from 1.4e-8 to 2.64e-8 in 30 steps
 		}
 		add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
@@ -108,7 +108,7 @@ add edmexperiment "The Experiment" {
 	}
 	
 	add alphareporter "alphareporter" {
-		set output_file "pollog.txt"
+		set output_file "pollog004_nograv.txt"
 	}
 }
 #tree
