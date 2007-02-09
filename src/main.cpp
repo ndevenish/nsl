@@ -105,42 +105,39 @@ int main ( int argc, char *argv[] )
 		nslobjectfactory::add("posreporter", new posreporter::Factory);
 		nslobjectfactory::add("alphareporter", new alphareporter::Factory);
 		
-		// Build the tree
+		// What script file do we want to read in?
 		path infile;
 		if (!vm.count("input-file"))
 		{
 			cout << "No input script specified, defaulting to testexperiment.nsl" << endl;
-			//rootobject.parse("./scripts/testexperiment.nsl");
 			infile = "./scripts/testexperiment.nsl";
 		} else {
-			cout << "Running script " << vm["input-file"].as<string>() << endl;
-			//rootobject.parse(vm["input-file"].as<string>());
 			infile = vm["input-file"].as<string>();
 		}
 		
 		if (!exists(infile))
 			throw runtime_error("Specified infile does not exist");
 		
+		// Build the tree
+		cout << "Running script " << infile.native_file_string() << endl;
 		rootobject.parse(infile.native_file_string());
 
+		// Were we asked to print an object tree?
 		if (vm.count("tree")) {
 			cout << "Read in structure:" << endl;
 			rootobject.tree();
 		}
-//		return 0;
-
-		// hold off on regeneration for now
-		/*cout << endl << "Regeneration:" << endl;*/
-		//rootobject.regenerate(cout);
-
+		
 		// initialise the random number generator
 		nsl::seedrand();
 		
+		// Prepare the object tree
 		rootobject.prepare();
 
 		// Allow the user to specify an option not to run
 		if (!vm.count("no-run"))
 		{
+			// Run the simulation!
 			cout << endl << "Starting Run:" << endl;
 			rootobject.run();
 		}

@@ -2,8 +2,6 @@
 
 add edmexperiment "The Experiment" {
 	
-	vary something from 1 to 10 in 10 steps
-	
 	# set the steptime for the inbuilt solver to use
 	set phase_steps 1 #phase average loops
 	#set bounces 1000 #number of bounces to run the simulation over
