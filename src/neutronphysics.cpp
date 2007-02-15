@@ -93,8 +93,8 @@ void neutron_physics::edmcalcs( particle &part, efield &elecfield )
 	
 	// Compare this with the tracked difference
 #warning "Debug code"
-	long double fdiff = (part.E_sum_phase - part.E_minus_sum_phase) /= part.flytime;
-	logger << " Freq Difference between methods: " << fdiff << " Hz" << endl;
+	long double fdiff = (part.E_sum_phase - part.E_minus_sum_phase) / part.flytime;
+	cout << " Freq Difference between methods: " << fdiff << " Hz" << endl;
 	
 	// Grab the E field vertical charge
 	vector3 E; // Volts per meter
