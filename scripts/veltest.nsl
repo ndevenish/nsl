@@ -1,6 +1,6 @@
 
 add edmexperiment "Velocity Test Experiment" {
-	set phase_steps 10 #phase average loops
+	set phase_steps 30 #phase average loops
 	#set bounces 1000 #number of bounces to run the simulation over
 	set lifetime 120	#The lifetime of a particle (seconds)
 
@@ -14,7 +14,7 @@ add edmexperiment "Velocity Test Experiment" {
 #	set gravity on
 	
 	add midpointsolver "midsolver" {
-		set steptime 3e-5 # (Seconds)
+		set steptime 3e-6 # (Seconds)
 	}
 	
 	add container "bottle" {
@@ -31,7 +31,7 @@ add edmexperiment "Velocity Test Experiment" {
 
 		#vary velocity from 10 to 200 in 20 steps
 		#set velocity 3 # (Meters per second)
-		vary velocity from 1 to 100 in 100 steps
+		vary velocity from 100 to 500 in 40 steps
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
 		#set maxwelldistribution on
@@ -68,8 +68,8 @@ add edmexperiment "Velocity Test Experiment" {
 		set e0z		8.e5 # (Volts per meter)
 	}
 	
-	ignore add edmreporter "edmreporter" {
-		set output_file "veltest.txt"
+	add edmreporter "edmreporter" {
+		set output_file "veltest2.txt"
 		set volaverage_dbdz true
 	}
 }

@@ -31,7 +31,7 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 250 particle neutron {
+	multiadd 1000 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
@@ -80,7 +80,7 @@ add edmexperiment "The Experiment" {
 		set b0z 	1.0E-6 # (Tesla)
 		add linear_zgradient "bfield gradient" {
 			#set D_DZ	1.51e-8 #1e-9 # (Tesla per meter)
-			vary D_DZ from 1.4e-8 to 2.64e-8 in 30 steps
+			vary D_DZ from 3e-8 to 5e-8 in 3 steps
 		}
 		add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
@@ -108,7 +108,7 @@ add edmexperiment "The Experiment" {
 	}
 	
 	add alphareporter "alphareporter" {
-		set output_file "pollog004_nograv.txt"
+		set output_file "pollog006_nograv.txt"
 	}
 }
 #tree
