@@ -69,5 +69,30 @@ public:
 		nslobject *create() { return new midpointsolver; }
 	};
 };
+
+class rungekutta_solver : public solver {
+private:
+	class efield *elecfield;
+	class bfield *magfield;
+	class edmexperiment *exp;
+	
+	long double initial_steptime;
+	
+public:
+		rungekutta_solver();
+	
+	void step( particle &part, const long double &time );
+	
+	bool prepareobject( void );
+	
+	/** Initialises all particles to be stepped. 
+		* This reinitialises all particles to an initial stepping state. */
+	void prepareparticles( std::vector<particle*> &particles );
+	
+	// Allow this to be created from the object factory
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new rungekutta_solver; }
+	};
+};
 #endif
 

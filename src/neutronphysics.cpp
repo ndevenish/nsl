@@ -91,6 +91,11 @@ void neutron_physics::edmcalcs( particle &part, efield &elecfield )
 								part.spinEplus.x*part.spinEminus.x + part.spinEplus.y*part.spinEminus.y );
 	part.frequencydiff /= part.flytime; // Radians per second
 	
+	// Compare this with the tracked difference
+#warning "Debug code"
+	long double fdiff = (part.E_sum_phase - part.E_minus_sum_phase) /= part.flytime;
+	logger << " Freq Difference between methods: " << fdiff << " Hz" << endl;
+	
 	// Grab the E field vertical charge
 	vector3 E; // Volts per meter
 	elecfield.getfield(E, vector3(0,0,0)); // Volts per meter
