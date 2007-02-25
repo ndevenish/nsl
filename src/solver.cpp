@@ -406,4 +406,5 @@ void rungekutta_solver::rkstep( particle &part, const long double &time )
 	long double phase_change = acos(cosphase);
 	//logger << "Phase Change: " << phase_change << endl;
 	
+	part.flytime += time;
 }
