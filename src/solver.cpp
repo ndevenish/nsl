@@ -404,6 +404,6 @@ void rungekutta_solver::rkstep( particle &part, const long double &time )
 		logger << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << endl;
 	
 	long double phase_change = acos(cosphase);
-	logger << "Phase Change: " << phase_change << endl;
+	//logger << "Phase Change: " << phase_change << endl;
 	
 }
