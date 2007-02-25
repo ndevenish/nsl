@@ -38,8 +38,10 @@ static long double spin_vector( vector3 &spinvector, const long double gyromag, 
 	vector3 oldspin = spinvector;
 	long double oldxylength = sqrtl(spinvector.x*spinvector.x + spinvector.y*spinvector.y);
 	
-	// Calculate the change in spin
-	vector3 dS = time * gyromag * crossproduct(spinvector, mag_field);
+	// Calculate the change in spin (through a function now)
+	//vector3 dS = time * gyromag * crossproduct(spinvector, mag_field);
+	 vector3 dS;
+	 neutron_physics::spinvec_change( time, gyromag, spinvector, mag_field, dS);
 	
 	// Now apply this to the spin vector
 	spinvector += dS;
@@ -72,10 +74,10 @@ void neutron_physics::spin_calculation( particle &part, const vector3 &B, const 
 	BminusvxE = B - part.vxEeffect; // Tesla
 	
 	// Now spin it both ways 
-	long double plusphase, minusphase, framediff;
+	long double plusphase, minusphase;//, framediff;
 	plusphase		= spin_vector(part.spinEplus,	part.gamma, BplusvxE,  time); // Radians
 	minusphase		= spin_vector(part.spinEminus,	part.gamma, BminusvxE, time); // Radians
-	framediff = plusphase - minusphase; // Radians
+	//framediff = plusphase - minusphase; // Radians
 	
 	part.E_sum_phase += plusphase; // Radians
 	part.E_minus_sum_phase += minusphase; // Radians
@@ -91,11 +93,6 @@ void neutron_physics::edmcalcs( particle &part, efield &elecfield )
 								part.spinEplus.x*part.spinEminus.x + part.spinEplus.y*part.spinEminus.y );
 	part.frequencydiff /= part.flytime; // Radians per second
 	
-	// Compare this with the tracked difference
-#warning "Debug code"
-	long double fdiff = (part.E_sum_phase - part.E_minus_sum_phase) / part.flytime;
-	cout << " Freq Difference between methods: " << fdiff << " Hz" << endl;
-	
 	// Grab the E field vertical charge
 	vector3 E; // Volts per meter
 	elecfield.getfield(E, vector3(0,0,0)); // Volts per meter
@@ -106,4 +103,11 @@ void neutron_physics::edmcalcs( particle &part, efield &elecfield )
 	// And convert into friendlier units
 	part.fake_edm *= 100/echarge; // e.cm
 	part.fake_edm *= 1e26; // e.cm x10^(-26)
+}
+
+void neutron_physics::Exveffect( const vector3 &position, const vector3 &velocity,  const long double gamma, efield &elecfield, vector3 &vxEeffect )
+{
+	vector3 vxE; vector3 E;
+	elecfield.getfield(E, position);
+	vxEeffect = (crossproduct(E, velocity) * gamma)/ csquared;
 }

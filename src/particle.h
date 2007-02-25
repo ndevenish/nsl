@@ -51,6 +51,7 @@ class particle : public nslobject {
 	friend class solver;
 	friend class midpointsolver;
 	friend class alphareporter;
+	friend class rungekutta_solver;
 	
 	// Physical Properties values
 	vector3	position;

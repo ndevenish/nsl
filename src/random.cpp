@@ -21,6 +21,9 @@
  */
 
 
+#ifndef RANDOM_H
+#define RANDOM_H
+
 #include <iostream>
 #include <ctime> // For time()
 
@@ -65,3 +68,4 @@ long double rand_normal()
 
 }
 
+#endif

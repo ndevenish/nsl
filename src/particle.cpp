@@ -39,6 +39,8 @@
 #include "random.h"
 #include "electromagnetics.h"
 
+#include "neutronphysics.h"
+
 using std::runtime_error;
 using std::string;
 
@@ -240,8 +242,12 @@ void particle::read_spinsettings( void)
 /** Updates the Exv effect for the particle. */
 void particle::updateExv ( efield &elecfield )
 {
+	/*
 	vector3 vxE; vector3 E;
 	elecfield.getfield(E, this->position);
 	this->vxEeffect = (crossproduct(E, this->velocity_vec) * this->vgamma)/ csquared;
+	*/
+//	void neutron_physics::Exveffect( const vector3 &position, const vector3 &velocity, const long double gamma, vector3 &vxEeffect )
+	neutron_physics::Exveffect( this->position, this->velocity_vec, this->vgamma, elecfield, this->vxEeffect );
 }
 

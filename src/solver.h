@@ -82,6 +82,7 @@ public:
 		rungekutta_solver();
 	
 	void step( particle &part, const long double &time );
+	void rkstep( particle &part, const long double &time );
 	
 	bool prepareobject( void );
 	

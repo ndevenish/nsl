@@ -20,8 +20,11 @@ add edmexperiment "The Experiment" {
 	#Gravity!
 	#set gravity off
 	
-	add midpointsolver "midsolver" {
+	ignore add midpointsolver "midsolver" {
 		set steptime 3e-4 # (Seconds)
+	}
+	add rungekutta_solver "rksolver" {
+		set initial_steptime 3e-4
 	}
 	
 	add container "bottle" {

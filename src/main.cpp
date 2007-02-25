@@ -93,6 +93,7 @@ int main ( int argc, char *argv[] )
 		nslobjectfactory::add("efield", new efield::Factory);
 		nslobjectfactory::add("dipole_zmagnetic", new dipole_zmagnetic::Factory);
 		nslobjectfactory::add("midpointsolver", new midpointsolver::Factory);
+		nslobjectfactory::add("rungekutta_solver", new rungekutta_solver::Factory);
 		
 		// Reporters!
 		nslobjectfactory::add("reporter", new reporter::Factory);
