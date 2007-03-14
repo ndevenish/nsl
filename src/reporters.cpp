@@ -650,7 +650,6 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 	variable cumPup, cumPdown; // cumulative probability
 	
 	dataset averagefreq_plusE; // radians
-		
 	// Calculate the average frequencies
 	BOOST_FOREACH(particle *p, particles)
 	{
