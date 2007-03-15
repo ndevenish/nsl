@@ -56,7 +56,7 @@ while 1
         break;
     end
     %Does this new line match? If so, test the next line
-    a = regexp(newline, '^\s*[#]')
+    a = regexp(newline, '^\s*[#]');
     if (a),
         linne = newline;
         continue;

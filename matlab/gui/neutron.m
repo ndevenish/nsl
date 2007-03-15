@@ -875,13 +875,13 @@ function import_file_menu_Callback(hObject, eventdata, handles)
 % hObject    handle to import_file_menu (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles    
+    %handles    
     curdir = cd;
     if (isempty(handles.lastdir) == 0)
         cd(handles.lastdir);
     end
     filename = cell(1,1);
-    [filename, pathname] = uigetfile('*.*', 'MultiSelect','on');
+    [filename, pathname] = uigetfile('*.txt', 'MultiSelect','on');
     cd (curdir);
     if(isnumeric(filename))
         return;

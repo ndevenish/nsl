@@ -4,8 +4,8 @@ add edmexperiment "The Experiment" {
 	
 	# set the steptime for the inbuilt solver to use
 	set phase_steps 1 #phase average loops
-	#set bounces 1000 #number of bounces to run the simulation over
-	set lifetime 60.0	#The lifetime of a particle (seconds)
+	set bounces 1 #number of bounces to run the simulation over
+	#set lifetime 60.0	#The lifetime of a particle (seconds)
 
 	#This is the time to bounce a particle around for
 	#before calling the 'interval' reporters
@@ -20,10 +20,11 @@ add edmexperiment "The Experiment" {
 	#Gravity!
 	#set gravity off
 	
-	ignore add midpointsolver "midsolver" {
-		set steptime 3e-4 # (Seconds)
+	add midpointsolver "midsolver" {
+		set steptime 3e-5 # (Seconds)
 	}
-	add rungekutta_solver "rksolver" {
+	
+	ignore add rungekutta_solver "rksolver" {
 		set initial_steptime 3e-4
 	}
 	
