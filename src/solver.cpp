@@ -139,8 +139,9 @@ void midpointsolver::step( particle &part, const long double &time )
 	// Had an annoying but where it 'stepped over' by 1e-38 seconds....... 1 fs should be perfectly fine.
 	if (laststep < -1e-15)
 		throw runtime_error("Stepping routine stepped over maximum time to impact");
-	// Now do the actual final step
-	smallstep(part, laststep);
+	// Now do the actual final step, if time is not our minimum step
+	if (laststep > 1e-9)
+		smallstep(part, laststep);
 }
 
 void midpointsolver::smallstep( particle &part, const long double &time)

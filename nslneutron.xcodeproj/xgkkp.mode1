@@ -265,7 +265,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>39</integer>
+									<integer>31</integer>
 									<integer>5</integer>
 									<integer>0</integer>
 								</array>
@@ -308,7 +308,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>solver.cpp</string>
+								<string>neutronphysics.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -316,11 +316,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>solver.cpp</string>
+										<string>neutronphysics.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0ABC8ADC0BB586AB0044022E</string>
+										<string>0ABC8AEF0BB589850044022E</string>
 										<key>history</key>
 										<array>
 											<string>0A348BAD0B07BBCF00F8771E</string>
@@ -349,7 +349,6 @@
 											<string>0A3CED520B91F2EA007053E6</string>
 											<string>0A3CED540B91F2EA007053E6</string>
 											<string>0ABC895F0BB46C780044022E</string>
-											<string>0ABC89600BB46C780044022E</string>
 											<string>0ABC89710BB46D710044022E</string>
 											<string>0ABC89910BB470010044022E</string>
 											<string>0ABC89930BB470010044022E</string>
@@ -360,7 +359,8 @@
 											<string>0ABC8AB50BB585370044022E</string>
 											<string>0ABC8AD10BB586950044022E</string>
 											<string>0ABC8AD20BB586950044022E</string>
-											<string>0ABC8AD30BB586950044022E</string>
+											<string>0ABC8AEC0BB589850044022E</string>
+											<string>0ABC8AED0BB589850044022E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -433,6 +433,7 @@
 											<string>0ABC8AD40BB586950044022E</string>
 											<string>0ABC8AD50BB586950044022E</string>
 											<string>0ABC8AD60BB586950044022E</string>
+											<string>0ABC8AEE0BB589850044022E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -631,11 +632,11 @@
 		<string>0ABC89E10BB477010044022E</string>
 		<string>0ABC89E20BB477010044022E</string>
 		<string>0ABC89D80BB4768F0044022E</string>
+		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>0A3B6EC30AC9944B002CC2AF</string>
+		<string>/Users/xgkkp/Documents/neutron/nslneutron/nslneutron.xcodeproj</string>
 		<string>0A3B6EDB0AC9957E002CC2AF</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C0AD2B3069F1EA900FABCE6</string>
-		<string>/Users/xgkkp/Documents/neutron/nslneutron/nslneutron.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>218 158 1146 720 0 0 1440 878 </string>
@@ -1090,7 +1091,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
