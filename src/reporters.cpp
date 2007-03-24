@@ -598,6 +598,8 @@ alphareporter::alphareporter()
 	types.push_back(objecttype);
 	
 	report_frequency = rfreq_run;
+	
+	bouncedecay = 0;
 }
 
 void alphareporter::preparefile( edmexperiment &exp )
@@ -609,6 +611,8 @@ void alphareporter::preparefile( edmexperiment &exp )
 bool alphareporter::prepareobject( void )
 {
 	reporter::prepareobject();
+	
+	bouncedecay = getint("bounce_decay",0);
 	
 	return true;
 }
@@ -681,6 +685,13 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 			cout << "\tMean phase: " << averagefreq_plusE.average() << endl;
 			cout << "\tProjection: " << meanaxis_projection.value << endl;
 			throw runtime_error("Calculated negative probability in polarization reporter");
+		}
+		
+		// Scale Pup according to the wall-interaction decay.. if it has been set
+		if (bouncedecay > 0)
+		{
+			cout << "Bounces: " << p->bounces << ", Scalefactor: " << exp(-(long double)p->bounces / (long double)bouncedecay) << endl;
+			Pup *= exp(-(long double)p->bounces / (long double)bouncedecay);
 		}
 		
 		cumPup += Pup;

@@ -245,6 +245,8 @@ protected:
 	nsl::variable calculate_visibility( std::vector<particle*> &particles );
 	nsl::variable calculate_frequencyratio( std::vector<particle*> &particles );
 	
+	int bouncedecay;
+	
 public:
 	alphareporter();
 	void report ( edmexperiment &experiment );

@@ -44,7 +44,11 @@ linecount = 0;
 linne = fgetl(fid);
 header.property{1} = 'Header';
 header.value{1} = strtrim(strtok(linne, ['#']));
+curpropindex = 2;
 
+%New! Now read properties from the file. Each property line will consist of
+%a has, a value name and a value, seperated by a : i.e.
+% # dbdz: 1e-6
 
 %Now read the column headings
 
@@ -58,7 +62,15 @@ while 1
     %Does this new line match? If so, test the next line
     a = regexp(newline, '^\s*[#]');
     if (a),
+        % Process this line to see if it contains file properties
         linne = newline;
+
+        props = regexp(linne, '^\s*[#]\s*(.+)\s*[:]\s*(.+)\s*', 'tokens');
+        if (~isempty(props)),
+            header.property{curpropindex} = props{1}{1};
+            header.value{curpropindex} = props{1}{2};
+            curpropindex = curpropindex + 1;
+        end
         continue;
     end
     break;
