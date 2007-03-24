@@ -198,8 +198,9 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	// Now spin the particle
 	neutron_physics::spin_calculation(part, B, time);
 	
-/* Temporarily disable this code for a checkin
+// Temporarily disable this code for a checkin
 	// Output the cumulative phase now!
+	/*
 #warning "Output debug code"
 	vector3 bpvxe, bmvxe;
 	bpvxe = B + part.vxEeffect;
@@ -211,7 +212,7 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 			 << bmvxe.x << "\t" << bmvxe.y << "\t" << bmvxe.z << "\t"
 			 << part.vxEeffect.x << "\t" << part.vxEeffect.y << "\t"  << part.vxEeffect.z << endl;
 //		phaselog << "Flytime\tbounces\tPlus_phase\tMinus_phase\tx\ty\tz\tBupx\tBupy\tBupz\tBdownx\tBdowny\tBdownz\tvxex\tvxey\tvxez" << endl;
-*/	
+*/
 	
 	
 	
