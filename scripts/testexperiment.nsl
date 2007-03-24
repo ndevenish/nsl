@@ -31,7 +31,7 @@ add edmexperiment "The Experiment" {
 	add container "bottle" {
 		add volume_cylinder "mainbottle" {
 			set type negative
-			set radius 0.235 # (Meters)
+			set radius 500 #0.235 # (Meters)
 			set height 0.12 # (Meters)
 			set reflection diffuse
 		}
@@ -41,12 +41,12 @@ add edmexperiment "The Experiment" {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
-		set velocity 3 # (Meters per second)
+		set velocity 100 # (Meters per second)
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
-		set maxwelldistribution on
+		#set maxwelldistribution on
 		# This sets the maximum height for cutting off the velocity
-		set maxwelliancutoff 0.79 # (Meters)
+		#set maxwelliancutoff 0.79 # (Meters)
 		
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 0 # (Meters per second)
@@ -84,10 +84,10 @@ add edmexperiment "The Experiment" {
 
 	add bfield "bfield" {
 		set b0z 	1.0E-6 # (Tesla)
-		ignore add linear_zgradient "bfield gradient" {
+		add linear_zgradient "bfield gradient" {
 			set D_DZ	1e-9 # (Tesla per meter)
 		}
-		add dipole_zmagnetic "Z magnetic dipole" {
+		ignore add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
 			set z 		-0.5 	# (Meters)
 			set mz		-1e-3 	# (Amps * Meters^2)
@@ -98,8 +98,8 @@ add edmexperiment "The Experiment" {
 		set e0z		8.e5 # (Volts per meter)
 	}
 	
-	ignore add edmreporter "edmreporter" {
-		set output_file "veltest_200.txt"
+	ignore edmreporter "edmreporter" {
+		set output_file "edmout.txt"
 		set volaverage_dbdz true
 	}
 	
@@ -112,7 +112,7 @@ add edmexperiment "The Experiment" {
 		set particle 1
 	}
 	
-	add alphareporter "alphareporter" {
+	ignore add alphareporter "alphareporter" {
 		set output_file "alphalog.txt"
 	}
 }

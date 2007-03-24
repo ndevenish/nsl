@@ -214,9 +214,11 @@ function updategui( handles )
     %Find the maximum length of a property
     %maxsize = 0;
     displaystring = [];
-    numel(handles.datasets.sets{curset}.header.property)
-    handles.datasets.sets{curset}.header
-    handles.datasets.sets{curset}.header.property
+    
+    %numel(handles.datasets.sets{curset}.header.property)
+    %handles.datasets.sets{curset}.header
+    %handles.datasets.sets{curset}.header.property
+    
     for i=1:numel(handles.datasets.sets{curset}.header.property)
         %Convert to a string if needed
         property = handles.datasets.sets{curset}.header.property{i};

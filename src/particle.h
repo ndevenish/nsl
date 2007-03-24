@@ -38,6 +38,7 @@ class efield;
 
 /** Object representing a particle. */
 class particle : public nslobject {
+public:
 	friend class edmexperiment;
 	friend class reporter;
 	friend class impactreporter;
@@ -69,6 +70,9 @@ class particle : public nslobject {
 	
 	// Particles velocity gamma
 	long double vgamma;
+	
+	// Number of bounces!
+	long bounces;
 	
 	long double E_sum_phase, E_minus_sum_phase; // Radians
 	
@@ -116,5 +120,8 @@ public:
 		nslobject *create() { return new particle; }
 	};
 };
+
+// DEbugger to feed out particle properties
+std::ostream& operator<<(std::ostream& os, const particle& p);
 
 #endif

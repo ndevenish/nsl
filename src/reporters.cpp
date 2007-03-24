@@ -711,6 +711,15 @@ variable alphareporter::calculate_frequencyratio( vector<particle*> &particles )
 		//ratio -= 1.;
 		//long double aval = ratio - ratio2;
 		freq_ratio += ratio;
+		// If the ratio is much less than zero, throw an exception
+		if (ratio < -0.5)
+		{
+			//cout << "E_sum_phase:     " << p->E_sum_phase << endl;
+			cout << "Rotational freq: " << rotfreq << endl;
+			cout << "Adjusted Gamma:  " << std::scientific << newgam << endl;
+			cout << *p << endl;
+			throw runtime_error("Ratio much less than 0");
+		}
 	}
 
 	// Convert this dataset into a variable and return it

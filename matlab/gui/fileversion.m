@@ -20,15 +20,20 @@
 function [version] = fileversion( filename )
 %FILEVERSION     Reads the specified file and returns what program version
 %it is.
-%           Returns: 1 - Old neutron data file
+%           Returns: 0 - Invalid file
+%                    1 - Old neutron data file
 %                    2 - nsl neutron Data file
+%                    3 - Preprocessed data file
 
 %Check the file is valid
 fid = fopen(filename);
 if (fid < 0)
-    header = fid;
+    version = 0;
     return;
 end
+
+%split up the file
+[path, name, ext] = fileparts(filename);
 
 % Do a very simple test for now - read the first line and see whether it
 % contains a #
@@ -36,10 +41,15 @@ line = fgetl(fid);
 
 regmatch = regexp(line, '^\s*[#]');
 
-if (regmatch),
-    version = 2;
-else
-    version = 1;
+if (strfind(ext, 'ppf'))
+    version = 3;
+elseif (strfind(ext, 'txt')),
+    if (regmatch),
+        version = 2;
+    else
+        version = 1;
+    end
 end
+
 
 fclose(fid);

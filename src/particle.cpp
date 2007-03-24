@@ -73,6 +73,7 @@ void particle::initvals( void )
 	
 	vxEeffect *= 0;
 	
+	bounces = 0;
 }
 bool particle::prepareobject()
 {
@@ -86,6 +87,9 @@ bool particle::prepareobject()
 }
 void particle::readsettings(void)
 {
+#warning "Added initvals line... this may break something"
+	initvals();
+	
 	// Reset all the per-phase run variables here
 	fake_edm = 0.;
 	flytime = 0.;
@@ -251,3 +255,68 @@ void particle::updateExv ( efield &elecfield )
 	neutron_physics::Exveffect( this->position, this->velocity_vec, this->vgamma, elecfield, this->vxEeffect );
 }
 
+
+
+/*	// Physical Properties values
+vector3	position;
+vector3 velocity_vec;
+vector3 spinEplus;
+vector3 spinEminus;
+
+// A 'cache' for the exB effect that only changes every bounce (in a linear electric field)
+vector3 vxEeffect;
+
+long double velocity; // m s^-1
+
+// Gyromagnetic ratio of the particle
+long double gamma; // 2*pi*Hz/Tesla
+
+// Particles velocity gamma
+long double vgamma;
+
+// Number of bounces!
+long bounces;
+
+long double E_sum_phase, E_minus_sum_phase; // Radians
+
+long double flytime; // s
+
+// particles mass
+long double mass; // kg
+
+// Our calculated edm parameters
+long double frequencydiff; //radians
+long double fake_edm; // e.cm x10(-26)
+
+dataset cumulativeedm;
+
+// Utility class pointers
+container *particlebox;
+bfield *mag_field;
+efield *elec_field;
+*/
+
+std::ostream& operator<<(std::ostream& os, const particle& p)
+{
+	using std::scientific;
+	
+	os.precision(3);
+	//os.setscientific();
+	os << "Particle Property dump:" << endl;
+	os << "Position: " << p.position << endl;
+	os << "Velocity: " << p.velocity << " ( " << p.velocity_vec << " )" << endl;
+	os << "Spin E+: " << p.spinEplus << endl;
+	os << "     E-: " << p.spinEminus << endl;
+	os << "VxE Effect: " << p.vxEeffect << endl;
+	os << "Gamma (L): " << p.gamma << endl;
+	os << "Gamme (R): " << p.vgamma << endl;
+	os << "Bounces: " << p.bounces << endl;
+	os << "Sum Phase, E+: " << p.E_sum_phase << endl;
+	os << "           E-: " << p.E_minus_sum_phase << endl;
+	os << "Flytime: " << p.flytime << endl;
+	os << "Mass: " << p.mass <<  endl;
+	os << "Frequency Diff: " << p.frequencydiff << endl;
+	os << "Fake EDM: " << p.fake_edm << endl;
+	
+	return os;
+}

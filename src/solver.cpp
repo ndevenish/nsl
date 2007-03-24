@@ -21,6 +21,7 @@
  */
 
 #include <iostream>
+#include <fstream>
 #include <string>
 
 #include "solver.h"
@@ -41,6 +42,8 @@ using std::endl;
 //using neutron_physics::Exveffect;
 
 
+
+std::ofstream phaselog("phaselog.txt");
 
 
 solver::solver()
@@ -84,6 +87,11 @@ bool midpointsolver::prepareobject ( void )
 	else
 		gravity = false;
 	
+#warning "Initialising debug output files"
+	phaselog << "# Debug phase tracking" << endl;
+	phaselog << "# Flytime\tBounces\tPlus_phase\tMinus_phase\tphase_diff\tx\ty\tz\tBupx\tBupy\tBupz\tBdownx\tBdowny\tBdownz\tvxex\tvxey\tvxez" << endl;
+	phaselog.precision(20);
+	
 	return true;
 }
 
@@ -106,13 +114,13 @@ void midpointsolver::step( particle &part, const long double &time )
 	// NOTE: if gravity is on, this does change over a bigstep so don't do this here
 	if (!gravity)
 		part.updateExv(*elecfield);
-/*
+
 	////////////////////////////////////
 	/// TEMPORARY DEBUG - match the other programs stepping algorithm
-	steps = (int)(time/3.e-5) + 1;
+	steps = (int)(time/steptime) + 1;
 	part.steptime = time / steps;
 #warning "Temporary debug code"
-*/	
+	
 	// Calculate the number of steps we are going to take
 	steps = (long)floorl((long double)time / (long double)part.steptime);
 	
@@ -128,7 +136,8 @@ void midpointsolver::step( particle &part, const long double &time )
 	
 	// Check we still have a little excess time to step
 	long double laststep = (time - (steps*part.steptime));
-	if (laststep < 0.0)
+	// Had an annoying but where it 'stepped over' by 1e-38 seconds....... 1 fs should be perfectly fine.
+	if (laststep < -1e-15)
 		throw runtime_error("Stepping routine stepped over maximum time to impact");
 	// Now do the actual final step
 	smallstep(part, laststep);
@@ -187,6 +196,23 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	
 	// Now spin the particle
 	neutron_physics::spin_calculation(part, B, time);
+	
+/* Temporarily disable this code for a checkin
+	// Output the cumulative phase now!
+#warning "Output debug code"
+	vector3 bpvxe, bmvxe;
+	bpvxe = B + part.vxEeffect;
+	bmvxe = B - part.vxEeffect;
+	phaselog << part.flytime << "\t" << part.bounces << "\t" << part.E_sum_phase << "\t" << part.E_minus_sum_phase << "\t"
+			<< (part.E_sum_phase - part.E_minus_sum_phase) << "\t"
+			 << part.position.x << "\t" << part.position.y << "\t" << part.position.z << "\t"
+			 << bpvxe.x << "\t" << bpvxe.y << "\t" << bpvxe.z << "\t"
+			 << bmvxe.x << "\t" << bmvxe.y << "\t" << bmvxe.z << "\t"
+			 << part.vxEeffect.x << "\t" << part.vxEeffect.y << "\t"  << part.vxEeffect.z << endl;
+//		phaselog << "Flytime\tbounces\tPlus_phase\tMinus_phase\tx\ty\tz\tBupx\tBupy\tBupz\tBdownx\tBdowny\tBdownz\tvxex\tvxey\tvxez" << endl;
+*/	
+	
+	
 	
 	// Now (god forbid) call the reporters that report every step
 	BOOST_FOREACH( reporter *rep, exp->report_step ) {

@@ -43,7 +43,7 @@ function varargout = neutron(varargin)
 
 % Edit the above text to modify the response to help neutron
 
-% Last Modified by GUIDE v2.5 01-Mar-2006 11:27:59
+% Last Modified by GUIDE v2.5 23-Mar-2007 23:42:54
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -881,7 +881,7 @@ function import_file_menu_Callback(hObject, eventdata, handles)
         cd(handles.lastdir);
     end
     filename = cell(1,1);
-    [filename, pathname] = uigetfile('*.txt', 'MultiSelect','on');
+    [filename, pathname] = uigetfile('*.txt;*.ppf', 'MultiSelect','on');
     cd (curdir);
     if(isnumeric(filename))
         return;
@@ -1524,3 +1524,12 @@ function addpredicted_menu_Callback(hObject, eventdata, handles)
     %Refresh the display
     updatesourceslist(hObject, handles);
     replot(hObject, handles);
+
+
+% --------------------------------------------------------------------
+function convert_data_Callback(hObject, eventdata, handles)
+% hObject    handle to convert_data (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    convertfile;
+

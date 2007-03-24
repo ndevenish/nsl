@@ -560,6 +560,8 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			}
 			part->position = collisionpoint.location + (collisionpoint.normal * collision_offset);
 			
+			// Add to the particles bounce count
+			part->bounces++;
 			
 			// See if this was a wall, and if not then reduce the bouncecount.
 			// This is for compatability with the old system, which didn't count ceiling bounces as
@@ -568,7 +570,7 @@ void edmexperiment::runinterval ( long double time, particle *part )
 				;//logger << "Wall bounce" << endl;
 			else {
 				//logger << "ceil bounce";
-				bounce--;
+				//bounce--;
 			}
 			
 			// Now call the reporters that report each bounce

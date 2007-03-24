@@ -40,6 +40,15 @@ function [ new_dataset ] = file_dataset( filename, name )
     if (fid == -1), error('Not a valid filename');return;end;fclose(fid);
     fprintf('Reading in file %s\n', filename);
 
+    %%%%%%%%%%%%
+    % Is it a pre-processed file?
+    if (fileversion(filename) == 3),
+        %fprintf('..File is a Pre-processed output file\n');
+        load ('-mat', filename);
+        new_dataset = indata;
+        return;
+    end
+    
     if (~exist('name')),
        name = strrep(file_name, '_', ' ');
     end

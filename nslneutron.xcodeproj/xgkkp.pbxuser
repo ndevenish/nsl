@@ -8,9 +8,10 @@
 			8DD76F620486A84900D96B5E /* nslneutron */,
 		);
 		breakpoints = (
-			0A3CEDA80B91FADE007053E6 /* solver.cpp:276 */,
-			0A3CEDB00B91FB38007053E6 /* solver.cpp:256 */,
-			0A3CEDC50B91FCC2007053E6 /* solver.cpp:377 */,
+			0A3CEDA80B91FADE007053E6 /* solver.cpp:302 */,
+			0A3CEDC50B91FCC2007053E6 /* solver.cpp:403 */,
+			0ABC8A8A0BB569AD0044022E /* solver.cpp:295 */,
+			0ABC8A970BB56A8D0044022E /* solver.cpp:127 */,
 		);
 		breakpointsGroup = 0A3B6EC80AC99489002CC2AF /* XCBreakpointsBucket */;
 		codeSenseManager = 0A3B6E8C0AC99360002CC2AF /* Code sense */;
@@ -87,7 +88,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					540,
+					662,
 					20,
 					48,
 					43,
@@ -166,8 +167,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 195668838;
-			PBXWorkspaceStateSaveDate = 195668838;
+			PBXPerProjectTemplateStateSaveDate = 196373512;
+			PBXWorkspaceStateSaveDate = 196373512;
 		};
 		perUserProjectItems = {
 			0A3489BF0B061D7700F8771E = 0A3489BF0B061D7700F8771E /* PBXTextBookmark */;
@@ -253,7 +254,7 @@
 			0A3CEDD80B9350CB007053E6 = 0A3CEDD80B9350CB007053E6 /* PBXTextBookmark */;
 			0A3CEDD90B9350CB007053E6 = 0A3CEDD90B9350CB007053E6 /* PBXTextBookmark */;
 			0A3CEDDA0B9350CB007053E6 = 0A3CEDDA0B9350CB007053E6 /* PBXTextBookmark */;
-			0A3CEEF10BA9AB7A007053E6 /* PBXTextBookmark */ = 0A3CEEF10BA9AB7A007053E6 /* PBXTextBookmark */;
+			0A3CEEF10BA9AB7A007053E6 = 0A3CEEF10BA9AB7A007053E6 /* PBXTextBookmark */;
 			0A58A73C0B32B5C20024E986 = 0A58A73C0B32B5C20024E986 /* PBXTextBookmark */;
 			0A6BB2FB0B6E37D500E89F6B = 0A6BB2FB0B6E37D500E89F6B /* PBXTextBookmark */;
 			0A6BB3780B6E573700E89F6B = 0A6BB3780B6E573700E89F6B /* PBXTextBookmark */;
@@ -302,6 +303,124 @@
 			0A9CA0600B5BF6530045E0B9 = 0A9CA0600B5BF6530045E0B9 /* PBXTextBookmark */;
 			0A9CA0870B5C03FD0045E0B9 = 0A9CA0870B5C03FD0045E0B9 /* PBXTextBookmark */;
 			0A9CA14F0B5EB43A0045E0B9 = 0A9CA14F0B5EB43A0045E0B9 /* PBXTextBookmark */;
+			0ABC895A0BB46C0E0044022E /* PBXTextBookmark */ = 0ABC895A0BB46C0E0044022E /* PBXTextBookmark */;
+			0ABC895F0BB46C780044022E /* PBXTextBookmark */ = 0ABC895F0BB46C780044022E /* PBXTextBookmark */;
+			0ABC89600BB46C780044022E /* PBXTextBookmark */ = 0ABC89600BB46C780044022E /* PBXTextBookmark */;
+			0ABC89610BB46C780044022E /* PBXTextBookmark */ = 0ABC89610BB46C780044022E /* PBXTextBookmark */;
+			0ABC89620BB46C780044022E /* PBXTextBookmark */ = 0ABC89620BB46C780044022E /* PBXTextBookmark */;
+			0ABC89630BB46C780044022E /* PBXTextBookmark */ = 0ABC89630BB46C780044022E /* PBXTextBookmark */;
+			0ABC89640BB46C780044022E /* PBXTextBookmark */ = 0ABC89640BB46C780044022E /* PBXTextBookmark */;
+			0ABC89650BB46C780044022E /* PBXTextBookmark */ = 0ABC89650BB46C780044022E /* PBXTextBookmark */;
+			0ABC89660BB46C780044022E /* PBXTextBookmark */ = 0ABC89660BB46C780044022E /* PBXTextBookmark */;
+			0ABC89690BB46D090044022E /* PBXTextBookmark */ = 0ABC89690BB46D090044022E /* PBXTextBookmark */;
+			0ABC896A0BB46D090044022E /* PBXTextBookmark */ = 0ABC896A0BB46D090044022E /* PBXTextBookmark */;
+			0ABC896B0BB46D090044022E /* PBXTextBookmark */ = 0ABC896B0BB46D090044022E /* PBXTextBookmark */;
+			0ABC896C0BB46D090044022E /* PBXTextBookmark */ = 0ABC896C0BB46D090044022E /* PBXTextBookmark */;
+			0ABC89710BB46D710044022E /* PBXTextBookmark */ = 0ABC89710BB46D710044022E /* PBXTextBookmark */;
+			0ABC89720BB46D710044022E /* PBXTextBookmark */ = 0ABC89720BB46D710044022E /* PBXTextBookmark */;
+			0ABC89730BB46D710044022E /* PBXTextBookmark */ = 0ABC89730BB46D710044022E /* PBXTextBookmark */;
+			0ABC89740BB46D710044022E /* PBXTextBookmark */ = 0ABC89740BB46D710044022E /* PBXTextBookmark */;
+			0ABC89770BB46E300044022E /* PBXBookmark */ = 0ABC89770BB46E300044022E /* PBXBookmark */;
+			0ABC897F0BB46EDC0044022E /* PBXTextBookmark */ = 0ABC897F0BB46EDC0044022E /* PBXTextBookmark */;
+			0ABC89800BB46EDC0044022E /* PBXTextBookmark */ = 0ABC89800BB46EDC0044022E /* PBXTextBookmark */;
+			0ABC89820BB46EDC0044022E /* PBXTextBookmark */ = 0ABC89820BB46EDC0044022E /* PBXTextBookmark */;
+			0ABC89900BB470010044022E /* PBXTextBookmark */ = 0ABC89900BB470010044022E /* PBXTextBookmark */;
+			0ABC89910BB470010044022E /* PBXTextBookmark */ = 0ABC89910BB470010044022E /* PBXTextBookmark */;
+			0ABC89920BB470010044022E /* PBXTextBookmark */ = 0ABC89920BB470010044022E /* PBXTextBookmark */;
+			0ABC89930BB470010044022E /* PBXTextBookmark */ = 0ABC89930BB470010044022E /* PBXTextBookmark */;
+			0ABC89940BB470010044022E /* PBXTextBookmark */ = 0ABC89940BB470010044022E /* PBXTextBookmark */;
+			0ABC89950BB470010044022E /* PBXTextBookmark */ = 0ABC89950BB470010044022E /* PBXTextBookmark */;
+			0ABC89960BB470010044022E /* PBXTextBookmark */ = 0ABC89960BB470010044022E /* PBXTextBookmark */;
+			0ABC89970BB470010044022E /* PBXTextBookmark */ = 0ABC89970BB470010044022E /* PBXTextBookmark */;
+			0ABC89980BB470010044022E /* PBXTextBookmark */ = 0ABC89980BB470010044022E /* PBXTextBookmark */;
+			0ABC89990BB470010044022E /* PBXTextBookmark */ = 0ABC89990BB470010044022E /* PBXTextBookmark */;
+			0ABC899A0BB470010044022E /* PBXTextBookmark */ = 0ABC899A0BB470010044022E /* PBXTextBookmark */;
+			0ABC899B0BB470010044022E /* PBXTextBookmark */ = 0ABC899B0BB470010044022E /* PBXTextBookmark */;
+			0ABC899C0BB470010044022E /* PBXTextBookmark */ = 0ABC899C0BB470010044022E /* PBXTextBookmark */;
+			0ABC899D0BB470010044022E /* PBXTextBookmark */ = 0ABC899D0BB470010044022E /* PBXTextBookmark */;
+			0ABC899E0BB470010044022E /* PBXTextBookmark */ = 0ABC899E0BB470010044022E /* PBXTextBookmark */;
+			0ABC899F0BB470010044022E /* PBXTextBookmark */ = 0ABC899F0BB470010044022E /* PBXTextBookmark */;
+			0ABC89A30BB470820044022E /* PBXTextBookmark */ = 0ABC89A30BB470820044022E /* PBXTextBookmark */;
+			0ABC89A80BB470930044022E /* PBXTextBookmark */ = 0ABC89A80BB470930044022E /* PBXTextBookmark */;
+			0ABC89A90BB470930044022E /* PBXTextBookmark */ = 0ABC89A90BB470930044022E /* PBXTextBookmark */;
+			0ABC89AB0BB474CC0044022E /* PBXTextBookmark */ = 0ABC89AB0BB474CC0044022E /* PBXTextBookmark */;
+			0ABC89AE0BB474E90044022E /* PBXTextBookmark */ = 0ABC89AE0BB474E90044022E /* PBXTextBookmark */;
+			0ABC89AF0BB474E90044022E /* PBXTextBookmark */ = 0ABC89AF0BB474E90044022E /* PBXTextBookmark */;
+			0ABC89B00BB474E90044022E /* PBXTextBookmark */ = 0ABC89B00BB474E90044022E /* PBXTextBookmark */;
+			0ABC89B10BB474E90044022E /* PBXTextBookmark */ = 0ABC89B10BB474E90044022E /* PBXTextBookmark */;
+			0ABC89B20BB474E90044022E /* PBXTextBookmark */ = 0ABC89B20BB474E90044022E /* PBXTextBookmark */;
+			0ABC89B70BB4752A0044022E /* PBXTextBookmark */ = 0ABC89B70BB4752A0044022E /* PBXTextBookmark */;
+			0ABC89B80BB4752B0044022E /* PBXTextBookmark */ = 0ABC89B80BB4752B0044022E /* PBXTextBookmark */;
+			0ABC89BC0BB475AB0044022E /* PBXTextBookmark */ = 0ABC89BC0BB475AB0044022E /* PBXTextBookmark */;
+			0ABC89BD0BB475AB0044022E /* PBXTextBookmark */ = 0ABC89BD0BB475AB0044022E /* PBXTextBookmark */;
+			0ABC89BE0BB475AB0044022E /* PBXTextBookmark */ = 0ABC89BE0BB475AB0044022E /* PBXTextBookmark */;
+			0ABC89BF0BB475AB0044022E /* PBXTextBookmark */ = 0ABC89BF0BB475AB0044022E /* PBXTextBookmark */;
+			0ABC89C00BB475AB0044022E /* PBXTextBookmark */ = 0ABC89C00BB475AB0044022E /* PBXTextBookmark */;
+			0ABC89C40BB475C20044022E /* PBXTextBookmark */ = 0ABC89C40BB475C20044022E /* PBXTextBookmark */;
+			0ABC89C50BB475C20044022E /* PBXTextBookmark */ = 0ABC89C50BB475C20044022E /* PBXTextBookmark */;
+			0ABC89CA0BB475F30044022E /* PBXTextBookmark */ = 0ABC89CA0BB475F30044022E /* PBXTextBookmark */;
+			0ABC89CB0BB475F30044022E /* PBXTextBookmark */ = 0ABC89CB0BB475F30044022E /* PBXTextBookmark */;
+			0ABC89D00BB4768F0044022E /* PBXTextBookmark */ = 0ABC89D00BB4768F0044022E /* PBXTextBookmark */;
+			0ABC89D10BB4768F0044022E /* PBXTextBookmark */ = 0ABC89D10BB4768F0044022E /* PBXTextBookmark */;
+			0ABC89DE0BB477010044022E /* PBXTextBookmark */ = 0ABC89DE0BB477010044022E /* PBXTextBookmark */;
+			0ABC89DF0BB477010044022E /* PBXTextBookmark */ = 0ABC89DF0BB477010044022E /* PBXTextBookmark */;
+			0ABC89E00BB477010044022E /* PBXTextBookmark */ = 0ABC89E00BB477010044022E /* PBXTextBookmark */;
+			0ABC89E70BB477C30044022E /* PBXTextBookmark */ = 0ABC89E70BB477C30044022E /* PBXTextBookmark */;
+			0ABC89E80BB477C30044022E /* PBXTextBookmark */ = 0ABC89E80BB477C30044022E /* PBXTextBookmark */;
+			0ABC89E90BB47FBB0044022E /* PBXTextBookmark */ = 0ABC89E90BB47FBB0044022E /* PBXTextBookmark */;
+			0ABC89EC0BB47FC10044022E /* PBXTextBookmark */ = 0ABC89EC0BB47FC10044022E /* PBXTextBookmark */;
+			0ABC89ED0BB47FC10044022E /* PBXTextBookmark */ = 0ABC89ED0BB47FC10044022E /* PBXTextBookmark */;
+			0ABC8A2C0BB495070044022E /* PBXTextBookmark */ = 0ABC8A2C0BB495070044022E /* PBXTextBookmark */;
+			0ABC8A2D0BB495070044022E /* PBXTextBookmark */ = 0ABC8A2D0BB495070044022E /* PBXTextBookmark */;
+			0ABC8A2F0BB4A30B0044022E /* PBXTextBookmark */ = 0ABC8A2F0BB4A30B0044022E /* PBXTextBookmark */;
+			0ABC8A550BB540350044022E /* PBXTextBookmark */ = 0ABC8A550BB540350044022E /* PBXTextBookmark */;
+			0ABC8A560BB540350044022E /* PBXTextBookmark */ = 0ABC8A560BB540350044022E /* PBXTextBookmark */;
+			0ABC8A690BB542CD0044022E /* PBXTextBookmark */ = 0ABC8A690BB542CD0044022E /* PBXTextBookmark */;
+			0ABC8A6A0BB542D00044022E /* PBXTextBookmark */ = 0ABC8A6A0BB542D00044022E /* PBXTextBookmark */;
+			0ABC8A8C0BB569E80044022E /* PBXTextBookmark */ = 0ABC8A8C0BB569E80044022E /* PBXTextBookmark */;
+			0ABC8A8D0BB569E80044022E /* PBXTextBookmark */ = 0ABC8A8D0BB569E80044022E /* PBXTextBookmark */;
+			0ABC8A8E0BB569E80044022E /* PBXTextBookmark */ = 0ABC8A8E0BB569E80044022E /* PBXTextBookmark */;
+			0ABC8A8F0BB569E80044022E /* PBXTextBookmark */ = 0ABC8A8F0BB569E80044022E /* PBXTextBookmark */;
+			0ABC8A900BB569E80044022E /* PBXTextBookmark */ = 0ABC8A900BB569E80044022E /* PBXTextBookmark */;
+			0ABC8A930BB56A600044022E /* PBXTextBookmark */ = 0ABC8A930BB56A600044022E /* PBXTextBookmark */;
+			0ABC8A950BB56A7E0044022E /* PBXTextBookmark */ = 0ABC8A950BB56A7E0044022E /* PBXTextBookmark */;
+			0ABC8A990BB56A9D0044022E /* PBXTextBookmark */ = 0ABC8A990BB56A9D0044022E /* PBXTextBookmark */;
+			0ABC8A9E0BB56D010044022E /* PBXTextBookmark */ = 0ABC8A9E0BB56D010044022E /* PBXTextBookmark */;
+			0ABC8AB00BB585370044022E /* PBXTextBookmark */ = 0ABC8AB00BB585370044022E /* PBXTextBookmark */;
+			0ABC8AB10BB585370044022E /* PBXTextBookmark */ = 0ABC8AB10BB585370044022E /* PBXTextBookmark */;
+			0ABC8AB20BB585370044022E /* PBXTextBookmark */ = 0ABC8AB20BB585370044022E /* PBXTextBookmark */;
+			0ABC8AB30BB585370044022E /* PBXTextBookmark */ = 0ABC8AB30BB585370044022E /* PBXTextBookmark */;
+			0ABC8AB40BB585370044022E /* PBXTextBookmark */ = 0ABC8AB40BB585370044022E /* PBXTextBookmark */;
+			0ABC8AB50BB585370044022E /* PBXTextBookmark */ = 0ABC8AB50BB585370044022E /* PBXTextBookmark */;
+			0ABC8AB60BB585370044022E /* PBXTextBookmark */ = 0ABC8AB60BB585370044022E /* PBXTextBookmark */;
+			0ABC8AB70BB585370044022E /* PBXTextBookmark */ = 0ABC8AB70BB585370044022E /* PBXTextBookmark */;
+			0ABC8AB80BB585370044022E /* PBXTextBookmark */ = 0ABC8AB80BB585370044022E /* PBXTextBookmark */;
+			0ABC8AB90BB585370044022E /* PBXTextBookmark */ = 0ABC8AB90BB585370044022E /* PBXTextBookmark */;
+			0ABC8ABA0BB585370044022E /* PBXTextBookmark */ = 0ABC8ABA0BB585370044022E /* PBXTextBookmark */;
+			0ABC8ABB0BB585370044022E /* PBXTextBookmark */ = 0ABC8ABB0BB585370044022E /* PBXTextBookmark */;
+			0ABC8ABC0BB585370044022E /* PBXTextBookmark */ = 0ABC8ABC0BB585370044022E /* PBXTextBookmark */;
+			0ABC8ABD0BB585370044022E /* PBXTextBookmark */ = 0ABC8ABD0BB585370044022E /* PBXTextBookmark */;
+			0ABC8ABE0BB585370044022E /* PBXTextBookmark */ = 0ABC8ABE0BB585370044022E /* PBXTextBookmark */;
+			0ABC8ABF0BB585370044022E /* PBXTextBookmark */ = 0ABC8ABF0BB585370044022E /* PBXTextBookmark */;
+			0ABC8AC00BB585370044022E /* PBXTextBookmark */ = 0ABC8AC00BB585370044022E /* PBXTextBookmark */;
+			0ABC8AC10BB585370044022E /* PBXTextBookmark */ = 0ABC8AC10BB585370044022E /* PBXTextBookmark */;
+			0ABC8AC20BB585370044022E /* PBXTextBookmark */ = 0ABC8AC20BB585370044022E /* PBXTextBookmark */;
+			0ABC8AC70BB586460044022E /* PBXTextBookmark */ = 0ABC8AC70BB586460044022E /* PBXTextBookmark */;
+			0ABC8AC80BB586460044022E /* PBXTextBookmark */ = 0ABC8AC80BB586460044022E /* PBXTextBookmark */;
+			0ABC8AC90BB586460044022E /* PBXTextBookmark */ = 0ABC8AC90BB586460044022E /* PBXTextBookmark */;
+			0ABC8ACA0BB586460044022E /* PBXTextBookmark */ = 0ABC8ACA0BB586460044022E /* PBXTextBookmark */;
+			0ABC8AD10BB586950044022E /* PBXTextBookmark */ = 0ABC8AD10BB586950044022E /* PBXTextBookmark */;
+			0ABC8AD20BB586950044022E /* PBXTextBookmark */ = 0ABC8AD20BB586950044022E /* PBXTextBookmark */;
+			0ABC8AD30BB586950044022E /* PBXTextBookmark */ = 0ABC8AD30BB586950044022E /* PBXTextBookmark */;
+			0ABC8AD40BB586950044022E /* PBXTextBookmark */ = 0ABC8AD40BB586950044022E /* PBXTextBookmark */;
+			0ABC8AD50BB586950044022E /* PBXTextBookmark */ = 0ABC8AD50BB586950044022E /* PBXTextBookmark */;
+			0ABC8AD60BB586950044022E /* PBXTextBookmark */ = 0ABC8AD60BB586950044022E /* PBXTextBookmark */;
+			0ABC8AD70BB586950044022E /* PBXTextBookmark */ = 0ABC8AD70BB586950044022E /* PBXTextBookmark */;
+			0ABC8AD80BB586A90044022E /* PBXTextBookmark */ = 0ABC8AD80BB586A90044022E /* PBXTextBookmark */;
+			0ABC8AD90BB586A90044022E /* PBXTextBookmark */ = 0ABC8AD90BB586A90044022E /* PBXTextBookmark */;
+			0ABC8ADA0BB586A90044022E /* PBXTextBookmark */ = 0ABC8ADA0BB586A90044022E /* PBXTextBookmark */;
+			0ABC8ADB0BB586A90044022E /* PBXTextBookmark */ = 0ABC8ADB0BB586A90044022E /* PBXTextBookmark */;
+			0ABC8ADC0BB586AB0044022E /* PBXTextBookmark */ = 0ABC8ADC0BB586AB0044022E /* PBXTextBookmark */;
 			0AD2AFA20B53B02900960C16 = 0AD2AFA20B53B02900960C16 /* PBXTextBookmark */;
 			0AD2AFA40B53B02900960C16 = 0AD2AFA40B53B02900960C16 /* PBXTextBookmark */;
 			0AD2AFA50B53B02900960C16 = 0AD2AFA50B53B02900960C16 /* PBXTextBookmark */;
@@ -495,9 +614,9 @@
 	};
 	0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {849, 2282}}";
+			sepNavIntBoundsRect = "{{0, 0}, {732, 2282}}";
 			sepNavSelRange = "{2697, 0}";
-			sepNavVisRect = "{{0, 799}, {849, 741}}";
+			sepNavVisRect = "{{0, 1004}, {732, 536}}";
 			sepNavWindowFrame = "{{437, 48}, {1013, 746}}";
 		};
 	};
@@ -511,40 +630,40 @@
 	};
 	0A3B6E9B0AC993DB002CC2AF /* main.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {977, 1988}}";
-			sepNavSelRange = "{2862, 0}";
-			sepNavVisRect = "{{0, 1150}, {977, 276}}";
+			sepNavIntBoundsRect = "{{0, 0}, {732, 1988}}";
+			sepNavSelRange = "{610, 0}";
+			sepNavVisRect = "{{0, 155}, {732, 536}}";
 			sepNavWindowFrame = "{{84, 261}, {813, 617}}";
 		};
 	};
 	0A3B6E9C0AC993DB002CC2AF /* nslobject.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {977, 9352}}";
-			sepNavSelRange = "{11308, 0}";
-			sepNavVisRect = "{{0, 5434}, {977, 319}}";
+			sepNavIntBoundsRect = "{{0, 0}, {860, 9352}}";
+			sepNavSelRange = "{17728, 0}";
+			sepNavVisRect = "{{0, 8802}, {732, 536}}";
 			sepNavWindowFrame = "{{410, 43}, {813, 617}}";
 		};
 	};
 	0A3B6E9D0AC993DB002CC2AF /* nslobjectfactory.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {849, 1050}}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 1050}}";
 			sepNavSelRange = "{836, 0}";
-			sepNavVisRect = "{{0, 0}, {849, 741}}";
+			sepNavVisRect = "{{0, 0}, {841, 621}}";
 		};
 	};
 	0A3B6E9F0AC993DB002CC2AF /* particle.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {977, 3248}}";
-			sepNavSelRange = "{1161, 0}";
-			sepNavVisRect = "{{0, 807}, {977, 276}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1051, 4214}}";
+			sepNavSelRange = "{7673, 0}";
+			sepNavVisRect = "{{0, 3889}, {1051, 239}}";
 			sepNavWindowFrame = "{{28, 77}, {1013, 669}}";
 		};
 	};
 	0A3B6EA00AC993DB002CC2AF /* physics.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {977, 1596}}";
-			sepNavSelRange = "{785, 0}";
-			sepNavVisRect = "{{0, 402}, {977, 330}}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 1596}}";
+			sepNavSelRange = "{759, 0}";
+			sepNavVisRect = "{{0, 126}, {841, 621}}";
 			sepNavWindowFrame = "{{130, 146}, {1013, 746}}";
 		};
 	};
@@ -605,9 +724,9 @@
 	};
 	0A3B6EB40AC9940B002CC2AF /* particle.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1051, 1386}}";
-			sepNavSelRange = "{678, 0}";
-			sepNavVisRect = "{{0, 364}, {1051, 239}}";
+			sepNavIntBoundsRect = "{{0, 0}, {854, 1484}}";
+			sepNavSelRange = "{802, 0}";
+			sepNavVisRect = "{{0, 182}, {854, 642}}";
 			sepNavWindowFrame = "{{121, 75}, {1013, 671}}";
 		};
 	};
@@ -624,7 +743,7 @@
 		name = nslneutron;
 		objects = (
 			0AFEF2360B779F6800611177 /* edmexperiment.cpp:260 */,
-			0AFEF25E0B789D5500611177 /* particle.cpp:68 */,
+			0AFEF25E0B789D5500611177 /* particle.cpp:72 */,
 			0AE8BC8E0B7B693700398D6A /* main.cpp:88 */,
 		);
 	};
@@ -663,7 +782,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = t;
 		rLen = 1;
-		rLoc = 1391;
+		rLoc = 1717;
 		rType = 0;
 		vrLen = 1936;
 		vrLoc = 1480;
@@ -683,7 +802,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 212";
 		rLen = 0;
-		rLoc = 5532;
+		rLoc = 6780;
 		rType = 0;
 		vrLen = 1154;
 		vrLoc = 4417;
@@ -703,7 +822,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 218";
 		rLen = 0;
-		rLoc = 5532;
+		rLoc = 6780;
 		rType = 0;
 		vrLen = 1754;
 		vrLoc = 2259;
@@ -723,7 +842,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 244";
 		rLen = 0;
-		rLoc = 6185;
+		rLoc = 7433;
 		rType = 0;
 		vrLen = 1224;
 		vrLoc = 5139;
@@ -743,7 +862,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 269";
 		rLen = 0;
-		rLoc = 7016;
+		rLoc = 8264;
 		rType = 0;
 		vrLen = 1543;
 		vrLoc = 5518;
@@ -793,7 +912,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 229";
 		rLen = 0;
-		rLoc = 6157;
+		rLoc = 6245;
 		rType = 0;
 		vrLen = 1855;
 		vrLoc = 4324;
@@ -833,7 +952,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = updateExv;
 		rLen = 9;
-		rLoc = 6580;
+		rLoc = 7828;
 		rType = 0;
 		vrLen = 1354;
 		vrLoc = 5644;
@@ -843,7 +962,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "void particle::updateExv ( efield &elecfield )";
 		rLen = 47;
-		rLoc = 5730;
+		rLoc = 5818;
 		rType = 0;
 		vrLen = 1657;
 		vrLoc = 4244;
@@ -853,7 +972,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 282";
 		rLen = 0;
-		rLoc = 9140;
+		rLoc = 10388;
 		rType = 0;
 		vrLen = 1318;
 		vrLoc = 4727;
@@ -873,7 +992,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = updateExv;
 		rLen = 0;
-		rLoc = 7950;
+		rLoc = 9198;
 		rType = 0;
 		vrLen = 1614;
 		vrLoc = 6780;
@@ -953,7 +1072,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 229";
 		rLen = 0;
-		rLoc = 6157;
+		rLoc = 6245;
 		rType = 0;
 		vrLen = 1819;
 		vrLoc = 4360;
@@ -1053,7 +1172,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 229";
 		rLen = 0;
-		rLoc = 6157;
+		rLoc = 6245;
 		rType = 0;
 		vrLen = 1855;
 		vrLoc = 4324;
@@ -1063,7 +1182,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 297";
 		rLen = 0;
-		rLoc = 7804;
+		rLoc = 9052;
 		rType = 0;
 		vrLen = 1457;
 		vrLoc = 6568;
@@ -1093,7 +1212,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 286";
 		rLen = 0;
-		rLoc = 7619;
+		rLoc = 8867;
 		rType = 0;
 		vrLen = 1496;
 		vrLoc = 6648;
@@ -1123,7 +1242,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 309";
 		rLen = 0;
-		rLoc = 10575;
+		rLoc = 11823;
 		rType = 0;
 		vrLen = 1514;
 		vrLoc = 6568;
@@ -1153,7 +1272,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 310";
 		rLen = 0;
-		rLoc = 9140;
+		rLoc = 10388;
 		rType = 0;
 		vrLen = 1699;
 		vrLoc = 6686;
@@ -1173,7 +1292,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 336";
 		rLen = 0;
-		rLoc = 9271;
+		rLoc = 10519;
 		rType = 0;
 		vrLen = 1645;
 		vrLoc = 7532;
@@ -1193,7 +1312,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "using neutron_physics::spinvec_change;";
 		rLen = 39;
-		rLoc = 457;
+		rLoc = 476;
 		rType = 0;
 		vrLen = 834;
 		vrLoc = 0;
@@ -1263,7 +1382,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 345";
 		rLen = 0;
-		rLoc = 9553;
+		rLoc = 10801;
 		rType = 0;
 		vrLen = 1917;
 		vrLoc = 7693;
@@ -1283,7 +1402,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 366";
 		rLen = 0;
-		rLoc = 10452;
+		rLoc = 11700;
 		rType = 0;
 		vrLen = 2122;
 		vrLoc = 8292;
@@ -1303,7 +1422,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 372";
 		rLen = 0;
-		rLoc = 11334;
+		rLoc = 12582;
 		rType = 0;
 		vrLen = 2219;
 		vrLoc = 8476;
@@ -1328,37 +1447,7 @@
 		vrLen = 2080;
 		vrLoc = 317;
 	};
-	0A3CEDA80B91FADE007053E6 /* solver.cpp:276 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		delayBeforeContinue = 0;
-		fileReference = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
-		functionName = "rungekutta_solver::rkstep()";
-		hitCount = 2;
-		lineNumber = 276;
-		location = solver.ob;
-		modificationTime = 194117119.036941;
-		state = 1;
-	};
-	0A3CEDB00B91FB38007053E6 /* solver.cpp:256 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		delayBeforeContinue = 0;
-		fileReference = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
-		functionName = "rungekutta_solver::step()";
-		hitCount = 1;
-		lineNumber = 256;
-		location = solver.ob;
-		modificationTime = 194116812.052757;
-		state = 1;
-	};
-	0A3CEDC50B91FCC2007053E6 /* solver.cpp:377 */ = {
+	0A3CEDA80B91FADE007053E6 /* solver.cpp:302 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -1368,9 +1457,24 @@
 		fileReference = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		functionName = "rungekutta_solver::rkstep()";
 		hitCount = 1;
-		lineNumber = 377;
+		lineNumber = 302;
 		location = solver.ob;
-		modificationTime = 194116816.185248;
+		modificationTime = 196439873.905594;
+		state = 1;
+	};
+	0A3CEDC50B91FCC2007053E6 /* solver.cpp:403 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		delayBeforeContinue = 0;
+		fileReference = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		functionName = "rungekutta_solver::rkstep()";
+		hitCount = 1;
+		lineNumber = 403;
+		location = solver.ob;
+		modificationTime = 196439873.905623;
 		state = 1;
 	};
 	0A3CEDD00B9200A5007053E6 /* PBXTextBookmark */ = {
@@ -1378,7 +1482,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 219";
 		rLen = 0;
-		rLoc = 5625;
+		rLoc = 6873;
 		rType = 0;
 		vrLen = 1359;
 		vrLoc = 5074;
@@ -1398,7 +1502,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 365";
 		rLen = 0;
-		rLoc = 10349;
+		rLoc = 11597;
 		rType = 0;
 		vrLen = 1392;
 		vrLoc = 9530;
@@ -1428,7 +1532,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 365";
 		rLen = 0;
-		rLoc = 10349;
+		rLoc = 11597;
 		rType = 0;
 		vrLen = 1392;
 		vrLoc = 9530;
@@ -1604,9 +1708,9 @@
 	};
 	0A72C9D00AF380670079760D /* reporters.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {836, 9898}}";
-			sepNavSelRange = "{17653, 0}";
-			sepNavVisRect = "{{0, 9134}, {732, 536}}";
+			sepNavIntBoundsRect = "{{0, 0}, {854, 10010}}";
+			sepNavSelRange = "{18760, 0}";
+			sepNavVisRect = "{{0, 9368}, {854, 642}}";
 			sepNavWindowFrame = "{{28, 75}, {1013, 671}}";
 		};
 	};
@@ -1875,7 +1979,7 @@
 		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
 		name = "particle.h: velocity";
 		rLen = 0;
-		rLoc = 943;
+		rLoc = 951;
 		rType = 0;
 		vrLen = 902;
 		vrLoc = 361;
@@ -1884,14 +1988,14 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 616}}";
 			sepNavSelRange = "{353, 0}";
-			sepNavVisRect = "{{0, 61}, {732, 536}}";
+			sepNavVisRect = "{{0, 54}, {732, 536}}";
 		};
 	};
 	0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {908, 1400}}";
-			sepNavSelRange = "{2281, 0}";
-			sepNavVisRect = "{{0, 658}, {732, 536}}";
+			sepNavIntBoundsRect = "{{0, 0}, {968, 1400}}";
+			sepNavSelRange = "{2521, 0}";
+			sepNavVisRect = "{{0, 608}, {968, 596}}";
 			sepNavWindowFrame = "{{15, 204}, {1013, 669}}";
 		};
 	};
@@ -1944,10 +2048,10 @@
 	};
 	0A863DB00B62ABB400FF32EA /* solver.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {932, 5558}}";
-			sepNavSelRange = "{10349, 0}";
-			sepNavVisRect = "{{0, 4835}, {732, 536}}";
-			sepNavWindowFrame = "{{15, 328}, {1013, 669}}";
+			sepNavIntBoundsRect = "{{0, 0}, {932, 5922}}";
+			sepNavSelRange = "{4996, 0}";
+			sepNavVisRect = "{{0, 2323}, {854, 642}}";
+			sepNavWindowFrame = "{{15, 209}, {1013, 669}}";
 		};
 	};
 	0A863DD20B62AE8100FF32EA /* PBXTextBookmark */ = {
@@ -2079,9 +2183,9 @@
 	};
 	0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1127, 9296}}";
-			sepNavSelRange = "{6966, 0}";
-			sepNavVisRect = "{{0, 3438}, {1127, 390}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1151, 9324}}";
+			sepNavSelRange = "{11908, 0}";
+			sepNavVisRect = "{{0, 5496}, {1151, 330}}";
 			sepNavWindowFrame = "{{354, 77}, {1013, 669}}";
 		};
 	};
@@ -2095,9 +2199,9 @@
 	};
 	0AB236A00ADD292B00323FF0 /* vector3.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {849, 2282}}";
-			sepNavSelRange = "{847, 0}";
-			sepNavVisRect = "{{0, 1470}, {849, 741}}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 2282}}";
+			sepNavSelRange = "{3855, 64}";
+			sepNavVisRect = "{{0, 1661}, {841, 621}}";
 			sepNavWindowFrame = "{{130, 146}, {1013, 746}}";
 		};
 	};
@@ -2108,6 +2212,1202 @@
 			sepNavVisRect = "{{0, 935}, {977, 301}}";
 			sepNavWindowFrame = "{{311, 85}, {1013, 671}}";
 		};
+	};
+	0ABC895A0BB46C0E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */;
+		name = "neutronphysics.h: 21";
+		rLen = 0;
+		rLoc = 353;
+		rType = 0;
+		vrLen = 1241;
+		vrLoc = 39;
+	};
+	0ABC895F0BB46C780044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */;
+		name = "neutronphysics.h: 21";
+		rLen = 0;
+		rLoc = 353;
+		rType = 0;
+		vrLen = 1241;
+		vrLoc = 39;
+	};
+	0ABC89600BB46C780044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 65";
+		rLen = 0;
+		rLoc = 2181;
+		rType = 0;
+		vrLen = 1448;
+		vrLoc = 1584;
+	};
+	0ABC89610BB46C780044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 585";
+		rLen = 0;
+		rLoc = 18970;
+		rType = 0;
+		vrLen = 1117;
+		vrLoc = 17374;
+	};
+	0ABC89620BB46C780044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 365";
+		rLen = 0;
+		rLoc = 11597;
+		rType = 0;
+		vrLen = 1392;
+		vrLoc = 9530;
+	};
+	0ABC89630BB46C780044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */;
+		name = "neutronphysics.h: 21";
+		rLen = 0;
+		rLoc = 353;
+		rType = 0;
+		vrLen = 1241;
+		vrLoc = 39;
+	};
+	0ABC89640BB46C780044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 65";
+		rLen = 0;
+		rLoc = 2181;
+		rType = 0;
+		vrLen = 1448;
+		vrLoc = 1584;
+	};
+	0ABC89650BB46C780044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 585";
+		rLen = 0;
+		rLoc = 18970;
+		rType = 0;
+		vrLen = 1117;
+		vrLoc = 17374;
+	};
+	0ABC89660BB46C780044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 101";
+		rLen = 0;
+		rLoc = 2569;
+		rType = 0;
+		vrLen = 1323;
+		vrLoc = 1827;
+	};
+	0ABC89690BB46D090044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 185";
+		rLen = 0;
+		rLoc = 5892;
+		rType = 0;
+		vrLen = 824;
+		vrLoc = 4295;
+	};
+	0ABC896A0BB46D090044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9B0AC993DB002CC2AF /* main.cpp */;
+		name = "main.cpp: 124";
+		rLen = 0;
+		rLoc = 3691;
+		rType = 0;
+		vrLen = 1029;
+		vrLoc = 3109;
+	};
+	0ABC896B0BB46D090044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 185";
+		rLen = 0;
+		rLoc = 5892;
+		rType = 0;
+		vrLen = 824;
+		vrLoc = 4295;
+	};
+	0ABC896C0BB46D090044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9B0AC993DB002CC2AF /* main.cpp */;
+		name = "main.cpp: 124";
+		rLen = 0;
+		rLoc = 3691;
+		rType = 0;
+		vrLen = 902;
+		vrLoc = 3250;
+	};
+	0ABC89710BB46D710044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9B0AC993DB002CC2AF /* main.cpp */;
+		name = "main.cpp: 35";
+		rLen = 0;
+		rLoc = 610;
+		rType = 0;
+		vrLen = 1005;
+		vrLoc = 173;
+	};
+	0ABC89720BB46D710044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 185";
+		rLen = 0;
+		rLoc = 5892;
+		rType = 0;
+		vrLen = 824;
+		vrLoc = 4295;
+	};
+	0ABC89730BB46D710044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9B0AC993DB002CC2AF /* main.cpp */;
+		name = "main.cpp: 35";
+		rLen = 0;
+		rLoc = 610;
+		rType = 0;
+		vrLen = 1005;
+		vrLoc = 173;
+	};
+	0ABC89740BB46D710044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 182";
+		rLen = 0;
+		rLoc = 5744;
+		rType = 0;
+		vrLen = 865;
+		vrLoc = 4588;
+	};
+	0ABC89770BB46E300044022E /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+	};
+	0ABC897F0BB46EDC0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: invalid use of member (did you forget the '&' ?)";
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		rLen = 1;
+		rLoc = 106;
+		rType = 1;
+	};
+	0ABC89800BB46EDC0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 107";
+		rLen = 0;
+		rLoc = 2535;
+		rType = 0;
+		vrLen = 1322;
+		vrLoc = 1793;
+	};
+	0ABC89820BB46EDC0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89900BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: 51";
+		rLen = 0;
+		rLoc = 1096;
+		rType = 0;
+		vrLen = 819;
+		vrLoc = 712;
+	};
+	0ABC89910BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9C0AC993DB002CC2AF /* nslobject.cpp */;
+		name = "nslobject.cpp: 650";
+		rLen = 0;
+		rLoc = 17728;
+		rType = 0;
+		vrLen = 830;
+		vrLoc = 17225;
+	};
+	0ABC89920BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 68";
+		rLen = 0;
+		rLoc = 1186;
+		rType = 0;
+		vrLen = 832;
+		vrLoc = 508;
+	};
+	0ABC89930BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */;
+		name = "electromagnetics.cpp: 128";
+		rLen = 0;
+		rLoc = 2697;
+		rType = 0;
+		vrLen = 702;
+		vrLoc = 1586;
+	};
+	0ABC89940BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 542";
+		rLen = 0;
+		rLoc = 17597;
+		rType = 0;
+		vrLen = 1495;
+		vrLoc = 16561;
+	};
+	0ABC89950BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 116";
+		rLen = 0;
+		rLoc = 2854;
+		rType = 0;
+		vrLen = 1389;
+		vrLoc = 2241;
+	};
+	0ABC89960BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 116";
+		rLen = 0;
+		rLoc = 2854;
+		rType = 0;
+		vrLen = 1389;
+		vrLoc = 2241;
+	};
+	0ABC89970BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 194";
+		rLen = 0;
+		rLoc = 4882;
+		rType = 0;
+		vrLen = 685;
+		vrLoc = 393;
+	};
+	0ABC89980BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: 51";
+		rLen = 0;
+		rLoc = 1096;
+		rType = 0;
+		vrLen = 819;
+		vrLoc = 712;
+	};
+	0ABC89990BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 54";
+		rLen = 0;
+		rLoc = 877;
+		rType = 0;
+		vrLen = 939;
+		vrLoc = 1227;
+	};
+	0ABC899A0BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9C0AC993DB002CC2AF /* nslobject.cpp */;
+		name = "nslobject.cpp: 650";
+		rLen = 0;
+		rLoc = 17728;
+		rType = 0;
+		vrLen = 830;
+		vrLoc = 17225;
+	};
+	0ABC899B0BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 68";
+		rLen = 0;
+		rLoc = 1186;
+		rType = 0;
+		vrLen = 832;
+		vrLoc = 508;
+	};
+	0ABC899C0BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E990AC993DB002CC2AF /* electromagnetics.cpp */;
+		name = "electromagnetics.cpp: 128";
+		rLen = 0;
+		rLoc = 2697;
+		rType = 0;
+		vrLen = 702;
+		vrLoc = 1586;
+	};
+	0ABC899D0BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 542";
+		rLen = 0;
+		rLoc = 17597;
+		rType = 0;
+		vrLen = 1495;
+		vrLoc = 16561;
+	};
+	0ABC899E0BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 78";
+		rLen = 0;
+		rLoc = 1546;
+		rType = 0;
+		vrLen = 1326;
+		vrLoc = 2068;
+	};
+	0ABC899F0BB470010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89A30BB470820044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 107";
+		rLen = 0;
+		rLoc = 2535;
+		rType = 0;
+		vrLen = 700;
+		vrLoc = 2070;
+	};
+	0ABC89A80BB470930044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 78";
+		rLen = 0;
+		rLoc = 1528;
+		rType = 0;
+		vrLen = 1021;
+		vrLoc = 783;
+	};
+	0ABC89A90BB470930044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89AB0BB474CC0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 107";
+		rLen = 0;
+		rLoc = 2535;
+		rType = 0;
+		vrLen = 700;
+		vrLoc = 2072;
+	};
+	0ABC89AE0BB474E90044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 63";
+		rLen = 0;
+		rLoc = 1109;
+		rType = 0;
+		vrLen = 1021;
+		vrLoc = 783;
+	};
+	0ABC89AF0BB474E90044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 542";
+		rLen = 0;
+		rLoc = 17597;
+		rType = 0;
+		vrLen = 1495;
+		vrLoc = 16561;
+	};
+	0ABC89B00BB474E90044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 63";
+		rLen = 0;
+		rLoc = 1109;
+		rType = 0;
+		vrLen = 1021;
+		vrLoc = 783;
+	};
+	0ABC89B10BB474E90044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 552";
+		rLen = 0;
+		rLoc = 17920;
+		rType = 0;
+		vrLen = 1708;
+		vrLoc = 16666;
+	};
+	0ABC89B20BB474E90044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89B70BB4752A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 552";
+		rLen = 0;
+		rLoc = 17920;
+		rType = 0;
+		vrLen = 1713;
+		vrLoc = 16666;
+	};
+	0ABC89B80BB4752B0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89BC0BB475AB0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 552";
+		rLen = 0;
+		rLoc = 17920;
+		rType = 0;
+		vrLen = 1953;
+		vrLoc = 15244;
+	};
+	0ABC89BD0BB475AB0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 63";
+		rLen = 0;
+		rLoc = 1109;
+		rType = 0;
+		vrLen = 1119;
+		vrLoc = 719;
+	};
+	0ABC89BE0BB475AB0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 552";
+		rLen = 0;
+		rLoc = 17920;
+		rType = 0;
+		vrLen = 1953;
+		vrLoc = 15244;
+	};
+	0ABC89BF0BB475AB0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 79";
+		rLen = 0;
+		rLoc = 1685;
+		rType = 0;
+		vrLen = 1432;
+		vrLoc = 1208;
+	};
+	0ABC89C00BB475AB0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89C40BB475C20044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 79";
+		rLen = 0;
+		rLoc = 1671;
+		rType = 0;
+		vrLen = 1429;
+		vrLoc = 1208;
+	};
+	0ABC89C50BB475C20044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89CA0BB475F30044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 79";
+		rLen = 0;
+		rLoc = 1671;
+		rType = 0;
+		vrLen = 1429;
+		vrLoc = 1208;
+	};
+	0ABC89CB0BB475F30044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89D00BB4768F0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: 'struct std::ofstream' has no member named 'sprecision'";
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		rLen = 1;
+		rLoc = 78;
+		rType = 1;
+	};
+	0ABC89D10BB4768F0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "phaselog.precision(20);";
+		rLen = 25;
+		rLoc = 1661;
+		rType = 0;
+		vrLen = 513;
+		vrLoc = 1343;
+	};
+	0ABC89DE0BB477010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 79";
+		rLen = 0;
+		rLoc = 1671;
+		rType = 0;
+		vrLen = 1567;
+		vrLoc = 1645;
+	};
+	0ABC89DF0BB477010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 193";
+		rLen = 0;
+		rLoc = 5646;
+		rType = 0;
+		vrLen = 1375;
+		vrLoc = 4507;
+	};
+	0ABC89E00BB477010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89E70BB477C30044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 194";
+		rLen = 0;
+		rLoc = 5706;
+		rType = 0;
+		vrLen = 1470;
+		vrLoc = 4419;
+	};
+	0ABC89E80BB477C30044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC89E90BB47FBB0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "phaselog.precision(20);";
+		rLen = 25;
+		rLoc = 1661;
+		rType = 0;
+		vrLen = 561;
+		vrLoc = 1343;
+	};
+	0ABC89EC0BB47FC10044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 194";
+		rLen = 0;
+		rLoc = 5706;
+		rType = 0;
+		vrLen = 1470;
+		vrLoc = 4419;
+	};
+	0ABC89ED0BB47FC10044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC8A2C0BB495070044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 192";
+		rLen = 0;
+		rLoc = 5532;
+		rType = 0;
+		vrLen = 1533;
+		vrLoc = 4451;
+	};
+	0ABC8A2D0BB495070044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC8A2F0BB4A30B0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 76";
+		rLen = 0;
+		rLoc = 1453;
+		rType = 0;
+		vrLen = 573;
+		vrLoc = 1343;
+	};
+	0ABC8A550BB540350044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 189";
+		rLen = 0;
+		rLoc = 5269;
+		rType = 0;
+		vrLen = 1533;
+		vrLoc = 4451;
+	};
+	0ABC8A560BB540350044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 76";
+		rLen = 0;
+		rLoc = 2521;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 1352;
+	};
+	0ABC8A690BB542CD0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 76";
+		rLen = 0;
+		rLoc = 1453;
+		rType = 0;
+		vrLen = 573;
+		vrLoc = 1343;
+	};
+	0ABC8A6A0BB542D00044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 76";
+		rLen = 0;
+		rLoc = 1453;
+		rType = 0;
+		vrLen = 573;
+		vrLoc = 1343;
+	};
+	0ABC8A8A0BB569AD0044022E /* solver.cpp:295 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		delayBeforeContinue = 0;
+		fileReference = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		functionName = "rungekutta_solver::step()";
+		hitCount = 1;
+		lineNumber = 295;
+		location = solver.ob;
+		modificationTime = 196439873.905633;
+		state = 1;
+	};
+	0ABC8A8C0BB569E80044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "Stepping routine";
+		rLen = 16;
+		rLoc = 19422;
+		rType = 0;
+		vrLen = 1317;
+		vrLoc = 18231;
+	};
+	0ABC8A8D0BB569E80044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 189";
+		rLen = 0;
+		rLoc = 5269;
+		rType = 0;
+		vrLen = 683;
+		vrLoc = 207;
+	};
+	0ABC8A8E0BB569E80044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 189";
+		rLen = 0;
+		rLoc = 5269;
+		rType = 0;
+		vrLen = 683;
+		vrLoc = 207;
+	};
+	0ABC8A8F0BB569E80044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "Stepping routine";
+		rLen = 16;
+		rLoc = 19422;
+		rType = 0;
+		vrLen = 1317;
+		vrLoc = 18231;
+	};
+	0ABC8A900BB569E80044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 280";
+		rLen = 0;
+		rLoc = 7820;
+		rType = 0;
+		vrLen = 1289;
+		vrLoc = 7294;
+	};
+	0ABC8A930BB56A600044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 76";
+		rLen = 0;
+		rLoc = 1453;
+		rType = 0;
+		vrLen = 573;
+		vrLoc = 1343;
+	};
+	0ABC8A950BB56A7E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 76";
+		rLen = 0;
+		rLoc = 1453;
+		rType = 0;
+		vrLen = 573;
+		vrLoc = 1343;
+	};
+	0ABC8A970BB56A8D0044022E /* solver.cpp:127 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		delayBeforeContinue = 0;
+		fileReference = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		functionName = "midpointsolver::step()";
+		hitCount = 1;
+		lineNumber = 127;
+		location = solver.ob;
+		modificationTime = 196439873.905642;
+		state = 1;
+	};
+	0ABC8A990BB56A9D0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 126";
+		rLen = 0;
+		rLoc = 3248;
+		rType = 0;
+		vrLen = 1623;
+		vrLoc = 1924;
+	};
+	0ABC8A9E0BB56D010044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 127";
+		rLen = 0;
+		rLoc = 3248;
+		rType = 0;
+		vrLen = 1661;
+		vrLoc = 1924;
+	};
+	0ABC8AB00BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 101";
+		rLen = 0;
+		rLoc = 2334;
+		rType = 0;
+		vrLen = 1661;
+		vrLoc = 1924;
+	};
+	0ABC8AB10BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 706";
+		rLen = 0;
+		rLoc = 18760;
+		rType = 0;
+		vrLen = 1255;
+		vrLoc = 17644;
+	};
+	0ABC8AB20BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB236A00ADD292B00323FF0 /* vector3.h */;
+		name = "std::ostream& operator<<(std::ostream& os, const vector3& vec);";
+		rLen = 64;
+		rLoc = 3855;
+		rType = 0;
+		vrLen = 857;
+		vrLoc = 3071;
+	};
+	0ABC8AB30BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9D0AC993DB002CC2AF /* nslobjectfactory.cpp */;
+		name = "nslobjectfactory.cpp: 32";
+		rLen = 0;
+		rLoc = 836;
+		rType = 0;
+		vrLen = 1254;
+		vrLoc = 0;
+	};
+	0ABC8AB40BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EA00AC993DB002CC2AF /* physics.cpp */;
+		name = "physics.cpp: 38";
+		rLen = 0;
+		rLoc = 759;
+		rType = 0;
+		vrLen = 885;
+		vrLoc = 156;
+	};
+	0ABC8AB50BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 281";
+		rLen = 0;
+		rLoc = 7213;
+		rType = 0;
+		vrLen = 1208;
+		vrLoc = 6650;
+	};
+	0ABC8AB60BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: 34";
+		rLen = 800;
+		rLoc = 689;
+		rType = 0;
+		vrLen = 1006;
+		vrLoc = 984;
+	};
+	0ABC8AB70BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 101";
+		rLen = 0;
+		rLoc = 2334;
+		rType = 0;
+		vrLen = 1661;
+		vrLoc = 1924;
+	};
+	0ABC8AB80BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 706";
+		rLen = 0;
+		rLoc = 18760;
+		rType = 0;
+		vrLen = 1255;
+		vrLoc = 17644;
+	};
+	0ABC8AB90BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB236A00ADD292B00323FF0 /* vector3.h */;
+		name = "std::ostream& operator<<(std::ostream& os, const vector3& vec);";
+		rLen = 64;
+		rLoc = 3855;
+		rType = 0;
+		vrLen = 857;
+		vrLoc = 3071;
+	};
+	0ABC8ABA0BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: std";
+		rLen = 0;
+		rLoc = 2196;
+		rType = 0;
+		vrLen = 1011;
+		vrLoc = 1248;
+	};
+	0ABC8ABB0BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EA00AC993DB002CC2AF /* physics.cpp */;
+		name = "physics.cpp: 38";
+		rLen = 0;
+		rLoc = 759;
+		rType = 0;
+		vrLen = 904;
+		vrLoc = 156;
+	};
+	0ABC8ABC0BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9D0AC993DB002CC2AF /* nslobjectfactory.cpp */;
+		name = "nslobjectfactory.cpp: 32";
+		rLen = 0;
+		rLoc = 836;
+		rType = 0;
+		vrLen = 1254;
+		vrLoc = 0;
+	};
+	0ABC8ABD0BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 239";
+		rLen = 0;
+		rLoc = 7875;
+		rType = 0;
+		vrLen = 1557;
+		vrLoc = 4789;
+	};
+	0ABC8ABE0BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EA00AC993DB002CC2AF /* physics.cpp */;
+		name = "physics.cpp: 38";
+		rLen = 0;
+		rLoc = 759;
+		rType = 0;
+		vrLen = 885;
+		vrLoc = 156;
+	};
+	0ABC8ABF0BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 240";
+		rLen = 0;
+		rLoc = 7887;
+		rType = 0;
+		vrLen = 1557;
+		vrLoc = 4789;
+	};
+	0ABC8AC00BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: 34";
+		rLen = 800;
+		rLoc = 689;
+		rType = 0;
+		vrLen = 933;
+		vrLoc = 1021;
+	};
+	0ABC8AC10BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 281";
+		rLen = 0;
+		rLoc = 7213;
+		rType = 0;
+		vrLen = 1208;
+		vrLoc = 6650;
+	};
+	0ABC8AC20BB585370044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: 19";
+		rLen = 0;
+		rLoc = 285;
+		rType = 0;
+		vrLen = 1055;
+		vrLoc = 174;
+	};
+	0ABC8AC70BB586460044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 76";
+		rLen = 0;
+		rLoc = 1453;
+		rType = 0;
+		vrLen = 573;
+		vrLoc = 1343;
+	};
+	0ABC8AC80BB586460044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: 'struct std::basic_ostream<char, std::char_traits<char> >' has no member named 'setscientific'";
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		rLen = 1;
+		rLoc = 281;
+		rType = 1;
+	};
+	0ABC8AC90BB586460044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 76";
+		rLen = 0;
+		rLoc = 1453;
+		rType = 0;
+		vrLen = 573;
+		vrLoc = 1343;
+	};
+	0ABC8ACA0BB586460044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 293";
+		rLen = 0;
+		rLoc = 7673;
+		rType = 0;
+		vrLen = 674;
+		vrLoc = 7103;
+	};
+	0ABC8AD10BB586950044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: spinEminus";
+		rLen = 0;
+		rLoc = 802;
+		rType = 0;
+		vrLen = 1055;
+		vrLoc = 174;
+	};
+	0ABC8AD20BB586950044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 706";
+		rLen = 0;
+		rLoc = 18760;
+		rType = 0;
+		vrLen = 1263;
+		vrLoc = 17644;
+	};
+	0ABC8AD30BB586950044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 101";
+		rLen = 0;
+		rLoc = 2334;
+		rType = 0;
+		vrLen = 1662;
+		vrLoc = 1923;
+	};
+	0ABC8AD40BB586950044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: spinEminus";
+		rLen = 0;
+		rLoc = 802;
+		rType = 0;
+		vrLen = 1055;
+		vrLoc = 174;
+	};
+	0ABC8AD50BB586950044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 101";
+		rLen = 0;
+		rLoc = 2334;
+		rType = 0;
+		vrLen = 1730;
+		vrLoc = 1923;
+	};
+	0ABC8AD60BB586950044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 706";
+		rLen = 0;
+		rLoc = 18760;
+		rType = 0;
+		vrLen = 1263;
+		vrLoc = 17644;
+	};
+	0ABC8AD70BB586950044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 186";
+		rLen = 0;
+		rLoc = 5122;
+		rType = 0;
+		vrLen = 1600;
+		vrLoc = 4539;
+	};
+	0ABC8AD80BB586A90044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 293";
+		rLen = 0;
+		rLoc = 7673;
+		rType = 0;
+		vrLen = 674;
+		vrLoc = 7103;
+	};
+	0ABC8AD90BB586A90044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "warning: #warning \"Temporary debug code\"";
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		rLen = 1;
+		rLoc = 107;
+		rType = 1;
+	};
+	0ABC8ADA0BB586A90044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 293";
+		rLen = 0;
+		rLoc = 7673;
+		rType = 0;
+		vrLen = 674;
+		vrLoc = 7103;
+	};
+	0ABC8ADB0BB586A90044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "#warning \"Temporary debug code\"";
+		rLen = 32;
+		rLoc = 2537;
+		rType = 0;
+		vrLen = 695;
+		vrLoc = 2238;
+	};
+	0ABC8ADC0BB586AB0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 182";
+		rLen = 0;
+		rLoc = 4996;
+		rType = 0;
+		vrLen = 1600;
+		vrLoc = 4539;
 	};
 	0AD2AFA20B53B02900960C16 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -2233,7 +3533,7 @@
 		vrLen = 829;
 		vrLoc = 17226;
 	};
-	0AFEF25E0B789D5500611177 /* particle.cpp:68 */ = {
+	0AFEF25E0B789D5500611177 /* particle.cpp:72 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2243,7 +3543,7 @@
 		fileReference = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		functionName = "particle::readsettings()";
 		hitCount = 2;
-		lineNumber = 68;
+		lineNumber = 72;
 		location = particle.ob;
 		modificationTime = 194116487.356168;
 		state = 1;
@@ -2253,7 +3553,7 @@
 		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
 		name = "particle.h: 78";
 		rLen = 0;
-		rLoc = 1728;
+		rLoc = 1776;
 		rType = 0;
 		vrLen = 841;
 		vrLoc = 1040;
