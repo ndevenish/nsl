@@ -688,15 +688,16 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 		}
 		
 		// Scale Pup according to the wall-interaction decay.. if it has been set
+		long double decayscale = 1.;
 		if (bouncedecay > 0)
 		{
 			cout << "Bounces: " << p->bounces << ", Scalefactor: " << exp(-(long double)p->bounces / (long double)bouncedecay) << endl;
-			Pup *= exp(-(long double)p->bounces / (long double)bouncedecay);
+			decayscale = exp(-(long double)p->bounces / (long double)bouncedecay);
 		}
 		
-		cumPup += Pup;
+		cumPup += Pup * decayscale;
 
-		cumPdown += (1. - Pup);
+		cumPdown += (1. - Pup) * decayscale;
 	}
 	
 	// Calculate the value
