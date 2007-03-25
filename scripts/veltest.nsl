@@ -1,8 +1,8 @@
 
 add edmexperiment "Velocity Test Experiment" {
-	set phase_steps 5 #phase average loops
-	#set bounces 1000 #number of bounces to run the simulation over
-	set lifetime 120	#The lifetime of a particle (seconds)
+	set phase_steps 30 #phase average loops
+	set bounces 10000 #number of bounces to run the simulation over
+	#set lifetime 60	#The lifetime of a particle (seconds)
 
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -14,11 +14,13 @@ add edmexperiment "Velocity Test Experiment" {
 #	set gravity on
 	
 	ignore add midpointsolver "midsolver" {
-		set steptime 3e-6 # (Seconds)
+		set steptime 3e-5 # (Seconds)
 	}
 
 	add rungekutta_solver "rksolver" {
-		set initial_steptime 1e-4
+		set initial_steptime 1e-6
+		set tolerance 0.001
+		set minimum_step 1e-7
 	}
 	
 	add container "bottle" {
@@ -35,7 +37,8 @@ add edmexperiment "Velocity Test Experiment" {
 
 		#vary velocity from 10 to 200 in 20 steps
 		#set velocity 3 # (Meters per second)
-		vary velocity from 1 to 500 in 40 steps
+		#vary velocity from 1 to 500 in 40 steps
+		set velocity 500
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
 		#set maxwelldistribution on
@@ -73,7 +76,7 @@ add edmexperiment "Velocity Test Experiment" {
 	}
 	
 	add edmreporter "edmreporter" {
-		set output_file "veltest-rk.txt"
+		set output_file "veltest.txt"
 		set volaverage_dbdz true
 	}
 }

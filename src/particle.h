@@ -113,7 +113,6 @@ public:
 	
 	// Update the vxe effect
 	void updateExv ( efield &Efield );
-	
 
 	// Allow this to be created from the object factory
 	class Factory : public nslobjectfactory {

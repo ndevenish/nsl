@@ -41,7 +41,67 @@ using std::endl;
 //using neutron_physics::spinvec_change;
 //using neutron_physics::Exveffect;
 
+struct particlestore {
+	vector3	position;
+	vector3 velocity_vec;
+	vector3 spinEplus;
+	vector3 spinEminus;
+	vector3 vxEeffect;
+	
+	long double velocity; // m s^-1
+	
+	// Particles velocity gamma
+	long double vgamma;
+	
+	// Number of bounces!
+	long bounces;
+	
+	long double E_sum_phase, E_minus_sum_phase;
+	long double flytime; // s
+	long double steptime;
+};
 
+particlestore storeparticle(const particle &p)
+{
+	particlestore ps;
+	
+	ps.position = p.position;
+	ps.velocity_vec = p.velocity_vec;
+	ps.spinEplus = p.spinEplus;
+	ps.spinEminus = p.spinEminus;
+	ps.vxEeffect = p.vxEeffect;
+	
+	ps.velocity = p.velocity;
+	
+	ps.vgamma = p.vgamma;
+	ps.bounces = p.bounces;
+	
+	ps.E_sum_phase = p.E_sum_phase;
+	ps.E_minus_sum_phase = p.E_minus_sum_phase;
+	ps.flytime = p.flytime;
+	ps.steptime = p.steptime;
+	
+	return ps;
+}
+
+void setparticle ( particle &p, const particlestore &ps)
+{
+	p.position = ps.position;
+	p.velocity_vec = ps.velocity_vec;
+	p.spinEplus = ps.spinEplus;
+	p.spinEminus = ps.spinEminus;
+	p.vxEeffect = ps.vxEeffect;
+	
+	p.velocity = ps.velocity;
+	
+	p.vgamma = ps.vgamma;
+	p.bounces = ps.bounces;
+	
+	p.E_sum_phase = ps.E_sum_phase;
+	p.E_minus_sum_phase = ps.E_minus_sum_phase;
+	p.flytime = ps.flytime;
+	p.steptime = ps.steptime;
+}
 
 std::ofstream phaselog("phaselog.txt");
 
@@ -259,8 +319,13 @@ bool rungekutta_solver::prepareobject( void )
 {
 	// Read in our steptime
 	require("initial_steptime");
+	require("tolerance");
+	require ("minimum_step");
 	
 	initial_steptime = getlongdouble("initial_steptime", 0.0);
+	minimum_step = getlongdouble("minimum_step", 0.00);
+	
+	tolerance = getlongdouble("tolerance", 0.0);
 	
 	elecfield = (efield*)findbytype("efield", 1);
 	if (!elecfield)
@@ -297,7 +362,7 @@ void rungekutta_solver::step( particle &part, const long double &time )
 	
 	if (!gravity)
 		part.updateExv(*elecfield);
-	
+	/*
 	long double steps = (long)floorl((long double)time / (long double)part.steptime);
 
 	for (int step = 0; step < steps; step++)
@@ -310,7 +375,101 @@ void rungekutta_solver::step( particle &part, const long double &time )
 	if (laststep < 0.0)
 		throw runtime_error("Stepping routine stepped over maximum time to impact");
 	// Now do the actual final step
-	rkstep(part, laststep);
+	rkstep(part, laststep);*/
+	
+	long double timeleft = time;
+	//long double spindot = tolerance + 1.;
+	
+	if (timeleft < part.steptime*2)
+	{
+//		logger << "STEPTIME OVER WHOLE STEP" << endl;
+		// Force it to evaluate, as long as timeleft isn't under/about the minimum stepsize
+		if (timeleft / 2.001 > minimum_step)
+			part.steptime = timeleft / 2.001;
+		//logger << "-------" << endl;
+	}
+
+	//Only do the double stepping procedure if the timeleft is more than twice the stepsize
+	while (timeleft > part.steptime*2)
+	{
+		// Backup the particle's properties
+		//particle partstore, norm_store;
+		//memcpy(&norm_store, &part, sizeof(particle));
+		//memcpy(&partstore,&part,sizeof(particle));
+		particlestore pstore, normstore, doublestore, halfstore;
+		
+		pstore = storeparticle(part);
+		
+		// Take a single step of the particles steptime
+		rkstep(part, part.steptime);
+		
+		// Only worry about spinEplus, reverse should be affected the same way
+		vector3 normstep_spin = part.spinEplus;
+		normstore = storeparticle(part);
+		
+		// Reset the particle
+		setparticle(part, pstore);
+		
+		// Now take a double step
+		part.steptime *= 2.;
+		rkstep(part, part.steptime);
+		doublestore = storeparticle(part);
+		
+		// Compare this spin with the normal steptime spin
+		long double spindot = 1. - (part.spinEplus * normstep_spin);
+		
+		//Check the tolerance...
+		if (spindot < tolerance)
+		{
+			// Within tolerance, we can double the stepsize!
+			
+			//since particle has already been stepped, we don't need to do anyhting else here
+			//logger << "Stepping up steptime: " << part.steptime << endl;
+		} else {
+			// NOT within tolerance, we cannot double, and may have to halve the stepsize
+			
+			//Reset the particle from storage...
+			setparticle(part,pstore);
+			
+			// Don't try stepping down if at minimum stepsize
+			if ((part.steptime / 2.) > minimum_step)
+			{
+				// Run the particle with half-stepsize
+				part.steptime /= 2.;
+				rkstep(part, part.steptime);
+				
+				// Now calculate if the tolerance is withing range here
+				spindot = 1. - (normstep_spin * part.spinEplus);
+				if (spindot < tolerance)
+				{
+					// The current steptime is within tolerances!
+					// copy back the particle settings
+					setparticle(part,normstore);
+				} else {
+					// We need to have a smaller steptime. Don't waste any more time here and 
+					// shrink it next time.
+					// The particle already has the small step applied!
+					//logger << "Stepping down steptime: " << part.steptime << endl;
+				}
+			} else {
+				logger << "x" << std::flush;
+			}
+			
+		} // spindot < tolerance
+		
+		// Reduce the time left, by whatever the particle stepsize is now
+		timeleft -= part.steptime;
+	} // while (timeleft > part.steptime*2)
+	
+	// By this point, there is timeleft < 2*steptime. Finish off the steps without bothering about altering stepsize
+	if (timeleft > part.steptime)
+	{
+		rkstep(part, part.steptime);
+		timeleft -= part.steptime;
+	}
+	
+	// Now do the final step!
+	rkstep(part, timeleft);
 }
 
 void rungekutta_solver::rkstep( particle &part, const long double &time )

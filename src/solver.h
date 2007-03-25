@@ -77,7 +77,8 @@ private:
 	class edmexperiment *exp;
 	
 	long double initial_steptime;
-	
+	long double tolerance;
+	long double minimum_step;
 public:
 		rungekutta_solver();
 	
