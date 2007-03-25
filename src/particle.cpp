@@ -77,10 +77,7 @@ void particle::initvals( void )
 }
 bool particle::prepareobject()
 {
-	// Find a container!
-	particlebox = (container*)findbytype("container");
-	if (!particlebox)
-		throw runtime_error("Unable to find a container for particle");
+	readsettings();
 	
 	return true;
 	
@@ -95,6 +92,8 @@ void particle::readsettings(void)
 	flytime = 0.;
 	frequencydiff = 0.;
 	E_sum_phase = E_minus_sum_phase = 0.;
+	bounces = 0;
+	vxEeffect *= 0;
 	
 	// Get and validate the velocities
 	read_velocitysettings();
@@ -104,6 +103,11 @@ void particle::readsettings(void)
 	
 	// Read the spin settings
 	read_spinsettings();
+	
+	// Find a container!
+	particlebox = (container*)findbytype("container");
+	if (!particlebox)
+		throw runtime_error("Unable to find a container for particle");
 	
 	// Find a magnetic field to link to
 	mag_field = (bfield*)findbytype("bfield");

@@ -578,6 +578,23 @@
 			0ABC8C9F0BB6F5A40044022E /* PBXTextBookmark */ = 0ABC8C9F0BB6F5A40044022E /* PBXTextBookmark */;
 			0ABC8CA00BB6F5A40044022E /* PBXTextBookmark */ = 0ABC8CA00BB6F5A40044022E /* PBXTextBookmark */;
 			0ABC8CA10BB6F5A40044022E /* PBXTextBookmark */ = 0ABC8CA10BB6F5A40044022E /* PBXTextBookmark */;
+			0ABC8CA20BB71B340044022E /* PBXTextBookmark */ = 0ABC8CA20BB71B340044022E /* PBXTextBookmark */;
+			0ABC8CA30BB71B340044022E /* PBXTextBookmark */ = 0ABC8CA30BB71B340044022E /* PBXTextBookmark */;
+			0ABC8CA40BB71CBA0044022E /* PBXTextBookmark */ = 0ABC8CA40BB71CBA0044022E /* PBXTextBookmark */;
+			0ABC8CA50BB71CBA0044022E /* PBXTextBookmark */ = 0ABC8CA50BB71CBA0044022E /* PBXTextBookmark */;
+			0ABC8CA60BB71CBA0044022E /* PBXTextBookmark */ = 0ABC8CA60BB71CBA0044022E /* PBXTextBookmark */;
+			0ABC8CA70BB71CBA0044022E /* PBXTextBookmark */ = 0ABC8CA70BB71CBA0044022E /* PBXTextBookmark */;
+			0ABC8CA80BB71CBA0044022E /* PBXTextBookmark */ = 0ABC8CA80BB71CBA0044022E /* PBXTextBookmark */;
+			0ABC8CAC0BB71CF10044022E /* PBXTextBookmark */ = 0ABC8CAC0BB71CF10044022E /* PBXTextBookmark */;
+			0ABC8CAD0BB71CF10044022E /* PBXTextBookmark */ = 0ABC8CAD0BB71CF10044022E /* PBXTextBookmark */;
+			0ABC8CB20BB71E7E0044022E /* PBXTextBookmark */ = 0ABC8CB20BB71E7E0044022E /* PBXTextBookmark */;
+			0ABC8CB30BB71E7E0044022E /* PBXTextBookmark */ = 0ABC8CB30BB71E7E0044022E /* PBXTextBookmark */;
+			0ABC8CB40BB71E7E0044022E /* PBXTextBookmark */ = 0ABC8CB40BB71E7E0044022E /* PBXTextBookmark */;
+			0ABC8CB50BB71E7E0044022E /* PBXTextBookmark */ = 0ABC8CB50BB71E7E0044022E /* PBXTextBookmark */;
+			0ABC8CB60BB71E7E0044022E /* PBXTextBookmark */ = 0ABC8CB60BB71E7E0044022E /* PBXTextBookmark */;
+			0ABC8CB70BB71E7E0044022E /* PBXTextBookmark */ = 0ABC8CB70BB71E7E0044022E /* PBXTextBookmark */;
+			0ABC8CB80BB71E7E0044022E /* PBXTextBookmark */ = 0ABC8CB80BB71E7E0044022E /* PBXTextBookmark */;
+			0ABC8CB90BB71E7E0044022E /* PBXTextBookmark */ = 0ABC8CB90BB71E7E0044022E /* PBXTextBookmark */;
 			0AD2AFA20B53B02900960C16 = 0AD2AFA20B53B02900960C16 /* PBXTextBookmark */;
 			0AD2AFA40B53B02900960C16 = 0AD2AFA40B53B02900960C16 /* PBXTextBookmark */;
 			0AD2AFA50B53B02900960C16 = 0AD2AFA50B53B02900960C16 /* PBXTextBookmark */;
@@ -814,9 +831,9 @@
 	};
 	0A3B6E9F0AC993DB002CC2AF /* particle.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1051, 4214}}";
-			sepNavSelRange = "{1128, 59}";
-			sepNavVisRect = "{{0, 826}, {1051, 239}}";
+			sepNavIntBoundsRect = "{{0, 0}, {854, 4270}}";
+			sepNavSelRange = "{929, 0}";
+			sepNavVisRect = "{{0, 937}, {854, 642}}";
 			sepNavWindowFrame = "{{28, 77}, {1013, 669}}";
 		};
 	};
@@ -904,7 +921,7 @@
 		name = nslneutron;
 		objects = (
 			0AFEF2360B779F6800611177 /* edmexperiment.cpp:260 */,
-			0AFEF25E0B789D5500611177 /* particle.cpp:72 */,
+			0AFEF25E0B789D5500611177 /* particle.cpp:69 */,
 			0AE8BC8E0B7B693700398D6A /* main.cpp:88 */,
 		);
 	};
@@ -1073,7 +1090,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 229";
 		rLen = 0;
-		rLoc = 6247;
+		rLoc = 6297;
 		rType = 0;
 		vrLen = 1855;
 		vrLoc = 4324;
@@ -1123,7 +1140,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "void particle::updateExv ( efield &elecfield )";
 		rLen = 47;
-		rLoc = 5820;
+		rLoc = 5870;
 		rType = 0;
 		vrLen = 1657;
 		vrLoc = 4244;
@@ -1233,7 +1250,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 229";
 		rLen = 0;
-		rLoc = 6247;
+		rLoc = 6297;
 		rType = 0;
 		vrLen = 1819;
 		vrLoc = 4360;
@@ -1333,7 +1350,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 229";
 		rLen = 0;
-		rLoc = 6247;
+		rLoc = 6297;
 		rType = 0;
 		vrLen = 1855;
 		vrLoc = 4324;
@@ -1839,9 +1856,9 @@
 	};
 	0A72C9D00AF380670079760D /* reporters.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {854, 10262}}";
-			sepNavSelRange = "{18100, 0}";
-			sepNavVisRect = "{{0, 8674}, {854, 642}}";
+			sepNavIntBoundsRect = "{{0, 0}, {968, 10262}}";
+			sepNavSelRange = "{18234, 16}";
+			sepNavVisRect = "{{0, 9383}, {968, 596}}";
 			sepNavWindowFrame = "{{396, 100}, {1013, 671}}";
 		};
 	};
@@ -2179,9 +2196,9 @@
 	};
 	0A863DB00B62ABB400FF32EA /* solver.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {932, 8302}}";
-			sepNavSelRange = "{16005, 0}";
-			sepNavVisRect = "{{0, 7419}, {854, 642}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1051, 8302}}";
+			sepNavSelRange = "{17338, 0}";
+			sepNavVisRect = "{{0, 6328}, {1051, 239}}";
 			sepNavWindowFrame = "{{15, 209}, {1013, 669}}";
 		};
 	};
@@ -2571,7 +2588,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 68";
 		rLen = 0;
-		rLoc = 1186;
+		rLoc = 1044;
 		rType = 0;
 		vrLen = 832;
 		vrLoc = 508;
@@ -2621,7 +2638,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 194";
 		rLen = 0;
-		rLoc = 4884;
+		rLoc = 4934;
 		rType = 0;
 		vrLen = 685;
 		vrLoc = 393;
@@ -2661,7 +2678,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 68";
 		rLen = 0;
-		rLoc = 1186;
+		rLoc = 1044;
 		rType = 0;
 		vrLen = 832;
 		vrLoc = 508;
@@ -3234,7 +3251,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 281";
 		rLen = 0;
-		rLoc = 7215;
+		rLoc = 7265;
 		rType = 0;
 		vrLen = 1208;
 		vrLoc = 6650;
@@ -3314,7 +3331,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 239";
 		rLen = 0;
-		rLoc = 7877;
+		rLoc = 7927;
 		rType = 0;
 		vrLen = 1557;
 		vrLoc = 4789;
@@ -3334,7 +3351,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 240";
 		rLen = 0;
-		rLoc = 7889;
+		rLoc = 7939;
 		rType = 0;
 		vrLen = 1557;
 		vrLoc = 4789;
@@ -3354,7 +3371,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 281";
 		rLen = 0;
-		rLoc = 7215;
+		rLoc = 7265;
 		rType = 0;
 		vrLen = 1208;
 		vrLoc = 6650;
@@ -3384,7 +3401,7 @@
 		comments = "error: 'struct std::basic_ostream<char, std::char_traits<char> >' has no member named 'setscientific'";
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		rLen = 1;
-		rLoc = 281;
+		rLoc = 285;
 		rType = 1;
 	};
 	0ABC8AC90BB586460044022E /* PBXTextBookmark */ = {
@@ -3402,7 +3419,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 293";
 		rLen = 0;
-		rLoc = 7675;
+		rLoc = 7725;
 		rType = 0;
 		vrLen = 674;
 		vrLoc = 7103;
@@ -3482,7 +3499,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 293";
 		rLen = 0;
-		rLoc = 7675;
+		rLoc = 7725;
 		rType = 0;
 		vrLen = 674;
 		vrLoc = 7103;
@@ -3500,7 +3517,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 293";
 		rLen = 0;
-		rLoc = 7675;
+		rLoc = 7725;
 		rType = 0;
 		vrLen = 674;
 		vrLoc = 7103;
@@ -4031,7 +4048,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: readsettings";
 		rLen = 0;
-		rLoc = 1125;
+		rLoc = 983;
 		rType = 0;
 		vrLen = 1242;
 		vrLoc = 1466;
@@ -4101,7 +4118,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: readsettings";
 		rLen = 0;
-		rLoc = 1125;
+		rLoc = 983;
 		rType = 0;
 		vrLen = 1242;
 		vrLoc = 1466;
@@ -4141,7 +4158,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: readsettings";
 		rLen = 0;
-		rLoc = 1125;
+		rLoc = 983;
 		rType = 0;
 		vrLen = 1162;
 		vrLoc = 1466;
@@ -4161,7 +4178,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 71";
 		rLen = 0;
-		rLoc = 1237;
+		rLoc = 1095;
 		rType = 0;
 		vrLen = 1037;
 		vrLoc = 654;
@@ -4181,7 +4198,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 89";
 		rLen = 0;
-		rLoc = 1633;
+		rLoc = 1683;
 		rType = 0;
 		vrLen = 1131;
 		vrLoc = 935;
@@ -4201,7 +4218,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "particle.cpp: 89";
 		rLen = 0;
-		rLoc = 1633;
+		rLoc = 1683;
 		rType = 0;
 		vrLen = 1131;
 		vrLoc = 935;
@@ -4361,7 +4378,7 @@
 		comments = "warning: #warning \"Added initvals line... this may break something\"";
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		rLen = 1;
-		rLoc = 67;
+		rLoc = 64;
 		rType = 1;
 	};
 	0ABC8BD50BB690320044022E /* PBXTextBookmark */ = {
@@ -4379,7 +4396,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "#warning \"Added initvals line... this may break something\"";
 		rLen = 59;
-		rLoc = 1128;
+		rLoc = 986;
 		rType = 0;
 		vrLen = 393;
 		vrLoc = 987;
@@ -4399,7 +4416,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "#warning \"Added initvals line... this may break something\"";
 		rLen = 59;
-		rLoc = 1128;
+		rLoc = 986;
 		rType = 0;
 		vrLen = 393;
 		vrLoc = 987;
@@ -4417,7 +4434,7 @@
 		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		name = "#warning \"Added initvals line... this may break something\"";
 		rLen = 59;
-		rLoc = 1128;
+		rLoc = 986;
 		rType = 0;
 		vrLen = 393;
 		vrLoc = 987;
@@ -5112,6 +5129,174 @@
 		vrLen = 1277;
 		vrLoc = 3;
 	};
+	0ABC8CA20BB71B340044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 593";
+		rLen = 0;
+		rLoc = 17338;
+		rType = 0;
+		vrLen = 1671;
+		vrLoc = 15667;
+	};
+	0ABC8CA30BB71B340044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */;
+		name = "static void spinvec_change( const long double &time, const long double &gyromag, const vector3 &spinvector, const vector3& mag_field, vector3 &dS)";
+		rLen = 148;
+		rLoc = 1054;
+		rType = 0;
+		vrLen = 1277;
+		vrLoc = 3;
+	};
+	0ABC8CA40BB71CBA0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 593";
+		rLen = 0;
+		rLoc = 17338;
+		rType = 0;
+		vrLen = 1671;
+		vrLoc = 15667;
+	};
+	0ABC8CA50BB71CBA0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: decayscale";
+		rLen = 0;
+		rLoc = 18100;
+		rType = 0;
+		vrLen = 1580;
+		vrLoc = 15766;
+	};
+	0ABC8CA60BB71CBA0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 593";
+		rLen = 0;
+		rLoc = 17338;
+		rType = 0;
+		vrLen = 1671;
+		vrLoc = 15667;
+	};
+	0ABC8CA70BB71CBA0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 624";
+		rLen = 0;
+		rLoc = 15877;
+		rType = 0;
+		vrLen = 1200;
+		vrLoc = 14417;
+	};
+	0ABC8CA80BB71CBA0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */;
+		name = "static void spinvec_change( const long double &time, const long double &gyromag, const vector3 &spinvector, const vector3& mag_field, vector3 &dS)";
+		rLen = 148;
+		rLoc = 1054;
+		rType = 0;
+		vrLen = 1277;
+		vrLoc = 3;
+	};
+	0ABC8CAC0BB71CF10044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: a function-definition is not allowed here before '{' token";
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		rLen = 1;
+		rLoc = 460;
+		rType = 1;
+	};
+	0ABC8CAD0BB71CF10044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 593";
+		rLen = 0;
+		rLoc = 17338;
+		rType = 0;
+		vrLen = 459;
+		vrLoc = 12563;
+	};
+	0ABC8CB20BB71E7E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 695";
+		rLen = 0;
+		rLoc = 18397;
+		rType = 0;
+		vrLen = 1716;
+		vrLoc = 16697;
+	};
+	0ABC8CB30BB71E7E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 89";
+		rLen = 0;
+		rLoc = 1683;
+		rType = 0;
+		vrLen = 1107;
+		vrLoc = 935;
+	};
+	0ABC8CB40BB71E7E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 695";
+		rLen = 0;
+		rLoc = 18397;
+		rType = 0;
+		vrLen = 1716;
+		vrLoc = 16697;
+	};
+	0ABC8CB50BB71E7E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
+		name = "particle.cpp: 58";
+		rLen = 0;
+		rLoc = 929;
+		rType = 0;
+		vrLen = 1178;
+		vrLoc = 1062;
+	};
+	0ABC8CB60BB71E7E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */;
+		name = "static void spinvec_change( const long double &time, const long double &gyromag, const vector3 &spinvector, const vector3& mag_field, vector3 &dS)";
+		rLen = 148;
+		rLoc = 1054;
+		rType = 0;
+		vrLen = 1277;
+		vrLoc = 3;
+	};
+	0ABC8CB70BB71E7E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "Average Bounces:";
+		rLen = 16;
+		rLoc = 18234;
+		rType = 0;
+		vrLen = 1585;
+		vrLoc = 17437;
+	};
+	0ABC8CB80BB71E7E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CEF0B61AE4F00FF32EA /* neutronphysics.h */;
+		name = "static void spinvec_change( const long double &time, const long double &gyromag, const vector3 &spinvector, const vector3& mag_field, vector3 &dS)";
+		rLen = 148;
+		rLoc = 1054;
+		rType = 0;
+		vrLen = 1277;
+		vrLoc = 3;
+	};
+	0ABC8CB90BB71E7E0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "Average Bounces:";
+		rLen = 16;
+		rLoc = 18234;
+		rType = 0;
+		vrLen = 1585;
+		vrLoc = 17437;
+	};
 	0AD2AFA20B53B02900960C16 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 0A3B6E9A0AC993DB002CC2AF /* errors.cpp */;
@@ -5236,7 +5421,7 @@
 		vrLen = 829;
 		vrLoc = 17226;
 	};
-	0AFEF25E0B789D5500611177 /* particle.cpp:72 */ = {
+	0AFEF25E0B789D5500611177 /* particle.cpp:69 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -5246,7 +5431,7 @@
 		fileReference = 0A3B6E9F0AC993DB002CC2AF /* particle.cpp */;
 		functionName = "particle::readsettings()";
 		hitCount = 2;
-		lineNumber = 72;
+		lineNumber = 69;
 		location = particle.ob;
 		modificationTime = 194116487.356168;
 		state = 1;
