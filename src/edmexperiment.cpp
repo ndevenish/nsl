@@ -84,7 +84,7 @@ edmexperiment::edmexperiment()
 	gravity = false;
 	
 	phase_steps = 0;
-	steptime = 0.0;
+//	steptime = 0.0;
 	bounces = 0;
 	lifetime = 0.0;
 	collision_offset = 0.;	
@@ -211,7 +211,7 @@ bool edmexperiment::prepareobject()
 
 void edmexperiment::readsettings ( void )
 {
-	steptime = getlongdouble("steptime", 3e-4);
+//	steptime = getlongdouble("steptime", 3e-4);
 	
 	phase_steps = getint("phase_steps", 1);
 	bounces = getlong("bounces", 1);

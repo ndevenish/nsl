@@ -190,31 +190,29 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
-				<string>0ABC8C840BB6F1CA0044022E</string>
+				<string>0ABC8CC30BB720E20044022E</string>
 				<key>PBXProjectModuleLabel</key>
-				<string>reporters.cpp</string>
+				<string>solver.cpp</string>
 				<key>PBXSplitModuleInNavigatorKey</key>
 				<dict>
 					<key>Split0</key>
 					<dict>
 						<key>PBXProjectModuleGUID</key>
-						<string>0ABC8C910BB6F27A0044022E</string>
+						<string>0ABC8CDF0BB721240044022E</string>
 						<key>PBXProjectModuleLabel</key>
-						<string>reporters.cpp</string>
+						<string>solver.cpp</string>
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>0ABC8CB90BB71E7E0044022E</string>
+						<string>0ABC8CE20BB721240044022E</string>
 						<key>history</key>
 						<array>
-							<string>0ABC8C9E0BB6F5A40044022E</string>
-							<string>0ABC8CB60BB71E7E0044022E</string>
-							<string>0ABC8CB70BB71E7E0044022E</string>
+							<string>0ABC8CE00BB721240044022E</string>
+							<string>0ABC8CD10BB7211F0044022E</string>
 						</array>
 						<key>prevStack</key>
 						<array>
-							<string>0ABC8CA00BB6F5A40044022E</string>
-							<string>0ABC8CB80BB71E7E0044022E</string>
+							<string>0ABC8CE10BB721240044022E</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -313,7 +311,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>34</integer>
+									<integer>27</integer>
 									<integer>5</integer>
 									<integer>0</integer>
 								</array>
@@ -356,7 +354,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>particle.cpp</string>
+								<string>edmexperiment.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -364,11 +362,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>particle.cpp</string>
+										<string>edmexperiment.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0ABC8CB50BB71E7E0044022E</string>
+										<string>0ABC8CDE0BB721240044022E</string>
 										<key>history</key>
 										<array>
 											<string>0A348BAD0B07BBCF00F8771E</string>
@@ -386,7 +384,6 @@
 											<string>0A6BB3F60B6E690400E89F6B</string>
 											<string>0A6BB4A70B6E72BF00E89F6B</string>
 											<string>0A6BB6100B72209800E89F6B</string>
-											<string>0AFEF2CB0B78C58600611177</string>
 											<string>0AE8BCAB0B82793000398D6A</string>
 											<string>0A8AA66A0B84988B007C852C</string>
 											<string>0A3CECAB0B91E4BA007053E6</string>
@@ -402,14 +399,15 @@
 											<string>0ABC8B2A0BB59D980044022E</string>
 											<string>0ABC8B830BB5E0D40044022E</string>
 											<string>0ABC8B840BB5E0D40044022E</string>
-											<string>0ABC8BBC0BB5EEAA0044022E</string>
 											<string>0ABC8BE60BB6D6010044022E</string>
-											<string>0ABC8C0F0BB6D9F30044022E</string>
-											<string>0ABC8C580BB6E6810044022E</string>
 											<string>0ABC8C8A0BB6F27A0044022E</string>
-											<string>0ABC8CA40BB71CBA0044022E</string>
 											<string>0ABC8CB20BB71E7E0044022E</string>
-											<string>0ABC8CB30BB71E7E0044022E</string>
+											<string>0ABC8CD30BB721240044022E</string>
+											<string>0ABC8CD40BB721240044022E</string>
+											<string>0ABC8CD50BB721240044022E</string>
+											<string>0ABC8CD60BB721240044022E</string>
+											<string>0ABC8CD70BB721240044022E</string>
+											<string>0ABC8CC40BB720EC0044022E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -528,6 +526,12 @@
 											<string>0ABC8C9C0BB6F5A40044022E</string>
 											<string>0ABC8CA60BB71CBA0044022E</string>
 											<string>0ABC8CB40BB71E7E0044022E</string>
+											<string>0ABC8CD80BB721240044022E</string>
+											<string>0ABC8CD90BB721240044022E</string>
+											<string>0ABC8CDA0BB721240044022E</string>
+											<string>0ABC8CDB0BB721240044022E</string>
+											<string>0ABC8CDC0BB721240044022E</string>
+											<string>0ABC8CDD0BB721240044022E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -700,7 +704,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>0ABC8C840BB6F1CA0044022E</string>
+	<string>0ABC8CC30BB720E20044022E</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -723,6 +727,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>0ABC89E10BB477010044022E</string>
 		<string>0ABC89E20BB477010044022E</string>
 		<string>1CD10A99069EF8BA00B06720</string>
@@ -730,9 +735,8 @@
 		<string>0A3B6EC30AC9944B002CC2AF</string>
 		<string>0A3B6EDB0AC9957E002CC2AF</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>0ABC8C840BB6F1CA0044022E</string>
 		<string>/Users/xgkkp/Documents/neutron/nslneutron/nslneutron.xcodeproj</string>
+		<string>0ABC8CC30BB720E20044022E</string>
 	</array>
 	<key>WindowString</key>
 	<string>78 158 1146 720 0 0 1440 878 </string>
@@ -968,7 +972,7 @@
 										<key>Frame</key>
 										<string>{{0, 0}, {888, 0}}</string>
 										<key>RubberWindowFrame</key>
-										<string>544 432 888 411 0 0 1440 878 </string>
+										<string>550 344 888 411 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -994,7 +998,7 @@
 								<key>Frame</key>
 								<string>{{0, 5}, {888, 365}}</string>
 								<key>RubberWindowFrame</key>
-								<string>544 432 888 411 0 0 1440 878 </string>
+								<string>550 344 888 411 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXProjectFindModule</string>
@@ -1023,11 +1027,11 @@
 				<string>1CD0528E0623707200166675</string>
 			</array>
 			<key>WindowString</key>
-			<string>544 432 888 411 0 0 1440 878 </string>
+			<string>550 344 888 411 0 0 1440 878 </string>
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

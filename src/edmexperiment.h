@@ -66,7 +66,8 @@ class edmexperiment : public nslobject {
 	class solver* thesolver; ///< Solver object link
 	
 	/// the steptime to be used by the basic inbuilt midpoint solver
-	long double steptime;
+	//long double steptime;
+	
 	/// How many phase averaging steps to take
 	int phase_steps;
 	/// How many bounces to take
