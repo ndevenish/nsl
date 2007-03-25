@@ -576,6 +576,7 @@ void rungekutta_solver::rkstep( particle &part, const long double &time )
 	
 	vector3 oldp, oldm;
 	oldp = part.spinEplus;
+	oldm = part.spinEminus;
 	
 	// Add these to the spin vectors
 	part.spinEplus	+= df_p;
@@ -589,8 +590,17 @@ void rungekutta_solver::rkstep( particle &part, const long double &time )
 	long double cosphase = (oldp.x*part.spinEplus.x + oldp.y*part.spinEplus.y) / (oldp.modxy()*part.spinEplus.modxy());
 	if (cosphase > 1.)
 		logger << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << endl;
-	
 	long double phase_change = acos(cosphase);
+	part.E_sum_phase += phase_change;
+	
+	// And now the other
+	cosphase = (oldm.x*part.spinEminus.x + oldm.y*part.spinEminus.y) / (oldm.modxy()*part.spinEminus.modxy());
+	if (cosphase > 1.)
+		logger << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << endl;
+	phase_change = acos(cosphase);
+	part.E_minus_sum_phase += phase_change;
+	
+	
 	//logger << "Phase Change: " << phase_change << endl;
 	
 	part.flytime += time;

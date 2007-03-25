@@ -185,7 +185,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>0ABC8C840BB6F1CA0044022E</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>neutronphysics.cpp</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>0ABC8C910BB6F27A0044022E</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>neutronphysics.cpp</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>0ABC8C920BB6F27A0044022E</string>
+						<key>history</key>
+						<array>
+							<string>0ABC8C830BB6F1CA0044022E</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {1013, 628}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>-1013 88 1013 669 -1024 0 1024 768 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -265,7 +306,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>39</integer>
+									<integer>31</integer>
 									<integer>5</integer>
 									<integer>0</integer>
 								</array>
@@ -290,7 +331,7 @@
 							<real>223</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>106 152 1146 720 0 0 1440 878 </string>
+						<string>-25 145 1146 720 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -320,7 +361,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0ABC8C820BB6ECD70044022E</string>
+										<string>0ABC8C900BB6F27A0044022E</string>
 										<key>history</key>
 										<array>
 											<string>0A348BAD0B07BBCF00F8771E</string>
@@ -350,18 +391,18 @@
 											<string>0ABC89930BB470010044022E</string>
 											<string>0ABC8AB30BB585370044022E</string>
 											<string>0ABC8AB40BB585370044022E</string>
-											<string>0ABC8B110BB59B0D0044022E</string>
 											<string>0ABC8B130BB59B0D0044022E</string>
 											<string>0ABC8B2A0BB59D980044022E</string>
 											<string>0ABC8B830BB5E0D40044022E</string>
 											<string>0ABC8B840BB5E0D40044022E</string>
 											<string>0ABC8BBB0BB5EEAA0044022E</string>
 											<string>0ABC8BBC0BB5EEAA0044022E</string>
-											<string>0ABC8BE50BB6D6010044022E</string>
 											<string>0ABC8BE60BB6D6010044022E</string>
 											<string>0ABC8C0F0BB6D9F30044022E</string>
 											<string>0ABC8C580BB6E6810044022E</string>
-											<string>0ABC8C590BB6E6810044022E</string>
+											<string>0ABC8C890BB6F27A0044022E</string>
+											<string>0ABC8C8A0BB6F27A0044022E</string>
+											<string>0ABC8C8B0BB6F27A0044022E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -472,6 +513,10 @@
 											<string>0ABC8C190BB6D9F30044022E</string>
 											<string>0ABC8C5A0BB6E6810044022E</string>
 											<string>0ABC8C5B0BB6E6810044022E</string>
+											<string>0ABC8C8C0BB6F27A0044022E</string>
+											<string>0ABC8C8D0BB6F27A0044022E</string>
+											<string>0ABC8C8E0BB6F27A0044022E</string>
+											<string>0ABC8C8F0BB6F27A0044022E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -485,7 +530,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {901, 674}}</string>
 								<key>RubberWindowFrame</key>
-								<string>106 152 1146 720 0 0 1440 878 </string>
+								<string>-25 145 1146 720 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -505,7 +550,7 @@
 								<key>Frame</key>
 								<string>{{0, 679}, {901, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>106 152 1146 720 0 0 1440 878 </string>
+								<string>-25 145 1146 720 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -644,7 +689,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>0ABC8B1D0BB59CF60044022E</string>
+	<string>0ABC8C840BB6F1CA0044022E</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -675,10 +720,11 @@
 		<string>0A3B6EDB0AC9957E002CC2AF</string>
 		<string>0A3B6EC30AC9944B002CC2AF</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
+		<string>0ABC8C840BB6F1CA0044022E</string>
 		<string>/Users/xgkkp/Documents/neutron/nslneutron/nslneutron.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>106 152 1146 720 0 0 1440 878 </string>
+	<string>-25 145 1146 720 0 0 1440 878 </string>
 	<key>WindowTools</key>
 	<array>
 		<dict>

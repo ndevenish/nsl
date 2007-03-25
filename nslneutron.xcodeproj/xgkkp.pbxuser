@@ -559,6 +559,16 @@
 			0ABC8C610BB6E91A0044022E /* PBXTextBookmark */ = 0ABC8C610BB6E91A0044022E /* PBXTextBookmark */;
 			0ABC8C730BB6EB4A0044022E /* PBXTextBookmark */ = 0ABC8C730BB6EB4A0044022E /* PBXTextBookmark */;
 			0ABC8C820BB6ECD70044022E /* PBXTextBookmark */ = 0ABC8C820BB6ECD70044022E /* PBXTextBookmark */;
+			0ABC8C830BB6F1CA0044022E /* PBXBookmark */ = 0ABC8C830BB6F1CA0044022E /* PBXBookmark */;
+			0ABC8C890BB6F27A0044022E /* PBXTextBookmark */ = 0ABC8C890BB6F27A0044022E /* PBXTextBookmark */;
+			0ABC8C8A0BB6F27A0044022E /* PBXTextBookmark */ = 0ABC8C8A0BB6F27A0044022E /* PBXTextBookmark */;
+			0ABC8C8B0BB6F27A0044022E /* PBXTextBookmark */ = 0ABC8C8B0BB6F27A0044022E /* PBXTextBookmark */;
+			0ABC8C8C0BB6F27A0044022E /* PBXTextBookmark */ = 0ABC8C8C0BB6F27A0044022E /* PBXTextBookmark */;
+			0ABC8C8D0BB6F27A0044022E /* PBXTextBookmark */ = 0ABC8C8D0BB6F27A0044022E /* PBXTextBookmark */;
+			0ABC8C8E0BB6F27A0044022E /* PBXTextBookmark */ = 0ABC8C8E0BB6F27A0044022E /* PBXTextBookmark */;
+			0ABC8C8F0BB6F27A0044022E /* PBXTextBookmark */ = 0ABC8C8F0BB6F27A0044022E /* PBXTextBookmark */;
+			0ABC8C900BB6F27A0044022E /* PBXTextBookmark */ = 0ABC8C900BB6F27A0044022E /* PBXTextBookmark */;
+			0ABC8C920BB6F27A0044022E /* PBXTextBookmark */ = 0ABC8C920BB6F27A0044022E /* PBXTextBookmark */;
 			0AD2AFA20B53B02900960C16 = 0AD2AFA20B53B02900960C16 /* PBXTextBookmark */;
 			0AD2AFA40B53B02900960C16 = 0AD2AFA40B53B02900960C16 /* PBXTextBookmark */;
 			0AD2AFA50B53B02900960C16 = 0AD2AFA50B53B02900960C16 /* PBXTextBookmark */;
@@ -1564,7 +1574,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 372";
 		rLen = 0;
-		rLoc = 16970;
+		rLoc = 17327;
 		rType = 0;
 		vrLen = 2219;
 		vrLoc = 8476;
@@ -1821,8 +1831,8 @@
 	0A72C9D00AF380670079760D /* reporters.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {854, 10262}}";
-			sepNavSelRange = "{18262, 0}";
-			sepNavVisRect = "{{0, 9360}, {854, 642}}";
+			sepNavSelRange = "{18472, 0}";
+			sepNavVisRect = "{{0, 1372}, {854, 642}}";
 			sepNavWindowFrame = "{{396, 100}, {1013, 671}}";
 		};
 	};
@@ -2105,9 +2115,9 @@
 	};
 	0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {908, 1400}}";
-			sepNavSelRange = "{1521, 0}";
-			sepNavVisRect = "{{0, 288}, {854, 642}}";
+			sepNavIntBoundsRect = "{{0, 0}, {968, 1400}}";
+			sepNavSelRange = "{1152, 0}";
+			sepNavVisRect = "{{0, 206}, {968, 596}}";
 			sepNavWindowFrame = "{{15, 204}, {1013, 669}}";
 		};
 	};
@@ -2160,9 +2170,9 @@
 	};
 	0A863DB00B62ABB400FF32EA /* solver.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {932, 8176}}";
-			sepNavSelRange = "{12229, 0}";
-			sepNavVisRect = "{{0, 5843}, {854, 642}}";
+			sepNavIntBoundsRect = "{{0, 0}, {932, 8316}}";
+			sepNavSelRange = "{17251, 0}";
+			sepNavVisRect = "{{0, 7632}, {854, 642}}";
 			sepNavWindowFrame = "{{15, 209}, {1013, 669}}";
 		};
 	};
@@ -4686,7 +4696,7 @@
 		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
 		name = "solver.cpp: 552";
 		rLen = 0;
-		rLoc = 16723;
+		rLoc = 16748;
 		rType = 0;
 		vrLen = 552;
 		vrLoc = 15692;
@@ -4911,6 +4921,100 @@
 		rType = 0;
 		vrLen = 1374;
 		vrLoc = 11416;
+	};
+	0ABC8C830BB6F1CA0044022E /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+	};
+	0ABC8C890BB6F27A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 702";
+		rLen = 0;
+		rLoc = 18472;
+		rType = 0;
+		vrLen = 1335;
+		vrLoc = 2066;
+	};
+	0ABC8C8A0BB6F27A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 39";
+		rLen = 0;
+		rLoc = 1152;
+		rType = 0;
+		vrLen = 1812;
+		vrLoc = 894;
+	};
+	0ABC8C8B0BB6F27A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 564";
+		rLen = 0;
+		rLoc = 16420;
+		rType = 0;
+		vrLen = 1559;
+		vrLoc = 15416;
+	};
+	0ABC8C8C0BB6F27A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 375";
+		rLen = 0;
+		rLoc = 10080;
+		rType = 0;
+		vrLen = 1338;
+		vrLoc = 9108;
+	};
+	0ABC8C8D0BB6F27A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 702";
+		rLen = 0;
+		rLoc = 18472;
+		rType = 0;
+		vrLen = 1335;
+		vrLoc = 2066;
+	};
+	0ABC8C8E0BB6F27A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 564";
+		rLen = 0;
+		rLoc = 16420;
+		rType = 0;
+		vrLen = 1520;
+		vrLoc = 15455;
+	};
+	0ABC8C8F0BB6F27A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 39";
+		rLen = 0;
+		rLoc = 1152;
+		rType = 0;
+		vrLen = 1812;
+		vrLoc = 894;
+	};
+	0ABC8C900BB6F27A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863DB00B62ABB400FF32EA /* solver.cpp */;
+		name = "solver.cpp: 590";
+		rLen = 0;
+		rLoc = 17251;
+		rType = 0;
+		vrLen = 1585;
+		vrLoc = 15722;
+	};
+	0ABC8C920BB6F27A0044022E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 39";
+		rLen = 0;
+		rLoc = 1152;
+		rType = 0;
+		vrLen = 1671;
+		vrLoc = 251;
 	};
 	0AD2AFA20B53B02900960C16 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
