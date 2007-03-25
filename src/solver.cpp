@@ -532,7 +532,11 @@ void rungekutta_solver::rkstep( particle &part, const long double &time )
 		start_exv = mid_exv = end_exv = part.vxEeffect;
 	}
 	//static void spinvec_change( const long double &time, const long double &gyromag, const vector3 &spinvector, const vector3& mag_field, vector3 &dS)
-
+	
+	vector3 oldp, oldm;
+	oldp = part.spinEplus;
+	oldm = part.spinEminus;
+	
 	vector3 d1_p, d2_p, d3_p, d4_p;
 	vector3 d1_m, d2_m, d3_m, d4_m;
 	vector3 half_d_p, half_d_m;
@@ -559,8 +563,8 @@ void rungekutta_solver::rkstep( particle &part, const long double &time )
 	neutron_physics::spinvec_change(time, gyromag, half_d_p, midfield + mid_exv, d3_p);
 	neutron_physics::spinvec_change(time, gyromag, half_d_m, midfield - mid_exv, d3_m);
 	// Full distance changes.. but reusing halfway variables
-	half_d_p = part.spinEplus + d2_p;
-	half_d_m = part.spinEminus + d2_m;
+	half_d_p = part.spinEplus + d3_p;
+	half_d_m = part.spinEminus + d3_m;
 	half_d_p.scaleto(1.0);
 	half_d_m.scaleto(1.0);
 	
@@ -572,11 +576,6 @@ void rungekutta_solver::rkstep( particle &part, const long double &time )
 	vector3 df_p, df_m;
 	df_p = (d1_p + 2*d2_p + 2*d3_p + d4_p) / 6;
 	df_m = (d1_m + 2*d2_m + 2*d3_m + d4_m) / 6;
-
-	
-	vector3 oldp, oldm;
-	oldp = part.spinEplus;
-	oldm = part.spinEminus;
 	
 	// Add these to the spin vectors
 	part.spinEplus	+= df_p;
