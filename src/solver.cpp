@@ -177,9 +177,9 @@ void midpointsolver::step( particle &part, const long double &time )
 
 	////////////////////////////////////
 	/// TEMPORARY DEBUG - match the other programs stepping algorithm
-	steps = (int)(time/steptime) + 1;
-	part.steptime = time / steps;
-#warning "Temporary debug code"
+	//steps = (int)(time/steptime) + 1;
+	//part.steptime = time / steps;
+//#warning "Temporary debug code"
 	
 	// Calculate the number of steps we are going to take
 	steps = (long)floorl((long double)time / (long double)part.steptime);

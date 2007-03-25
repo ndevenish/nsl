@@ -87,7 +87,7 @@ bool particle::prepareobject()
 }
 void particle::readsettings(void)
 {
-#warning "Added initvals line... this may break something"
+//#warning "Added initvals line... this may break something"
 	//initvals();
 	
 	// Reset all the per-phase run variables here

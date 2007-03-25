@@ -613,7 +613,7 @@ bool alphareporter::prepareobject( void )
 	reporter::prepareobject();
 	
 	bouncedecay = getint("bounce_decay",0);
-	
+	cout << "Bounce decay: " << bouncedecay <<endl;
 	return true;
 }
 
@@ -659,7 +659,7 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 	{
 		averagefreq_plusE += p->E_sum_phase;
 	}
-	
+
 	dataset bounces;
 	
 	// Run through every particle accumulating probabilities by calculating the projection of the frequency onto
@@ -693,7 +693,7 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 		long double decayscale = 1.;
 		if (bouncedecay > 0)
 		{
-			cout << "Bounces: " << p->bounces << ", Scalefactor: " << exp(-(long double)p->bounces / (long double)bouncedecay) << endl;
+//			cout << "Bounces: " << p->bounces << ", Scalefactor: " << exp(-(long double)p->bounces / (long double)bouncedecay) << endl;
 			decayscale = exp(-(long double)p->bounces / (long double)bouncedecay);
 		}
 		bounces += p->bounces;
