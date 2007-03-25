@@ -660,6 +660,8 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 		averagefreq_plusE += p->E_sum_phase;
 	}
 	
+	dataset bounces;
+	
 	// Run through every particle accumulating probabilities by calculating the projection of the frequency onto
 	// this average
 	BOOST_FOREACH(particle *p, particles)
@@ -694,12 +696,14 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 			cout << "Bounces: " << p->bounces << ", Scalefactor: " << exp(-(long double)p->bounces / (long double)bouncedecay) << endl;
 			decayscale = exp(-(long double)p->bounces / (long double)bouncedecay);
 		}
+		bounces += p->bounces;
 		
 		cumPup += Pup * decayscale;
 
 		cumPdown += (1. - Pup) * decayscale;
 	}
 	
+	cout << "Average Bounces: " << bounces.average() << " ± " << bounces.stdev() << endl;
 	// Calculate the value
 	variable alpha = (cumPup - cumPdown) / (cumPup + cumPdown);
 	
