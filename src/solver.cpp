@@ -388,6 +388,16 @@ void rungekutta_solver::step( particle &part, const long double &time )
 	rkstep(part, laststep);*/
 	
 	long double timeleft = time;
+
+	while ( timeleft - part.steptime > 0 )
+	{
+		rkstep(part, part.steptime);
+		timeleft -= part.steptime;
+	}
+	if (timeleft > 1e-9)
+		rkstep(part, timeleft);
+
+/*
 	//long double spindot = tolerance + 1.;
 	
 	if (timeleft < part.steptime*2)
@@ -432,7 +442,7 @@ void rungekutta_solver::step( particle &part, const long double &time )
 		if (spindot < tolerance)
 		{
 			// Within tolerance, we can double the stepsize!
-			
+			;//logger << "+" << std::flush;	
 			//since particle has already been stepped, we don't need to do anyhting else here
 			//logger << "Stepping up steptime: " << part.steptime << endl;
 		} else {
@@ -460,9 +470,10 @@ void rungekutta_solver::step( particle &part, const long double &time )
 					// shrink it next time.
 					// The particle already has the small step applied!
 					//logger << "Stepping down steptime: " << part.steptime << endl;
+				;//	logger << "-" << std::flush;
 				}
 			} else {
-				logger << "x" << std::flush;
+				//logger << "x" << std::flush;
 			}
 			
 		} // spindot < tolerance
@@ -480,6 +491,7 @@ void rungekutta_solver::step( particle &part, const long double &time )
 	
 	// Now do the final step!
 	rkstep(part, timeleft);
+*/
 }
 
 void rungekutta_solver::rkstep( particle &part, const long double &time )
@@ -596,16 +608,19 @@ void rungekutta_solver::rkstep( particle &part, const long double &time )
 	part.spinEminus.scaleto(1.0);
 	
 	// Calculate the phase change (for one of them)
+	
 	long double cosphase = (oldp.x*part.spinEplus.x + oldp.y*part.spinEplus.y) / (oldp.modxy()*part.spinEplus.modxy());
-	if (cosphase > 1.)
-		logger << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << endl;
+	/*if (cosphase > 1.)
+		logger << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << " (Time = " << std::scientific << time << ")" << endl;
+	*/
 	long double phase_change = acos(cosphase);
 	part.E_sum_phase += phase_change;
 	
 	// And now the other
 	cosphase = (oldm.x*part.spinEminus.x + oldm.y*part.spinEminus.y) / (oldm.modxy()*part.spinEminus.modxy());
-	if (cosphase > 1.)
-		logger << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << endl;
+	/*if (cosphase > 1.)
+		logger << "Cosphase > 1 by : " << lddistance(cosphase, 1.) << " (Time = " << std::scientific << time << ")" << endl;
+	*/
 	phase_change = acos(cosphase);
 	part.E_minus_sum_phase += phase_change;
 	
