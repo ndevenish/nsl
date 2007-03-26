@@ -703,7 +703,9 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 		cumPdown += (1. - Pup) * decayscale;
 	}
 	
-	cout << "Average Bounces: " << bounces.average() << " ± " << bounces.stdev() << endl;
+	cout << "Average Bounces: " << bounces.average() << " +- " << bounces.stdev() << endl;
+	if (bouncedecay > 0)
+		cout << "     Average decay: " << exp(-(long double)bounces.average() / (long double)bouncedecay) << endl;
 	// Calculate the value
 	variable alpha = (cumPup - cumPdown) / (cumPup + cumPdown);
 	

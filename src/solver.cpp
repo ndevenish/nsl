@@ -147,11 +147,11 @@ bool midpointsolver::prepareobject ( void )
 	else
 		gravity = false;
 	
-#warning "Initialising debug output files"
+/*#warning "Initialising debug output files"
 	phaselog << "# Debug phase tracking" << endl;
 	phaselog << "# Flytime\tBounces\tPlus_phase\tMinus_phase\tphase_diff\tx\ty\tz\tBupx\tBupy\tBupz\tBdownx\tBdowny\tBdownz\tvxex\tvxey\tvxez" << endl;
 	phaselog.precision(20);
-	
+*/	
 	return true;
 }
 
@@ -168,7 +168,7 @@ void midpointsolver::prepareparticles ( std::vector<particle*> &particles )
 // particle will not hit any objects during this time.
 void midpointsolver::step( particle &part, const long double &time )
 {
-	long steps;
+//	long steps;
 	
 	// calculate the Exv effect for the particle- this does not change over a bigstep
 	// NOTE: if gravity is on, this does change over a bigstep so don't do this here
@@ -177,16 +177,16 @@ void midpointsolver::step( particle &part, const long double &time )
 
 	////////////////////////////////////
 	/// TEMPORARY DEBUG - match the other programs stepping algorithm
-	//steps = (int)(time/steptime) + 1;
-	//part.steptime = time / steps;
+//	steps = (int)(time/steptime) + 1;
+//	part.steptime = time / steps;
 //#warning "Temporary debug code"
 	
 	// Calculate the number of steps we are going to take
-	steps = (long)floorl((long double)time / (long double)part.steptime);
+//	steps = (long)floorl((long double)time / (long double)part.steptime);
 	
 	// Now do this many smallsteps - after which we will have one step of time less
 	// than one step to complete
-	for (int step = 0; step < steps; step++)
+/*	for (int step = 0; step < steps; step++)
 	{
 		// We can safely callthe smallstep with steptime as inside this loop it is 
 		// guaranteed to be so
@@ -202,6 +202,16 @@ void midpointsolver::step( particle &part, const long double &time )
 	// Now do the actual final step, if time is not our minimum step
 	if (laststep > 1e-9)
 		smallstep(part, laststep);
+		*/
+	// Step while there is time left
+	long double timeleft = time;
+	while (timeleft - part.steptime > 0)
+	{
+		smallstep(part, part.steptime);
+		timeleft -= part.steptime;
+	}
+	if (timeleft > 0.) 
+		smallstep(part, timeleft);
 }
 
 void midpointsolver::smallstep( particle &part, const long double &time)
@@ -297,8 +307,8 @@ public:
 	
 	bool prepareobject( void );
 	
-	/** Initialises all particles to be stepped. 
-		* This reinitialises all particles to an initial stepping state. 
+	// Initialises all particles to be stepped. 
+	//	* This reinitialises all particles to an initial stepping state. 
 	void prepareparticles( std::vector<particle*> &particles );
 	
 	// Allow this to be created from the object factory
