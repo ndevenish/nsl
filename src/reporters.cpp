@@ -605,7 +605,7 @@ alphareporter::alphareporter()
 void alphareporter::preparefile( edmexperiment &exp )
 {
 	*outfile << "# Alpha-visibility reporter: " << exp.get("time") << endl;
-	*outfile << "# " << exp.variation.parameter << "\tRa\tuncert\talpha\tuncert\tvolume_dbdz\tuncert\tvolume_dbdzsq\tuncert" << endl;
+	*outfile << "# " << exp.variation.parameter << "\tRa\tuncert\talpha\tuncert\tvolume_dbdz\tuncert\tvolume_dbdzsq\tuncert\tActive_parts" << endl;
 }
 
 bool alphareporter::prepareobject( void )
@@ -629,6 +629,14 @@ void alphareporter::report( edmexperiment &exp )
 	// Now calculate the Ra-1 value
 	variable Ra = calculate_frequencyratio( exp.particles );
 	
+	// Now count the number of active particles
+	int activep = 0;
+	BOOST_FOREACH(particle *p, exp.particles)
+	{
+		if (p->active)
+			activep++;
+	}
+	
 	// Now calculate the volume average fields
 	dataset volaverage_dbdz  = calc_dbdz(*exp.magfield, *exp.particlebox);
 	dataset volaverage_dbdz2 = calc_dbdz(*exp.magfield, *exp.particlebox, 2.0);
@@ -643,7 +651,8 @@ void alphareporter::report( edmexperiment &exp )
 		*outfile << Ra.value << "\t" << Ra.error << "\t";
 		*outfile << alpha.value << "\t" << alpha.error << "\t";
 		*outfile << volaverage_dbdz.average() << "\t" << volaverage_dbdz.uncert() << "\t";
-		*outfile << volaverage_dbdz2.average() << "\t" << volaverage_dbdz2.uncert();
+		*outfile << volaverage_dbdz2.average() << "\t" << volaverage_dbdz2.uncert() << "\t";
+		*outfile << activep;
 		*outfile << endl;
 	}
 
@@ -658,7 +667,8 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 	// Calculate the average frequencies
 	BOOST_FOREACH(particle *p, particles)
 	{
-		averagefreq_plusE += p->E_sum_phase;
+		if (p->active)
+			averagefreq_plusE += p->E_sum_phase;
 	}
 
 	dataset bounces;
@@ -667,41 +677,44 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 	// this average
 	BOOST_FOREACH(particle *p, particles)
 	{
-		// Calculate the difference from the mean
-		variable meandiff; //Radians
-		meandiff.value = p->E_sum_phase - averagefreq_plusE.average();
-		meandiff.error = averagefreq_plusE.uncert();
-		
-		// calculate the projection of this onto the mean-line
-		variable meanaxis_projection;
-		meanaxis_projection.value = cos(meandiff.value);
-		meanaxis_projection.error = sin(meandiff.value) * meandiff.error;
-		
-		// Scale this to [0, 1]
-		variable Pup = 0.5 * (meanaxis_projection + 1.);
-		//long double PupErr = 0.5 * (meanaxis_projectionerr + 1.);
-		
-		if (Pup.value < 0.)
+		if (p->active)
 		{
-			cout << "ERROR: Probability value less than zero." << endl;
-			cout << "\tMeandiff:   " << meandiff.value << endl;
-			cout << "\tMean phase: " << averagefreq_plusE.average() << endl;
-			cout << "\tProjection: " << meanaxis_projection.value << endl;
-			throw runtime_error("Calculated negative probability in polarization reporter");
-		}
-		
-		// Scale Pup according to the wall-interaction decay.. if it has been set
-		long double decayscale = 1.;
-		if (bouncedecay > 0)
-		{
-//			cout << "Bounces: " << p->bounces << ", Scalefactor: " << exp(-(long double)p->bounces / (long double)bouncedecay) << endl;
-			decayscale = exp(-(long double)p->bounces / (long double)bouncedecay);
-		}
-		bounces += p->bounces;
-		
-		cumPup += Pup * decayscale;
+			// Calculate the difference from the mean
+			variable meandiff; //Radians
+			meandiff.value = p->E_sum_phase - averagefreq_plusE.average();
+			meandiff.error = averagefreq_plusE.uncert();
+			
+			// calculate the projection of this onto the mean-line
+			variable meanaxis_projection;
+			meanaxis_projection.value = cos(meandiff.value);
+			meanaxis_projection.error = sin(meandiff.value) * meandiff.error;
+			
+			// Scale this to [0, 1]
+			variable Pup = 0.5 * (meanaxis_projection + 1.);
+			//long double PupErr = 0.5 * (meanaxis_projectionerr + 1.);
+			
+			if (Pup.value < 0.)
+			{
+				cout << "ERROR: Probability value less than zero." << endl;
+				cout << "\tMeandiff:   " << meandiff.value << endl;
+				cout << "\tMean phase: " << averagefreq_plusE.average() << endl;
+				cout << "\tProjection: " << meanaxis_projection.value << endl;
+				throw runtime_error("Calculated negative probability in polarization reporter");
+			}
+			
+			// Scale Pup according to the wall-interaction decay.. if it has been set
+			long double decayscale = 1.;
+			if (bouncedecay > 0)
+			{
+	//			cout << "Bounces: " << p->bounces << ", Scalefactor: " << exp(-(long double)p->bounces / (long double)bouncedecay) << endl;
+				decayscale = exp(-(long double)p->bounces / (long double)bouncedecay);
+			}
+			bounces += p->bounces;
+			
+			cumPup += Pup * decayscale;
 
-		cumPdown += (1. - Pup) * decayscale;
+			cumPdown += (1. - Pup) * decayscale;
+		} // if p is active
 	}
 	
 	cout << "Average Bounces: " << bounces.average() << " +- " << bounces.stdev() << endl;
@@ -722,25 +735,29 @@ variable alphareporter::calculate_frequencyratio( vector<particle*> &particles )
 	// Calculate the frequency ratio for each particle, and then average them
 	BOOST_FOREACH(particle *p, particles)
 	{
-		long double rotfreq = (p->E_sum_phase / p->flytime) / (2 * pi); // Hertz
-		// Convert the gamma factor into hertz for our purposes
-		long double newgam  = fabsl(p->gamma * B0) / (2*pi); // Hertz
-		//long double ratio = rotfreq / newgam; // Dimensionless
-		long double ratio = ( rotfreq - newgam ) / newgam; // dimensionless
-		//ratio -= 1.;
-		//long double aval = ratio - ratio2;
-		freq_ratio += ratio;
-		
-		/* I think this is quackery debug code, so disabled
-		// If the ratio is much less than zero, throw an exception
-		if (ratio < -0.5)
+		// Only count active particles
+		if (p->active)
 		{
-			//cout << "E_sum_phase:     " << p->E_sum_phase << endl;
-			cout << "Rotational freq: " << rotfreq << endl;
-			cout << "Adjusted Gamma:  " << std::scientific << newgam << endl;
-			cout << *p << endl;
-			throw runtime_error("Ratio much less than 0");
-		}*/
+			long double rotfreq = (p->E_sum_phase / p->flytime) / (2 * pi); // Hertz
+			// Convert the gamma factor into hertz for our purposes
+			long double newgam  = fabsl(p->gamma * B0) / (2*pi); // Hertz
+			//long double ratio = rotfreq / newgam; // Dimensionless
+			long double ratio = ( rotfreq - newgam ) / newgam; // dimensionless
+			//ratio -= 1.;
+			//long double aval = ratio - ratio2;
+			freq_ratio += ratio;
+			
+			/* I think this is quackery debug code, so disabled
+			// If the ratio is much less than zero, throw an exception
+			if (ratio < -0.5)
+			{
+				//cout << "E_sum_phase:     " << p->E_sum_phase << endl;
+				cout << "Rotational freq: " << rotfreq << endl;
+				cout << "Adjusted Gamma:  " << std::scientific << newgam << endl;
+				cout << *p << endl;
+				throw runtime_error("Ratio much less than 0");
+			}*/
+		} // active parts
 	}
 
 	// Convert this dataset into a variable and return it

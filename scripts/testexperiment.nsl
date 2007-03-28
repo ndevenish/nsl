@@ -3,7 +3,7 @@
 add edmexperiment "The Experiment" {
 	
 	# set the steptime for the inbuilt solver to use
-	set phase_steps 10 #phase average loops
+	set phase_steps 1 #phase average loops
 	#set bounces 3000 #number of bounces to run the simulation over
 	set lifetime 60.0	#The lifetime of a particle (seconds)
 
@@ -18,14 +18,21 @@ add edmexperiment "The Experiment" {
 	set collision_compensation_distance 1e-15 # (Meters)
 	
 	#Gravity!
-	#set gravity on
+	set gravity on
+	
+	# Probability of particle 'loss' per bounce. This value should give similar
+	# results to the old, bounce decay method. Can expect about 1/e particles to remain at
+	# this point (1/bounces), so we need e(2.7) as many particles to get the sme resolution.
+	# for 500 particles this works out to needing 1360 particles. Round to 1500 to get a decent amount.
+	set bounce_loss_probability 8.888e-4
+	#set bounce_loss_probability 0.01
 	
 	add midpointsolver "midsolver" {
-		set steptime 3e-5 # (Seconds)
+		set steptime 3e-2 # (Seconds)
 	}
 	
 	ignore add rungekutta_solver "rksolver" {
-		set initial_steptime 3e-4
+		set initial_steptime 3e-5
 	}
 	
 	add container "bottle" {
@@ -35,7 +42,7 @@ add edmexperiment "The Experiment" {
 			set height 0.12 # (Meters)
 			set reflection diffuse
 		}
-		add volume_cylinder "cavity" {
+		ignore add volume_cylinder "cavity" {
 			set type negative
 			set radius 0.034
 			set height 0.05
@@ -44,11 +51,11 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 1 particle neutron {
+	multiadd 100 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
-		set velocity 100 # (Meters per second)
+		set velocity 3 # (Meters per second)
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
 		#set maxwelldistribution on
@@ -121,7 +128,7 @@ add edmexperiment "The Experiment" {
 		set particle 1
 	}
 	
-	ignore add alphareporter "alphareporter" {
+	add alphareporter "alphareporter" {
 		set output_file "alphalog.txt"
 		#set bounce_decay 3000 # Number of bounces for 1/e decay 
 	}

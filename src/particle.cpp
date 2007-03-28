@@ -105,6 +105,7 @@ void particle::readsettings(void)
 	E_sum_phase = E_minus_sum_phase = 0.;
 	bounces = 0;
 	vxEeffect *= 0;
+	active = true;
 	
 	// Get and validate the velocities
 	read_velocitysettings();

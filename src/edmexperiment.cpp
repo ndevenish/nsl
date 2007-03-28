@@ -217,6 +217,10 @@ void edmexperiment::readsettings ( void )
 	bounces = getlong("bounces", 1);
 	lifetime = getlongdouble("lifetime", 0.0);
 	
+	bounce_loss_probability = getlongdouble("bounce_loss_probability", 0.0);
+	if (bounce_loss_probability > 0.)
+		logger << "Probability of particle loss at bounce: " << bounce_loss_probability << endl;
+	
 	// If we have set a lifetime, null out the bounces
 	uselifetime = isset("lifetime");
 
@@ -510,7 +514,7 @@ void edmexperiment::runinterval ( long double time, particle *part )
 	
 	// Start a loop over bounces, but keep it infinite, as if we are in lifetime mode then
 	// we don't care about the bounces and we can decide on this later
-	while (1)
+	while (part->active)
 	{
 		// If we are doing bounce-based looping, track that here
 		// Stop if we have reached the maximum number of bounces
@@ -558,6 +562,13 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			// Take away the time for the travel for this bounce from the time left
 			timeleft -= collisionpoint.time;
 			
+			// Calculate the chance that the particle is 'lost' through this collision
+			if (rand_uniform() < bounce_loss_probability)
+			{
+				part->active = false;
+//				logger << "L" << std::flush;
+			}
+			
 			// Move the particle to the collision point, plus a tiny offset - should eliminate need for fudge
 			// whilst having a minimal physical impact (preliminary tests indicate this is usually of order
 			// 1e-30 anyway)
@@ -602,7 +613,7 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			// Duuuuuuh actually quit out of the loop.....
 			break;
 		}
-	} //while(1) over bounces	
+	} //while(active particle) over bounces (and particle activity)	
 }
 
 

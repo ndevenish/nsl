@@ -95,6 +95,8 @@ public:
 	bool prepareobject();
 	void readsettings(void);
 	
+	bool active;
+	
 	// Initialise the values in the class
 	void initvals();
 

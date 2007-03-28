@@ -77,6 +77,8 @@ class edmexperiment : public nslobject {
 	long double intervaltime;
 	bool uselifetime; // Using lifetime?
 	
+	long double bounce_loss_probability;
+	
 	/// The floating-point-error collision compensation distance
 	long double collision_offset;
 
