@@ -105,6 +105,7 @@ int main ( int argc, char *argv[] )
 		nslobjectfactory::add("poldistreporter", new poldistreporter::Factory);
 		nslobjectfactory::add("posreporter", new posreporter::Factory);
 		nslobjectfactory::add("alphareporter", new alphareporter::Factory);
+		nslobjectfactory::add("bouncereporter", new bouncereporter::Factory);
 		
 		// What script file do we want to read in?
 		path infile;
@@ -133,6 +134,7 @@ int main ( int argc, char *argv[] )
 		nsl::seedrand();
 		
 		// Prepare the object tree
+		cout << "Preparing object treee..." << endl;
 		rootobject.prepare();
 
 		// Allow the user to specify an option not to run

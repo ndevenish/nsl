@@ -646,6 +646,7 @@ void alphareporter::report( edmexperiment &exp )
 		*outfile << volaverage_dbdz2.average() << "\t" << volaverage_dbdz2.uncert();
 		*outfile << endl;
 	}
+
 }
 
 /// Function to calculate the alpha fringe visibility value for a set of particles.
@@ -746,3 +747,41 @@ variable alphareporter::calculate_frequencyratio( vector<particle*> &particles )
 	return variable(freq_ratio);
 }
 
+/*
+class bouncereporter : public reporter {
+protected:
+void preparefile( edmexperiment &exp );
+//	bool prepareobject( void );
+
+public:
+bouncereporter();
+void report ( edmexperiment &experiment );
+
+class Factory : public nslobjectfactory {
+	nslobject *create() { return new bouncereporter; }
+};	
+};*/
+
+bouncereporter::bouncereporter()
+{
+	objecttype = "bouncereporter";
+	types.push_back(objecttype);
+	
+	report_frequency = rfreq_run;
+}
+
+void bouncereporter::preparefile( edmexperiment &exp )
+{
+	*outfile << "# bounce-tracking reporter: " << exp.get("time") << endl;
+	*outfile << "# Max_height\tflytime\tbounces" << endl;
+}
+
+void bouncereporter::report( edmexperiment &exp )
+{
+	BOOST_FOREACH(particle *p, exp.particles)
+	{
+		// Calculate the maximum height that this particle will reach
+		long double maxz = p->position.z + (p->velocity*p->velocity)/(2*g);
+		*outfile << maxz << "\t" << p->flytime << "\t" << p->bounces << endl;
+	}
+}

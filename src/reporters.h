@@ -234,6 +234,21 @@ public:
 	};	
 };
 
+///////////////////////////////////////////////
+// Bounce reporter
+class bouncereporter : public reporter {
+protected:
+	void preparefile( edmexperiment &exp );
+//	bool prepareobject( void );
+	
+public:
+		bouncereporter();
+	void report ( edmexperiment &experiment );
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new bouncereporter; }
+	};	
+};
 
 ///////////////////////////////////////////////
 // Alpha value and polarisation reporter!!!!
