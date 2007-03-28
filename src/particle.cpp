@@ -47,6 +47,17 @@ using std::string;
 using nsl::rand_normal;
 using std::endl;
 
+/*
+particle::mag_field = 0;
+particle::elec_field = 0;
+particle::particlebox = 0;
+*/
+
+// Hack: File global pointers to avoid initialisation
+static container *g_particlebox = 0;
+static bfield *g_mag_field = 0;
+static efield *g_elec_field = 0;
+
 particle::particle()
 {
 	initvals();
@@ -104,16 +115,27 @@ void particle::readsettings(void)
 	// Read the spin settings
 	read_spinsettings();
 	
+	
+	// This section now reads into static variables, as the process was taking inordinate
+	// amounts of time for large particle numbers
 	// Find a container!
-	particlebox = (container*)findbytype("container");
-	if (!particlebox)
-		throw runtime_error("Unable to find a container for particle");
+	if (!g_particlebox)
+	{
+		g_particlebox = (container*)findbytype("container");
+		if (!g_particlebox)
+			throw runtime_error("Unable to find a container for particle");
+	}
+	particlebox = g_particlebox;
 	
 	// Find a magnetic field to link to
-	mag_field = (bfield*)findbytype("bfield");
+	if (!g_mag_field)
+		g_mag_field = (bfield*)findbytype("bfield");
+	mag_field = g_mag_field;
 	
 	// Look for an electric field to link to
-	elec_field = (efield*)findbytype("efield");
+	if (!g_elec_field)
+		g_elec_field = (efield*)findbytype("efield");
+	elec_field = g_elec_field;
 }
 
 void particle::read_velocitysettings( void )

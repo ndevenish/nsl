@@ -3,8 +3,8 @@
 add edmexperiment "The Experiment" {
 	
 	# set the steptime for the inbuilt solver to use
-	set phase_steps 1 #phase average loops
-	#set bounces 1000 #number of bounces to run the simulation over
+	set phase_steps 10 #phase average loops
+	#set bounces 3000 #number of bounces to run the simulation over
 	set lifetime 60.0	#The lifetime of a particle (seconds)
 
 	#This is the time to bounce a particle around for
@@ -21,7 +21,7 @@ add edmexperiment "The Experiment" {
 	#set gravity on
 	
 	add midpointsolver "midsolver" {
-		set steptime 3e1 # (Seconds)
+		set steptime 3e-5 # (Seconds)
 	}
 	
 	ignore add rungekutta_solver "rksolver" {
@@ -35,18 +35,25 @@ add edmexperiment "The Experiment" {
 			set height 0.12 # (Meters)
 			set reflection diffuse
 		}
+		add volume_cylinder "cavity" {
+			set type negative
+			set radius 0.034
+			set height 0.05
+			set reflection diffuse
+			set z -0.04
+		}
 	}
 
-	multiadd 10000 particle neutron {
+	multiadd 1 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
-		set velocity 3 # (Meters per second)
+		set velocity 100 # (Meters per second)
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
-		set maxwelldistribution on
+		#set maxwelldistribution on
 		# This sets the maximum height for cutting off the velocity
-		set maxwelliancutoff 0.79 # (Meters)
+		#set maxwelliancutoff 0.79 # (Meters)
 		
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 0 # (Meters per second)
@@ -84,13 +91,14 @@ add edmexperiment "The Experiment" {
 
 	add bfield "bfield" {
 		set b0z 	1.0E-6 # (Tesla)
-		add linear_zgradient "bfield gradient" {
+		ignore add linear_zgradient "bfield gradient" {
 			set D_DZ	1e-9 # (Tesla per meter)
 		}
-		ignore add dipole_zmagnetic "Z magnetic dipole" {
+		add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
-			set z 		-0.5 	# (Meters)
-			set mz		-1e-3 	# (Amps * Meters^2)
+			#set z 		-0.3 	# (Meters)
+			vary z from -0.4 to -1. in 10 steps
+			set mz		-4.4e-7 	# (Amps * Meters^2)
 		}
 	}
 	
@@ -98,7 +106,7 @@ add edmexperiment "The Experiment" {
 		set e0z		8.e5 # (Volts per meter)
 	}
 	
-	ignore edmreporter "edmreporter" {
+	add edmreporter "edmreporter" {
 		set output_file "edmout.txt"
 		set volaverage_dbdz true
 	}
@@ -106,6 +114,7 @@ add edmexperiment "The Experiment" {
 	ignore add posreporter "posreporter" {
 		set output_file "poslog.txt"
 		set particle 0
+		set report_frequency bounce
 	}
 	ignore add posreporter "posreporter" {
 		set output_file "poslog2.txt"
@@ -116,7 +125,7 @@ add edmexperiment "The Experiment" {
 		set output_file "alphalog.txt"
 		#set bounce_decay 3000 # Number of bounces for 1/e decay 
 	}
-	add bouncereporter {
+	ignore add bouncereporter {
 		set output_file "bouncelog.txt"
 	}
 }
