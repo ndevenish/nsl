@@ -858,6 +858,7 @@ function save_file_menu_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     %do we have a filename already
     [filename, path] = uiputfile('*.nds');
+    [path filename ext] = fileparts(fullfile(path, filename));
     
     type = 1337;
     %saveobject.datasets = handles.datasets;
@@ -866,7 +867,7 @@ function save_file_menu_Callback(hObject, eventdata, handles)
     xaxis = get(handles.xaxis_list, 'Value');
     yaxis = get(handles.yaxis_list, 'Value');
 
-    save ([path filename], 'datasets', 'type', 'xaxis', 'yaxis');
+    save (fullfile(path, [filename '.nds']), 'datasets', 'type', 'xaxis', 'yaxis');
 
 
 
