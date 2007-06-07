@@ -1,7 +1,7 @@
 
 add edmexperiment "The Experiment" {
 	# set the steptime for the inbuilt solver to use
-	set phase_steps 1 #phase average loops
+	set phase_steps 15 #phase average loops
 	#set bounces 1000 #number of bounces to run the simulation over
 	set lifetime 120.0	#The lifetime of a particle (seconds)
 
@@ -16,10 +16,10 @@ add edmexperiment "The Experiment" {
 	set collision_compensation_distance 1e-15 # (Meters)
 	
 	#Gravity!
-	set gravity on
+	#set gravity on
 	
 	add midpointsolver "midsolver" {
-		set steptime 3e-4 # (Seconds)
+		set steptime 3e-5 # (Seconds)
 	}
 	
 	add container "bottle" {
@@ -31,16 +31,16 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 500 particle neutron {
+	multiadd 1 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
-		set velocity 3 # (Meters per second)
+		set velocity 100 # (Meters per second)
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
-		set maxwelldistribution on
+		#set maxwelldistribution on
 		# This sets the maximum height for cutting off the velocity
-		set maxwelliancutoff 0.79 # (Meters)
+		#set maxwelliancutoff 0.79 # (Meters)
 		
 		# set up the velocity VECTOR (this will be scaled to velocity)
 		set vy 0 # (Meters per second)
@@ -78,14 +78,14 @@ add edmexperiment "The Experiment" {
 
 	add bfield "bfield" {
 		set b0z 	1.0E-6 # (Tesla)
-		add linear_zgradient "bfield gradient" {
+		ignore add linear_zgradient "bfield gradient" {
 			#set D_DZ	1.51e-8 #1e-9 # (Tesla per meter)
-			vary D_DZ from 0. to 0.5e-7 in 20 steps #3e-8 to 5e-8 in 3 steps
+			#vary D_DZ from 0. to 0.5e-7 in 20 steps #3e-8 to 5e-8 in 3 steps
 		}
 		add dipole_zmagnetic "Z magnetic dipole" {
-			#vary z from -0.1 to -1.0 in 100 steps
-			set z 		-0.3 	# (Meters)
-			set mz		1e-3 #1e-3 	# (Amps * Meters^2)
+			vary z from -0.1 to -1.0 in 20 steps
+			#set z 		-0.3 	# (Meters)
+			set mz		-4.4e-7 #1e-3 	# (Amps * Meters^2)
 		}
 	}
 	
@@ -93,8 +93,8 @@ add edmexperiment "The Experiment" {
 		set e0z		8.e5 # (Volts per meter)
 	}
 	
-	ignore add edmreporter "edmreporter" {
-		set output_file "veltest_200.txt"
+	add edmreporter "edmreporter" {
+		set output_file "varyz_dipole.txt"
 		set volaverage_dbdz true
 	}
 	
@@ -107,8 +107,8 @@ add edmexperiment "The Experiment" {
 		set particle 1
 	}
 	
-	add alphareporter "alphareporter" {
+	ignore add alphareporter "alphareporter" {
 		set output_file "pollog_d1e3_reproduce_new.txt"
 	}
 }
-#tree
+tree
