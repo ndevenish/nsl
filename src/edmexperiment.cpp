@@ -411,8 +411,9 @@ void edmexperiment::run_phaseloop( int phase_loop )
 		inited = true;
 		//groupsample.precision(20);
 		long double energygroup = 0.5 * part->velocity * part->velocity / g + part->position.z;
-		
-		groupsample << std::setprecision(20) << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.stdev() << endl;
+		if (energygroup < part->sampleZ.average())
+			logger << "ERROR" << endl;
+		groupsample << std::setprecision(20) << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.uncert() << endl;
 		
 	}
 

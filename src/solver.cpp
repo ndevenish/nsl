@@ -265,6 +265,11 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	// Update the particles flytime
 	part.flytime += time; // Seconds
 
+	// Double check the height against it's energy group (if gravity)
+	if (gravity)
+		if (part.position.z > part.energygroup)
+			logger << "Warning: Particle higher than energy group value by " << part.position.z-part.energygroup << endl;
+	
 	
 	// Add this magnetic field to the particles average
 	part.sampleBx += B.x;

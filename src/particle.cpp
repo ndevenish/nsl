@@ -106,6 +106,10 @@ void particle::readsettings(void)
 	bounces = 0;
 	vxEeffect *= 0;
 	active = true;
+	sampleBx.reset();
+	sampleBy.reset();
+	sampleBz.reset();
+	sampleZ.reset();
 	
 	// Get and validate the positions
 	read_positionsettings();
@@ -166,6 +170,9 @@ void particle::read_velocitysettings( void )
 	// Maxwell-Boltzmann distribution
 	if (get("maxwelldistribution", "off") == "on")
 		generate_maxwellianvelocity();
+	
+	// Calculate the energy group
+	energygroup = 0.5 * velocity * velocity / g + position.z;
 	
 	// Calculate the relativistic gamma factor
 	vgamma = sqrtl(1. / (1. - (velocity*velocity)/csquared));

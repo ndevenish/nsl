@@ -42,6 +42,7 @@
 class dataset : boost::addable< dataset ,
 				boost::multiplicative< dataset, long double > >
 {
+	static int reference;
 	long double vaverage;
 	long double vaveragesq;
 	long vpointcount;
@@ -91,7 +92,8 @@ class dataset : boost::addable< dataset ,
 		/** Resets the dataset. */
 		void reset ( void )  { vaverage = vaveragesq = vpointcount = 0; } 
 		
-		dataset() : vaverage(0), vaveragesq(0), vpointcount(0) {}
+		dataset() : vaverage(0), vaveragesq(0), vpointcount(0) { reference++; }
+		~dataset() { reference--; }
 };
 
 inline dataset dataset::operator+=(const long double& newpoint)
@@ -106,7 +108,7 @@ inline dataset dataset::operator+=(const long double& newpoint)
 //dataset operator+(const long double& lhs, const dataset& rhs )
 
 //dataset operator+( const dataset& rhs; const long double &lhs );
-		
+int dataset::reference = 0;		
 
 inline dataset dataset::operator+=( const dataset &mergeset )
 {
