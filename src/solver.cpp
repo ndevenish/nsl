@@ -264,14 +264,17 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	
 	// Update the particles flytime
 	part.flytime += time; // Seconds
-	
-	// Now spin the particle
-	neutron_physics::spin_calculation(part, B, time);
+
 	
 	// Add this magnetic field to the particles average
 	part.sampleBx += B.x;
 	part.sampleBy += B.y;
 	part.sampleBz += B.z;
+
+	part.sampleZ += part.position.z;
+	
+	// Now spin the particle
+	neutron_physics::spin_calculation(part, B, time);
 	
 // Temporarily disable this code for a checkin
 	// Output the cumulative phase now!

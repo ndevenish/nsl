@@ -107,12 +107,12 @@ void particle::readsettings(void)
 	vxEeffect *= 0;
 	active = true;
 	
-	// Get and validate the velocities
-	read_velocitysettings();
-
 	// Get and validate the positions
 	read_positionsettings();
 	
+	// Get and validate the velocities (this depends on positions being initialisied)
+	read_velocitysettings();
+
 	// Read the spin settings
 	read_spinsettings();
 	

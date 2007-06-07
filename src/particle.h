@@ -110,6 +110,7 @@ public:
 	// Track the average magnetic field that this particle sees
 	dataset sampleBz, sampleBx, sampleBy;
 	long double energygroup;
+	dataset sampleZ;
 	
 public:
 	particle();
