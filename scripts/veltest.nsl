@@ -1,8 +1,8 @@
 
 add edmexperiment "Velocity Test Experiment" {
 	set phase_steps 30 #phase average loops
-	set bounces 10000 #number of bounces to run the simulation over
-	#set lifetime 60	#The lifetime of a particle (seconds)
+#	set bounces 10000 #number of bounces to run the simulation over
+	set lifetime 120	#The lifetime of a particle (seconds)
 
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -37,7 +37,7 @@ add edmexperiment "Velocity Test Experiment" {
 
 		#vary velocity from 10 to 200 in 20 steps
 		#set velocity 3 # (Meters per second)
-		#vary velocity from 1 to 500 in 40 steps
+		#vary velocity from 100 to 500 in 3 steps
 		set velocity 500
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
