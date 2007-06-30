@@ -359,11 +359,11 @@ edmreporter::edmreporter()
 
 void edmreporter::preparefile(edmexperiment &exp)
 {
-	*outfile << "# Edm loop report: " << exp.get("runtime") << endl;
-	*outfile << "# " << exp.variation.parameter << "\t" << "False-EDM" << "\t" << "Error";
+	*outfile << "# Edm loop report: " << exp.get("runtime") << "#" << endl;
+	*outfile << "# " << exp.variation.parameter << "\t" << "False-EDM" << "\t" << "uncert";
 	
 	if (volaverage)
-		*outfile << "\t" << "volavg-dbzdz" << "\t" << "error";
+		*outfile << "\t" << "volavg-dbzdz" << "\t" << "uncert";
 	
 	*outfile << endl;
 }

@@ -253,7 +253,7 @@ void container::reflect ( vector3& velocity_vec, const vector3& normal, const lo
 		long double sintheta = sqrt(1. - costheta*costheta);
 		
 		long double phi = 2*pi*rand_uniform();
-		long sincos = sintheta * cos(phi);
+		long double sincos = sintheta * cos(phi);
 		
 		// Are we a wall or ceiling reflection? If we are a wall reflection, then we need to rotate,
 		// otherwise we don't need to bother. In the future, this could be extended to a full 3d rotation
