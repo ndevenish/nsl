@@ -1,8 +1,8 @@
 
 add edmexperiment "Velocity Test Experiment" {
-	set phase_steps 30 #phase average loops
+	set phase_steps 20 #phase average loops
 #	set bounces 10000 #number of bounces to run the simulation over
-	set lifetime 120	#The lifetime of a particle (seconds)
+	set lifetime 20	#The lifetime of a particle (seconds)
 
 	#Set the distance to 'lift' the particle off of the bottles
 	#surface after a collision has happened. This is in to fix
@@ -35,7 +35,7 @@ add edmexperiment "Velocity Test Experiment" {
 	add particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
-		#vary velocity from 10 to 200 in 20 steps
+		#vary velocity from 1 to 200 in 50 steps
 		#set velocity 3 # (Meters per second)
 		#vary velocity from 100 to 500 in 3 steps
 		set velocity 500

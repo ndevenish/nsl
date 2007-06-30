@@ -282,6 +282,7 @@ void container::reflect ( vector3& velocity_vec, const vector3& normal, const lo
 			if (normal.z < 0)
 				velocity_vec.z *= -1.;
 		}
+	/*
 		// Dump out the dot product between this and the normal
 		static std::ofstream dotps("dotps.txt");
 		static std::ofstream dotwrong("dotwrong.txt");
@@ -300,7 +301,7 @@ void container::reflect ( vector3& velocity_vec, const vector3& normal, const lo
 		if (dotp > 1)
 			dotwrong << dotp << "\t(" << velocity_vec << ")\t(" << normal*velocity << ")" << endl;
 		reflects << velocity_vec << endl;
-	}
+	}*/
 	}
 	else
 		throw runtime_error("Unrecognised reflection type requested for reflection");
