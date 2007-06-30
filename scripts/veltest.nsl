@@ -13,11 +13,11 @@ add edmexperiment "Velocity Test Experiment" {
 	#Gravity!
 #	set gravity on
 	
-	ignore add midpointsolver "midsolver" {
+	add midpointsolver "midsolver" {
 		set steptime 3e-5 # (Seconds)
 	}
 
-	add rungekutta_solver "rksolver" {
+	ignore add rungekutta_solver "rksolver" {
 		set initial_steptime 1e-6
 		set tolerance 0.001
 		set minimum_step 1e-7
