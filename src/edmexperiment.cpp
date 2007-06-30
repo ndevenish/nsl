@@ -218,7 +218,7 @@ void edmexperiment::readsettings ( void )
 	bounces = getlong("bounces", 1);
 	lifetime = getlongdouble("lifetime", 0.0);
 	
-	bounce_loss_probability = getlongdouble("bounce_loss_probability", 0.0);
+	bounce_loss_probability = getlongdouble("bounce_loss_probability", -1.0);
 	if (bounce_loss_probability > 0.)
 		logger << "Probability of particle loss at bounce: " << bounce_loss_probability << endl;
 	
@@ -562,7 +562,7 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			2)	We don't, so have to go halfway
 			3)	We are bounce-looping - in which case (for now) short-circuit the test */
 		
-		// If doing bounce mode, short circuit the test ahead DISASSEMBLE
+		// If doing bounce mode, short circuit the test ahead
 		if (!uselifetime)
 			timeleft = collisionpoint.time + 1.;
 		
@@ -584,6 +584,9 @@ void edmexperiment::runinterval ( long double time, particle *part )
 			timeleft -= collisionpoint.time;
 			
 			// Calculate the chance that the particle is 'lost' through this collision
+			// This test is okay - because in the event no bounce probability has been defined it
+			// defaults to negative - and therefore the random number will never be higher.
+			// May, however, want to skip this test if we don't want bounce losses.
 			if (rand_uniform() < bounce_loss_probability)
 			{
 				part->active = false;

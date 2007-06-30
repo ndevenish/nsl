@@ -222,6 +222,7 @@ void container::reflect ( vector3& velocity_vec, const vector3& normal, const lo
 	// If not, is it diffuse?
 	else if(reflection == reflection_diffuse)
 	{
+		/*
 		// Generate a random z and theta
 		velocity_vec.z = (rand_uniform()-0.5)*2.;
 		
@@ -243,7 +244,42 @@ void container::reflect ( vector3& velocity_vec, const vector3& normal, const lo
 		//cout << velocity_vec.mod() << endl;
 		
 		velocity_vec *= velocity;
-		return;
+		return;*/
+		
+		// Now try the new method of diffuse reflection (i.e. the proper way)
+		
+		// Generate the Random Terms
+		long double costheta = sqrt(rand_uniform());
+		long double sintheta = sqrt(1. - costheta*costheta);
+		
+		long double phi = 2*pi*rand_uniform();
+		long sincos = sintheta * cos(phi);
+		
+		// Are we a wall or ceiling reflection? If we are a wall reflection, then we need to rotate,
+		// otherwise we don't need to bother. In the future, this could be extended to a full 3d rotation
+		// but that is overkill for the time being, as only the two types of surfaces exist
+		if (normal.x*normal.x+normal.y*normal.y > 1e-9)
+		{
+			// A Wall reflection!
+
+			// Now, generate the new velocities,and apply a rotation also
+			// Note: The rotation cos and sin factors can be pulled right out of the
+			// normal vector
+			velocity_vec.x = velocity * (costheta * normal.x	-	sincos * normal.y);
+			velocity_vec.y = velocity * (sincos	* normal.x		+	costheta * normal.y);
+			velocity_vec.z = velocity * (sintheta * sin(phi));
+			
+		} else {
+			// A Ceiling reflection!
+			velocity_vec.x = velocity * sincos;
+			velocity_vec.y = velocity * (sintheta * sin(phi));
+			velocity_vec.z = velocity * costheta;
+			
+			//This will do an upwards spread, invert it if we have hit the top ceiling
+			if (normal.z < 0)
+				velocity_vec.z *= -1.;
+		}
+		
 	}
 	else
 		throw runtime_error("Unrecognised reflection type requested for reflection");
