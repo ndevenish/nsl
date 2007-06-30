@@ -9,7 +9,7 @@
 		);
 		breakpoints = (
 			0A927DD80C188EE600D9A9CE /* solver.cpp:257 */,
-			0A927DFC0C1891A700D9A9CE /* edmexperiment.cpp:393 */,
+			0A927DFC0C1891A700D9A9CE /* edmexperiment.cpp:394 */,
 			0A927E300C189B1800D9A9CE /* solver.cpp:263 */,
 		);
 		breakpointsGroup = 0A3B6EC80AC99489002CC2AF /* XCBreakpointsBucket */;
@@ -396,6 +396,9 @@
 			0AA0B1F60C3690EE008F7EDE /* PBXTextBookmark */ = 0AA0B1F60C3690EE008F7EDE /* PBXTextBookmark */;
 			0AA0B1F80C3690EE008F7EDE /* PBXTextBookmark */ = 0AA0B1F80C3690EE008F7EDE /* PBXTextBookmark */;
 			0AA0B1FC0C36912D008F7EDE /* PBXTextBookmark */ = 0AA0B1FC0C36912D008F7EDE /* PBXTextBookmark */;
+			0AA0B2000C36C75B008F7EDE /* PBXTextBookmark */ = 0AA0B2000C36C75B008F7EDE /* PBXTextBookmark */;
+			0AA0B2010C36C75B008F7EDE /* PBXTextBookmark */ = 0AA0B2010C36C75B008F7EDE /* PBXTextBookmark */;
+			0AA0B2080C36C784008F7EDE /* PBXTextBookmark */ = 0AA0B2080C36C784008F7EDE /* PBXTextBookmark */;
 			0ABC895F0BB46C780044022E = 0ABC895F0BB46C780044022E /* PBXTextBookmark */;
 			0ABC89930BB470010044022E = 0ABC89930BB470010044022E /* PBXTextBookmark */;
 			0ABC8AB30BB585370044022E = 0ABC8AB30BB585370044022E /* PBXTextBookmark */;
@@ -533,7 +536,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 558";
 		rLen = 0;
-		rLoc = 19683;
+		rLoc = 19786;
 		rType = 0;
 		vrLen = 1444;
 		vrLoc = 17425;
@@ -848,7 +851,7 @@
 		name = nslneutron;
 		objects = (
 			0A927DD80C188EE600D9A9CE /* solver.cpp:257 */,
-			0A927DFC0C1891A700D9A9CE /* edmexperiment.cpp:393 */,
+			0A927DFC0C1891A700D9A9CE /* edmexperiment.cpp:394 */,
 			0A927E300C189B1800D9A9CE /* solver.cpp:263 */,
 		);
 	};
@@ -1217,7 +1220,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 387";
 		rLen = 0;
-		rLoc = 12993;
+		rLoc = 13096;
 		rType = 0;
 		vrLen = 1195;
 		vrLoc = 10197;
@@ -1529,7 +1532,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 555";
 		rLen = 0;
-		rLoc = 19516;
+		rLoc = 19619;
 		rType = 0;
 		vrLen = 1183;
 		vrLoc = 18246;
@@ -1599,7 +1602,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 555";
 		rLen = 0;
-		rLoc = 19516;
+		rLoc = 19619;
 		rType = 0;
 		vrLen = 1178;
 		vrLoc = 18251;
@@ -1619,7 +1622,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 535";
 		rLen = 0;
-		rLoc = 18419;
+		rLoc = 18522;
 		rType = 0;
 		vrLen = 1556;
 		vrLoc = 16943;
@@ -1629,7 +1632,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 535";
 		rLen = 0;
-		rLoc = 18419;
+		rLoc = 18522;
 		rType = 0;
 		vrLen = 1556;
 		vrLoc = 16943;
@@ -1639,7 +1642,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 535";
 		rLen = 0;
-		rLoc = 18419;
+		rLoc = 18522;
 		rType = 0;
 		vrLen = 1556;
 		vrLoc = 16943;
@@ -1649,7 +1652,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 535";
 		rLen = 0;
-		rLoc = 18419;
+		rLoc = 18522;
 		rType = 0;
 		vrLen = 1556;
 		vrLoc = 16943;
@@ -1695,7 +1698,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 535";
 		rLen = 0;
-		rLoc = 18419;
+		rLoc = 18522;
 		rType = 0;
 		vrLen = 1556;
 		vrLoc = 16943;
@@ -1705,7 +1708,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 535";
 		rLen = 0;
-		rLoc = 18419;
+		rLoc = 18522;
 		rType = 0;
 		vrLen = 1556;
 		vrLoc = 16943;
@@ -1815,7 +1818,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 538";
 		rLen = 0;
-		rLoc = 18538;
+		rLoc = 18641;
 		rType = 0;
 		vrLen = 1554;
 		vrLoc = 16567;
@@ -1855,7 +1858,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 538";
 		rLen = 0;
-		rLoc = 18538;
+		rLoc = 18641;
 		rType = 0;
 		vrLen = 1554;
 		vrLoc = 16567;
@@ -2213,7 +2216,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 389";
 		rLen = 0;
-		rLoc = 12198;
+		rLoc = 12301;
 		rType = 0;
 		vrLen = 1469;
 		vrLoc = 10718;
@@ -2233,7 +2236,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 391";
 		rLen = 0;
-		rLoc = 12254;
+		rLoc = 12357;
 		rType = 0;
 		vrLen = 1616;
 		vrLoc = 11033;
@@ -2243,7 +2246,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 397";
 		rLen = 0;
-		rLoc = 12421;
+		rLoc = 12524;
 		rType = 0;
 		vrLen = 1616;
 		vrLoc = 11033;
@@ -2263,7 +2266,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 397";
 		rLen = 0;
-		rLoc = 12421;
+		rLoc = 12524;
 		rType = 0;
 		vrLen = 1616;
 		vrLoc = 11033;
@@ -2293,7 +2296,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 397";
 		rLen = 0;
-		rLoc = 12421;
+		rLoc = 12524;
 		rType = 0;
 		vrLen = 1616;
 		vrLoc = 11033;
@@ -2323,7 +2326,7 @@
 		comments = "error: 'sd' has not been declared";
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		rLen = 1;
-		rLoc = 393;
+		rLoc = 394;
 		rType = 1;
 	};
 	0A927DA80C186AD700D9A9CE /* PBXTextBookmark */ = {
@@ -2331,7 +2334,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: groupsample";
 		rLen = 0;
-		rLoc = 12293;
+		rLoc = 12396;
 		rType = 0;
 		vrLen = 682;
 		vrLoc = 11620;
@@ -2545,7 +2548,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: groupsample";
 		rLen = 0;
-		rLoc = 12317;
+		rLoc = 12420;
 		rType = 0;
 		vrLen = 1639;
 		vrLoc = 10947;
@@ -2695,7 +2698,7 @@
 		vrLen = 1057;
 		vrLoc = 2319;
 	};
-	0A927DFC0C1891A700D9A9CE /* edmexperiment.cpp:393 */ = {
+	0A927DFC0C1891A700D9A9CE /* edmexperiment.cpp:394 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2705,7 +2708,7 @@
 		fileReference = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		functionName = "BOOST_FOREACH()";
 		hitCount = 1;
-		lineNumber = 393;
+		lineNumber = 394;
 		location = edmexperiment.ob;
 		modificationTime = 202939305.88646;
 		state = 1;
@@ -2735,7 +2738,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 399";
 		rLen = 0;
-		rLoc = 12415;
+		rLoc = 12518;
 		rType = 0;
 		vrLen = 1718;
 		vrLoc = 11190;
@@ -2755,7 +2758,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 399";
 		rLen = 0;
-		rLoc = 12415;
+		rLoc = 12518;
 		rType = 0;
 		vrLen = 1718;
 		vrLoc = 11190;
@@ -2775,7 +2778,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 393";
 		rLen = 0;
-		rLoc = 12198;
+		rLoc = 12301;
 		rType = 0;
 		vrLen = 1788;
 		vrLoc = 11190;
@@ -2785,7 +2788,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 393";
 		rLen = 0;
-		rLoc = 12198;
+		rLoc = 12301;
 		rType = 0;
 		vrLen = 1788;
 		vrLoc = 11190;
@@ -2825,7 +2828,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 393";
 		rLen = 0;
-		rLoc = 12198;
+		rLoc = 12301;
 		rType = 0;
 		vrLen = 1788;
 		vrLoc = 11190;
@@ -2885,7 +2888,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: groupsample";
 		rLen = 0;
-		rLoc = 12352;
+		rLoc = 12455;
 		rType = 0;
 		vrLen = 769;
 		vrLoc = 11620;
@@ -2913,7 +2916,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: groupsample";
 		rLen = 0;
-		rLoc = 12352;
+		rLoc = 12455;
 		rType = 0;
 		vrLen = 769;
 		vrLoc = 11620;
@@ -3075,7 +3078,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 393";
 		rLen = 0;
-		rLoc = 12198;
+		rLoc = 12301;
 		rType = 0;
 		vrLen = 1788;
 		vrLoc = 11190;
@@ -3105,7 +3108,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 559";
 		rLen = 0;
-		rLoc = 18555;
+		rLoc = 18658;
 		rType = 0;
 		vrLen = 1559;
 		vrLoc = 18035;
@@ -3119,7 +3122,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 565";
 		rLen = 0;
-		rLoc = 19063;
+		rLoc = 19166;
 		rType = 0;
 		vrLen = 1594;
 		vrLoc = 18096;
@@ -3139,16 +3142,43 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 567";
 		rLen = 0;
-		rLoc = 19059;
+		rLoc = 19162;
 		rType = 0;
 		vrLen = 1709;
 		vrLoc = 18096;
 	};
+	0AA0B2000C36C75B008F7EDE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		rLen = 5;
+		rLoc = 12200;
+		rType = 0;
+	};
+	0AA0B2010C36C75B008F7EDE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 393";
+		rLen = 0;
+		rLoc = 12269;
+		rType = 0;
+		vrLen = 1876;
+		vrLoc = 11189;
+	};
+	0AA0B2080C36C784008F7EDE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 392";
+		rLen = 0;
+		rLoc = 12134;
+		rType = 0;
+		vrLen = 1866;
+		vrLoc = 11189;
+	};
 	0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1148, 10038}}";
-			sepNavSelRange = "{19059, 0}";
-			sepNavVisRect = "{{0, 7637}, {966, 572}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1148, 10052}}";
+			sepNavSelRange = "{12134, 0}";
+			sepNavVisRect = "{{0, 5205}, {966, 572}}";
 			sepNavWindowFrame = "{{270, 120}, {1013, 669}}";
 		};
 	};
