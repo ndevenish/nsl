@@ -403,6 +403,7 @@ void edmexperiment::run_phaseloop( int phase_loop )
 		//logger << "\tSampled Field z : " << std::setprecision(20) << part->sampleBz.average() << endl;
 		//logger << "\tSampled Field x,y : " << std::setprecision(3) << part->sampleBx.average() << ", " << part->sampleBy.average() << endl;
 		
+#warning "Group sample log"
 		// Add the sampled field to the log file
 		static ofstream groupsample("groupsample.txt");
 		static bool inited = false;
@@ -488,22 +489,6 @@ void edmexperiment::runruninterval ( edmexperiment *thisp, long double intervalt
 			
 			// We have generated a particle index number... run it's interval!
 			thisp->runinterval(intervaltime, thisp->particles[partnum]);
-			/*
-#warning "Debug bounce stuff"
-			dataset bouncetracker;
-			{
-				// We want a static local mutex so that all threads passing through here can share it.
-				static boost::mutex cout_mutex;
-				boost::mutex::scoped_lock lock(cout_mutex);
-				
-				//BOOST_FOREACH(particle *part, thisp->particles) {
-				//	bouncetracker += part->bounces; 
-				//	cout << *part << endl;
-				//}
-				cout << thisp->particles[partnum]->bounces << endl;
-				
-				//cout << "Bounces: " << bouncetracker.average() << " +- " << bouncetracker.stdev() << endl;
-			}*/
 			
 			// Let the user know we are processing
 			cout << "." << std::flush;
