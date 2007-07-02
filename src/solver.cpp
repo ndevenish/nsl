@@ -188,9 +188,9 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	
 	// Calculate the (non-gravitational) position after this step... this is because we recalculate
 	// velocity here (gravitationally) and this messes up the later calculation!
-	newposition = part.position += part.velocity_vec * time; // Meters
+	newposition = part.position + part.velocity_vec * time; // Meters
 	
-	// If gravity is turned on, adjust the relevant properties
+	// If gravity is turned on, adjust the relevant (midpoint) properties
 	if (gravity)
 	{
 		// the midpoint is different...
@@ -200,7 +200,11 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 		part.velocity_vec.z -= g*halftime; // Meters per second
 		part.velocity = mod(part.velocity_vec); // Meters per second
 
-		// And the particles Exv effect
+		// Update the velocity gamma value
+		part.vgamma = 1. / sqrt(1-((part.velocity*part.velocity)/csquared));
+		
+		// And the particles Exv effect (which relies on the particles position being at the midpoint!)
+		part.position = midpoint;
 		part.updateExv(*elecfield);
 	}
 	
@@ -224,6 +228,10 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 		// and finish adjusting the velocity with the other half of the step
 		part.velocity_vec.z -= g*halftime; // Meters per second
 		part.velocity = mod(part.velocity_vec); // Meters per second
+		
+		// Should we update the vgamma value here? I don't think so, as it shouldn't be needed
+		// except at the VxE calculation above. So don't do it here for now.
+		// Although to be technically correct it should.
 	}
 	
 	// Update the particles flytime
@@ -235,17 +243,19 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 			logger << "Warning: Particle higher than energy group value by " << part.position.z-part.energygroup << endl;
 	
 	
+#warning "Particle sampling magnetic field as it steps"
 	// Add this magnetic field to the particles average
 	part.sampleBx += B.x;
 	part.sampleBy += B.y;
 	part.sampleBz += B.z;
-
+	
+#warning "Particle sampling position as it steps"
 	part.sampleZ += part.position.z;
 	
 	// Now spin the particle
 	neutron_physics::spin_calculation(part, B, time);
 	
-	// Now (god forbid) call the reporters that report every step
+	// Now call the reporters that report every step
 	BOOST_FOREACH( reporter *rep, exp->report_step ) {
 		rep->report(*exp);
 	}
