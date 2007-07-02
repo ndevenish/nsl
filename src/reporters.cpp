@@ -668,7 +668,7 @@ void alphareporter::report( edmexperiment &exp )
 		
 		// If we are 'run based' give an indication of the total alpha
 		if (report_frequency == rfreq_run)
-			logger << "\tCalculated Alpha: " << alpha.value << " +- " << alpha.error << endl;
+			logger << "   Calculated Alpha: " << alpha.value << " +- " << alpha.error << endl;
 	}
 
 }
