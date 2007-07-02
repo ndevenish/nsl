@@ -225,6 +225,8 @@ void edmexperiment::readsettings ( void )
 	// If we have set a lifetime, null out the bounces
 	uselifetime = isset("lifetime");
 
+	thread_max = getint("threads", 2);
+	
 	// If no intervaltime set, then set it to lifetime + 1 second
 	if (uselifetime)
 	{
@@ -434,7 +436,7 @@ void edmexperiment::runinterval( long double time )
 {
 	
 	// How many threads do we want doing the particles?
-	const int thread_max = 2;
+//	const int thread_max = 2;
 	
 	// Build the storage that all threads will store access to
 	int partsleft = particles.size();

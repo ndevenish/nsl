@@ -309,18 +309,19 @@ int volume_cylinder::findintersections_gravity ( const vector3& rayposi, const v
 	long double lowerheight, upperheight;
 	lowerheight = 0;//position.z;
 	upperheight = height;//position.z + height;
-	
+	// Note: The above are in the frame of reference of the cylinder, which we transform into a couple of lines below
+		
 	int intercepts = 0, return_intercepts = 0;
 		
 	vector3 raypos(rayposi.x-position.x, rayposi.y-position.y, rayposi.z-position.z);
 
 	// Check the top cap for intersections and update the intercepts
-	return_intercepts = capintersections_gravity(upperheight, raypos, direction, nextplace);
+	return_intercepts = topcap_intersections_gravity(raypos, direction, nextplace);
 	intercepts += return_intercepts;
 	nextplace += return_intercepts;
 	
 	// What about the bottom cap?
-	return_intercepts = capintersections_gravity(lowerheight, raypos, direction, nextplace);
+	return_intercepts = bottomcap_intersections_gravity(raypos, direction, nextplace);
 	intercepts += return_intercepts;
 	nextplace += return_intercepts;	
 	
@@ -416,6 +417,7 @@ int volume_cylinder::sideintersections ( const vector3& raypos, const vector3& d
 	return intercepts;
 }
 
+/*
 int volume_cylinder::capintersections_gravity ( long double capheight, const vector3& raypos, const vector3& direction, intercept *nextplace) const
 {
 	int intercepts = 0;
@@ -489,6 +491,168 @@ int volume_cylinder::capintersections_gravity ( long double capheight, const vec
 	
 	return intercepts;
 }	
+*/
+int volume_cylinder::topcap_intersections_gravity (const vector3& raypos, const vector3& direction, intercept *nextplace) const
+{
+	// Remember: This is in the cylinders reference frame
+	long double capheight = height;
+	
+	int intercepts = 0;
+	
+	long double infactor = direction.z*direction.z - 2*g*capheight + 2*g*raypos.z;
+	
+	// Does it hit the cap? (Don't count touches) if not, return nothing
+	if (infactor < 0)
+		return 0;
+	
+	// Change infactor to a more useful form now
+	infactor = sqrtl(infactor);
+	
+	// We do touch, so calculate the times for these intersections
+	long double t1, t2;
+	t1 = (direction.z - infactor) / g;
+	t2 = (direction.z + infactor) / g;
+	
+	// Check if each of these times are valid
+	// Is t1 valid? If so, process it.
+	if (t1 > 0)
+	{
+		// Calculate the xy positon at this time
+		long double x = raypos.x + t1*direction.x;
+		long double y = raypos.y + t1*direction.y;
+		
+		// Is it inside the radius?
+		if (x*x + y*y < radius*radius)
+		{
+			// We have an intersection! but is it an entry or exit?
+			nextplace->time = t1;
+			nextplace->collideobject = (container*)this;
+			nextplace->normal.x = nextplace->normal.y = 0.0;
+			if (raypos.z < capheight)
+				nextplace->normal.z = -1;
+			else
+				nextplace->normal.z = 1;
+			
+			// Is this always correct? i.e. first intersection with cap exit, second entry?
+			// Yes! At least, for the top cap case.
+			nextplace->type = icept_exit;
+			
+			nextplace++;
+			intercepts++;
+		}
+	}
+	
+	if (t2 > 0)
+	{
+		// Calculate the xy postion at this time
+		long double x = raypos.x + t2*direction.x;
+		long double y = raypos.y + t2*direction.y;
+		// Is it inside the radius?
+		if (x*x + y*y < radius*radius)
+		{
+			// We have an intersection! but is it an entry or exit?
+			nextplace->time = t2;
+			nextplace->collideobject = (container*)this;
+			nextplace->normal.x = nextplace->normal.y = 0.0;
+			if (raypos.z < capheight)
+				nextplace->normal.z = -1;
+			else
+				nextplace->normal.z = 1;
+			
+			// Is this always correct? i.e. first intersection with cap exit, second entry?
+			// Yes! At least it is for the top cap case
+			nextplace->type = icept_entry;
+			
+			nextplace++;
+			intercepts++;
+		}
+	}
+	
+	return intercepts;
+	
+}
+
+int volume_cylinder::bottomcap_intersections_gravity ( const vector3& raypos, const vector3& direction, intercept *nextplace) const
+{
+	// Remember: This is in the cylinders reference frame
+	long double capheight = 0.;
+	
+	int intercepts = 0;
+	
+	long double infactor = direction.z*direction.z - 2*g*capheight + 2*g*raypos.z;
+	
+	// Does it hit the cap? (Don't count touches) if not, return nothing
+	if (infactor < 0)
+		return 0;
+	
+	// Change infactor to a more useful form now
+	infactor = sqrtl(infactor);
+	
+	// We do touch, so calculate the times for these intersections
+	long double t1, t2;
+	t1 = (direction.z - infactor) / g;
+	t2 = (direction.z + infactor) / g;
+	
+	// Check if each of these times are valid
+	// Is t1 valid? If so, process it.
+	if (t1 > 0)
+	{
+		// Calculate the xy positon at this time
+		long double x = raypos.x + t1*direction.x;
+		long double y = raypos.y + t1*direction.y;
+		
+		// Is it inside the radius?
+		if (x*x + y*y < radius*radius)
+		{
+			// We have an intersection! but is it an entry or exit?
+			nextplace->time = t1;
+			nextplace->collideobject = (container*)this;
+			nextplace->normal.x = nextplace->normal.y = 0.0;
+			if (raypos.z < capheight)
+				nextplace->normal.z = -1;
+			else
+				nextplace->normal.z = 1;
+			
+			// For the bottom cap, the first is always entry, the second exit - this is opposite
+			// the behaviour of the top cap
+			nextplace->type = icept_entry;
+			
+			nextplace++;
+			intercepts++;
+		}
+	}
+	
+	if (t2 > 0)
+	{
+		// Calculate the xy postion at this time
+		long double x = raypos.x + t2*direction.x;
+		long double y = raypos.y + t2*direction.y;
+		// Is it inside the radius?
+		if (x*x + y*y < radius*radius)
+		{
+			// We have an intersection! but is it an entry or exit?
+			nextplace->time = t2;
+			nextplace->collideobject = (container*)this;
+			nextplace->normal.x = nextplace->normal.y = 0.0;
+			if (raypos.z < capheight)
+				nextplace->normal.z = -1;
+			else
+				nextplace->normal.z = 1;
+			
+			
+			// For the bottom cap, the first is always entry, the second exit - this is opposite
+			// the behaviour of the top cap
+			nextplace->type = icept_exit;
+			
+			nextplace++;
+			intercepts++;
+		}
+	}
+	
+	return intercepts;
+	
+}
+
 
 int volume_cylinder::isinside(const vector3 &pos) const
 {

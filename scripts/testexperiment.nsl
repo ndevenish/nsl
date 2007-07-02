@@ -17,6 +17,8 @@ add edmexperiment "The Experiment" {
 	#raytracer.
 	set collision_compensation_distance 1e-15 # (Meters)
 	
+	set threads 1
+	
 	#Gravity!
 	set gravity on
 	
@@ -42,7 +44,7 @@ add edmexperiment "The Experiment" {
 			set height 0.12 # (Meters)
 			set reflection diffuse
 		}
-		ignore add volume_cylinder "cavity" {
+		add volume_cylinder "cavity" {
 			set type negative
 			set radius 0.034
 			set height 0.05
@@ -51,26 +53,26 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 1000 particle neutron {
+	multiadd 1 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
 		set velocity 3 # (Meters per second)
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
-		set maxwelldistribution on
+		set maxwelldistribution off
 		# This sets the maximum height for cutting off the velocity
 		set maxwelliancutoff 0.79 # (Meters)
 		
 		# set up the velocity VECTOR (this will be scaled to velocity)
-		set vx 0.6847 # (Meters per second)
-		set vy 0.9448 # (Meters per second)
-		set vz 0.3285 # (Meters per second)
+		set vx 0 # (Meters per second)
+		set vy 0 # (Meters per second)
+		set vz -0.1 # (Meters per second)
 		
 		# Set up the starting position
 		#set startvolume mainbottle
 		#set startposition edge
-		set z 0.001 	# (Meters)
+		set z 0.1 	# (Meters)
 		set x 0		# (Meters)
 		set y 0		# (Meters)
 		
@@ -136,7 +138,7 @@ add edmexperiment "The Experiment" {
 		set output_file "bouncelog.txt"
 	}
 	
-	add impactreporter {
+	ignore add impactreporter {
 		set output_file "impact.txt"
 	}
 }

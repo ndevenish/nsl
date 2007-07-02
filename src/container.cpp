@@ -91,7 +91,7 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 	int intercepts;
 	intercept interceptlist[MAX_INTERCEPTS];
 	intercepts = castinternal( position, direction, interceptlist );
-
+	
 	// If intercepts is equal to one, just pass it back without anything further -
 	// it is the only intercept
 	if (intercepts == 1)
@@ -134,6 +134,24 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 			}
 	} while (swaps);
 
+/* Intersection debugging code: Uncomment this to get a readout of multiple intersections
+		// Calculate the details
+//warning "Fully processing intercepts"
+	logger << "Intercepts:" << endl;
+	for (int i = 0; i < intercepts; i++)
+	{
+		intercept *ic = sortinglist[i];
+		ic->location = position + direction*ic->time;
+		ic->location.z -= 0.5*g*ic->time*ic->time;
+		
+		if (ic->type == interception_entry)
+			logger << "Entry\t";
+		else if (ic->type == interception_exit)
+			logger << "Exit \t";
+		
+		logger << ic->time << "\t[" << ic->location << "]" << endl;
+	}
+		*/
 	// We now have a sorted list of interceptions. Find out if any of these exit
 	// all known volumes, assuming that we are starting inside of one.
 	//int in_volumes = 1;
@@ -180,7 +198,7 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 	}
 
 
-	throw runtime_error("Particle appears to be outside all known volumes");
+	throw runtime_error("Reached end of Intersections function");
 
 	// Return the last intercept in this case.....
 

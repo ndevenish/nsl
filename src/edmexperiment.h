@@ -79,6 +79,9 @@ class edmexperiment : public nslobject {
 	
 	long double bounce_loss_probability;
 	
+	// How many threads are we going to use?
+	int thread_max;
+	
 	/// The floating-point-error collision compensation distance
 	long double collision_offset;
 
