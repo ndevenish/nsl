@@ -665,6 +665,10 @@ void alphareporter::report( edmexperiment &exp )
 		*outfile << volaverage_dbdz2.average() << "\t" << volaverage_dbdz2.uncert() << "\t";
 		*outfile << activep;
 		*outfile << endl;
+		
+		// If we are 'run based' give an indication of the total alpha
+		if (report_frequency == rfreq_run)
+			logger << "\tCalculated Alpha: " << alpha.value << " +- " << alpha.error << endl;
 	}
 
 }
