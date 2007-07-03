@@ -126,6 +126,64 @@ dataset calc_dbdz(bfield &b, container &cont, long double power = 1.0)
 	return vertgrad;
 }
 
+// And again, to calculate the magnetic field!
+variable calc_baverage(bfield &b, container &cont)
+{
+	// Let's grab the size of the volume to generate over
+	cylbounds cyl = cont.getcylinder();
+	
+	unsigned long hits = 0, misses = 0, throws = 0;
+	
+	//	long double x, y, z;
+	vector3 pos, magfield;
+	dataset b_avg;
+	
+	while (1)
+	{
+		//r = sqrtl(uni()) * cyl.radius;
+		pos.z =(rand_uniform() - 0.5) * cyl.height;
+		pos.x = rand_uniform() * cyl.radius*2. - cyl.radius;
+		pos.y = rand_uniform() * cyl.radius*2. - cyl.radius;
+		
+		// Throw these out if outside test cylinder
+		if (pos.x*pos.x + pos.y*pos.y > cyl.radius *cyl.radius)
+		{
+			throws++;
+			continue;
+		}
+		pos += cyl.position;
+		
+		//Now, test to see if these points are inside a container
+		if (!cont.isinside(pos))
+		{
+			// If it isn't inside a container, this is a miss. This can be used to estimate the volume
+			misses++;
+			continue;
+		} else {
+			hits++;
+			magfield = vector3(0.0,0.0,0.0);
+			b.getfield(magfield,pos);
+			
+			b_avg += magfield.z;
+		}
+		
+		if (hits > 1e6)
+			break;
+	}
+	// Calculate the estimated volume
+	//long double hitratio = (long double)hits / (long double)(hits+misses);
+	//long double volumeestimate = hitratio * pi * cyl.radius * cyl.radius * cyl.height;
+	// Estimate the error on the volume, by culculating the volume estimate change by a
+	// single hit difference
+	//long double volumeplushitest = (((long double)(hits+1) / (long double)(hits+misses+1))) * pi * cyl.radius * cyl.height * cyl.radius;
+	//long double volerrest = volumeestimate * ((volumeestimate / volumeplushitest) - 1.);
+	
+	
+	cout << "  B Volume Average = " << b_avg << " T" << endl;
+	
+	return variable(b_avg);
+}
+
 
 
 reporter::reporter()
@@ -577,7 +635,7 @@ void posreporter::report( edmexperiment &exp )
 	outfile->precision(20);
 	particle &part = *(exp.particles[0]);
 	
-	if (tparticle+1 > exp.particles.size())
+	if ((tparticle+1) > exp.particles.size())
 		throw runtime_error("Particle asked to track does not exist");
 	
 	// Enclose this in a block for mutexing, to prevent two threads simultaneously writing out
@@ -637,8 +695,11 @@ void alphareporter::report( edmexperiment &exp )
 	// Calculate the alpha fringe visibility valuePhenomenology
 	variable alpha = calculate_visibility( exp.particles );
 	
+	// Calculate the volume averaged b field
+	variable bsample = calc_baverage(*exp.magfield, *exp.particlebox);
+	
 	// Now calculate the Ra-1 value
-	variable Ra = calculate_frequencyratio( exp.particles );
+	variable Ra = calculate_frequencyratio( exp.particles, bsample );
 	
 	// Now count the number of active particles
 	int activep = 0;
@@ -741,11 +802,12 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 	return alpha;
 }
 
-variable alphareporter::calculate_frequencyratio( vector<particle*> &particles )
+variable alphareporter::calculate_frequencyratio( vector<particle*> &particles, nsl::variable bsample )
 {
 	dataset freq_ratio;
 
-	const long double B0 = 1e-6; // Tesla
+	// This B0 value should be replaced by the volume avereraged magnetic field
+	const long double B0 = bsample.value; // Tesla
 	
 	// Calculate the frequency ratio for each particle, and then average them
 	BOOST_FOREACH(particle *p, particles)

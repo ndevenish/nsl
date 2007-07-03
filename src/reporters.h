@@ -258,7 +258,7 @@ protected:
 	bool prepareobject( void );
 	
 	nsl::variable calculate_visibility( std::vector<particle*> &particles );
-	nsl::variable calculate_frequencyratio( std::vector<particle*> &particles );
+	nsl::variable calculate_frequencyratio( std::vector<particle*> &particles, nsl::variable bsample );
 	
 	int bouncedecay;
 	
