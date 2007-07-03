@@ -108,7 +108,7 @@ const intercept &container::cast ( const vector3 &position, const vector3 &direc
 		logger << "Zero intercepts detected:" << endl;
 		logger << " Pos:   " << position << endl;
 		logger << " Direc: " << direction << endl;
-		throw runtime_error("Zero intercepts detected");
+////		throw runtime_error("Zero intercepts detected");
 	}
 	assert(intercepts < MAX_INTERCEPTS); // this would mean we have violated internal memory
 

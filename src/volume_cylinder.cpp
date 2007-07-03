@@ -528,14 +528,17 @@ int volume_cylinder::topcap_intersections_gravity (const vector3& raypos, const 
 			nextplace->time = t1;
 			nextplace->collideobject = (container*)this;
 			nextplace->normal.x = nextplace->normal.y = 0.0;
-			if (raypos.z < capheight)
-				nextplace->normal.z = -1;
-			else
-				nextplace->normal.z = 1;
+
+			//			if (raypos.z < capheight)
+//				nextplace->normal.z = -1;
+//			else
+//				nextplace->normal.z = 1;
 			
 			// Is this always correct? i.e. first intersection with cap exit, second entry?
 			// Yes! At least, for the top cap case.
 			nextplace->type = icept_exit;
+			// A top cap exit always has a negative normal
+			nextplace->normal.z = -1.;
 			
 			nextplace++;
 			intercepts++;
@@ -554,14 +557,16 @@ int volume_cylinder::topcap_intersections_gravity (const vector3& raypos, const 
 			nextplace->time = t2;
 			nextplace->collideobject = (container*)this;
 			nextplace->normal.x = nextplace->normal.y = 0.0;
-			if (raypos.z < capheight)
-				nextplace->normal.z = -1;
-			else
-				nextplace->normal.z = 1;
+//			if (raypos.z < capheight)
+//				nextplace->normal.z = 1;
+//			else
+//				nextplace->normal.z = -1;
 			
 			// Is this always correct? i.e. first intersection with cap exit, second entry?
 			// Yes! At least it is for the top cap case
 			nextplace->type = icept_entry;
+			// a top cap entry always has a positive normal
+			nextplace->normal.z = 1.;
 			
 			nextplace++;
 			intercepts++;
@@ -608,14 +613,16 @@ int volume_cylinder::bottomcap_intersections_gravity ( const vector3& raypos, co
 			nextplace->time = t1;
 			nextplace->collideobject = (container*)this;
 			nextplace->normal.x = nextplace->normal.y = 0.0;
-			if (raypos.z < capheight)
-				nextplace->normal.z = -1;
-			else
-				nextplace->normal.z = 1;
+//			if (raypos.z < capheight)
+//				nextplace->normal.z = -1;
+//			else
+//				nextplace->normal.z = 1;
 			
 			// For the bottom cap, the first is always entry, the second exit - this is opposite
 			// the behaviour of the top cap
 			nextplace->type = icept_entry;
+			// bottom cap entry always negative
+			nextplace->normal.z = -1.;
 			
 			nextplace++;
 			intercepts++;
@@ -643,6 +650,8 @@ int volume_cylinder::bottomcap_intersections_gravity ( const vector3& raypos, co
 			// For the bottom cap, the first is always entry, the second exit - this is opposite
 			// the behaviour of the top cap
 			nextplace->type = icept_exit;
+			// Bottom cap exit always positive!
+			nextplace->normal.z = 1.;
 			
 			nextplace++;
 			intercepts++;
