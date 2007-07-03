@@ -271,7 +271,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 324}, {223, 628}}</string>
+							<string>{{0, 58}, {223, 628}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -320,7 +320,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0A7334190C3ACF6400FCFA44</string>
+										<string>0A73343C0C3AD20D00FCFA44</string>
 										<key>history</key>
 										<array>
 											<string>0A348BAD0B07BBCF00F8771E</string>
@@ -336,7 +336,6 @@
 											<string>0ABC895F0BB46C780044022E</string>
 											<string>0ABC89930BB470010044022E</string>
 											<string>0ABC8AB30BB585370044022E</string>
-											<string>0ABC8B130BB59B0D0044022E</string>
 											<string>0ABC8B830BB5E0D40044022E</string>
 											<string>0ABC8B840BB5E0D40044022E</string>
 											<string>0ABC8CD70BB721240044022E</string>
@@ -350,19 +349,20 @@
 											<string>0A927DCD0C18812000D9A9CE</string>
 											<string>0A927DCE0C18812000D9A9CE</string>
 											<string>0A927DE90C188F7100D9A9CE</string>
-											<string>0A927E320C189B2E00D9A9CE</string>
-											<string>0A927E330C189B2E00D9A9CE</string>
 											<string>0AA0B2230C36E91D008F7EDE</string>
 											<string>0ADB922E0C39064200EE62DE</string>
 											<string>0ADB925C0C390C3100EE62DE</string>
 											<string>0ADB929A0C39134300EE62DE</string>
-											<string>0ADB92C00C3936B600EE62DE</string>
-											<string>0ADB92CD0C3937F800EE62DE</string>
 											<string>0ADB92CE0C3937F800EE62DE</string>
 											<string>0A61EED30C3A978300B38D9B</string>
 											<string>0A61EED40C3A978300B38D9B</string>
 											<string>0A7334150C3ACF6400FCFA44</string>
-											<string>0A7334160C3ACF6400FCFA44</string>
+											<string>0A73342C0C3AD20D00FCFA44</string>
+											<string>0A73342D0C3AD20D00FCFA44</string>
+											<string>0A73342E0C3AD20D00FCFA44</string>
+											<string>0A73342F0C3AD20D00FCFA44</string>
+											<string>0A7334300C3AD20D00FCFA44</string>
+											<string>0A7334310C3AD20D00FCFA44</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -408,6 +408,16 @@
 											<string>0A8A4CEC0BE7A3E000C2BCB5</string>
 											<string>0A7334170C3ACF6400FCFA44</string>
 											<string>0A7334180C3ACF6400FCFA44</string>
+											<string>0A7334320C3AD20D00FCFA44</string>
+											<string>0A7334330C3AD20D00FCFA44</string>
+											<string>0A7334340C3AD20D00FCFA44</string>
+											<string>0A7334350C3AD20D00FCFA44</string>
+											<string>0A7334360C3AD20D00FCFA44</string>
+											<string>0A7334370C3AD20D00FCFA44</string>
+											<string>0A7334380C3AD20D00FCFA44</string>
+											<string>0A7334390C3AD20D00FCFA44</string>
+											<string>0A73343A0C3AD20D00FCFA44</string>
+											<string>0A73343B0C3AD20D00FCFA44</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -603,9 +613,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>0A3B6EC30AC9944B002CC2AF</string>
 		<string>0A7334140C3ACF5C00FCFA44</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>0A3B6EC30AC9944B002CC2AF</string>
 		<string>/Users/xgkkp/Documents/Neutron/nslneutron/nslneutron.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -699,7 +709,7 @@
 			<key>WindowToolGUID</key>
 			<string>0A3B6EC30AC9944B002CC2AF</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

@@ -178,8 +178,7 @@ variable calc_baverage(bfield &b, container &cont)
 	//long double volumeplushitest = (((long double)(hits+1) / (long double)(hits+misses+1))) * pi * cyl.radius * cyl.height * cyl.radius;
 	//long double volerrest = volumeestimate * ((volumeestimate / volumeplushitest) - 1.);
 	
-	
-	cout << "  B Volume Average = " << b_avg << " T" << endl;
+	cout << "  B Volume Average = " << b_avg.average() - 1.e-6 << " +- " << b_avg.uncert() << " T (shifted, +1e-6)" << endl;
 	
 	return variable(b_avg);
 }
