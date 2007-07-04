@@ -412,14 +412,14 @@ void edmexperiment::run_phaseloop( int phase_loop )
 		static ofstream groupsample("groupsample.txt");
 		static bool inited = false;
 		if (!inited)
-			groupsample << "# E Group sample\n# H\tsampled_Bz_shift\taverage_z\tuncert" << endl;
+			groupsample << "# E Group sample\n# H\tsampled_Bz_shift\taverage_z\tuncert\tspin_phase" << endl;
 		inited = true;
 		//groupsample.precision(20);
 		long double energygroup = 0.5 * part->velocity * part->velocity / g + part->position.z;
 		if (gravity)
 			if (energygroup < part->sampleZ.average())
 				logger << "ERROR: Energy group less than average z: " << energygroup << "< " << part->sampleZ.average() << endl;
-		groupsample << std::setprecision(20) << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.uncert() << endl;
+		groupsample << std::setprecision(20) << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.uncert() << part->E_sum_phase << endl;
 		
 	}
 

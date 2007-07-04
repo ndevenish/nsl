@@ -294,6 +294,16 @@
 			0AE73A550C3BCD7A0040CD91 /* PBXTextBookmark */ = 0AE73A550C3BCD7A0040CD91 /* PBXTextBookmark */;
 			0AE73A560C3BCD7A0040CD91 /* PBXTextBookmark */ = 0AE73A560C3BCD7A0040CD91 /* PBXTextBookmark */;
 			0AE73A5D0C3BCDCC0040CD91 /* PBXTextBookmark */ = 0AE73A5D0C3BCDCC0040CD91 /* PBXTextBookmark */;
+			0AE73A5E0C3BE7B40040CD91 /* PBXTextBookmark */ = 0AE73A5E0C3BE7B40040CD91 /* PBXTextBookmark */;
+			0AE73A5F0C3BE7B40040CD91 /* PBXTextBookmark */ = 0AE73A5F0C3BE7B40040CD91 /* PBXTextBookmark */;
+			0AE73A620C3BE9F20040CD91 /* PBXBookmark */ = 0AE73A620C3BE9F20040CD91 /* PBXBookmark */;
+			0AE73A670C3BEAED0040CD91 /* PBXTextBookmark */ = 0AE73A670C3BEAED0040CD91 /* PBXTextBookmark */;
+			0AE73A680C3BEAED0040CD91 /* PBXTextBookmark */ = 0AE73A680C3BEAED0040CD91 /* PBXTextBookmark */;
+			0AE73A690C3BEAED0040CD91 /* PBXTextBookmark */ = 0AE73A690C3BEAED0040CD91 /* PBXTextBookmark */;
+			0AE73A6A0C3BEAED0040CD91 /* PBXTextBookmark */ = 0AE73A6A0C3BEAED0040CD91 /* PBXTextBookmark */;
+			0AE73A6C0C3BEAED0040CD91 /* PBXTextBookmark */ = 0AE73A6C0C3BEAED0040CD91 /* PBXTextBookmark */;
+			0AE73A6D0C3BEAED0040CD91 /* PBXTextBookmark */ = 0AE73A6D0C3BEAED0040CD91 /* PBXTextBookmark */;
+			0AE73A6E0C3BEAED0040CD91 /* PBXTextBookmark */ = 0AE73A6E0C3BEAED0040CD91 /* PBXTextBookmark */;
 			0AE8BCAB0B82793000398D6A = 0AE8BCAB0B82793000398D6A /* PBXTextBookmark */;
 			0AE8BCB20B82793000398D6A = 0AE8BCB20B82793000398D6A /* PBXTextBookmark */;
 		};
@@ -623,9 +633,9 @@
 	};
 	0A3B6EB40AC9940B002CC2AF /* particle.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {732, 1568}}";
-			sepNavSelRange = "{1979, 0}";
-			sepNavVisRect = "{{0, 922}, {732, 536}}";
+			sepNavIntBoundsRect = "{{0, 0}, {968, 1568}}";
+			sepNavSelRange = "{1585, 0}";
+			sepNavVisRect = "{{0, 518}, {968, 598}}";
 			sepNavWindowFrame = "{{326, 92}, {1013, 671}}";
 		};
 	};
@@ -797,9 +807,9 @@
 	};
 	0A72C9D00AF380670079760D /* reporters.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {925, 12040}}";
+			sepNavIntBoundsRect = "{{0, 0}, {968, 12040}}";
 			sepNavSelRange = "{21727, 0}";
-			sepNavVisRect = "{{0, 11205}, {925, 294}}";
+			sepNavVisRect = "{{0, 11058}, {968, 598}}";
 			sepNavWindowFrame = "{{396, 100}, {1013, 671}}";
 		};
 	};
@@ -1221,7 +1231,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 387";
 		rLen = 0;
-		rLoc = 13197;
+		rLoc = 13230;
 		rType = 0;
 		vrLen = 1195;
 		vrLoc = 10197;
@@ -1282,8 +1292,8 @@
 	};
 	0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {956, 1624}}";
-			sepNavSelRange = "{1455, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {956, 1638}}";
+			sepNavSelRange = "{4321, 0}";
 			sepNavVisRect = "{{0, 85}, {732, 609}}";
 			sepNavWindowFrame = "{{15, 204}, {1013, 669}}";
 		};
@@ -1566,9 +1576,9 @@
 	};
 	0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1160, 9898}}";
-			sepNavSelRange = "{7700, 0}";
-			sepNavVisRect = "{{0, 3420}, {732, 609}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1214, 9898}}";
+			sepNavSelRange = "{12438, 0}";
+			sepNavVisRect = "{{0, 5172}, {732, 609}}";
 			sepNavWindowFrame = "{{270, 120}, {1013, 669}}";
 		};
 	};
@@ -1726,7 +1736,7 @@
 		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
 		name = "edmexperiment.cpp: 424";
 		rLen = 0;
-		rLoc = 13355;
+		rLoc = 13388;
 		rType = 0;
 		vrLen = 1641;
 		vrLoc = 13947;
@@ -2108,6 +2118,98 @@
 		rType = 0;
 		vrLen = 1562;
 		vrLoc = 151;
+	};
+	0AE73A5E0C3BE7B40040CD91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: cannot convert 'vector3' to 'long double' in initialization";
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		rLen = 1;
+		rLoc = 51;
+		rType = 1;
+	};
+	0AE73A5F0C3BE7B40040CD91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 117";
+		rLen = 0;
+		rLoc = 4321;
+		rType = 0;
+		vrLen = 686;
+		vrLoc = 1172;
+	};
+	0AE73A620C3BE9F20040CD91 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+	};
+	0AE73A670C3BEAED0040CD91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 117";
+		rLen = 0;
+		rLoc = 4321;
+		rType = 0;
+		vrLen = 1562;
+		vrLoc = 151;
+	};
+	0AE73A680C3BEAED0040CD91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: falseedmav";
+		rLen = 0;
+		rLoc = 7700;
+		rType = 0;
+		vrLen = 1696;
+		vrLoc = 6466;
+	};
+	0AE73A690C3BEAED0040CD91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A863CF00B61AE4F00FF32EA /* neutronphysics.cpp */;
+		name = "neutronphysics.cpp: 117";
+		rLen = 0;
+		rLoc = 4321;
+		rType = 0;
+		vrLen = 1562;
+		vrLoc = 151;
+	};
+	0AE73A6A0C3BEAED0040CD91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0AB232B70ADA3BE400323FF0 /* edmexperiment.cpp */;
+		name = "edmexperiment.cpp: 400";
+		rLen = 0;
+		rLoc = 12438;
+		rType = 0;
+		vrLen = 2034;
+		vrLoc = 11019;
+	};
+	0AE73A6C0C3BEAED0040CD91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: 78";
+		rLen = 0;
+		rLoc = 1585;
+		rType = 0;
+		vrLen = 853;
+		vrLoc = 762;
+	};
+	0AE73A6D0C3BEAED0040CD91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A3B6EB40AC9940B002CC2AF /* particle.h */;
+		name = "particle.h: 78";
+		rLen = 0;
+		rLoc = 1585;
+		rType = 0;
+		vrLen = 853;
+		vrLoc = 762;
+	};
+	0AE73A6E0C3BEAED0040CD91 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0A72C9D00AF380670079760D /* reporters.cpp */;
+		name = "reporters.cpp: 805";
+		rLen = 0;
+		rLoc = 21727;
+		rType = 0;
+		vrLen = 1262;
+		vrLoc = 21286;
 	};
 	0AE8BCAB0B82793000398D6A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
