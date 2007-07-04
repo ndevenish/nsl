@@ -329,7 +329,7 @@ void edmexperiment::update_variationparameters (int exprun )
 {
 	// Calculate the value for the variation this loop
 	long double varyval = variation.minval + (variation.maxval - variation.minval)*exprun / (variation.runs-1);
-	logger << "Outer Loop " << exprun+1 << "/" << variation.runs << " of " << variation.parameter << ": Value = " << varyval << endl;
+	logger << "\nOuter Loop " << exprun+1 << "/" << variation.runs << " of " << variation.parameter << ": Value = " << varyval << endl;
 	// now set it!
 	variation.varyobject->set(variation.parameter, str(varyval));
 	variation.value = varyval;
