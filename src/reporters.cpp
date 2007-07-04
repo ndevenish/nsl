@@ -792,7 +792,7 @@ variable alphareporter::calculate_visibility( vector<particle*> &particles )
 		} // if p is active
 	}
 	
-	cout << "Average Bounces: " << bounces.average() << " +- " << bounces.stdev() << endl;
+	cout << "   Average Bounces: " << bounces.average() << " +- " << bounces.stdev() << endl;
 	if (bouncedecay > 0)
 		cout << "     Average decay: " << exp(-(long double)bounces.average() / (long double)bouncedecay) << endl;
 	// Calculate the value

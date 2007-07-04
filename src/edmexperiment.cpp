@@ -304,7 +304,7 @@ bool edmexperiment::runobject()
 		BOOST_FOREACH(particle *part, particles)
 			falseedmav += part->cumulativeedm;
 		
-		logger << "   Sampled Bz: " << std::setprecision(7) << sampledBz.average()- 1e-6 << " +- " << std::setprecision(2) << sampledBz.stdev() << "(" << sampledBz.uncert() << ")" << endl;
+		//logger << "   Sampled Bz: " << std::setprecision(7) << sampledBz.average()- 1e-6 << " +- " << std::setprecision(2) << sampledBz.stdev() << "(" << sampledBz.uncert() << ")" << endl;
 		
 		// Now output the calculated edm values
 		logger << "   Calculated False-EDM : " << std::setprecision(4) << falseedmav.average() << " +/- " << falseedmav.uncert() << " E-26 e.cm"<< endl;
@@ -337,7 +337,9 @@ void edmexperiment::update_variationparameters (int exprun )
 
 void edmexperiment::run_phaseloop( int phase_loop )
 {
-	logger << "   Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+	if (phase_steps > 1)
+		logger << "   Phase Averaging Loop " << phase_loop+1 << " of " << phase_steps << endl;
+	
 	// Calculate the phase for this loop
 	long double phaseavg = phase_loop * (2.0 / phase_steps);
 	
