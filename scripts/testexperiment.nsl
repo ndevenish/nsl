@@ -54,7 +54,7 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 500 particle neutron {
+	multiadd 10 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
@@ -102,8 +102,8 @@ add edmexperiment "The Experiment" {
 	add bfield "bfield" {
 		set b0z 	1.0E-6 # (Tesla)
 		add linear_zgradient "bfield gradient" {
-			#set D_DZ	0. #1e-9 # (Tesla per meter)
-			vary D_DZ from -5e-9 to 5e-9 in 5 steps
+			set D_DZ	-5e-9 #1e-9 # (Tesla per meter)
+			#vary D_DZ from -5e-9 to 5e-9 in 5 steps
 		}
 		ignore add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps

@@ -419,7 +419,7 @@ void edmexperiment::run_phaseloop( int phase_loop )
 		if (gravity)
 			if (energygroup < part->sampleZ.average())
 				logger << "ERROR: Energy group less than average z: " << energygroup << "< " << part->sampleZ.average() << endl;
-		groupsample << std::setprecision(20) << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.uncert() << part->E_sum_phase << endl;
+		groupsample << std::setprecision(20) << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.uncert() << "\t" << part->E_sum_phase << endl;
 		
 	}
 
