@@ -43,17 +43,18 @@ add edmexperiment "The Experiment" {
 			set radius 0.235 #0.235 # (Meters)
 			set height 0.12 # (Meters)
 			set reflection diffuse
+			set z 0.0
 		}
-		add volume_cylinder "cavity" {
+	ignore add volume_cylinder "cavity" {
 			set type negative
 			set radius 0.034
 			set height 0.05
 			set reflection diffuse
-			set z -0.04
+			set z 0.0
 		}
 	}
 
-	multiadd 1000 particle neutron {
+	multiadd 500 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
@@ -101,8 +102,8 @@ add edmexperiment "The Experiment" {
 	add bfield "bfield" {
 		set b0z 	1.0E-6 # (Tesla)
 		add linear_zgradient "bfield gradient" {
-			#set D_DZ	1e-9 # (Tesla per meter)
-			vary D_DZ from -5e-9 to 5e-9 in 20 steps
+			set D_DZ	0. #1e-9 # (Tesla per meter)
+			#vary D_DZ from -5e-9 to 5e-9 in 9 steps
 		}
 		ignore add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
@@ -113,7 +114,7 @@ add edmexperiment "The Experiment" {
 	}
 	
 	add efield "Efield" {
-		set e0z		8.e5 #8.e5 # (Volts per meter)
+		set e0z	0. #	8.e5 #8.e5 # (Volts per meter)
 	}
 	
 	ignore add edmreporter "edmreporter" {
@@ -132,7 +133,7 @@ add edmexperiment "The Experiment" {
 	}
 	
 	add alphareporter "alphareporter" {
-		set output_file "alphalog_cavity.txt"
+		set output_file "alphalog_test.txt"
 		#set bounce_decay 3000 # Number of bounces for 1/e decay 
 	}
 	ignore add bouncereporter {
