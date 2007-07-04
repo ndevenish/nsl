@@ -117,9 +117,9 @@ dataset calc_dbdz(bfield &b, container &cont, long double power = 1.0)
 	long double volerrest = volumeestimate * ((volumeestimate / volumeplushitest) - 1.);
 	
 	
-	cout << "  DBDZ averaging: Hits: " << hits << ", Misses: " << misses << "; (power " << power << ")" << endl;
-	cout << "	Estimated Volume = " << volumeestimate << " +- " << volerrest << " m^3" << endl;
-	cout << "	dBz/dz			 = " << vertgrad << " T/(m^" << (int)power << ")" << endl;
+	cout << "   <dBz/dz^" << power << "> = " << vertgrad << " T/(m^" << (int)power << ")" << endl;
+//	cout << "	Estimated Volume = " << volumeestimate << " +- " << volerrest << " m^3" << endl;
+//	cout << 
 	//vertgrad /= volumeestimate;
 	//logger << "   Average field gradient over volume : " << vertgrad<< endl;
 	
