@@ -66,7 +66,8 @@ static long double spin_vector( vector3 &spinvector, const long double gyromag, 
 //	vector3 compare = newvector - spinvector;
 	spinvector = newvector;
 //	long double len = spinvector.mod();
-	
+	spinvector.scaleto(1.0);
+
 	// Calculate the new length of the xy vectorshar
 	long double newxylength = sqrtl(spinvector.x* spinvector.x + spinvector.y*spinvector.y);
 	
