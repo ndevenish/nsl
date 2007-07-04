@@ -48,10 +48,7 @@ public:
 
 	static void Exveffect( const vector3 &position, const vector3 &velocity, const long double gamma, efield &elecfield, vector3 &vxEeffect );
 	
-	static void spinvec_change( const long double &time, const long double &gyromag, const vector3 &spinvector, const vector3& mag_field, vector3 &dS)
-	{
-		dS = time * gyromag * crossproduct(spinvector, mag_field);
-	}
+	static void spinvec_change( const long double &time, const long double &gyromag, const vector3 &spinvector, const vector3& mag_field, vector3 &dS);
 };
 #endif
 

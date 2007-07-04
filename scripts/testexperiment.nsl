@@ -54,7 +54,7 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 500 particle neutron {
+	multiadd 1 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps

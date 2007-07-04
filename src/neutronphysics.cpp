@@ -31,25 +31,41 @@ using std::endl;
 using std::cout;
 using std::cerr;
 
+void neutron_physics::spinvec_change( const long double &time, const long double &gyromag, const vector3 &spinvector, const vector3& mag_field, vector3 &dS)
+{
+	dS = time * gyromag * crossproduct(spinvector, mag_field);
+}
 
 static long double spin_vector( vector3 &spinvector, const long double gyromag, const vector3& mag_field, const long double time )
 {
 	// Let's twist again, like we did last summer
 	vector3 oldspin = spinvector;
 	long double oldxylength = sqrtl(spinvector.x*spinvector.x + spinvector.y*spinvector.y);
-	
+/*	
 	// Calculate the change in spin (through a function now)
 	//vector3 dS = time * gyromag * crossproduct(spinvector, mag_field);
 	 vector3 dS;
 	 neutron_physics::spinvec_change( time, gyromag, spinvector, mag_field, dS);
-	
 	// Now apply this to the spin vector
 	spinvector += dS;
-	
 	// Scale it to ensure that it remains of constant length
-	/*cout.precision(1000);
-	cout << endl << spinvector.x << endl << spinvector.y << endl << spinvector.z << endl;*/
 	spinvector.scaleto(1.0);
+	
+*/	
+	// NEW METHOD? Try to use exact formulae
+#warning "Using accurate, slower method for rotation angle calculations
+	vector3 normmag = mag_field;
+	normmag.scaleto(1.0);
+	long double theta = time*gyromag*mod(mag_field);
+	vector3 newvector;
+// Attempt to use the proper rotation formula
+	newvector = spinvector * cos(theta);
+	newvector += crossproduct(spinvector, normmag) * sin(theta);
+	newvector += normmag * (spinvector * normmag) * (1. - cos(theta));
+	// compare this with the dS vector
+//	vector3 compare = newvector - spinvector;
+	spinvector = newvector;
+//	long double len = spinvector.mod();
 	
 	// Calculate the new length of the xy vectorshar
 	long double newxylength = sqrtl(spinvector.x* spinvector.x + spinvector.y*spinvector.y);
