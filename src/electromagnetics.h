@@ -128,6 +128,8 @@ public:
 * The linear gradient this produces is centered on the origin, and purely vertical. */
 class linear_zgradient : public forcefield {
 	long double d_dz;
+	//vector3 myposition;
+	long double zposition;
 
 protected:
 	void field(vector3& field, const vector3 &position);

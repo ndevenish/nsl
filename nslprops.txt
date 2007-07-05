@@ -7,6 +7,8 @@ vx, vy, vz - Vector of starting velocity
 velocity - Magnitude of starting velocity.
 	- If the vector settings are missing, a default will be created with i=j=k=1.
 	- If there is a magnitude specified, this will be scaled to fit this. Otherwise the magnitude is set to zero, even if the vector is non-zero.
+maxwelldistribution - if set to "on", the particles velocity is randomly picked from a maxwell-boltzmann distribution
+		with average velocity velocity.
 gamma	- the gamma value
 x,y,z	- Starting position of particle. All default to zero, and overridden if startvolume is set
 startvolume - The container volume (name) to start in. If not set, position will be [x,y,z]
@@ -15,7 +17,7 @@ startposition - The position in this volume to start in. Valid are:
 	- center - Starts in the center (default)
 start_spin_polar_angle - The vertical angle (in units of pi) to start the particles spin off at. Default is 0.5 (full horizontal spin).
 start_spin_phase - the horizontal phase to start the spin off at. Again in units of pi. default is zero.
-
+mass - the particles mass
 ===========================================================================
 volume_cylinder class settings
 
@@ -41,4 +43,41 @@ e0x, e0y, e0z - The base Electric field strengths along the three axis
 linear_zgradient class settings
 
 d_dz - the vertical field gradient
-NOTE: The linear_zgradient currently assumes that the zero-point is at 0,0,0
+z - The vertical 'zero point' of the gradient. Defaults to 0.
+
+===========================================================================
+dipole_zmagnetic settings
+
+mz - The z component of the magnetic dipole
+z - the z position of the magnetic dipole
+
+===========================================================================
+reporter class settings
+
+report_frequency	- The frequency of when to reporter. this is only to override the internal setting. This can be:
+		- none		: Only runs post-init and pre-close
+		- run		: Reports at the end of every individual data run
+		- bounce	: reports every particle bounce
+		- step		: reports every particle step (this will slow down execution lots)
+		- interval  : reports every interval
+output_file			- the file to output the report to.
+output_format		- The format to output the file to. The options available may be reduced depending on the derived reporter. This setting also will have it's own defaults and so will not always need to be set.
+		- plain		: Outputs in plain text format
+		
+================
+edmreporter extra settings
+volaverage_dbdz		- Should we calculate the volume average dbdz? Yes if set at all
+
+================
+poldistreporter settings
+
+
+==========
+edmexperiment settings
+lifetime	- The lifetime of a particle (i.e. the time to bounce around for). Overrides bounces
+bounces - The number of (non-ceiling) bounces to run the particle for
+interval - The amount of time between 'interval' reporters are called
+gravity - Set to 'on' to use gravity
+
+===================
+rungekutta_solver

@@ -129,6 +129,9 @@ linear_zgradient::linear_zgradient()
 void linear_zgradient::readsettings( void )
 {
 	d_dz = getlongdouble("d_dz", 0.0);
+	//myposition.x = getlongdouble("x", 0.0);
+//	myposition.y = getlongdouble("y", 0.0);
+	zposition = getlongdouble("z", 0.0);
 }
 void linear_zgradient::field(vector3& field, const vector3 &position)
 {
@@ -136,7 +139,7 @@ void linear_zgradient::field(vector3& field, const vector3 &position)
 
 	field.x += -position.x * (d_dz / 2.0); // Tesla
 	field.y += -position.y * (d_dz / 2.0); // Tesla
-	field.z += position.z * d_dz;		   // Tesla
+	field.z += (position.z - zposition) * d_dz;		   // Tesla
 }
 
 /////////////////////////////////////////////////////////////////

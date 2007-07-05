@@ -104,6 +104,7 @@ add edmexperiment "The Experiment" {
 		add linear_zgradient "bfield gradient" {
 			set D_DZ	-5e-9 #1e-9 # (Tesla per meter)
 			#vary D_DZ from -5e-9 to 5e-9 in 5 steps
+			set z 0.06 # The zero-point is in the bottle middle!
 		}
 		ignore add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
