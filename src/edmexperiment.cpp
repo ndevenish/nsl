@@ -162,6 +162,8 @@ bool edmexperiment::prepareobject()
 				case reporter::rfreq_interval:
 					report_interval.push_back((reporter*)subobject);
 					break;
+				case reporter::rfreq_phase:
+					report_phase.push_back((reporter*)subobject);
 			}
 		}
 	}
@@ -403,24 +405,17 @@ void edmexperiment::run_phaseloop( int phase_loop )
 		//				falseedmav += part->fake_edm;
 		
 		sampledBz += part->sampleBz.average();
+		
 		// Output the sampled magnetic field for each particle!
 		//logger << "\tSampled Field z : " << std::setprecision(20) << part->sampleBz.average() << endl;
 		//logger << "\tSampled Field x,y : " << std::setprecision(3) << part->sampleBx.average() << ", " << part->sampleBy.average() << endl;
 		
-#warning "Group sample log"
-		// Add the sampled field to the log file
-		static ofstream groupsample("groupsample.txt");
-		static bool inited = false;
-		if (!inited)
-			groupsample << "# E Group sample\n# H\tsampled_Bz_shift\taverage_z\tuncert\tspin_phase" << endl;
-		inited = true;
-		//groupsample.precision(20);
-		long double energygroup = 0.5 * part->velocity * part->velocity / g + part->position.z;
-		if (gravity)
-			if (energygroup < part->sampleZ.average())
-				logger << "ERROR: Energy group less than average z: " << energygroup << "< " << part->sampleZ.average() << endl;
-		groupsample << std::setprecision(20) << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.uncert() << "\t" << part->E_sum_phase << endl;
-		
+		// Group log sampler thing was here
+	}
+	
+	// Call all of the phase reporters
+	BOOST_FOREACH( reporter *rep, report_phase ) {
+		rep->report(*this);
 	}
 
 }

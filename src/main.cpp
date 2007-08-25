@@ -106,6 +106,7 @@ int main ( int argc, char *argv[] )
 		nslobjectfactory::add("posreporter", new posreporter::Factory);
 		nslobjectfactory::add("alphareporter", new alphareporter::Factory);
 		nslobjectfactory::add("bouncereporter", new bouncereporter::Factory);
+		nslobjectfactory::add("groupsampler", new groupsampler::Factory);
 		
 		// What script file do we want to read in?
 		path infile;

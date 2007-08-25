@@ -48,7 +48,8 @@ public:
 		rfreq_run,	// Report every experimental run
 		rfreq_bounce, // Report every bounce
 		rfreq_step, // report every step (gaah!)
-		rfreq_interval // Report every set time interval
+		rfreq_interval, // Report every set time interval
+		rfreq_phase	// Report every phase loop
 	};
 	enum enum_output_format {
 		format_plain
@@ -268,6 +269,18 @@ public:
 	
 	class Factory : public nslobjectfactory {
 		nslobject *create() { return new alphareporter; }
+	};	
+};
+
+class groupsampler : public reporter {
+protected:
+	void preparefile( edmexperiment &exp );
+public:
+	groupsampler();
+	void report ( edmexperiment &experiment );
+	
+	class Factory : public nslobjectfactory {
+		nslobject *create() { return new groupsampler; }
 	};	
 };
 

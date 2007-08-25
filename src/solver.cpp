@@ -245,8 +245,8 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	
 #warning "Particle sampling magnetic field as it steps"
 	// Add this magnetic field to the particles average
-	part.sampleBx += B.x;
-	part.sampleBy += B.y;
+//	part.sampleBx += B.x;
+//	part.sampleBy += B.y;
 	part.sampleBz += B.z;
 	
 #warning "Particle sampling position as it steps"

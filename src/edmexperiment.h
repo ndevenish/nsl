@@ -55,7 +55,7 @@ class edmexperiment : public nslobject {
 	//particle *particles[MAX_PARTICLES]; ///< An array of particles we control
 	//reporter *reporters[MAX_REPORTERS]; ///< An array of reporters to call
 	
-	std::vector<reporter*>	report_bounce, report_run, report_step, report_interval;
+	std::vector<reporter*>	report_bounce, report_run, report_step, report_interval, report_phase;
 
 	//void initvals( void );
 	void readsettings ( void );

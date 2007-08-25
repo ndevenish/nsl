@@ -871,3 +871,56 @@ void bouncereporter::report( edmexperiment &exp )
 		*outfile << maxz << "\t" << p->flytime << "\t" << p->bounces << endl;
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////// Group sampler reporter
+
+groupsampler::groupsampler()
+{
+	objecttype = "groupsampler";
+	types.push_back(objecttype);
+	
+	report_frequency = rfreq_phase;
+}
+
+void groupsampler::preparefile( edmexperiment &exp )
+{
+	*outfile << "# Group sampling reporter: " << exp.get("time") << endl;
+	*outfile << "# H\tsampled_Bz_shift\taverage_z\tuncert\tspin_phase" << endl;
+}
+
+void groupsampler::report( edmexperiment &exp )
+{
+	cout << "Running group sampler" << endl;
+
+	BOOST_FOREACH(particle *part, exp.particles) {
+		// Calculate the energy group!
+		long double energygroup = 0.5 * part->velocity * part->velocity / g + part->position.z;
+		/* if (exp.gravity)
+			if (energygroup < part->sampleZ.average())
+				logger << "ERROR: Energy group less than average z: " << energygroup << "< " << part->sampleZ.average() << endl;
+		*/
+
+		// Dump out information
+		{
+			static boost::mutex output_mutex;
+			boost::mutex::scoped_lock lock(output_mutex);
+			
+			outfile->precision(20);
+			*outfile << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.uncert() << "\t" << part->E_sum_phase << endl;
+		}
+	}
+}
+/*
+ class groupsampler : public reporter {
+protected:
+	 void preparefile( edmexperiment &exp );
+public:
+	 groupsampler();
+	 void report ( edmexperiment &experiment );
+	 
+	 class Factory : public nslobjectfactory {
+		 nslobject *create() { return new groupsampler; }
+	 };	
+ }
+*/ 

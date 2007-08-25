@@ -3,9 +3,9 @@
 add edmexperiment "The Experiment" {
 	
 	# set the steptime for the inbuilt solver to use
-	set phase_steps 1 #phase average loops
-	#set bounces 100 #number of bounces to run the simulation over
-	set lifetime 60.0	#The lifetime of a particle (seconds)
+	set phase_steps 5 #phase average loops
+	set bounces 1 #number of bounces to run the simulation over
+	#set lifetime 60.0	#The lifetime of a particle (seconds)
 
 	#This is the time to bounce a particle around for
 	#before calling the 'interval' reporters
@@ -45,7 +45,7 @@ add edmexperiment "The Experiment" {
 			set reflection diffuse
 			set z 0.0
 		}
-	ignore add volume_cylinder "cavity" {
+	add volume_cylinder "cavity" {
 			set type negative
 			set radius 0.034
 			set height 0.05
@@ -58,7 +58,7 @@ add edmexperiment "The Experiment" {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
-		set velocity 5.4 # (Meters per second)
+		set velocity 3.92292 #5.4 # (Meters per second)
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
 		set maxwelldistribution on
@@ -108,26 +108,21 @@ add edmexperiment "The Experiment" {
 		set volaverage_dbdz true
 	}
 	
-	ignore add posreporter "posreporter" {
-		set output_file "poslog.txt"
-		set particle 0
-		set report_frequency bounce
-	}
-	ignore add posreporter "posreporter" {
-		set output_file "poslog2.txt"
-		set particle 1
-	}
-	
 	add alphareporter "alphareporter" {
 		set output_file "alphalog_newrotation.txt"
 		#set bounce_decay 3000 # Number of bounces for 1/e decay 
 	}
+
 	ignore add bouncereporter {
 		set output_file "bouncelog.txt"
 	}
 	
 	ignore add impactreporter {
 		set output_file "impact.txt"
+	}
+	
+	add groupsampler "groupsample" {
+		set output_file "groupsample.txt"
 	}
 }
 #tree

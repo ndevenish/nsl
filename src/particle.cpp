@@ -25,6 +25,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <iostream>
+#include <fstream>
 
 #include "nslobject.h"
 #include "nslobjectfactory.h"
@@ -43,8 +44,10 @@
 
 using std::runtime_error;
 using std::string;
+using std::ofstream;
 
 using nsl::rand_normal;
+using nsl::rand_uniform;
 using std::endl;
 
 /*
@@ -192,12 +195,26 @@ void particle::generate_maxwellianvelocity( void )
 	
 	// Calculate the effective temperature for the desired maximum velocity
 	long double T = (velocity*velocity * mass ) / (2.*k);
-	// Precalculate the factor for this
+	//long double T = mass / (velocity * velocity * 2. * k);
 	long double factor = sqrtl((k*T) / mass );
+
+	long double mwcutoff = getlongdouble("maxwelliancutoff", position.z + 1.);
 	
 	// Check we are not above the cutoff
-	if (getlongdouble("maxwelliancutoff", position.z + 1.) < position.z)
+	if (mwcutoff < position.z)
 		throw runtime_error("Particle start position is higher than maxwellian cutoff");
+	
+	
+	// Do a stupid uniform thing to save time
+	long double egroup = sqrt(rand_uniform() * pow(0.04 + mwcutoff, 2.)) - 0.04;
+	velocity = sqrt(2.*g*(egroup - position.z));
+	
+	velocity_vec.z = -velocity;
+	velocity_vec.x = velocity_vec.y = 0.;
+	
+	return;
+/*
+	//ofstream max("maxwellians.txt");
 	
 	// Loop until we have a valid velocity
 	while(1)
@@ -217,11 +234,19 @@ void particle::generate_maxwellianvelocity( void )
 			
 			// If not, it is valid! otherwise recast.
 			if (velocity < cutoff)
-				break;
+			{
+				long double egroup = (( velocity * velocity ) / ( 2. * g )) + position.z;
+				max << velocity << endl;
+				static long count = 0;
+				logger << ++count << endl;
+				// break;
+				continue;
+			}
 		} else {
 			break;
 		}
 	} // while(1)
+ */
 }
 
 void particle::read_positionsettings( void )
