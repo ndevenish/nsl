@@ -210,8 +210,9 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 	
 	// Just grab the magnetic field - now we have precalculated the magnetic field
 	// for the particle already
-	vector3 B; // Tesla
+	vector3 B, dbz; // Tesla
 	magfield->getfield(B, midpoint); // Tesla
+	magfield->getfieldgradient(dbz, midpoint);
 	
 	
 	// Now apply the new physical properties to the particle
@@ -248,6 +249,9 @@ void midpointsolver::smallstep( particle &part, const long double &time)
 //	part.sampleBx += B.x;
 //	part.sampleBy += B.y;
 	part.sampleBz += B.z;
+	
+	part.sampledBz += dbz.z;
+	part.sampledBz2 += dbz.z * dbz.z;
 	
 #warning "Particle sampling position as it steps"
 	part.sampleZ += part.position.z;

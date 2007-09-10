@@ -108,7 +108,8 @@ public:
 	void generate_maxwellianvelocity(void);
 	
 	// Track the average magnetic field that this particle sees
-	dataset sampleBz, sampleBx, sampleBy;
+	dataset sampleBz;
+	dataset sampledBz, sampledBz2;
 	long double energygroup;
 	dataset sampleZ;
 	

@@ -107,8 +107,8 @@ void particle::readsettings(void)
 	bounces = 0;
 	vxEeffect *= 0;
 	active = true;
-	sampleBx.reset();
-	sampleBy.reset();
+	sampledBz.reset();
+	sampledBz2.reset();
 	sampleBz.reset();
 	sampleZ.reset();
 	

@@ -114,7 +114,7 @@ dataset calc_dbdz(bfield &b, container &cont, long double power = 1.0)
 	// Estimate the error on the volume, by culculating the volume estimate change by a
 	// single hit difference
 	long double volumeplushitest = (((long double)(hits+1) / (long double)(hits+misses+1))) * pi * cyl.radius * cyl.height * cyl.radius;
-	long double volerrest = volumeestimate * ((volumeestimate / volumeplushitest) - 1.);
+//	long double volerrest = volumeestimate * ((volumeestimate / volumeplushitest) - 1.);
 	
 	
 	cout << "   <dBz/dz^" << power << "> = " << vertgrad << " T/(m^" << (int)power << ")" << endl;
@@ -886,7 +886,7 @@ groupsampler::groupsampler()
 void groupsampler::preparefile( edmexperiment &exp )
 {
 	*outfile << "# Group sampling reporter: " << exp.get("time") << endl;
-	*outfile << "# H\tsampled_Bz_shift\taverage_z\tuncert\tspin_phase" << endl;
+	*outfile << "# H\tsampled_Bz_shift\taverage_z\tuncert\tsampled_dbdz\tuncert\tsampled_dbdz2\tuncert" << endl;
 }
 
 void groupsampler::report( edmexperiment &exp )
@@ -907,7 +907,9 @@ void groupsampler::report( edmexperiment &exp )
 			boost::mutex::scoped_lock lock(output_mutex);
 			
 			outfile->precision(20);
-			*outfile << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.uncert() << "\t" << part->E_sum_phase << endl;
+			*outfile << energygroup << "\t" << part->sampleBz.average()-1e-6 << "\t" << part->sampleZ.average() << "\t" << part->sampleZ.uncert() << "\t"
+					<< part->sampledBz.average() << "\t" << part->sampledBz.uncert() << "\t"
+					<< part->sampledBz2.average() << "\t" << part->sampledBz2.uncert() << endl;
 		}
 	}
 }
