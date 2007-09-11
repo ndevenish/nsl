@@ -3,9 +3,9 @@
 add edmexperiment "The Experiment" {
 	
 	# set the steptime for the inbuilt solver to use
-	set phase_steps 5 #phase average loops
-	set bounces 1 #number of bounces to run the simulation over
-	#set lifetime 60.0	#The lifetime of a particle (seconds)
+	set phase_steps 1 #phase average loops
+	#set bounces 1 #number of bounces to run the simulation over
+	set lifetime 60.0	#The lifetime of a particle (seconds)
 
 	#This is the time to bounce a particle around for
 	#before calling the 'interval' reporters
@@ -54,7 +54,7 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 10 particle neutron {
+	multiadd 5000 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
@@ -87,20 +87,20 @@ add edmexperiment "The Experiment" {
 	add bfield "bfield" {
 		set b0z 	1.0E-6 # (Tesla)
 		add linear_zgradient "bfield gradient" {
-			set D_DZ	-5e-9 #1e-9 # (Tesla per meter)
-			vary D_DZ from -5e-9 to 5e-9 in 5 steps
+			#set D_DZ	-3.1e-12 #1e-9 # (Tesla per meter)
+			vary D_DZ from -4e-12 to -1e-12 in 7 steps
 			#set z 0.06 # The zero-point is in the bottle middle!
 		}
-		ignore add dipole_zmagnetic "Z magnetic dipole" {
+		add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
-			#set z 		-0.3 	# (Meters)
-			vary z from -0.4 to -1. in 10 steps
+			set z 		-0.5 	# (Meters)
+			#vary z from -0.4 to -1. in 10 steps
 			set mz		-4.4e-7 	# (Amps * Meters^2)
 		}
 	}
 	
 	add efield "Efield" {
-		set e0z	8.e5 #8.e5 # (Volts per meter)
+		set e0z	0. #8.e5 # (Volts per meter)
 	}
 	
 	ignore add edmreporter "edmreporter" {
@@ -109,7 +109,7 @@ add edmexperiment "The Experiment" {
 	}
 	
 	add alphareporter "alphareporter" {
-		set output_file "alphalog_newrotation.txt"
+		set output_file "alphalog_5k7.txt"
 		#set bounce_decay 3000 # Number of bounces for 1/e decay 
 	}
 
@@ -122,7 +122,7 @@ add edmexperiment "The Experiment" {
 	}
 	
 	add groupsampler "groupsample" {
-		set output_file "groupsample.txt"
+		set output_file "groupsample_5k7.txt"
 	}
 }
 #tree
