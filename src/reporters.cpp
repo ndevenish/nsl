@@ -249,6 +249,13 @@ impactreporter::impactreporter() {
 	types.push_back(objecttype);
 }
 
+void impactreporter::preparefile (edmexperiment &exp)
+{
+	*outfile << "# Impact Reporter log file: " << exp.get("runtime") << endl;
+	*outfile << "# Bounce\tBounce2\tflytime\tx\ty\tz\tsum_phase" << endl;// << "------------------------------------" << endl;
+	outfile->precision(20);
+}
+
 void impactreporter::report( edmexperiment &experiment ) {
 	static long bounce = 0;
 
@@ -257,7 +264,11 @@ void impactreporter::report( edmexperiment &experiment ) {
 		static boost::mutex output_mutex;
 		boost::mutex::scoped_lock lock(output_mutex);
 		
-		*outfile << bounce++ << ", " << experiment.particles[0]->flytime << ", " << experiment.particles[0]->position << endl;
+		*outfile << bounce++ << "\t" << experiment.particles[0]->bounces << "\t" << experiment.particles[0]->flytime << "\t"
+			<< experiment.particles[0]->position.x << "\t"
+			<< experiment.particles[0]->position.y << "\t"
+			<< experiment.particles[0]->position.z << "\t"
+			<< experiment.particles[0]->E_sum_phase << endl;
 	}
 }
 

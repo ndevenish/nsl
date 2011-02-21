@@ -238,6 +238,10 @@ void container::reflect ( vector3& velocity_vec, const vector3& normal, const lo
 			velocity_vec *= -1.0;
 		
 		// Scale the velocity to the proper one
+		
+		// Output the magnitude of the velocity vector
+		//cout << velocity_vec.mod() << endl;
+		
 		velocity_vec *= velocity;
 		return;
 	}

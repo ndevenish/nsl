@@ -115,8 +115,8 @@ class impactreporter : public reporter {
 public:
 	impactreporter();
 	
-	void preparefile( edmexperiment & ) {}
-	void closefile(edmexperiment &) {}
+	void preparefile( edmexperiment & );
+	//void closefile(edmexperiment &) {}
 	
 	void report( edmexperiment &experiment );
 	

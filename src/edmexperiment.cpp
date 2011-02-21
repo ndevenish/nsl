@@ -24,6 +24,7 @@
 
 // Standard Headers
 #include <iostream> // For endl, and cout inside exception handlers
+#include <iomanip>
 #include <fstream>
 
 // C Headers
@@ -63,7 +64,7 @@ using std::ofstream;
 using nsl::rand_uniform;
 
 
-
+dataset sampledBz;
 
 
 
@@ -301,8 +302,10 @@ bool edmexperiment::runobject()
 		BOOST_FOREACH(particle *part, particles)
 			falseedmav += part->cumulativeedm;
 		
+		logger << "   Sampled Bz: " << std::setprecision(7) << sampledBz.average()- 1e-6 << " +- " << std::setprecision(2) << sampledBz.stdev() << "(" << sampledBz.uncert() << ")" << endl;
+		
 		// Now output the calculated edm values
-		logger << "   Calculated False-EDM : " << falseedmav.average() << " +/- " << falseedmav.uncert() << " E-26 e.cm"<< endl;
+		logger << "   Calculated False-EDM : " << std::setprecision(4) << falseedmav.average() << " +/- " << falseedmav.uncert() << " E-26 e.cm"<< endl;
 		
 		// Now tell all the reporters that are supposed to report every run, to report
 		BOOST_FOREACH( reporter *rep, report_run ) {
@@ -394,6 +397,23 @@ void edmexperiment::run_phaseloop( int phase_loop )
 		neutron_physics::edmcalcs(*part, *elecfield);
 		part->cumulativeedm += part->fake_edm;
 		//				falseedmav += part->fake_edm;
+		
+		sampledBz += part->sampleBz.average();
+		// Output the sampled magnetic field for each particle!
+		//logger << "\tSampled Field z : " << std::setprecision(20) << part->sampleBz.average() << endl;
+		//logger << "\tSampled Field x,y : " << std::setprecision(3) << part->sampleBx.average() << ", " << part->sampleBy.average() << endl;
+		
+		// Add the sampled field to the log file
+		static ofstream groupsample("groupsample.txt");
+		static bool inited = false;
+		if (!inited)
+			groupsample << "# E Group sample\n# H\tsampled_Bz_shift" << endl;
+		inited = true;
+		//groupsample.precision(20);
+		long double energygroup = 0.5 * part->velocity * part->velocity / g + part->position.z;
+		
+		groupsample << std::setprecision(20) << energygroup << "\t" << part->sampleBz.average()-1e-6 << endl;
+		
 	}
 
 }

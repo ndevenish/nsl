@@ -3,9 +3,9 @@
 add edmexperiment "The Experiment" {
 	
 	# set the steptime for the inbuilt solver to use
-	set phase_steps 1 #phase average loops
-	#set bounces 3000 #number of bounces to run the simulation over
-	set lifetime 60.0	#The lifetime of a particle (seconds)
+	set phase_steps 1000 #phase average loops
+	set bounces 100 #number of bounces to run the simulation over
+	#set lifetime 60.0	#The lifetime of a particle (seconds)
 
 	#This is the time to bounce a particle around for
 	#before calling the 'interval' reporters
@@ -24,11 +24,11 @@ add edmexperiment "The Experiment" {
 	# results to the old, bounce decay method. Can expect about 1/e particles to remain at
 	# this point (1/bounces), so we need e(2.7) as many particles to get the sme resolution.
 	# for 500 particles this works out to needing 1360 particles. Round to 1500 to get a decent amount.
-	set bounce_loss_probability 8.888e-4
+	#set bounce_loss_probability 8.888e-4
 	#set bounce_loss_probability 0.01
 	
 	add midpointsolver "midsolver" {
-		set steptime 3e-2 # (Seconds)
+		set steptime 3e-5 # (Seconds)
 	}
 	
 	ignore add rungekutta_solver "rksolver" {
@@ -51,21 +51,21 @@ add edmexperiment "The Experiment" {
 		}
 	}
 
-	multiadd 100 particle neutron {
+	multiadd 1 particle neutron {
 		set gamma -29.1646870E+6  # (Hertz per tesla)
 
 		#vary velocity from 10 to 200 in 20 steps
 		set velocity 3 # (Meters per second)
 		#This will 'spread out' the velocity to a random point on a
 		#maxwell-boltzmann distribution of velocities
-		#set maxwelldistribution on
+		set maxwelldistribution on
 		# This sets the maximum height for cutting off the velocity
-		#set maxwelliancutoff 0.79 # (Meters)
+		set maxwelliancutoff 0.79 # (Meters)
 		
 		# set up the velocity VECTOR (this will be scaled to velocity)
-		set vy 0 # (Meters per second)
-		set vx 1 # (Meters per second)
-		set vz 0 # (Meters per second)
+		set vx 0.6847 # (Meters per second)
+		set vy 0.9448 # (Meters per second)
+		set vz 0.3285 # (Meters per second)
 		
 		# Set up the starting position
 		#set startvolume mainbottle
@@ -98,10 +98,10 @@ add edmexperiment "The Experiment" {
 
 	add bfield "bfield" {
 		set b0z 	1.0E-6 # (Tesla)
-		ignore add linear_zgradient "bfield gradient" {
+		add linear_zgradient "bfield gradient" {
 			set D_DZ	1e-9 # (Tesla per meter)
 		}
-		add dipole_zmagnetic "Z magnetic dipole" {
+		ignore add dipole_zmagnetic "Z magnetic dipole" {
 			#vary z from -0.1 to -1.0 in 100 steps
 			#set z 		-0.3 	# (Meters)
 			vary z from -0.4 to -1. in 10 steps
@@ -128,12 +128,16 @@ add edmexperiment "The Experiment" {
 		set particle 1
 	}
 	
-	add alphareporter "alphareporter" {
+	ignore add alphareporter "alphareporter" {
 		set output_file "alphalog.txt"
 		#set bounce_decay 3000 # Number of bounces for 1/e decay 
 	}
 	ignore add bouncereporter {
 		set output_file "bouncelog.txt"
+	}
+	
+	add impactreporter {
+		set output_file "impact.txt"
 	}
 }
 #tree

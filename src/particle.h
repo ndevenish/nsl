@@ -107,6 +107,10 @@ public:
 	void read_spinsettings( void );
 	void generate_maxwellianvelocity(void);
 	
+	// Track the average magnetic field that this particle sees
+	dataset sampleBz, sampleBx, sampleBy;
+	long double energygroup;
+	
 public:
 	particle();
 
