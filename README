@@ -7,3 +7,14 @@ NSL - Neutron Scripting Language
 
 Overview
 --------
+
+Requirements
+------------
+Several pieces of software are required to build this package:
+* ``Boost 1.34`` (minimum) is required for the ``thread``, ``filesystem``, ``system`` and ``program_options`` modules. It may be possible to rewrite a couple of these dependencies, but threading is pretty ingrained.
+* ``CMake 2.6`` is used to generate the makefiles, to build the program.
+* (Optionally) ``Doxygen`` to build the documentation.
+
+Building
+--------
+
