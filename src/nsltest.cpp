@@ -57,7 +57,7 @@ public:
 	};
 };
 
-int main (int argc, string argv)
+int main (int argc, char ** argv)
 {
 	//testparser();
 	//return 0;
