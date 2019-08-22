@@ -20,6 +20,8 @@
  * 
  */
 
+#define BOOST_FILESYSTEM_DEPRECATED
+
 #include <string>
 #include <iostream>
 #include <fstream>

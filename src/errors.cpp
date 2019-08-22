@@ -38,5 +38,5 @@ Warning::Warning(std::stringstream message)
 {
 	//string messag;
 	//messag = (message.rdbuf())->str();
-	Warning::Warning(message.str());
+	Warning(message.str());
 }

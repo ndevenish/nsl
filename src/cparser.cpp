@@ -28,6 +28,7 @@
 #include <cctype>
 #include <iostream>
 #include <fstream>
+#include <cstring>
 #include "errors.h"
 
 

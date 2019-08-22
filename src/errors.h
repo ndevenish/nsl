@@ -24,6 +24,7 @@
 #define ERRORS_H
 
 //#include <sstream>
+#include <string>
 #include <stdexcept>
 
 class Warning {
